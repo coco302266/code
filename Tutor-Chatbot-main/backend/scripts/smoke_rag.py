@@ -92,9 +92,21 @@ def load_cases(path: str = "") -> list[tuple]:
     """
     p = Path(path) if path else CASES_FILE
     if not p.exists():
-        raise SystemExit(
-            "找不到评测集：%s\n（题目已从代码移到 JSON，见项目根 docs/proposals/PROPOSALS.md 第 5 节）" % p
-        )
+        # 报告 JSON 里的 `cases_file` 记的是「生成报告那台机器」的绝对路径：
+        # 宿主机上跑出来的是 D:\...\backend\rag_eval_cases.json，容器里没有 D 盘，
+        # 照原路径找必然落空 —— /evaluation/metrics 因此在容器里恒 500。
+        # 文件名本身与机器无关，所以回落到仓库内的同名文件：
+        # 宿主机路径存在时走原路径（行为不变），容器里才走回落。
+        #
+        # 反斜杠要先换成正斜杠：POSIX 下反斜杠不是路径分隔符，直接取 .name
+        # 会拿到整条 Windows 路径而不是文件名。
+        tail = Path(str(p).replace("\\", "/")).name
+        fallback = BACKEND_DIR / tail
+        if not fallback.exists():
+            raise SystemExit(
+                "找不到评测集：%s\n（题目已从代码移到 JSON，见项目根 docs/proposals/PROPOSALS.md 第 5 节）" % p
+            )
+        p = fallback
 
     data = json.loads(p.read_text(encoding="utf-8"))
     cases = []

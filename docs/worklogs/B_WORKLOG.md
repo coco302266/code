@@ -3159,3 +3159,114 @@ plans 4 合 1、handoff 4 合 1 + 4 独立、worklogs 2、tutorial.md），根�
 处理：把该断言从 `test_all_new_knobs_default_off` 拆成独立用例
 `test_rerank_text_adopted_parent_head`，注释写明依据与「要动这个值先看实测表」，
 其余四个开关仍锁「默认关闭」。当前 `run_tests.py` 684/684。
+
+### XB-51 容器一键启动 + P0 `doc_context` 500 修复（实测推翻交接文档的旧判断）
+
+启动：`docker compose -f deploy/docker-compose.yml up -d`（容器此前是 Exited，卷保留），
+四个容器全部 Up（mysql / backend healthy，web 8080，init 一次性跑完 Exited(0)）。
+
+**先纠正 XB-50 里一句错判断。** 交接文档原文写「我用『给我写一首关于秋天的诗』实测返回 200，
+因为那次 topic 没判成 unknown」，据此推断"不是每个库外问题都会触发"。容器起来后拿真实
+接口打同一句：
+
+```text
+POST /api/chat  {"message": "帮我写一首关于秋天的诗"}   ->  [HTTP 500 | 2.53s]
+```
+
+必现。真实判据是「评估节点是否把 topic 判成 unknown」，与输入长短无关；之前那次 200 是
+输入恰好被判成了别的 topic，被误当成这条分支扛得住。教训：静态定位出变量作用域问题后，
+实测只跑通一次就下"不必然触发"的结论，是拿单点样本覆盖了分支条件——应当直接构造满足
+分支条件的输入去打。
+
+修复按交接文档的方案 1：`app.py:1102` 的 `if doc_context:` -> `if pdf_docs:`。
+`pdf_docs` 是 `chat()` 里第 1019 行解包出来的，作用域内真实存在；没有采用方案 2
+（`_compose_rag_context` 多返回一个值会动到 4 处调用/解包）。
+
+新守护用例 `tests/test_chat_unknown_topic.py`（4 条）：unknown 无上传件走寒暄降级
+（200 + 发空 sources 数组，注意「收到空 sources」与「没收到」是两种语义）、unknown
+有上传件走文档降级（200 + sources 带 upload origin）。红绿顺序：先跑红（4 条全崩在
+NameError），改完转绿。全量 `run_tests.py` 684 -> 688 全绿。
+
+容器复验（`docker compose up -d --build backend` 重建镜像，因为代码是 COPY 进镜像的，
+改源码不重建不生效）：
+
+```text
+寒暄   "帮我写一首关于秋天的诗"     500 -> 200（15.5s，sources 空数组，66 token）
+八股   "什么是死锁？四个必要条件"   200（6.8s，sources 命中 cs/os/deadlock.md x3）
+容器内 CONFIG: parent_child=True  rerank_text=parent_head  final_k=4
+```
+
+八股那条顺带确认父子模式没被重建打断。交接文档的 P0 段落已改成存档，P1 / P2 仍留给 A。
+本次未推 Gitee / GitHub（用户选择先不推送），改动目前只在本机。
+
+### XB-52 越界拒答策略：修掉「已有 topic 吞掉越界信号」的绕过路径
+
+起因是一张前端截图：学生（张三）在讲「死锁」的会话里问「给我写一首关于秋天的诗」，
+助教真写了一首《秋日》，回复下方标注「依据：模型自有知识（本轮未使用知识库资料）」。
+
+根因在 `agent/graph.py` 的 `extract_topic_node`：有一段容错是「模型返回 unknown 且
+当前已有知识点时 `return {}`，沿用旧 topic」，用来防追问被误判成换题。副作用是
+**越界信号被一起吞掉**——模型其实正确判出了越界，却因为 current_topic="死锁" 被当成
+沿用旧话题，于是走正常链路拿自有知识把诗写了。
+
+修法：越界单独占一个信号位，不走 topic。
+
+```text
+agent/prompts.py   EXTRACT_TOPIC_PROMPT 增加 off_topic（有诉求但越界），与 unknown
+                   （纯招呼、无实质诉求）区分；新增 KNOWLEDGE_SCOPE / OFF_TOPIC_REPLY
+agent/state.py     TutorState 加 off_topic: NotRequired[bool]
+agent/graph.py     topic == "off_topic" -> return {"off_topic": True}，
+                   无论有无 current_topic 都传出，且不动 topic
+app.py             unknown 分支**之前**检测 off_topic -> off_topic_stream()
+```
+
+两个取舍：① 拒答不动 topic（保住教学状态，下轮回正题能接上），所以检测必须放在
+unknown 分支之前，否则会被挡住；② 拒答流不调 LLM，文案服务端直发——既省一次往返，
+也杜绝模型自作主张，寒暄分支原来那段让模型现编招呼词的 prompt 一并删除，与越界共用
+同一文案（要求：措辞不因问题类型改变）。
+
+判定口径：专业领域 = 计算机与编程，比知识库（20 篇：OS 8 / 网络 7 / DB 2 / DSA 3）宽。
+领域内但知识库未覆盖的题用自有知识补位不算越界（与 eval/judge_scores.py 的既有口径一致）。
+
+守护用例 `tests/test_off_topic_guard.py`（13 条），**做过反向验证**：临时把
+`return {"off_topic": True}` 改回 `return {}` 跑一次，3 条核心用例立刻红，确认守护
+有效后改回。全量 `run_tests.py` 688 -> 701。
+
+容器端到端：讲着死锁突然要诗（带 topic=死锁 + history）不再写诗、返回固定文案；
+首轮直接要诗文案完全一致；正常八股仍命中 deadlock.md x3；静夜思作者 / 聊聊天 /
+翻译 三类全部拒答；MySQL 索引失效 / 快排复杂度 正常作答，无误伤。
+
+### XB-53 修 /evaluation/metrics 与 metrics.csv 的 500（评测报告接口）
+
+用户问「评测报告有没有接口、前端能不能点下载」。调研结论：接口有 7 个，
+**前端 0 个页面、0 处调用**，且 metrics / metrics.csv 恒 500。
+
+500 根因：e2e 报告 JSON 里的 `cases_file` 记的是「生成报告那台机器」的绝对路径，
+宿主机跑出来的存的是 `D:\...\backend\rag_eval_cases.json`，容器里没有 D 盘，
+`load_cases` 找不到就抛 SystemExit → 500。**文件本身在容器里是存在的**
+（rag_eval_cases.json 随 `COPY backend/ ./` 进了镜像），纯粹是路径对不上。
+
+修法：在 `scripts/smoke_rag.py` 的 `load_cases` 里加回落——路径不存在时按文件名
+回落到 `BACKEND_DIR/同名文件`：
+
+```python
+tail = Path(str(p).replace("\\", "/")).name   # 先换成正斜杠：POSIX 下反斜杠不是
+fallback = BACKEND_DIR / tail                 # 分隔符，否则取到整条 Windows 路径
+```
+
+改读取侧而不是改报告文件里的路径：宿主机路径存在时行为不变，容器里才回落，
+新报告再写 Windows 路径也照样能用。
+
+守护用例 `tests/test_eval_cases_path.py`（6 条），反向验证过（移除回落 -> 3 条红）。
+全量 `run_tests.py` 701 -> 707。
+
+验证：`/api/evaluation/metrics` 200（71 条计分用例）；`/api/evaluation/metrics.csv`
+200（11.6KB，Content-Disposition: attachment，带 BOM，Excel 打开中文不乱码）。
+CSV 可直接访问 URL 下载，不需要前端页面。
+
+遗留两点：
+1. `eval/reports/` 不在 compose 挂载列表，容器里的报告是**镜像构建时的快照**
+   （最新 e2e_20261028_142722.json），宿主机新报告不会进容器，要刷新得
+   POST /evaluation/metrics/refresh 在容器里重跑。
+2. `summary` 与 `sheet` 返回的是 **JSON 不是文件**，要做成「点击下载」得让前端
+   转 CSV 或后端加导出端点——本次没做（用户选择先只修 500）。

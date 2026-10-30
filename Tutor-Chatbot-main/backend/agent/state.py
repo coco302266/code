@@ -25,6 +25,11 @@ class TutorState(TypedDict):
     resolved: bool
     llm: Any
     topic_changed: NotRequired[bool]
+    # 越界信号（2026-10-31）：最新消息有明确诉求，但不属于计算机 / 编程领域。
+    # 故意不复用 topic —— 它是「本轮该不该拒答」的判断，不是知识点归属，
+    # 混进 topic 会被「沿用上一轮知识点」的容错分支吃掉（详见 graph.py）。
+    # 只写 True，不写 False：字典合并时缺省即 False，没必要多一个键。
+    off_topic: NotRequired[bool]
 
 
 class HistoryMessage(BaseModel):

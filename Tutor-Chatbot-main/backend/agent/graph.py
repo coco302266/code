@@ -184,6 +184,20 @@ async def extract_topic_node(state: TutorState) -> dict:
     # 模型偶尔会带个句号或引号返回（"死锁。"），不清掉就会被当成换了话题，
     # 白白把 hint_level 打回 0。
     topic = result.lower().strip().strip("。.！!？?；;，,、\"' ")
+
+    # 越界信号必须无条件往上抛。
+    #
+    # 下面「当前已有知识点时忽略 unknown」的容错，曾经把越界一起吞掉：学生正讲着
+    # 死锁、突然问「给我写一首关于秋天的诗」，模型正确判出越界，却因为
+    # current_topic="死锁" 被 `return {}` 当成沿用旧话题，于是走正常链路用模型
+    # 自有知识把诗写了出来（2026-10-31 前端截图实测，回复下方还标注着
+    # "依据：模型自有知识（本轮未使用知识库资料）"）。
+    #
+    # 所以越界单独占一个信号位，不走 topic，且**不动 topic**：拒答不该清掉教学
+    # 状态，学生下一轮回到正题还能接着讲。
+    if topic == "off_topic":
+        return {"off_topic": True}
+
     if topic in ["unknown", "none", "no topic", "not mentioned"]:
         if current_topic != "unknown":
             return {}

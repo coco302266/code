@@ -4,7 +4,8 @@
 > 接收人：A（后端与 AI 算法 owner）
 > 日期：2026-10-30
 > 范围：RAG 检索链路、评测体系与金标准、Docker 部署配置、裁判模型通道、文档目录整理
-> 代码状态：全部落地并验证，`run_tests.py` 684/684 通过；有一个已知 500 归你（见第二节 P0）
+> 代码状态：全部落地并验证，`run_tests.py` 688/688 通过
+> 变更（2026-10-30 晚）：第二节的 P0 已在容器里实测复现并修复，不再归你；P1 / P2 仍需你处理
 > 说明位置：本文件放在项目根便于你第一眼看到，接收后建议并入 `docs/handoff/HANDOFF.md` 或直接删除
 
 ---
@@ -27,37 +28,49 @@ parent_head/480、per_doc_floor=-8 这一整套都没生效。现在打开了，
 
 ## 二、A 需要处理的事（按优先级）
 
-### P0　`app.py` 库外提问必 500（NameError）—— 你的代码，我没动
+### P0　`app.py` 库外提问必 500（NameError）—— 已于 2026-10-30 修复，仅存档
 
 ```text
 文件    Tutor-Chatbot-main/backend/app.py
 行号    1102
-代码        if doc_context:
+旧代码      if doc_context:
+新代码      if pdf_docs:
 问题    doc_context 只在 _compose_rag_context()（第 826 行）内部定义，
         而 1102 行在 chat() 函数里（第 843 行起）。两个不同作用域。
 触发    只要 assessment_state["topic"] == "unknown"，执行到 1102 行必然 NameError -> 500
 ```
 
-静态已确认：`_compose_rag_context()` 的返回是 `(rag_context, source_items)`（第 1022 行解包），
-`doc_context` 从来没被带出来。
+更正上一版的一个判断：原文写「实测返回 HTTP 200，因为那次 topic 没判成 unknown」，
+这个结论是错的。当晚在容器里用同一句话打真实接口，拿到的是：
 
-复现注意：不是每个"库外问题"都会触发。我刚才用「给我写一首关于秋天的诗」实测返回 HTTP 200，
-因为那次 topic 没判成 `unknown`。要稳定复现，得让 `extract_topic`/`assess_understanding`
-判成 unknown（例如极短寒暄、或与学科完全无关且无主题词的输入），或直接在单测里构造
-`assessment_state = {"topic": "unknown"}` 调 `chat()`。
-
-修复建议（二选一，别只改符号）：
-
-```python
-# 方案 1（推荐）：按"学生是否上传过文档"判断，语义与注释一致
-if pdf_docs:
-    ...
-
-# 方案 2：让 _compose_rag_context 多返回一个 doc_context（会动 4 处调用/解包）
+```text
+POST /api/chat  {"message": "帮我写一首关于秋天的诗"}
+[HTTP 500 | 2.53s]
 ```
 
-改之前先补一条回归用例：`topic=unknown` 且 `pdf_docs` 为空时必须走"不注入资料"的分支而不是抛异常。
-这条我原来答应做，但它是你 owner 的模块，留给你决定要不要按方案 2 重构。
+只要评估节点把 topic 判成 unknown 就必 500，与输入长短无关；之前那次 200 是我测的
+输入恰好被判成了别的 topic，不是这条分支能扛住。
+
+已按方案 1 修（采纳上文的推荐项，没有动 `_compose_rag_context` 的返回值）：
+
+```python
+if pdf_docs:      # pdf_docs 是 chat() 里第 1019 行解包出来的，作用域内真实存在
+```
+
+补的回归用例在 `Tutor-Chatbot-main/backend/tests/test_chat_unknown_topic.py`，4 条：
+unknown 无上传件走寒暄降级（200 + 发空 sources 数组）、unknown 有上传件走文档降级
+（200 + sources 带 upload origin）。先跑红（4 条全部崩在 NameError），改完转绿。
+全量 `run_tests.py` 684 -> 688，全绿。
+
+修完后在容器里复验两条链路：
+
+```text
+寒暄   POST /api/chat "帮我写一首关于秋天的诗"       500 -> 200（15.5s，sources 空数组，66 token）
+八股   POST /api/chat "什么是死锁？四个必要条件"     200（6.8s，sources 命中 cs/os/deadlock.md x3）
+```
+
+八股那条顺带确认了父子模式没被重建打断：`parent_child=True / rerank_text=parent_head`。
+这条你不用再动了，下面 P1 / P2 才是留给你的。
 
 ### P1　我改了检索默认值，连带改了守护测试的语义（请 review 这一处）
 
@@ -67,7 +80,7 @@ if pdf_docs:
 `test_rerank_text_adopted_parent_head`，注释里写清依据和"要动这个值先看实测表"。
 
 请重点看：这样拆分是否影响你对这个测试文件的意图（剩下的四个开关仍锁"默认关闭"）。
-当前状态 684/684 全绿。
+当前状态 688/688 全绿（684 是修 P0 之前的数，新增 4 条是 P0 的守护用例）。
 
 ### P2　父子模式开关只改了配置，没改代码（你的 .env 里现在多了一行）
 
@@ -265,7 +278,7 @@ cd Tutor-Chatbot-main/backend
 
 # 1. 单测（约 5 秒，不联网不花钱）
 venv/Scripts/python.exe run_tests.py
-# 期望：RAN=684 FAILURES=0 ERRORS=0
+# 期望：RAN=688 FAILURES=0 ERRORS=0（684 + P0 守护用例 4 条）
 
 # 2. 裁判通道自检（不发请求，只看解析结果）
 venv/Scripts/python.exe -m eval.judge_llm

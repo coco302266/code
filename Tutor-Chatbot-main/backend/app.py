@@ -75,7 +75,7 @@ from agent.personalize import (
     preview_prompt,
     suggest_start_level,
 )
-from agent.prompts import RAG_GROUNDING_RULES
+from agent.prompts import OFF_TOPIC_REPLY, RAG_GROUNDING_RULES
 from agent.profiler import (
     apply_turn,
     derive_level,
@@ -1097,9 +1097,63 @@ async def chat(request: Request, body: ChatRequest):
             }
         )
 
+    async def off_topic_stream():
+        """越界 / 无知识点共用的固定文案流（2026-10-31）。
+
+        两种情况共用一条文案：① 本轮判定越界（off_topic）② 抽不出知识点且无上传件。
+        措辞完全一致是刻意的——要求「不因问题类型不同而改变」，所以寒暄不再单独
+        配一套招呼词。
+
+        **这里不调用 LLM**。越界的正确行为是「不回答这个问题本身」，文案由服务端
+        直接下发：既省一次模型往返，也杜绝模型自作主张把诗写出来——正是 2026-10-31
+        前端截图里那次事故的行为（回复下方还标着「依据：模型自有知识」）。
+        """
+        try:
+            # 与寒暄分支口径一致：发空数组而不是不发。
+            # 「收到空的 sources」＝明确没有资料，「没收到」＝这条流没覆盖。
+            yield (
+                "data: "
+                f"{json.dumps({'type': 'sources', 'items': []})}\n\n"
+            )
+            yield (
+                "data: "
+                f"{json.dumps({'type': 'token', 'content': OFF_TOPIC_REPLY})}\n\n"
+            )
+            _persist_assistant(
+                classroom_id, OFF_TOPIC_REPLY, user_id=body.user_id,
+                sources=[], agent_role=body.agent_role,
+            )
+            # 拒答不推 state：本轮没有知识点可推，发了会把上一轮真实的
+            # topic / 深度清掉（理由同下：前端是「收到才更新」）。
+            logger.info(
+                "本轮拒答（超出知识库范围），不推 state 事件 message=%r",
+                body.message[:100],
+            )
+            yield "data: [DONE]\n\n"
+        except Exception:
+            yield (
+                "data: "
+                f"{json.dumps({'type': 'error', 'content': 'Failed to send the reply.'})}\n\n"
+            )
+
+    # 越界拒答（2026-10-31）：
+    # 判据是「本轮消息有明确诉求，但不属于计算机 / 编程领域」，与 topic 无关。
+    #
+    # 必须放在 unknown 分支**之前**：学生正讲着某个知识点、突然跳到无关话题时，
+    # topic 仍是旧知识点（拒答刻意不清状态，下一轮回到正题还能接上），
+    # 只有 off_topic 这个信号位能反映「本轮越界」。放在后面会被 unknown 分支挡住。
+    if assessment_state.get("off_topic"):
+        return StreamingResponse(off_topic_stream(), media_type="text/event-stream")
+
     if assessment_state["topic"] == "unknown":
-        # 纯寒暄不该拿知识库去回答，只有学生上传过文档时才依据文档答
-        if doc_context:
+        # 纯寒暄不该拿知识库去回答，只有学生上传过文档时才依据文档答。
+        # 判据必须用 pdf_docs（本函数内 1019 行解包出来的）：原来写成
+        # doc_context，而它只是 _compose_rag_context() 内部的局部变量，
+        # 这里取不到 —— 2026-10-30 容器实测「帮我写一首关于秋天的诗」
+        # 因此必 500（NameError）。只有 unknown 分支会走到，常规八股题的
+        # 冒烟测不出来，所以是靠容器里打真实请求才暴露的。
+        # 守护用例：tests/test_chat_unknown_topic.py
+        if pdf_docs:
 
             async def doc_stream():
                 try:
@@ -1147,46 +1201,11 @@ async def chat(request: Request, body: ChatRequest):
 
             return StreamingResponse(doc_stream(), media_type="text/event-stream")
 
-        async def unknown_stream():
-            try:
-                # 寒暄场景压根没走资料，发空数组而不是不发：
-                # 「收到了空的 sources」＝明确没有资料，「没收到」＝这条流没覆盖，
-                # 两种语义前端要能区分。
-                yield (
-                    "data: "
-                    f"{json.dumps({'type': 'sources', 'items': []})}\n\n"
-                )
-                answer_parts: list[str] = []
-                prompt = (
-                    "你是计算机八股（面试知识点）辅导助手。学生还没说想学什么。"
-                    "用中文简短打个招呼，并请他告诉你想了解哪个计算机知识点，"
-                    "例如进程与线程、TCP 三次握手、MySQL 索引、垃圾回收等。"
-                )
-                async for chunk in llm.astream([HumanMessage(content=prompt)]):
-                    token = chunk.content
-                    if token:
-                        answer_parts.append(str(token))
-                        yield (
-                            "data: "
-                            f"{json.dumps({'type': 'token', 'content': token})}\n\n"
-                        )
-                _persist_assistant(
-                    classroom_id, "".join(answer_parts), user_id=body.user_id,
-                    sources=[], agent_role=body.agent_role,
-                )
-                # 同上：寒暄场景没有教学状态，不推 state（理由见 doc_stream 里的注释）。
-                logger.info(
-                    "未识别知识点，走寒暄降级回答，不推 state 事件 message=%r",
-                    body.message[:100],
-                )
-                yield "data: [DONE]\n\n"
-            except Exception:
-                yield (
-                    "data: "
-                    f"{json.dumps({'type': 'error', 'content': 'The language model request failed.'})}\n\n"
-                )
-
-        return StreamingResponse(unknown_stream(), media_type="text/event-stream")
+        # 抽不出知识点、又没有上传件可依据：与越界共用同一条固定文案。
+        # 原来这里会让 LLM 现编一段招呼词（"用中文简短打个招呼…"），两个问题：
+        # ① 白跑一次模型往返；② 模型不受控，实测就写过"秋日／风过疏林叶渐黄"
+        #    这种完整的诗——越界提问被变相回答了。现在一律走固定文案。
+        return StreamingResponse(off_topic_stream(), media_type="text/event-stream")
 
     async def event_stream():
         try:
