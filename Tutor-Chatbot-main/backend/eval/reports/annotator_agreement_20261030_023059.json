@@ -1,0 +1,64 @@
+{
+  "generated_at": "20261030_023059",
+  "docs": [
+    "cs/network/http-https.md",
+    "cs/os/deadlock.md",
+    "cs/network/tcp-handshake.md"
+  ],
+  "points": 339,
+  "a_vs_g": {
+    "a": "Qwen(裁判通道)",
+    "b": "现存金标准 G",
+    "points": 339,
+    "agree": 248,
+    "agreement": 0.7316,
+    "kappa": 0.5596,
+    "top_grade_only_in_a": 2,
+    "top_grade_only_in_b": 16,
+    "confusions": {
+      "0.0->0.5": 63,
+      "0.5->1.0": 11,
+      "0.5->0.0": 10,
+      "0.0->1.0": 5,
+      "1.0->0.5": 2
+    }
+  },
+  "b_vs_g": {
+    "a": "DeepSeek(deepseek-flash)",
+    "b": "现存金标准 G",
+    "points": 339,
+    "agree": 285,
+    "agreement": 0.8407,
+    "kappa": 0.7472,
+    "top_grade_only_in_a": 5,
+    "top_grade_only_in_b": 15,
+    "confusions": {
+      "0.0->0.5": 28,
+      "0.5->1.0": 15,
+      "0.5->0.0": 6,
+      "1.0->0.5": 5
+    }
+  },
+  "a_vs_b": {
+    "a": "Qwen(裁判通道)",
+    "b": "DeepSeek(deepseek-flash)",
+    "points": 339,
+    "agree": 273,
+    "agreement": 0.8053,
+    "kappa": 0.6645,
+    "top_grade_only_in_a": 3,
+    "top_grade_only_in_b": 7,
+    "confusions": {
+      "0.0->0.5": 45,
+      "0.5->0.0": 11,
+      "0.5->1.0": 5,
+      "1.0->0.5": 3,
+      "0.0->1.0": 2
+    }
+  },
+  "per_source": {
+    "cs/network/http-https.md": 0.7259,
+    "cs/os/deadlock.md": 0.6442,
+    "cs/network/tcp-handshake.md": 0.83
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "generated_at": "20261030_030046",
+  "docs": [
+    "cs/network/http-https.md",
+    "cs/os/deadlock.md",
+    "cs/network/tcp-handshake.md"
+  ],
+  "points": 339,
+  "a_vs_g": {
+    "a": "Qwen(裁判通道)",
+    "b": "现存金标准 G",
+    "points": 339,
+    "agree": 250,
+    "agreement": 0.7375,
+    "kappa": 0.5693,
+    "top_grade_only_in_a": 2,
+    "top_grade_only_in_b": 16,
+    "confusions": {
+      "0.0->0.5": 62,
+      "0.5->1.0": 11,
+      "0.5->0.0": 9,
+      "0.0->1.0": 5,
+      "1.0->0.5": 2
+    }
+  },
+  "b_vs_g": {
+    "agreement": null,
+    "kappa": NaN,
+    "confusions": {},
+    "top_grade_only_in_a": 0,
+    "top_grade_only_in_b": 0
+  },
+  "a_vs_b": {
+    "agreement": null,
+    "kappa": NaN,
+    "confusions": {},
+    "top_grade_only_in_a": 0,
+    "top_grade_only_in_b": 0
+  },
+  "per_source": {
+    "cs/network/http-https.md": 0.7407,
+    "cs/os/deadlock.md": 0.6442,
+    "cs/network/tcp-handshake.md": 0.83
+  }
+}

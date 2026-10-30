@@ -1,0 +1,1387 @@
+{
+  "mode": "nothink",
+  "n": 60,
+  "resolved_acc": 96.66666666666667,
+  "mis_acc": 73.33333333333333,
+  "hint_up_acc": 83.33333333333334,
+  "strict_acc": 63.33333333333333,
+  "lat_mean": 772.4595000000894,
+  "lat_p50": 782.0369500004745,
+  "lat_p95": 974.9516899977606,
+  "per_item": {
+    "a01": [
+      {
+        "ok_resolved": true,
+        "ok_mis": true,
+        "ok_up": true,
+        "ok_strict": true,
+        "pred": {
+          "resolved": true,
+          "misconception": "",
+          "hint_level": 0
+        }
+      },
+      {
+        "ok_resolved": true,
+        "ok_mis": true,
+        "ok_up": true,
+        "ok_strict": true,
+        "pred": {
+          "resolved": true,
+          "misconception": "",
+          "hint_level": 0
+        }
+      }
+    ],
+    "a02": [
+      {
+        "ok_resolved": true,
+        "ok_mis": true,
+        "ok_up": true,
+        "ok_strict": true,
+        "pred": {
+          "resolved": true,
+          "misconception": "",
+          "hint_level": 0
+        }
+      },
+      {
+        "ok_resolved": true,
+        "ok_mis": true,
+        "ok_up": true,
+        "ok_strict": true,
+        "pred": {
+          "resolved": true,
+          "misconception": "",
+          "hint_level": 0
+        }
+      }
+    ],
+    "a03": [
+      {
+        "ok_resolved": true,
+        "ok_mis": true,
+        "ok_up": true,
+        "ok_strict": true,
+        "pred": {
+          "resolved": true,
+          "misconception": "",
+          "hint_level": 0
+        }
+      },
+      {
+        "ok_resolved": true,
+        "ok_mis": true,
+        "ok_up": true,
+        "ok_strict": true,
+        "pred": {
+          "resolved": true,
+          "misconception": "",
+          "hint_level": 0
+        }
+      }
+    ],
+    "a04": [
+      {
+        "ok_resolved": true,
+        "ok_mis": true,
+        "ok_up": true,
+        "ok_strict": true,
+        "pred": {
+          "resolved": true,
+          "misconception": "",
+          "hint_level": 0
+        }
+      },
+      {
+        "ok_resolved": true,
+        "ok_mis": true,
+        "ok_up": true,
+        "ok_strict": true,
+        "pred": {
+          "resolved": true,
+          "misconception": "",
+          "hint_level": 0
+        }
+      }
+    ],
+    "a05": [
+      {
+        "ok_resolved": true,
+        "ok_mis": true,
+        "ok_up": true,
+        "ok_strict": true,
+        "pred": {
+          "resolved": true,
+          "misconception": "",
+          "hint_level": 0
+        }
+      },
+      {
+        "ok_resolved": true,
+        "ok_mis": true,
+        "ok_up": true,
+        "ok_strict": true,
+        "pred": {
+          "resolved": true,
+          "misconception": "",
+          "hint_level": 0
+        }
+      }
+    ],
+    "a06": [
+      {
+        "ok_resolved": true,
+        "ok_mis": true,
+        "ok_up": true,
+        "ok_strict": true,
+        "pred": {
+          "resolved": true,
+          "misconception": "",
+          "hint_level": 0
+        }
+      },
+      {
+        "ok_resolved": true,
+        "ok_mis": true,
+        "ok_up": true,
+        "ok_strict": true,
+        "pred": {
+          "resolved": true,
+          "misconception": "",
+          "hint_level": 0
+        }
+      }
+    ],
+    "b01": [
+      {
+        "ok_resolved": true,
+        "ok_mis": true,
+        "ok_up": true,
+        "ok_strict": true,
+        "pred": {
+          "resolved": true,
+          "misconception": "",
+          "hint_level": 0
+        }
+      },
+      {
+        "ok_resolved": true,
+        "ok_mis": true,
+        "ok_up": true,
+        "ok_strict": true,
+        "pred": {
+          "resolved": true,
+          "misconception": "",
+          "hint_level": 0
+        }
+      }
+    ],
+    "b02": [
+      {
+        "ok_resolved": true,
+        "ok_mis": true,
+        "ok_up": true,
+        "ok_strict": true,
+        "pred": {
+          "resolved": true,
+          "misconception": "",
+          "hint_level": 0
+        }
+      },
+      {
+        "ok_resolved": true,
+        "ok_mis": true,
+        "ok_up": true,
+        "ok_strict": true,
+        "pred": {
+          "resolved": true,
+          "misconception": "",
+          "hint_level": 0
+        }
+      }
+    ],
+    "b03": [
+      {
+        "ok_resolved": true,
+        "ok_mis": true,
+        "ok_up": true,
+        "ok_strict": true,
+        "pred": {
+          "resolved": true,
+          "misconception": "",
+          "hint_level": 0
+        }
+      },
+      {
+        "ok_resolved": true,
+        "ok_mis": true,
+        "ok_up": true,
+        "ok_strict": true,
+        "pred": {
+          "resolved": true,
+          "misconception": "",
+          "hint_level": 0
+        }
+      }
+    ],
+    "b04": [
+      {
+        "ok_resolved": true,
+        "ok_mis": true,
+        "ok_up": true,
+        "ok_strict": true,
+        "pred": {
+          "resolved": true,
+          "misconception": "",
+          "hint_level": 0
+        }
+      },
+      {
+        "ok_resolved": true,
+        "ok_mis": true,
+        "ok_up": true,
+        "ok_strict": true,
+        "pred": {
+          "resolved": true,
+          "misconception": "",
+          "hint_level": 0
+        }
+      }
+    ],
+    "b05": [
+      {
+        "ok_resolved": true,
+        "ok_mis": true,
+        "ok_up": true,
+        "ok_strict": true,
+        "pred": {
+          "resolved": true,
+          "misconception": "",
+          "hint_level": 0
+        }
+      },
+      {
+        "ok_resolved": true,
+        "ok_mis": true,
+        "ok_up": true,
+        "ok_strict": true,
+        "pred": {
+          "resolved": true,
+          "misconception": "",
+          "hint_level": 0
+        }
+      }
+    ],
+    "c01": [
+      {
+        "ok_resolved": true,
+        "ok_mis": true,
+        "ok_up": true,
+        "ok_strict": true,
+        "pred": {
+          "resolved": false,
+          "misconception": "学生把死锁等同于死循环，认为进程还在一直运行，忽略了死锁是全部阻塞、不占 CPU 的永久等待状态",
+          "hint_level": 2
+        }
+      },
+      {
+        "ok_resolved": true,
+        "ok_mis": true,
+        "ok_up": true,
+        "ok_strict": true,
+        "pred": {
+          "resolved": false,
+          "misconception": "把死锁错误理解成两个进程死循环一直在跑，混淆了死锁（全部阻塞、不占CPU）与死循环（占用CPU持续运行）的本质区别。",
+          "hint_level": 2
+        }
+      }
+    ],
+    "c02": [
+      {
+        "ok_resolved": true,
+        "ok_mis": true,
+        "ok_up": true,
+        "ok_strict": true,
+        "pred": {
+          "resolved": false,
+          "misconception": "学生误认为同进程的线程之间是进程隔离、完全不共享内存，只能靠消息队列通信。",
+          "hint_level": 2
+        }
+      },
+      {
+        "ok_resolved": true,
+        "ok_mis": true,
+        "ok_up": true,
+        "ok_strict": true,
+        "pred": {
+          "resolved": false,
+          "misconception": "学生误以为同一进程内的线程之间是进程隔离、完全不共享内存，只能靠消息队列通信。",
+          "hint_level": 2
+        }
+      }
+    ],
+    "c03": [
+      {
+        "ok_resolved": false,
+        "ok_mis": false,
+        "ok_up": false,
+        "ok_strict": false,
+        "pred": {
+          "resolved": true,
+          "misconception": "",
+          "hint_level": 0
+        }
+      },
+      {
+        "ok_resolved": true,
+        "ok_mis": true,
+        "ok_up": false,
+        "ok_strict": false,
+        "pred": {
+          "resolved": false,
+          "misconception": "学生把三次握手简化为“双方各确认一次”，没有理解三次握手的核心是防止历史重复连接初始化，以及双方需确认对方发送与接收能力均正常。",
+          "hint_level": 1
+        }
+      }
+    ],
+    "c04": [
+      {
+        "ok_resolved": true,
+        "ok_mis": true,
+        "ok_up": true,
+        "ok_strict": true,
+        "pred": {
+          "resolved": false,
+          "misconception": "学生误以为隔离级别越高越好，忽略了高隔离级别带来的并发性能下降和锁竞争代价，没有理解隔离级别需要根据业务场景权衡选择。",
+          "hint_level": 2
+        }
+      },
+      {
+        "ok_resolved": true,
+        "ok_mis": true,
+        "ok_up": false,
+        "ok_strict": false,
+        "pred": {
+          "resolved": false,
+          "misconception": "认为隔离级别越高越好、Serializable 最安全，忽略了高隔离级别带来的并发性能下降和锁竞争代价。",
+          "hint_level": 1
+        }
+      }
+    ],
+    "c05": [
+      {
+        "ok_resolved": true,
+        "ok_mis": true,
+        "ok_up": true,
+        "ok_strict": true,
+        "pred": {
+          "resolved": false,
+          "misconception": "学生误以为HTTPS全程使用同一个密钥加解密，忽略了握手阶段非对称加密协商会话密钥、之后才用对称加密传输数据的区分。",
+          "hint_level": 2
+        }
+      },
+      {
+        "ok_resolved": true,
+        "ok_mis": true,
+        "ok_up": true,
+        "ok_strict": true,
+        "pred": {
+          "resolved": false,
+          "misconception": "学生误以为HTTPS全程使用同一个密钥加解密，忽略了握手阶段用非对称加密协商会话密钥、之后才用对称加密传输数据的混合加密机制。",
+          "hint_level": 2
+        }
+      }
+    ],
+    "d01": [
+      {
+        "ok_resolved": true,
+        "ok_mis": false,
+        "ok_up": true,
+        "ok_strict": false,
+        "pred": {
+          "resolved": false,
+          "misconception": "学生完全不了解死锁概念，尚未建立任何相关认知。",
+          "hint_level": 2
+        }
+      },
+      {
+        "ok_resolved": true,
+        "ok_mis": false,
+        "ok_up": true,
+        "ok_strict": false,
+        "pred": {
+          "resolved": false,
+          "misconception": "学生完全没有接触过死锁概念，尚未建立任何理解。",
+          "hint_level": 1
+        }
+      }
+    ],
+    "d02": [
+      {
+        "ok_resolved": true,
+        "ok_mis": false,
+        "ok_up": true,
+        "ok_strict": false,
+        "pred": {
+          "resolved": false,
+          "misconception": "学生不清楚 ReadView 的可见性判断规则，直接放弃思考要求讲解。",
+          "hint_level": 2
+        }
+      },
+      {
+        "ok_resolved": true,
+        "ok_mis": false,
+        "ok_up": true,
+        "ok_strict": false,
+        "pred": {
+          "resolved": false,
+          "misconception": "学生不了解 ReadView 判断可见性的机制，直接放弃思考要求讲解。",
+          "hint_level": 2
+        }
+      }
+    ],
+    "d03": [
+      {
+        "ok_resolved": true,
+        "ok_mis": false,
+        "ok_up": true,
+        "ok_strict": false,
+        "pred": {
+          "resolved": false,
+          "misconception": "对慢启动和拥塞避免的概念及区别没有基本认识",
+          "hint_level": 2
+        }
+      },
+      {
+        "ok_resolved": true,
+        "ok_mis": false,
+        "ok_up": true,
+        "ok_strict": false,
+        "pred": {
+          "resolved": false,
+          "misconception": "学生对慢启动和拥塞避免的区别没有概念，尚未理解两者在拥塞窗口增长方式上的差异。",
+          "hint_level": 2
+        }
+      }
+    ],
+    "d04": [
+      {
+        "ok_resolved": true,
+        "ok_mis": false,
+        "ok_up": true,
+        "ok_strict": false,
+        "pred": {
+          "resolved": false,
+          "misconception": "学生完全没有接触过虚拟内存，属于知识空白而非理解错误",
+          "hint_level": 1
+        }
+      },
+      {
+        "ok_resolved": true,
+        "ok_mis": false,
+        "ok_up": true,
+        "ok_strict": false,
+        "pred": {
+          "resolved": false,
+          "misconception": "学生表示没看过该知识点，尚未建立对虚拟内存作用的基本理解。",
+          "hint_level": 1
+        }
+      }
+    ],
+    "e01": [
+      {
+        "ok_resolved": true,
+        "ok_mis": true,
+        "ok_up": true,
+        "ok_strict": true,
+        "pred": {
+          "resolved": false,
+          "misconception": "",
+          "hint_level": 1
+        }
+      },
+      {
+        "ok_resolved": true,
+        "ok_mis": true,
+        "ok_up": false,
+        "ok_strict": false,
+        "pred": {
+          "resolved": false,
+          "misconception": "",
+          "hint_level": 2
+        }
+      }
+    ],
+    "e02": [
+      {
+        "ok_resolved": true,
+        "ok_mis": false,
+        "ok_up": true,
+        "ok_strict": false,
+        "pred": {
+          "resolved": false,
+          "misconception": "学生不理解破坏不可剥夺条件为何能预防死锁，可能没有把不可剥夺与死锁的循环等待/资源占用机制联系起来。",
+          "hint_level": 1
+        }
+      },
+      {
+        "ok_resolved": true,
+        "ok_mis": false,
+        "ok_up": false,
+        "ok_strict": false,
+        "pred": {
+          "resolved": false,
+          "misconception": "学生不理解破坏不可剥夺条件与预防死锁之间的因果机制，需要展开原理说明。",
+          "hint_level": 2
+        }
+      }
+    ],
+    "e03": [
+      {
+        "ok_resolved": true,
+        "ok_mis": false,
+        "ok_up": true,
+        "ok_strict": false,
+        "pred": {
+          "resolved": false,
+          "misconception": "学生仍混淆B树与B+树的核心差异，未能抓住非叶子节点是否存数据、叶子链表支持范围查询这两个关键点。",
+          "hint_level": 2
+        }
+      },
+      {
+        "ok_resolved": true,
+        "ok_mis": false,
+        "ok_up": true,
+        "ok_strict": false,
+        "pred": {
+          "resolved": false,
+          "misconception": "学生仍混淆B树与B+树的核心差异，未能抓住B+树非叶子节点仅存索引、数据全在叶子且叶子间有链表这一关键结构区别。",
+          "hint_level": 2
+        }
+      }
+    ],
+    "e04": [
+      {
+        "ok_resolved": true,
+        "ok_mis": false,
+        "ok_up": true,
+        "ok_strict": false,
+        "pred": {
+          "resolved": false,
+          "misconception": "学生不理解为什么划分极不平衡时快排会退化为 O(n²)",
+          "hint_level": 2
+        }
+      },
+      {
+        "ok_resolved": true,
+        "ok_mis": false,
+        "ok_up": true,
+        "ok_strict": false,
+        "pred": {
+          "resolved": false,
+          "misconception": "学生不理解最坏情况下每次划分极不平衡导致递归深度为 n、每层代价为 O(n)，从而总代价为 O(n²)",
+          "hint_level": 2
+        }
+      }
+    ],
+    "e05": [
+      {
+        "ok_resolved": true,
+        "ok_mis": true,
+        "ok_up": true,
+        "ok_strict": true,
+        "pred": {
+          "resolved": false,
+          "misconception": "",
+          "hint_level": 1
+        }
+      },
+      {
+        "ok_resolved": true,
+        "ok_mis": true,
+        "ok_up": true,
+        "ok_strict": true,
+        "pred": {
+          "resolved": false,
+          "misconception": "",
+          "hint_level": 1
+        }
+      }
+    ],
+    "e06": [
+      {
+        "ok_resolved": true,
+        "ok_mis": true,
+        "ok_up": true,
+        "ok_strict": true,
+        "pred": {
+          "resolved": false,
+          "misconception": "",
+          "hint_level": 1
+        }
+      },
+      {
+        "ok_resolved": true,
+        "ok_mis": true,
+        "ok_up": true,
+        "ok_strict": true,
+        "pred": {
+          "resolved": false,
+          "misconception": "",
+          "hint_level": 1
+        }
+      }
+    ],
+    "f01": [
+      {
+        "ok_resolved": true,
+        "ok_mis": true,
+        "ok_up": false,
+        "ok_strict": false,
+        "pred": {
+          "resolved": false,
+          "misconception": "学生把饥饿等同于死锁，认为两者差不多是一回事，忽略了饥饿时系统仍在推进、进程只是长期得不到资源这一关键区别。",
+          "hint_level": 2
+        }
+      },
+      {
+        "ok_resolved": true,
+        "ok_mis": true,
+        "ok_up": false,
+        "ok_strict": false,
+        "pred": {
+          "resolved": false,
+          "misconception": "学生把饥饿等同于死锁，认为两者差不多是一回事，忽略了饥饿时系统仍在推进、进程可能最终获得资源的关键区别。",
+          "hint_level": 2
+        }
+      }
+    ],
+    "f02": [
+      {
+        "ok_resolved": true,
+        "ok_mis": true,
+        "ok_up": true,
+        "ok_strict": true,
+        "pred": {
+          "resolved": false,
+          "misconception": "学生认为MVCC仅靠版本号比较、完全不用加锁，忽略了ReadView可见性判断和undo log版本链的作用，也误解了MVCC与锁的关系。",
+          "hint_level": 2
+        }
+      },
+      {
+        "ok_resolved": true,
+        "ok_mis": true,
+        "ok_up": true,
+        "ok_strict": true,
+        "pred": {
+          "resolved": false,
+          "misconception": "学生误以为MVCC仅靠版本号比较、完全不用加锁，忽略了ReadView可见性判断和undo log版本链的作用，也忽略了MVCC不能完全替代锁（如写操作仍需加锁）。",
+          "hint_level": 2
+        }
+      }
+    ],
+    "f03": [
+      {
+        "ok_resolved": true,
+        "ok_mis": true,
+        "ok_up": true,
+        "ok_strict": true,
+        "pred": {
+          "resolved": false,
+          "misconception": "学生把“索引列上使用函数导致该列索引失效”错误扩大为“只要where里用了函数就整个SQL全表扫描”，忽略了其他列仍可能走索引或函数作用于非索引列的情况。",
+          "hint_level": 2
+        }
+      },
+      {
+        "ok_resolved": true,
+        "ok_mis": true,
+        "ok_up": true,
+        "ok_strict": true,
+        "pred": {
+          "resolved": false,
+          "misconception": "学生误以为只要 where 中用了函数就一定会全表扫描，忽略了函数作用在索引列上才导致索引失效，而函数作用在非索引列或常量上不影响索引使用。",
+          "hint_level": 2
+        }
+      }
+    ],
+    "f04": [
+      {
+        "ok_resolved": true,
+        "ok_mis": true,
+        "ok_up": true,
+        "ok_strict": true,
+        "pred": {
+          "resolved": false,
+          "misconception": "学生误以为时间片越小越好、越小越公平，忽略了时间片过小会导致上下文切换开销增大、吞吐量下降。",
+          "hint_level": 2
+        }
+      },
+      {
+        "ok_resolved": true,
+        "ok_mis": true,
+        "ok_up": true,
+        "ok_strict": true,
+        "pred": {
+          "resolved": false,
+          "misconception": "学生误以为时间片越小越好、越小越公平，忽略了时间片过小会导致上下文切换开销增大、吞吐量下降的权衡。",
+          "hint_level": 2
+        }
+      }
+    ]
+  },
+  "_items": [
+    {
+      "id": "a01",
+      "topic": "死锁",
+      "hint_level_in": 1,
+      "category": "明确表示懂了",
+      "history": [
+        {
+          "role": "student",
+          "content": "什么是死锁？"
+        },
+        {
+          "role": "assistant",
+          "content": "死锁是多个进程因竞争资源而相互等待，若无外力干预谁都无法推进的永久阻塞状态。注意不是死循环：死循环占着 CPU 一直跑，死锁是全部阻塞、不占 CPU。"
+        }
+      ],
+      "utterance": "明白了，就是互相拿着对方要的资源不放，谁也推不动，谢谢老师！",
+      "gold": {
+        "resolved": true,
+        "misconception": false,
+        "hint_up": false
+      }
+    },
+    {
+      "id": "a02",
+      "topic": "TCP 三次握手",
+      "hint_level_in": 1,
+      "category": "明确表示懂了",
+      "history": [
+        {
+          "role": "student",
+          "content": "TCP 为什么是三次握手，而不是两次？"
+        },
+        {
+          "role": "assistant",
+          "content": "两次握手无法阻止历史重复连接初始化，会浪费服务端资源；三次才能双方都确认对方的发送与接收能力正常。"
+        }
+      ],
+      "utterance": "懂了，两次不行是因为服务端没法确认客户端的接收能力，也挡不住历史重复连接。",
+      "gold": {
+        "resolved": true,
+        "misconception": false,
+        "hint_up": false
+      }
+    },
+    {
+      "id": "a03",
+      "topic": "进程与线程",
+      "hint_level_in": 2,
+      "category": "明确表示懂了",
+      "history": [
+        {
+          "role": "student",
+          "content": "进程和线程到底有什么区别？"
+        },
+        {
+          "role": "assistant",
+          "content": "进程是资源分配的基本单位，线程是 CPU 调度的基本单位。同一进程的线程共享地址空间和文件描述符，但各有独立的栈和寄存器上下文。"
+        }
+      ],
+      "utterance": "清楚了，线程共享地址空间所以通信快，进程各自独立所以隔离性好、切换成本高。",
+      "gold": {
+        "resolved": true,
+        "misconception": false,
+        "hint_up": false
+      }
+    },
+    {
+      "id": "a04",
+      "topic": "B+树索引",
+      "hint_level_in": 1,
+      "category": "明确表示懂了",
+      "history": [
+        {
+          "role": "student",
+          "content": "为什么 MySQL 索引用 B+ 树不用 B 树？"
+        },
+        {
+          "role": "assistant",
+          "content": "B+ 树的非叶子节点只存 key 不存数据，扇出更高、树更矮；叶子节点用链表串起来，范围查询可以顺序扫。"
+        }
+      ],
+      "utterance": "哦懂了，叶子串成链表所以范围查询快，非叶子只存 key 所以一层能放更多，树就矮。",
+      "gold": {
+        "resolved": true,
+        "misconception": false,
+        "hint_up": false
+      }
+    },
+    {
+      "id": "a05",
+      "topic": "事务隔离级别",
+      "hint_level_in": 2,
+      "category": "明确表示懂了",
+      "history": [
+        {
+          "role": "student",
+          "content": "RR 和 RC 到底差在哪？"
+        },
+        {
+          "role": "assistant",
+          "content": "RC 每次快照读都生成新的 ReadView，RR 只在事务第一次快照读时生成。所以 RR 能挡住不可重复读，幻读还要靠间隙锁。"
+        }
+      ],
+      "utterance": "明白了，RR 靠 ReadView 解决不可重复读，幻读得靠间隙锁补上。",
+      "gold": {
+        "resolved": true,
+        "misconception": false,
+        "hint_up": false
+      }
+    },
+    {
+      "id": "a06",
+      "topic": "页面置换",
+      "hint_level_in": 1,
+      "category": "明确表示懂了",
+      "history": [
+        {
+          "role": "student",
+          "content": "LRU 有什么问题？"
+        },
+        {
+          "role": "assistant",
+          "content": "LRU 淘汰最久未使用的页，但一次性全表扫描会把热数据全部挤出去，这叫 LRU 污染。"
+        }
+      ],
+      "utterance": "知道了，LRU 就是淘汰最久没用的，但会被一次性扫描污染，所以才有 LRU-K 这些改进。",
+      "gold": {
+        "resolved": true,
+        "misconception": false,
+        "hint_up": false
+      }
+    },
+    {
+      "id": "b01",
+      "topic": "死锁",
+      "hint_level_in": 1,
+      "category": "复述出关键结论",
+      "history": [
+        {
+          "role": "student",
+          "content": "死锁是怎么产生的？"
+        },
+        {
+          "role": "assistant",
+          "content": "需要同时满足四个必要条件：互斥、请求与保持、不可剥夺、循环等待，缺一不可。"
+        }
+      ],
+      "utterance": "四个条件是互斥、请求与保持、不可剥夺、循环等待，预防就是破坏其中任意一个。",
+      "gold": {
+        "resolved": true,
+        "misconception": false,
+        "hint_up": false
+      }
+    },
+    {
+      "id": "b02",
+      "topic": "TIME_WAIT",
+      "hint_level_in": 1,
+      "category": "复述出关键结论",
+      "history": [
+        {
+          "role": "student",
+          "content": "那四次挥手为什么要等 2MSL？"
+        },
+        {
+          "role": "assistant",
+          "content": "一是保证最后一个 ACK 能到达对端（丢了还能重传），二是让本次连接的残留报文在网络中消散，避免污染新连接。"
+        }
+      ],
+      "utterance": "2MSL 一是保证最后一个 ACK 能到，二是让这次连接的残留报文在网络里消掉，不会串到新连接上。",
+      "gold": {
+        "resolved": true,
+        "misconception": false,
+        "hint_up": false
+      }
+    },
+    {
+      "id": "b03",
+      "topic": "协程",
+      "hint_level_in": 1,
+      "category": "复述出关键结论",
+      "history": [
+        {
+          "role": "student",
+          "content": "协程和线程比好在哪？"
+        },
+        {
+          "role": "assistant",
+          "content": "协程的切换在用户态完成，不进内核，也不需要保存完整的内核栈和寄存器上下文，所以创建成本和切换开销都远小于线程。"
+        }
+      ],
+      "utterance": "协程是用户态自己调度的，切换不用进内核，所以比线程轻很多。",
+      "gold": {
+        "resolved": true,
+        "misconception": false,
+        "hint_up": false
+      }
+    },
+    {
+      "id": "b04",
+      "topic": "索引失效",
+      "hint_level_in": 1,
+      "category": "复述出关键结论",
+      "history": [
+        {
+          "role": "student",
+          "content": "联合索引什么时候会失效？"
+        },
+        {
+          "role": "assistant",
+          "content": "核心是最左前缀原则：查询条件必须从联合索引的最左列开始且不跳过中间列，否则后面的列用不上索引。"
+        }
+      ],
+      "utterance": "带头大哥不能丢，中间兄弟不能断，违反最左前缀就用不上联合索引。",
+      "gold": {
+        "resolved": true,
+        "misconception": false,
+        "hint_up": false
+      }
+    },
+    {
+      "id": "b05",
+      "topic": "缓存穿透",
+      "hint_level_in": 1,
+      "category": "复述出关键结论",
+      "history": [
+        {
+          "role": "student",
+          "content": "什么叫缓存穿透？"
+        },
+        {
+          "role": "assistant",
+          "content": "查询一个根本不存在的数据，缓存永远不命中，请求每次都打到数据库。常见解法是布隆过滤器或缓存空值。"
+        }
+      ],
+      "utterance": "查一个根本不存在的 key，缓存永远不命中，每次都落到 DB，用布隆过滤器或者缓存空值来挡。",
+      "gold": {
+        "resolved": true,
+        "misconception": false,
+        "hint_up": false
+      }
+    },
+    {
+      "id": "c01",
+      "topic": "死锁",
+      "hint_level_in": 1,
+      "category": "典型误解",
+      "history": [
+        {
+          "role": "student",
+          "content": "什么是死锁？"
+        },
+        {
+          "role": "assistant",
+          "content": "死锁是多个进程因竞争资源而相互等待，若无外力干预谁都无法推进的永久阻塞状态。注意不是死循环：死循环占着 CPU 一直跑，死锁是全部阻塞、不占 CPU。"
+        }
+      ],
+      "utterance": "懂了，死锁就是两个进程死循环了，一直在跑但就是出不来。",
+      "gold": {
+        "resolved": false,
+        "misconception": true,
+        "hint_up": true
+      }
+    },
+    {
+      "id": "c02",
+      "topic": "进程与线程",
+      "hint_level_in": 1,
+      "category": "典型误解",
+      "history": [
+        {
+          "role": "student",
+          "content": "线程之间怎么通信？"
+        },
+        {
+          "role": "assistant",
+          "content": "同进程的线程共享堆和全局变量，直接读写共享变量即可，但要配合锁或信号量保证同步。"
+        }
+      ],
+      "utterance": "线程之间是进程隔离的，所以完全不共享内存，只能靠消息队列传。",
+      "gold": {
+        "resolved": false,
+        "misconception": true,
+        "hint_up": true
+      }
+    },
+    {
+      "id": "c03",
+      "topic": "TCP 三次握手",
+      "hint_level_in": 1,
+      "category": "部分正确但含糊",
+      "history": [
+        {
+          "role": "student",
+          "content": "TCP 为什么是三次握手，而不是两次？"
+        },
+        {
+          "role": "assistant",
+          "content": "两次握手无法阻止历史重复连接初始化，会浪费服务端资源；三次才能双方都确认对方的发送与接收能力正常。"
+        }
+      ],
+      "utterance": "因为双方都要确认一次，所以需要三次。",
+      "gold": {
+        "resolved": false,
+        "misconception": true,
+        "hint_up": true
+      }
+    },
+    {
+      "id": "c04",
+      "topic": "事务隔离级别",
+      "hint_level_in": 1,
+      "category": "典型误解",
+      "history": [
+        {
+          "role": "student",
+          "content": "隔离级别怎么选？"
+        },
+        {
+          "role": "assistant",
+          "content": "级别越高一致性越好但并发越低，MySQL 默认 RR，是在一致性和性能之间的折中。"
+        }
+      ],
+      "utterance": "那隔离级别肯定越高越好啊，直接上 Serializable 最安全。",
+      "gold": {
+        "resolved": false,
+        "misconception": true,
+        "hint_up": true
+      }
+    },
+    {
+      "id": "c05",
+      "topic": "HTTPS",
+      "hint_level_in": 1,
+      "category": "部分正确但不准确",
+      "history": [
+        {
+          "role": "student",
+          "content": "HTTPS 是怎么加密的？"
+        },
+        {
+          "role": "assistant",
+          "content": "握手阶段用非对称加密协商出会话密钥，之后的通信改用对称加密传输数据。"
+        }
+      ],
+      "utterance": "明白了，HTTPS 就是全程用一个密钥加解密，双方拿着同一把钥匙。",
+      "gold": {
+        "resolved": false,
+        "misconception": true,
+        "hint_up": true
+      }
+    },
+    {
+      "id": "d01",
+      "topic": "死锁",
+      "hint_level_in": 0,
+      "category": "不知道",
+      "history": [
+        {
+          "role": "student",
+          "content": "死锁有哪些处理方式？"
+        }
+      ],
+      "utterance": "不知道，这个概念我没听过。",
+      "gold": {
+        "resolved": false,
+        "misconception": false,
+        "hint_up": true
+      }
+    },
+    {
+      "id": "d02",
+      "topic": "MVCC",
+      "hint_level_in": 1,
+      "category": "不知道",
+      "history": [
+        {
+          "role": "assistant",
+          "content": "MVCC 通过 undo log 版本链和 ReadView 实现一致性非锁定读。"
+        },
+        {
+          "role": "student",
+          "content": "那 ReadView 怎么判断可见性？"
+        }
+      ],
+      "utterance": "完全没思路，老师你直接讲吧。",
+      "gold": {
+        "resolved": false,
+        "misconception": false,
+        "hint_up": true
+      }
+    },
+    {
+      "id": "d03",
+      "topic": "拥塞控制",
+      "hint_level_in": 1,
+      "category": "不知道",
+      "history": [
+        {
+          "role": "assistant",
+          "content": "拥塞控制包含慢启动、拥塞避免、快重传、快恢复四个阶段。"
+        },
+        {
+          "role": "student",
+          "content": "慢启动和拥塞避免的区别是？"
+        }
+      ],
+      "utterance": "不太了解这块，没什么概念。",
+      "gold": {
+        "resolved": false,
+        "misconception": false,
+        "hint_up": true
+      }
+    },
+    {
+      "id": "d04",
+      "topic": "虚拟内存",
+      "hint_level_in": 0,
+      "category": "不知道",
+      "history": [
+        {
+          "role": "student",
+          "content": "虚拟内存解决了什么问题？"
+        }
+      ],
+      "utterance": "不晓得，这块我没看过。",
+      "gold": {
+        "resolved": false,
+        "misconception": false,
+        "hint_up": true
+      }
+    },
+    {
+      "id": "e01",
+      "topic": "TCP 三次握手",
+      "hint_level_in": 1,
+      "category": "探索性追问",
+      "history": [
+        {
+          "role": "student",
+          "content": "TCP 为什么是三次握手，而不是两次？"
+        },
+        {
+          "role": "assistant",
+          "content": "两次握手无法阻止历史重复连接初始化，会浪费服务端资源；三次才能双方都确认对方的发送与接收能力正常。"
+        }
+      ],
+      "utterance": "那如果改成四次握手会怎么样？",
+      "gold": {
+        "resolved": false,
+        "misconception": false,
+        "hint_up": false
+      }
+    },
+    {
+      "id": "e02",
+      "topic": "死锁",
+      "hint_level_in": 1,
+      "category": "探索性追问",
+      "history": [
+        {
+          "role": "student",
+          "content": "怎么预防死锁？"
+        },
+        {
+          "role": "assistant",
+          "content": "预防的思路是破坏四个必要条件中的任意一个，比如一次性申请所有资源可以破坏请求与保持。"
+        }
+      ],
+      "utterance": "为什么破坏不可剥夺就能预防死锁？",
+      "gold": {
+        "resolved": false,
+        "misconception": false,
+        "hint_up": false
+      }
+    },
+    {
+      "id": "e03",
+      "topic": "B+树索引",
+      "hint_level_in": 1,
+      "category": "自述仍混",
+      "history": [
+        {
+          "role": "student",
+          "content": "B 树和 B+ 树有什么区别？"
+        },
+        {
+          "role": "assistant",
+          "content": "B+ 树的数据只存在叶子节点，非叶子只存 key；叶子之间有链表指针，适合范围查询。"
+        }
+      ],
+      "utterance": "那 B 树和 B+ 树到底差在哪？我还是有点混。",
+      "gold": {
+        "resolved": false,
+        "misconception": false,
+        "hint_up": true
+      }
+    },
+    {
+      "id": "e04",
+      "topic": "快排",
+      "hint_level_in": 1,
+      "category": "自述仍混",
+      "history": [
+        {
+          "role": "student",
+          "content": "快排的时间复杂度是多少？"
+        },
+        {
+          "role": "assistant",
+          "content": "平均 O(n log n)，最坏 O(n²)（每次划分极不平衡），可以用随机化 pivot 或三数取中缓解。"
+        }
+      ],
+      "utterance": "我不太明白为什么最坏情况是 O(n²)。",
+      "gold": {
+        "resolved": false,
+        "misconception": false,
+        "hint_up": true
+      }
+    },
+    {
+      "id": "e05",
+      "topic": "线程池",
+      "hint_level_in": 1,
+      "category": "探索性追问",
+      "history": [
+        {
+          "role": "student",
+          "content": "线程池的核心参数有哪些？"
+        },
+        {
+          "role": "assistant",
+          "content": "核心线程数、最大线程数、存活时间、工作队列、拒绝策略；任务先进核心线程，满了进队列，队列满了才扩容到最大线程数。"
+        }
+      ],
+      "utterance": "那队列满了之后拒绝策略一般有哪几种？",
+      "gold": {
+        "resolved": false,
+        "misconception": false,
+        "hint_up": false
+      }
+    },
+    {
+      "id": "e06",
+      "topic": "HTTP",
+      "hint_level_in": 1,
+      "category": "探索性追问",
+      "history": [
+        {
+          "role": "student",
+          "content": "HTTP 是无状态的，那怎么保持登录？"
+        },
+        {
+          "role": "assistant",
+          "content": "靠 Cookie/Session 或 Token：服务端下发凭证，客户端后续请求带上，服务端据此识别身份。"
+        }
+      ],
+      "utterance": "Cookie 和 Session 的区别又是什么？",
+      "gold": {
+        "resolved": false,
+        "misconception": false,
+        "hint_up": false
+      }
+    },
+    {
+      "id": "f01",
+      "topic": "死锁",
+      "hint_level_in": 2,
+      "category": "沾边但跑偏",
+      "history": [
+        {
+          "role": "student",
+          "content": "死锁和饥饿有什么区别？"
+        },
+        {
+          "role": "assistant",
+          "content": "死锁是循环等待且都不释放资源，饥饿是长期得不到资源但系统仍在推进。"
+        }
+      ],
+      "utterance": "饥饿就是进程饿死了，CPU 一直不给它时间片，跟死锁差不多是一回事吧。",
+      "gold": {
+        "resolved": false,
+        "misconception": true,
+        "hint_up": true
+      }
+    },
+    {
+      "id": "f02",
+      "topic": "MVCC",
+      "hint_level_in": 1,
+      "category": "沾边但跑偏",
+      "history": [
+        {
+          "role": "student",
+          "content": "MVCC 是怎么实现的？"
+        },
+        {
+          "role": "assistant",
+          "content": "靠 undo log 版本链 + ReadView：每行有隐藏的 trx_id 和 roll_pointer，读时按 ReadView 判断哪个版本可见。"
+        }
+      ],
+      "utterance": "MVCC 就是给每行加版本号，读的时候只看比自己小的版本，所以完全不用加锁。",
+      "gold": {
+        "resolved": false,
+        "misconception": true,
+        "hint_up": true
+      }
+    },
+    {
+      "id": "f03",
+      "topic": "索引失效",
+      "hint_level_in": 1,
+      "category": "沾边但跑偏",
+      "history": [
+        {
+          "role": "student",
+          "content": "哪些写法会让索引失效？"
+        },
+        {
+          "role": "assistant",
+          "content": "违反最左前缀、在索引列上做函数运算或隐式类型转换、like 以 % 开头、or 连接的列没有索引等。"
+        }
+      ],
+      "utterance": "只要 where 里用了函数，整个 SQL 就一定全表扫描了。",
+      "gold": {
+        "resolved": false,
+        "misconception": true,
+        "hint_up": true
+      }
+    },
+    {
+      "id": "f04",
+      "topic": "进程调度",
+      "hint_level_in": 1,
+      "category": "沾边但跑偏",
+      "history": [
+        {
+          "role": "student",
+          "content": "常见的进程调度算法有哪些？"
+        },
+        {
+          "role": "assistant",
+          "content": "先来先服务、短作业优先、时间片轮转、优先级调度、多级反馈队列，各有吞吐与响应时间的取舍。"
+        }
+      ],
+      "utterance": "时间片轮转就是把时间片设得越小越好，越小越公平。",
+      "gold": {
+        "resolved": false,
+        "misconception": true,
+        "hint_up": true
+      }
+    }
+  ]
+}

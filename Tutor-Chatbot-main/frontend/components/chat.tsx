@@ -1,0 +1,259 @@
+"use client";
+
+import type { MessageRole, SourceItem } from "@/lib/types";
+import { Spinner, Tag, shortTime } from "./ui";
+
+export interface UIMsg {
+  key: string;
+  role: MessageRole;
+  username: string | null;
+  content: string;
+  topic?: string | null;
+  createdAt?: string | null;
+  /** 正在流式接收中的那条 */
+  streaming?: boolean;
+  /**
+   * 本轮引用的资料（来自 SSE 的 sources 事件）。
+   * 用 `undefined` 和 `[]` 区分两件事：
+   *   undefined = 这一轮没收到 sources 事件（这条流没覆盖）
+   *   []        = 后端明确说了「本轮没用资料」
+   */
+  sources?: SourceItem[];
+  /** M4：这条 AI 发言的角色键（tutor / teacher / peer / examiner）。 */
+  agentRole?: string | null;
+  /** M4：角色中文名，后端给的，前端不自己维护映射。 */
+  agentLabel?: string | null;
+  /** M4：该角色在本场景里的身份，如「主讲」「质疑」，作气泡副标题。 */
+  agentStance?: string | null;
+  /** M4：本条发言在本轮中的序号，从 0 开始。 */
+  agentIndex?: number | null;
+  /** M4：本轮总发言数；> 1 时才需要显示进度。 */
+  agentTotal?: number | null;
+}
+
+/**
+ * 角色 → 视觉。
+ *
+ * 四个 AI 角色必须一眼分得开，否则多智能体编排在界面上等于没做 ——
+ * 学生看到的究竟是「同一段话被切成三块」还是「三个人各说各的」，
+ * 全靠颜色和角标区分。
+ */
+const AGENT_STYLE: Record<
+  string,
+  { avatar: string; bubble: string; mark: string; label: string }
+> = {
+  tutor: {
+    avatar: "bg-ai-soft text-ai",
+    bubble: "border-[#c9e7de] bg-ai-soft",
+    mark: "讲",
+    label: "主讲助教",
+  },
+  teacher: {
+    avatar: "bg-teacher-soft text-teacher",
+    bubble: "border-[#f0dcbb] bg-teacher-soft",
+    mark: "师",
+    label: "主讲教师",
+  },
+  peer: {
+    avatar: "bg-brand-soft text-brand",
+    bubble: "border-[#cfe0fb] bg-brand-soft",
+    mark: "伴",
+    label: "学伴",
+  },
+  examiner: {
+    avatar: "border border-line bg-soft text-sub",
+    bubble: "border-line bg-soft",
+    mark: "考",
+    label: "考官",
+  },
+};
+
+/** 拿一个角色的展示信息。未知 / 缺失一律退回「AI 助教」。 */
+export function agentMeta(role?: string | null) {
+  return (
+    AGENT_STYLE[role ?? ""] ?? {
+      avatar: "bg-ai-soft text-ai",
+      bubble: "border-[#c9e7de] bg-ai-soft",
+      mark: "AI",
+      label: "AI 助教",
+    }
+  );
+}
+
+export function Avatar({
+  name,
+  role,
+  agentRole,
+}: {
+  name: string | null;
+  role: MessageRole;
+  agentRole?: string | null;
+}) {
+  const isAi = role === "assistant";
+  const meta = agentMeta(agentRole);
+  // AI 用角色角标而不是首字母：一轮里可能有 3 个 AI，首字母全是 "A"，分不出来
+  const label = isAi ? meta.mark : (name || "?").slice(0, 1);
+  return (
+    <span
+      className={`grid h-8 w-8 shrink-0 place-items-center rounded-lg text-[12px] font-medium ${
+        isAi
+          ? meta.avatar
+          : role === "teacher"
+            ? "bg-teacher-soft text-teacher"
+            : "bg-brand-soft text-brand"
+      }`}
+    >
+      {label}
+    </span>
+  );
+}
+
+/**
+ * 一条消息。**所有人都左对齐**，不做「自己的消息靠右」——
+ * 产品决策是「一个课堂 = 一个群」，靠右会让共享上下文看起来像私聊。
+ */
+export function MessageRow({
+  msg,
+  isMine = false,
+}: {
+  msg: UIMsg;
+  isMine?: boolean;
+}) {
+  const isAi = msg.role === "assistant";
+  const meta = agentMeta(msg.agentRole);
+  // 优先用后端给的角色名；拿不到（老后端 / 降级流）就退回「AI 助教」
+  const name = isAi
+    ? (msg.agentLabel || meta.label || "AI 助教")
+    : (msg.username ?? "未知用户");
+
+  return (
+    <div className="rise flex gap-2.5" data-selectable>
+      <Avatar name={msg.username} role={msg.role} agentRole={msg.agentRole} />
+      <div className="min-w-0 flex-1">
+        <div className="flex flex-wrap items-center gap-2">
+          <span className="text-[12.5px] font-medium text-ink">{name}</span>
+          {isAi && <Tag tone="ai">AI</Tag>}
+          {isAi && msg.agentStance && (
+            <Tag tone="neutral">{msg.agentStance}</Tag>
+          )}
+          {isAi &&
+            msg.agentTotal !== null &&
+            msg.agentTotal !== undefined &&
+            msg.agentTotal > 1 && (
+              <span className="text-[11px] text-hint">
+                {(msg.agentIndex ?? 0) + 1}/{msg.agentTotal}
+              </span>
+            )}
+          {msg.role === "teacher" && <Tag tone="teacher">教师</Tag>}
+          {isMine && !isAi && <Tag tone="brand">我</Tag>}
+          {msg.topic && <Tag tone="neutral">{msg.topic}</Tag>}
+          <span className="text-[11px] text-hint">
+            {shortTime(msg.createdAt)}
+          </span>
+        </div>
+
+        <div
+          className={`mt-1.5 whitespace-pre-wrap rounded-xl border px-3.5 py-2.5 text-[13px] leading-[1.75] ${
+            isAi
+              ? `${meta.bubble} text-ink`
+              : msg.role === "teacher"
+                ? "border-[#f0dcbb] bg-teacher-soft text-ink"
+                : "border-line bg-panel text-ink"
+          }`}
+        >
+          {msg.content}
+          {msg.streaming && msg.content && (
+            <span className="ml-0.5 inline-block h-3.5 w-[2px] translate-y-[2px] animate-pulse bg-ai" />
+          )}
+          {msg.streaming && !msg.content && (
+            <span className="text-[12.5px] text-hint">
+              <Spinner className="mr-1 align-middle" />
+              正在检索知识库并组织讲解…
+            </span>
+          )}
+        </div>
+
+        {isAi && <SourceLine sources={msg.sources} />}
+      </div>
+    </div>
+  );
+}
+
+/**
+ * 本轮资料依据。
+ *
+ * 契约里专门强调过三种状态不能混为一谈：
+ *   - 收到非空 items  → 列出来
+ *   - 收到空 items    → 明确「本轮没用资料」（例如纯寒暄）
+ *   - 没收到事件      → 什么都不显示（这条流没覆盖，不代表没用资料）
+ *
+ * 这个信息对学生是有用的（知道答案有没有依据），
+ * 对排查检索退化更是唯一线索 —— 检索全错时模型照样答得很好，从回答上看不出来。
+ */
+function SourceLine({ sources }: { sources?: SourceItem[] }) {
+  if (!sources) return null;
+
+  if (sources.length === 0) {
+    return (
+      <p className="mt-1.5 pl-1 text-[11px] text-hint">
+        依据：模型自有知识（本轮未使用知识库资料）
+      </p>
+    );
+  }
+
+  // 同一文件可能命中多片，按展示标签去重
+  const seen = new Set<string>();
+  const chips = sources
+    .map((item) => {
+      if (item.origin === "upload") {
+        const label = item.page ? `上传文档 · 第 ${item.page} 页` : "上传文档";
+        return { key: `u-${label}`, label };
+      }
+      if (item.origin === "classroom") {
+        // 一个课堂可能传了十几份讲义，「第 3 页」单独拿出来无法定位是哪一份，
+        // 所以标签带文件名（过长时截断，完整名放 title）。
+        const name = item.filename || fileName(item.source) || "课堂资料";
+        const short = name.length > 16 ? `${name.slice(0, 15)}…` : name;
+        const label = item.page ? `课堂 · ${short} 第 ${item.page} 页` : `课堂 · ${short}`;
+        return {
+          key: `c-${item.doc_id ?? name}-${item.page ?? ""}`,
+          label,
+          title: [name, item.page ? `第 ${item.page} 页` : "", item.section]
+            .filter(Boolean)
+            .join(" · "),
+        };
+      }
+      const label = item.topic || fileName(item.source) || "知识库";
+      return {
+        key: `k-${item.source ?? label}`,
+        label,
+        title: [item.category, item.source].filter(Boolean).join(" · "),
+      };
+    })
+    .filter((chip) => {
+      if (seen.has(chip.key)) return false;
+      seen.add(chip.key);
+      return true;
+    });
+
+  return (
+    <div className="mt-1.5 flex flex-wrap items-center gap-1.5 pl-1">
+      <span className="text-[11px] text-hint">依据</span>
+      {chips.map((chip) => (
+        <span
+          key={chip.key}
+          title={"title" in chip ? chip.title : undefined}
+          className="rounded border border-line bg-soft px-1.5 py-0.5 text-[11px] leading-4 text-sub"
+        >
+          {chip.label}
+        </span>
+      ))}
+    </div>
+  );
+}
+
+function fileName(source?: string | null): string {
+  if (!source) return "";
+  const parts = source.split(/[\\/]/);
+  return parts[parts.length - 1] ?? "";
+}

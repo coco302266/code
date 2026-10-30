@@ -1,0 +1,27 @@
+# Backend
+backend/venv/
+backend/.env
+backend/chroma_kb/
+# embedding 模型缓存（约 100MB，可按固定路径重新下载）
+backend/.model_cache/
+
+# Frontend (already handled by frontend/.gitignore but just in case)
+frontend/node_modules/
+frontend/.next/
+
+# General
+__pycache__/
+*.pyc
+.DS_Store
+
+# 构建 / 启动 / 端到端验证日志（不入库，等同 backend/logs/）
+logs/
+
+# Docker 部署（含密钥，不入库）
+deploy/.env
+
+# 运行时数据 / 归档（不入库）
+backend/chroma_classrooms/
+backend/classroom_docs/
+backend/_chroma_archive/
+backend/logs/

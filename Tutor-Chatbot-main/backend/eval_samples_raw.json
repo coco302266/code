@@ -1,0 +1,2363 @@
+{
+  "v1": [
+    {
+      "status": 200,
+      "elapsed_ms": 6727,
+      "event_counts": {
+        "sources": 1,
+        "agent": 1,
+        "token": 233,
+        "state": 1
+      },
+      "sources": 4,
+      "source_topics": [
+        "死锁"
+      ],
+      "agents": [
+        [
+          "tutor",
+          0,
+          1
+        ]
+      ],
+      "chars": 389,
+      "topic": "死锁",
+      "hint_level": 0,
+      "resolved": false,
+      "personalized": false,
+      "error": "",
+      "index": 1,
+      "question": "什么是死锁？",
+      "classroom_id": 2
+    },
+    {
+      "status": 200,
+      "elapsed_ms": 6570,
+      "event_counts": {
+        "sources": 1,
+        "agent": 1,
+        "token": 155,
+        "state": 1
+      },
+      "sources": 4,
+      "source_topics": [
+        "死锁"
+      ],
+      "agents": [
+        [
+          "tutor",
+          0,
+          1
+        ]
+      ],
+      "chars": 275,
+      "topic": "死锁",
+      "hint_level": 1,
+      "resolved": false,
+      "personalized": true,
+      "error": "",
+      "index": 2,
+      "question": "死锁产生的四个必要条件是什么？",
+      "classroom_id": 2
+    },
+    {
+      "status": 200,
+      "elapsed_ms": 9049,
+      "event_counts": {
+        "sources": 1,
+        "agent": 1,
+        "token": 262,
+        "state": 1
+      },
+      "sources": 4,
+      "source_topics": [
+        "死锁"
+      ],
+      "agents": [
+        [
+          "tutor",
+          0,
+          1
+        ]
+      ],
+      "chars": 464,
+      "topic": "死锁",
+      "hint_level": 1,
+      "resolved": false,
+      "personalized": true,
+      "error": "",
+      "index": 3,
+      "question": "那该怎么预防死锁？",
+      "classroom_id": 2
+    },
+    {
+      "status": 200,
+      "elapsed_ms": 13400,
+      "event_counts": {
+        "sources": 1,
+        "agent": 1,
+        "token": 390,
+        "state": 1
+      },
+      "sources": 4,
+      "source_topics": [
+        "死锁",
+        "进程调度算法"
+      ],
+      "agents": [
+        [
+          "tutor",
+          0,
+          1
+        ]
+      ],
+      "chars": 789,
+      "topic": "银行家算法",
+      "hint_level": 0,
+      "resolved": false,
+      "personalized": true,
+      "error": "",
+      "index": 4,
+      "question": "银行家算法是怎么工作的？",
+      "classroom_id": 2
+    },
+    {
+      "status": 200,
+      "elapsed_ms": 7302,
+      "event_counts": {
+        "sources": 1,
+        "agent": 1,
+        "token": 380,
+        "state": 1
+      },
+      "sources": 4,
+      "source_topics": [
+        "进程与线程"
+      ],
+      "agents": [
+        [
+          "tutor",
+          0,
+          1
+        ]
+      ],
+      "chars": 669,
+      "topic": "进程与线程的区别",
+      "hint_level": 0,
+      "resolved": false,
+      "personalized": true,
+      "error": "",
+      "index": 5,
+      "question": "进程和线程有什么区别？",
+      "classroom_id": 2
+    },
+    {
+      "status": 200,
+      "elapsed_ms": 18211,
+      "event_counts": {
+        "sources": 1,
+        "agent": 1,
+        "token": 566,
+        "state": 1
+      },
+      "sources": 4,
+      "source_topics": [
+        "进程与线程",
+        "进程调度算法"
+      ],
+      "agents": [
+        [
+          "tutor",
+          0,
+          1
+        ]
+      ],
+      "chars": 954,
+      "topic": "进程与线程的区别",
+      "hint_level": 2,
+      "resolved": false,
+      "personalized": true,
+      "error": "",
+      "index": 6,
+      "question": "为什么线程切换比进程切换开销小？",
+      "classroom_id": 2
+    },
+    {
+      "status": 200,
+      "elapsed_ms": 11102,
+      "event_counts": {
+        "sources": 1,
+        "agent": 1,
+        "token": 561,
+        "state": 1
+      },
+      "sources": 4,
+      "source_topics": [
+        "死锁",
+        "进程与线程",
+        "进程调度算法"
+      ],
+      "agents": [
+        [
+          "tutor",
+          0,
+          1
+        ]
+      ],
+      "chars": 914,
+      "topic": "进程调度算法",
+      "hint_level": 0,
+      "resolved": false,
+      "personalized": true,
+      "error": "",
+      "index": 7,
+      "question": "进程调度算法有哪些？",
+      "classroom_id": 2
+    },
+    {
+      "status": 200,
+      "elapsed_ms": 10983,
+      "event_counts": {
+        "sources": 1,
+        "agent": 1,
+        "token": 334,
+        "state": 1
+      },
+      "sources": 4,
+      "source_topics": [
+        "进程调度算法"
+      ],
+      "agents": [
+        [
+          "tutor",
+          0,
+          1
+        ]
+      ],
+      "chars": 572,
+      "topic": "进程调度算法",
+      "hint_level": 1,
+      "resolved": false,
+      "personalized": true,
+      "error": "",
+      "index": 8,
+      "question": "时间片轮转和优先级调度该怎么选？",
+      "classroom_id": 2
+    },
+    {
+      "status": 200,
+      "elapsed_ms": 8552,
+      "event_counts": {
+        "sources": 1,
+        "agent": 1,
+        "token": 225,
+        "state": 1
+      },
+      "sources": 4,
+      "source_topics": [
+        "进程与线程",
+        "进程调度算法"
+      ],
+      "agents": [
+        [
+          "tutor",
+          0,
+          1
+        ]
+      ],
+      "chars": 393,
+      "topic": "进程调度算法",
+      "hint_level": 1,
+      "resolved": false,
+      "personalized": true,
+      "error": "",
+      "index": 9,
+      "question": "它有什么缺点？",
+      "classroom_id": 2
+    },
+    {
+      "status": 200,
+      "elapsed_ms": 7833,
+      "event_counts": {
+        "sources": 1,
+        "agent": 1,
+        "token": 394,
+        "state": 1
+      },
+      "sources": 4,
+      "source_topics": [
+        "虚拟内存与页面置换"
+      ],
+      "agents": [
+        [
+          "tutor",
+          0,
+          1
+        ]
+      ],
+      "chars": 655,
+      "topic": "虚拟内存",
+      "hint_level": 0,
+      "resolved": false,
+      "personalized": true,
+      "error": "",
+      "index": 10,
+      "question": "什么是虚拟内存？",
+      "classroom_id": 2
+    },
+    {
+      "status": 200,
+      "elapsed_ms": 9988,
+      "event_counts": {
+        "sources": 1,
+        "agent": 1,
+        "token": 356,
+        "state": 1
+      },
+      "sources": 4,
+      "source_topics": [
+        "虚拟内存与页面置换"
+      ],
+      "agents": [
+        [
+          "tutor",
+          0,
+          1
+        ]
+      ],
+      "chars": 605,
+      "topic": "页面置换lru",
+      "hint_level": 0,
+      "resolved": false,
+      "personalized": true,
+      "error": "",
+      "index": 11,
+      "question": "页面置换 LRU 是怎么工作的？",
+      "classroom_id": 2
+    },
+    {
+      "status": 200,
+      "elapsed_ms": 10401,
+      "event_counts": {
+        "sources": 1,
+        "agent": 1,
+        "token": 230,
+        "state": 1
+      },
+      "sources": 4,
+      "source_topics": [
+        "TCP 三次握手与四次挥手",
+        "虚拟内存与页面置换"
+      ],
+      "agents": [
+        [
+          "tutor",
+          0,
+          1
+        ]
+      ],
+      "chars": 371,
+      "topic": "页面置换lru",
+      "hint_level": 1,
+      "resolved": false,
+      "personalized": true,
+      "error": "",
+      "index": 12,
+      "question": "LRU 和 FIFO 有什么区别，会出现 Belady 异常吗？",
+      "classroom_id": 2
+    },
+    {
+      "status": 200,
+      "elapsed_ms": 8447,
+      "event_counts": {
+        "sources": 1,
+        "agent": 1,
+        "token": 311,
+        "state": 1
+      },
+      "sources": 4,
+      "source_topics": [
+        "TCP 三次握手与四次挥手"
+      ],
+      "agents": [
+        [
+          "tutor",
+          0,
+          1
+        ]
+      ],
+      "chars": 554,
+      "topic": "tcp三次握手",
+      "hint_level": 0,
+      "resolved": false,
+      "personalized": true,
+      "error": "",
+      "index": 13,
+      "question": "TCP 三次握手的过程是怎样的？",
+      "classroom_id": 2
+    },
+    {
+      "status": 200,
+      "elapsed_ms": 18680,
+      "event_counts": {
+        "sources": 1,
+        "agent": 1,
+        "token": 567,
+        "state": 1
+      },
+      "sources": 4,
+      "source_topics": [
+        "TCP 三次握手与四次挥手"
+      ],
+      "agents": [
+        [
+          "tutor",
+          0,
+          1
+        ]
+      ],
+      "chars": 1014,
+      "topic": "tcp三次握手",
+      "hint_level": 2,
+      "resolved": false,
+      "personalized": true,
+      "error": "",
+      "index": 14,
+      "question": "为什么需要三次握手，两次不行吗？",
+      "classroom_id": 2
+    },
+    {
+      "status": 200,
+      "elapsed_ms": 14431,
+      "event_counts": {
+        "sources": 1,
+        "agent": 1,
+        "token": 571,
+        "state": 1
+      },
+      "sources": 4,
+      "source_topics": [
+        "TCP 三次握手与四次挥手"
+      ],
+      "agents": [
+        [
+          "tutor",
+          0,
+          1
+        ]
+      ],
+      "chars": 967,
+      "topic": "tcp四次挥手",
+      "hint_level": 0,
+      "resolved": false,
+      "personalized": true,
+      "error": "",
+      "index": 15,
+      "question": "TCP 四次挥手为什么要等 TIME_WAIT？",
+      "classroom_id": 2
+    },
+    {
+      "status": 200,
+      "elapsed_ms": 13844,
+      "event_counts": {
+        "sources": 1,
+        "agent": 1,
+        "token": 551,
+        "state": 1
+      },
+      "sources": 4,
+      "source_topics": [
+        "TCP 与 UDP",
+        "TCP/IP 分层模型与 ARP / DNS"
+      ],
+      "agents": [
+        [
+          "tutor",
+          0,
+          1
+        ]
+      ],
+      "chars": 941,
+      "topic": "tcp与udp的区别",
+      "hint_level": 0,
+      "resolved": false,
+      "personalized": true,
+      "error": "",
+      "index": 16,
+      "question": "TCP 和 UDP 该怎么选？",
+      "classroom_id": 2
+    },
+    {
+      "status": 200,
+      "elapsed_ms": 9745,
+      "event_counts": {
+        "sources": 1,
+        "agent": 1,
+        "token": 464,
+        "state": 1
+      },
+      "sources": 4,
+      "source_topics": [
+        "HTTPS 与 TLS 握手",
+        "TCP 与 UDP",
+        "TCP/IP 分层模型与 ARP / DNS"
+      ],
+      "agents": [
+        [
+          "tutor",
+          0,
+          1
+        ]
+      ],
+      "chars": 859,
+      "topic": "http与https的区别",
+      "hint_level": 0,
+      "resolved": false,
+      "personalized": true,
+      "error": "",
+      "index": 17,
+      "question": "HTTPS 和 HTTP 有什么不同？",
+      "classroom_id": 2
+    },
+    {
+      "status": 200,
+      "elapsed_ms": 15014,
+      "event_counts": {
+        "sources": 1,
+        "agent": 1,
+        "token": 385,
+        "state": 1
+      },
+      "sources": 4,
+      "source_topics": [
+        "HTTPS 与 TLS 握手",
+        "TCP/IP 分层模型与 ARP / DNS"
+      ],
+      "agents": [
+        [
+          "tutor",
+          0,
+          1
+        ]
+      ],
+      "chars": 751,
+      "topic": "http与https的区别",
+      "hint_level": 1,
+      "resolved": false,
+      "personalized": true,
+      "error": "",
+      "index": 18,
+      "question": "TLS 握手大概做了什么事？",
+      "classroom_id": 2
+    },
+    {
+      "status": 200,
+      "elapsed_ms": 9351,
+      "event_counts": {
+        "sources": 1,
+        "agent": 1,
+        "token": 520,
+        "state": 1
+      },
+      "sources": 4,
+      "source_topics": [
+        "TCP/IP 分层模型与 ARP / DNS"
+      ],
+      "agents": [
+        [
+          "tutor",
+          0,
+          1
+        ]
+      ],
+      "chars": 855,
+      "topic": "tcp/ip分层模型",
+      "hint_level": 0,
+      "resolved": false,
+      "personalized": true,
+      "error": "",
+      "index": 19,
+      "question": "TCP/IP 分层模型有几层，各层负责什么？",
+      "classroom_id": 2
+    },
+    {
+      "status": 200,
+      "elapsed_ms": 11533,
+      "event_counts": {
+        "sources": 1,
+        "agent": 1,
+        "token": 356,
+        "state": 1
+      },
+      "sources": 4,
+      "source_topics": [
+        "TCP 与 UDP",
+        "TCP/IP 分层模型与 ARP / DNS"
+      ],
+      "agents": [
+        [
+          "tutor",
+          0,
+          1
+        ]
+      ],
+      "chars": 603,
+      "topic": "dns 为什么使用 udp",
+      "hint_level": 0,
+      "resolved": false,
+      "personalized": true,
+      "error": "",
+      "index": 20,
+      "question": "为什么 DNS 用 UDP？",
+      "classroom_id": 2
+    },
+    {
+      "status": 200,
+      "elapsed_ms": 14401,
+      "event_counts": {
+        "sources": 1,
+        "agent": 1,
+        "token": 642,
+        "state": 1
+      },
+      "sources": 4,
+      "source_topics": [
+        "TCP/IP 分层模型与 ARP / DNS",
+        "虚拟内存与页面置换"
+      ],
+      "agents": [
+        [
+          "tutor",
+          0,
+          1
+        ]
+      ],
+      "chars": 1264,
+      "topic": "mybatis缓存设计",
+      "hint_level": 0,
+      "resolved": false,
+      "personalized": true,
+      "error": "",
+      "index": 21,
+      "question": "换成 mybatis 的缓存该怎么设计？",
+      "classroom_id": 2
+    },
+    {
+      "status": 200,
+      "elapsed_ms": 18824,
+      "event_counts": {
+        "sources": 1,
+        "agent": 1,
+        "token": 261,
+        "state": 1
+      },
+      "sources": 4,
+      "source_topics": [
+        "TCP 与 UDP",
+        "TCP/IP 分层模型与 ARP / DNS",
+        "死锁",
+        "虚拟内存与页面置换"
+      ],
+      "agents": [
+        [
+          "tutor",
+          0,
+          1
+        ]
+      ],
+      "chars": 486,
+      "topic": "mybatis缓存设计",
+      "hint_level": 1,
+      "resolved": false,
+      "personalized": true,
+      "error": "",
+      "index": 22,
+      "question": "刚才说的这些里面，哪个最常在面试被追问？",
+      "classroom_id": 2
+    }
+  ],
+  "group": [
+    {
+      "status": 200,
+      "elapsed_ms": 9856,
+      "event_counts": {
+        "sources": 1,
+        "agent": 2,
+        "token": 321,
+        "state": 1
+      },
+      "sources": 4,
+      "source_topics": [
+        "死锁"
+      ],
+      "agents": [
+        [
+          "tutor",
+          0,
+          2
+        ],
+        [
+          "peer",
+          1,
+          2
+        ]
+      ],
+      "chars": 543,
+      "topic": "死锁",
+      "hint_level": 0,
+      "resolved": false,
+      "personalized": false,
+      "error": "",
+      "index": 1,
+      "question": "什么是死锁？",
+      "classroom_id": 3
+    },
+    {
+      "status": 200,
+      "elapsed_ms": 9519,
+      "event_counts": {
+        "sources": 1,
+        "agent": 2,
+        "token": 377,
+        "state": 1
+      },
+      "sources": 4,
+      "source_topics": [
+        "死锁"
+      ],
+      "agents": [
+        [
+          "tutor",
+          0,
+          2
+        ],
+        [
+          "peer",
+          1,
+          2
+        ]
+      ],
+      "chars": 665,
+      "topic": "死锁",
+      "hint_level": 0,
+      "resolved": true,
+      "personalized": true,
+      "error": "",
+      "index": 2,
+      "question": "死锁产生的四个必要条件是什么？",
+      "classroom_id": 3
+    },
+    {
+      "status": 200,
+      "elapsed_ms": 12676,
+      "event_counts": {
+        "sources": 1,
+        "agent": 2,
+        "token": 337,
+        "state": 1
+      },
+      "sources": 4,
+      "source_topics": [
+        "死锁"
+      ],
+      "agents": [
+        [
+          "tutor",
+          0,
+          2
+        ],
+        [
+          "peer",
+          1,
+          2
+        ]
+      ],
+      "chars": 591,
+      "topic": "死锁",
+      "hint_level": 1,
+      "resolved": false,
+      "personalized": true,
+      "error": "",
+      "index": 3,
+      "question": "那该怎么预防死锁？",
+      "classroom_id": 3
+    },
+    {
+      "status": 200,
+      "elapsed_ms": 16095,
+      "event_counts": {
+        "sources": 1,
+        "agent": 2,
+        "token": 598,
+        "state": 1
+      },
+      "sources": 4,
+      "source_topics": [
+        "死锁",
+        "进程调度算法"
+      ],
+      "agents": [
+        [
+          "tutor",
+          0,
+          2
+        ],
+        [
+          "peer",
+          1,
+          2
+        ]
+      ],
+      "chars": 1142,
+      "topic": "银行家算法",
+      "hint_level": 0,
+      "resolved": false,
+      "personalized": true,
+      "error": "",
+      "index": 4,
+      "question": "银行家算法是怎么工作的？",
+      "classroom_id": 3
+    },
+    {
+      "status": 200,
+      "elapsed_ms": 16386,
+      "event_counts": {
+        "sources": 1,
+        "agent": 2,
+        "token": 533,
+        "state": 1
+      },
+      "sources": 4,
+      "source_topics": [
+        "进程与线程"
+      ],
+      "agents": [
+        [
+          "tutor",
+          0,
+          2
+        ],
+        [
+          "peer",
+          1,
+          2
+        ]
+      ],
+      "chars": 889,
+      "topic": "进程与线程的区别",
+      "hint_level": 0,
+      "resolved": false,
+      "personalized": true,
+      "error": "",
+      "index": 5,
+      "question": "进程和线程有什么区别？",
+      "classroom_id": 3
+    },
+    {
+      "status": 200,
+      "elapsed_ms": 22810,
+      "event_counts": {
+        "sources": 1,
+        "agent": 2,
+        "token": 838,
+        "state": 1
+      },
+      "sources": 4,
+      "source_topics": [
+        "进程与线程",
+        "进程调度算法"
+      ],
+      "agents": [
+        [
+          "tutor",
+          0,
+          2
+        ],
+        [
+          "peer",
+          1,
+          2
+        ]
+      ],
+      "chars": 1448,
+      "topic": "进程与线程的区别",
+      "hint_level": 2,
+      "resolved": false,
+      "personalized": true,
+      "error": "",
+      "index": 6,
+      "question": "为什么线程切换比进程切换开销小？",
+      "classroom_id": 3
+    },
+    {
+      "status": 200,
+      "elapsed_ms": 16307,
+      "event_counts": {
+        "sources": 1,
+        "agent": 2,
+        "token": 941,
+        "state": 1
+      },
+      "sources": 4,
+      "source_topics": [
+        "死锁",
+        "进程与线程",
+        "进程调度算法"
+      ],
+      "agents": [
+        [
+          "tutor",
+          0,
+          2
+        ],
+        [
+          "peer",
+          1,
+          2
+        ]
+      ],
+      "chars": 1552,
+      "topic": "进程调度算法",
+      "hint_level": 0,
+      "resolved": false,
+      "personalized": true,
+      "error": "",
+      "index": 7,
+      "question": "进程调度算法有哪些？",
+      "classroom_id": 3
+    },
+    {
+      "status": 200,
+      "elapsed_ms": 13898,
+      "event_counts": {
+        "sources": 1,
+        "agent": 2,
+        "token": 511,
+        "state": 1
+      },
+      "sources": 4,
+      "source_topics": [
+        "进程调度算法"
+      ],
+      "agents": [
+        [
+          "tutor",
+          0,
+          2
+        ],
+        [
+          "peer",
+          1,
+          2
+        ]
+      ],
+      "chars": 882,
+      "topic": "进程调度算法",
+      "hint_level": 1,
+      "resolved": false,
+      "personalized": true,
+      "error": "",
+      "index": 8,
+      "question": "时间片轮转和优先级调度该怎么选？",
+      "classroom_id": 3
+    },
+    {
+      "status": 200,
+      "elapsed_ms": 20435,
+      "event_counts": {
+        "sources": 1,
+        "agent": 2,
+        "token": 404,
+        "state": 1
+      },
+      "sources": 4,
+      "source_topics": [
+        "进程与线程",
+        "进程调度算法"
+      ],
+      "agents": [
+        [
+          "tutor",
+          0,
+          2
+        ],
+        [
+          "peer",
+          1,
+          2
+        ]
+      ],
+      "chars": 701,
+      "topic": "进程调度算法",
+      "hint_level": 1,
+      "resolved": false,
+      "personalized": true,
+      "error": "",
+      "index": 9,
+      "question": "它有什么缺点？",
+      "classroom_id": 3
+    },
+    {
+      "status": 200,
+      "elapsed_ms": 13636,
+      "event_counts": {
+        "sources": 1,
+        "agent": 2,
+        "token": 633,
+        "state": 1
+      },
+      "sources": 4,
+      "source_topics": [
+        "虚拟内存与页面置换"
+      ],
+      "agents": [
+        [
+          "tutor",
+          0,
+          2
+        ],
+        [
+          "peer",
+          1,
+          2
+        ]
+      ],
+      "chars": 1064,
+      "topic": "虚拟内存",
+      "hint_level": 0,
+      "resolved": false,
+      "personalized": true,
+      "error": "",
+      "index": 10,
+      "question": "什么是虚拟内存？",
+      "classroom_id": 3
+    },
+    {
+      "status": 200,
+      "elapsed_ms": 17360,
+      "event_counts": {
+        "sources": 1,
+        "agent": 2,
+        "token": 775,
+        "state": 1
+      },
+      "sources": 4,
+      "source_topics": [
+        "虚拟内存与页面置换"
+      ],
+      "agents": [
+        [
+          "tutor",
+          0,
+          2
+        ],
+        [
+          "peer",
+          1,
+          2
+        ]
+      ],
+      "chars": 1290,
+      "topic": "lru 页面置换算法",
+      "hint_level": 0,
+      "resolved": false,
+      "personalized": true,
+      "error": "",
+      "index": 11,
+      "question": "页面置换 LRU 是怎么工作的？",
+      "classroom_id": 3
+    },
+    {
+      "status": 200,
+      "elapsed_ms": 28209,
+      "event_counts": {
+        "sources": 1,
+        "agent": 2,
+        "token": 629,
+        "state": 1
+      },
+      "sources": 4,
+      "source_topics": [
+        "TCP 三次握手与四次挥手",
+        "虚拟内存与页面置换"
+      ],
+      "agents": [
+        [
+          "tutor",
+          0,
+          2
+        ],
+        [
+          "peer",
+          1,
+          2
+        ]
+      ],
+      "chars": 1006,
+      "topic": "lru 页面置换算法",
+      "hint_level": 1,
+      "resolved": false,
+      "personalized": true,
+      "error": "",
+      "index": 12,
+      "question": "LRU 和 FIFO 有什么区别，会出现 Belady 异常吗？",
+      "classroom_id": 3
+    },
+    {
+      "status": 200,
+      "elapsed_ms": 12858,
+      "event_counts": {
+        "sources": 1,
+        "agent": 2,
+        "token": 792,
+        "state": 1
+      },
+      "sources": 4,
+      "source_topics": [
+        "TCP 三次握手与四次挥手"
+      ],
+      "agents": [
+        [
+          "tutor",
+          0,
+          2
+        ],
+        [
+          "peer",
+          1,
+          2
+        ]
+      ],
+      "chars": 1419,
+      "topic": "tcp三次握手",
+      "hint_level": 0,
+      "resolved": false,
+      "personalized": true,
+      "error": "",
+      "index": 13,
+      "question": "TCP 三次握手的过程是怎样的？",
+      "classroom_id": 3
+    },
+    {
+      "status": 200,
+      "elapsed_ms": 17914,
+      "event_counts": {
+        "sources": 1,
+        "agent": 2,
+        "token": 1246,
+        "state": 1
+      },
+      "sources": 4,
+      "source_topics": [
+        "TCP 三次握手与四次挥手"
+      ],
+      "agents": [
+        [
+          "tutor",
+          0,
+          2
+        ],
+        [
+          "peer",
+          1,
+          2
+        ]
+      ],
+      "chars": 2216,
+      "topic": "tcp三次握手",
+      "hint_level": 3,
+      "resolved": false,
+      "personalized": true,
+      "error": "",
+      "index": 14,
+      "question": "为什么需要三次握手，两次不行吗？",
+      "classroom_id": 3
+    },
+    {
+      "status": 200,
+      "elapsed_ms": 24165,
+      "event_counts": {
+        "sources": 1,
+        "agent": 2,
+        "token": 909,
+        "state": 1
+      },
+      "sources": 4,
+      "source_topics": [
+        "TCP 三次握手与四次挥手"
+      ],
+      "agents": [
+        [
+          "tutor",
+          0,
+          2
+        ],
+        [
+          "peer",
+          1,
+          2
+        ]
+      ],
+      "chars": 1576,
+      "topic": "time_wait状态",
+      "hint_level": 0,
+      "resolved": false,
+      "personalized": true,
+      "error": "",
+      "index": 15,
+      "question": "TCP 四次挥手为什么要等 TIME_WAIT？",
+      "classroom_id": 3
+    },
+    {
+      "status": 200,
+      "elapsed_ms": 15574,
+      "event_counts": {
+        "sources": 1,
+        "agent": 2,
+        "token": 572,
+        "state": 1
+      },
+      "sources": 4,
+      "source_topics": [
+        "TCP 与 UDP",
+        "TCP/IP 分层模型与 ARP / DNS"
+      ],
+      "agents": [
+        [
+          "tutor",
+          0,
+          2
+        ],
+        [
+          "peer",
+          1,
+          2
+        ]
+      ],
+      "chars": 948,
+      "topic": "tcp 与 udp 的区别",
+      "hint_level": 0,
+      "resolved": false,
+      "personalized": true,
+      "error": "",
+      "index": 16,
+      "question": "TCP 和 UDP 该怎么选？",
+      "classroom_id": 3
+    },
+    {
+      "status": 200,
+      "elapsed_ms": 17244,
+      "event_counts": {
+        "sources": 1,
+        "agent": 2,
+        "token": 951,
+        "state": 1
+      },
+      "sources": 4,
+      "source_topics": [
+        "HTTPS 与 TLS 握手",
+        "TCP 与 UDP",
+        "TCP/IP 分层模型与 ARP / DNS"
+      ],
+      "agents": [
+        [
+          "tutor",
+          0,
+          2
+        ],
+        [
+          "peer",
+          1,
+          2
+        ]
+      ],
+      "chars": 1634,
+      "topic": "https与http的区别",
+      "hint_level": 0,
+      "resolved": false,
+      "personalized": true,
+      "error": "",
+      "index": 17,
+      "question": "HTTPS 和 HTTP 有什么不同？",
+      "classroom_id": 3
+    },
+    {
+      "status": 200,
+      "elapsed_ms": 19940,
+      "event_counts": {
+        "sources": 1,
+        "agent": 2,
+        "token": 866,
+        "state": 1
+      },
+      "sources": 4,
+      "source_topics": [
+        "HTTPS 与 TLS 握手",
+        "TCP 三次握手与四次挥手",
+        "TCP/IP 分层模型与 ARP / DNS"
+      ],
+      "agents": [
+        [
+          "tutor",
+          0,
+          2
+        ],
+        [
+          "peer",
+          1,
+          2
+        ]
+      ],
+      "chars": 1666,
+      "topic": "tls握手",
+      "hint_level": 0,
+      "resolved": false,
+      "personalized": true,
+      "error": "",
+      "index": 18,
+      "question": "TLS 握手大概做了什么事？",
+      "classroom_id": 3
+    },
+    {
+      "status": 200,
+      "elapsed_ms": 18557,
+      "event_counts": {
+        "sources": 1,
+        "agent": 2,
+        "token": 743,
+        "state": 1
+      },
+      "sources": 4,
+      "source_topics": [
+        "TCP/IP 分层模型与 ARP / DNS"
+      ],
+      "agents": [
+        [
+          "tutor",
+          0,
+          2
+        ],
+        [
+          "peer",
+          1,
+          2
+        ]
+      ],
+      "chars": 1249,
+      "topic": "tcp/ip 分层模型",
+      "hint_level": 0,
+      "resolved": false,
+      "personalized": true,
+      "error": "",
+      "index": 19,
+      "question": "TCP/IP 分层模型有几层，各层负责什么？",
+      "classroom_id": 3
+    },
+    {
+      "status": 200,
+      "elapsed_ms": 21283,
+      "event_counts": {
+        "sources": 1,
+        "agent": 2,
+        "token": 696,
+        "state": 1
+      },
+      "sources": 4,
+      "source_topics": [
+        "TCP 与 UDP",
+        "TCP/IP 分层模型与 ARP / DNS"
+      ],
+      "agents": [
+        [
+          "tutor",
+          0,
+          2
+        ],
+        [
+          "peer",
+          1,
+          2
+        ]
+      ],
+      "chars": 1214,
+      "topic": "dns 使用 udp",
+      "hint_level": 0,
+      "resolved": false,
+      "personalized": true,
+      "error": "",
+      "index": 20,
+      "question": "为什么 DNS 用 UDP？",
+      "classroom_id": 3
+    },
+    {
+      "status": 200,
+      "elapsed_ms": 26608,
+      "event_counts": {
+        "sources": 1,
+        "agent": 2,
+        "token": 1119,
+        "state": 1
+      },
+      "sources": 4,
+      "source_topics": [
+        "TCP/IP 分层模型与 ARP / DNS",
+        "虚拟内存与页面置换"
+      ],
+      "agents": [
+        [
+          "tutor",
+          0,
+          2
+        ],
+        [
+          "peer",
+          1,
+          2
+        ]
+      ],
+      "chars": 2221,
+      "topic": "mybatis 缓存设计",
+      "hint_level": 0,
+      "resolved": false,
+      "personalized": true,
+      "error": "",
+      "index": 21,
+      "question": "换成 mybatis 的缓存该怎么设计？",
+      "classroom_id": 3
+    },
+    {
+      "status": 200,
+      "elapsed_ms": 18063,
+      "event_counts": {
+        "sources": 1,
+        "agent": 2,
+        "token": 730,
+        "state": 1
+      },
+      "sources": 4,
+      "source_topics": [
+        "TCP 与 UDP",
+        "TCP/IP 分层模型与 ARP / DNS",
+        "死锁",
+        "虚拟内存与页面置换"
+      ],
+      "agents": [
+        [
+          "tutor",
+          0,
+          2
+        ],
+        [
+          "peer",
+          1,
+          2
+        ]
+      ],
+      "chars": 1395,
+      "topic": "mybatis 缓存设计",
+      "hint_level": 2,
+      "resolved": false,
+      "personalized": true,
+      "error": "",
+      "index": 22,
+      "question": "刚才说的这些里面，哪个最常在面试被追问？",
+      "classroom_id": 3
+    }
+  ],
+  "debate": [
+    {
+      "status": 200,
+      "elapsed_ms": 17588,
+      "event_counts": {
+        "sources": 1,
+        "agent": 3,
+        "token": 465,
+        "state": 1
+      },
+      "sources": 4,
+      "source_topics": [
+        "死锁"
+      ],
+      "agents": [
+        [
+          "tutor",
+          0,
+          3
+        ],
+        [
+          "peer",
+          1,
+          3
+        ],
+        [
+          "examiner",
+          2,
+          3
+        ]
+      ],
+      "chars": 777,
+      "topic": "死锁",
+      "hint_level": 0,
+      "resolved": false,
+      "personalized": false,
+      "error": "",
+      "index": 1,
+      "question": "什么是死锁？",
+      "classroom_id": 4
+    },
+    {
+      "status": 200,
+      "elapsed_ms": 15726,
+      "event_counts": {
+        "sources": 1,
+        "agent": 3,
+        "token": 667,
+        "state": 1
+      },
+      "sources": 4,
+      "source_topics": [
+        "死锁"
+      ],
+      "agents": [
+        [
+          "tutor",
+          0,
+          3
+        ],
+        [
+          "peer",
+          1,
+          3
+        ],
+        [
+          "examiner",
+          2,
+          3
+        ]
+      ],
+      "chars": 1124,
+      "topic": "死锁",
+      "hint_level": 1,
+      "resolved": false,
+      "personalized": true,
+      "error": "",
+      "index": 2,
+      "question": "死锁产生的四个必要条件是什么？",
+      "classroom_id": 4
+    },
+    {
+      "status": 200,
+      "elapsed_ms": 27349,
+      "event_counts": {
+        "sources": 1,
+        "agent": 3,
+        "token": 2114,
+        "state": 1
+      },
+      "sources": 4,
+      "source_topics": [
+        "死锁"
+      ],
+      "agents": [
+        [
+          "tutor",
+          0,
+          3
+        ],
+        [
+          "peer",
+          1,
+          3
+        ],
+        [
+          "examiner",
+          2,
+          3
+        ]
+      ],
+      "chars": 3570,
+      "topic": "死锁",
+      "hint_level": 2,
+      "resolved": false,
+      "personalized": true,
+      "error": "",
+      "index": 3,
+      "question": "那该怎么预防死锁？",
+      "classroom_id": 4
+    },
+    {
+      "status": 200,
+      "elapsed_ms": 36567,
+      "event_counts": {
+        "sources": 1,
+        "agent": 3,
+        "token": 1540,
+        "state": 1
+      },
+      "sources": 4,
+      "source_topics": [
+        "死锁",
+        "进程调度算法"
+      ],
+      "agents": [
+        [
+          "tutor",
+          0,
+          3
+        ],
+        [
+          "peer",
+          1,
+          3
+        ],
+        [
+          "examiner",
+          2,
+          3
+        ]
+      ],
+      "chars": 2787,
+      "topic": "银行家算法",
+      "hint_level": 0,
+      "resolved": false,
+      "personalized": true,
+      "error": "",
+      "index": 4,
+      "question": "银行家算法是怎么工作的？",
+      "classroom_id": 4
+    },
+    {
+      "status": 200,
+      "elapsed_ms": 19348,
+      "event_counts": {
+        "sources": 1,
+        "agent": 3,
+        "token": 1101,
+        "state": 1
+      },
+      "sources": 4,
+      "source_topics": [
+        "进程与线程"
+      ],
+      "agents": [
+        [
+          "tutor",
+          0,
+          3
+        ],
+        [
+          "peer",
+          1,
+          3
+        ],
+        [
+          "examiner",
+          2,
+          3
+        ]
+      ],
+      "chars": 1893,
+      "topic": "进程与线程的区别",
+      "hint_level": 0,
+      "resolved": false,
+      "personalized": true,
+      "error": "",
+      "index": 5,
+      "question": "进程和线程有什么区别？",
+      "classroom_id": 4
+    },
+    {
+      "status": 200,
+      "elapsed_ms": 32561,
+      "event_counts": {
+        "sources": 1,
+        "agent": 3,
+        "token": 1898,
+        "state": 1
+      },
+      "sources": 4,
+      "source_topics": [
+        "进程与线程",
+        "进程调度算法"
+      ],
+      "agents": [
+        [
+          "tutor",
+          0,
+          3
+        ],
+        [
+          "peer",
+          1,
+          3
+        ],
+        [
+          "examiner",
+          2,
+          3
+        ]
+      ],
+      "chars": 3246,
+      "topic": "进程与线程的区别",
+      "hint_level": 1,
+      "resolved": false,
+      "personalized": true,
+      "error": "",
+      "index": 6,
+      "question": "为什么线程切换比进程切换开销小？",
+      "classroom_id": 4
+    },
+    {
+      "status": 200,
+      "elapsed_ms": 37524,
+      "event_counts": {
+        "sources": 1,
+        "agent": 3,
+        "token": 2300,
+        "state": 1
+      },
+      "sources": 4,
+      "source_topics": [
+        "死锁",
+        "进程与线程",
+        "进程调度算法"
+      ],
+      "agents": [
+        [
+          "tutor",
+          0,
+          3
+        ],
+        [
+          "peer",
+          1,
+          3
+        ],
+        [
+          "examiner",
+          2,
+          3
+        ]
+      ],
+      "chars": 3768,
+      "topic": "进程调度算法",
+      "hint_level": 0,
+      "resolved": false,
+      "personalized": true,
+      "error": "",
+      "index": 7,
+      "question": "进程调度算法有哪些？",
+      "classroom_id": 4
+    },
+    {
+      "status": 200,
+      "elapsed_ms": 36369,
+      "event_counts": {
+        "sources": 1,
+        "agent": 3,
+        "token": 1086,
+        "state": 1
+      },
+      "sources": 4,
+      "source_topics": [
+        "进程调度算法"
+      ],
+      "agents": [
+        [
+          "tutor",
+          0,
+          3
+        ],
+        [
+          "peer",
+          1,
+          3
+        ],
+        [
+          "examiner",
+          2,
+          3
+        ]
+      ],
+      "chars": 1858,
+      "topic": "进程调度算法",
+      "hint_level": 0,
+      "resolved": false,
+      "personalized": true,
+      "error": "",
+      "index": 8,
+      "question": "时间片轮转和优先级调度该怎么选？",
+      "classroom_id": 4
+    },
+    {
+      "status": 200,
+      "elapsed_ms": 22850,
+      "event_counts": {
+        "sources": 1,
+        "agent": 3,
+        "token": 478,
+        "state": 1
+      },
+      "sources": 4,
+      "source_topics": [
+        "进程与线程",
+        "进程调度算法"
+      ],
+      "agents": [
+        [
+          "tutor",
+          0,
+          3
+        ],
+        [
+          "peer",
+          1,
+          3
+        ],
+        [
+          "examiner",
+          2,
+          3
+        ]
+      ],
+      "chars": 793,
+      "topic": "进程调度算法",
+      "hint_level": 1,
+      "resolved": false,
+      "personalized": true,
+      "error": "",
+      "index": 9,
+      "question": "它有什么缺点？",
+      "classroom_id": 4
+    },
+    {
+      "status": 200,
+      "elapsed_ms": 25767,
+      "event_counts": {
+        "sources": 1,
+        "agent": 3,
+        "token": 1471,
+        "state": 1
+      },
+      "sources": 4,
+      "source_topics": [
+        "虚拟内存与页面置换"
+      ],
+      "agents": [
+        [
+          "tutor",
+          0,
+          3
+        ],
+        [
+          "peer",
+          1,
+          3
+        ],
+        [
+          "examiner",
+          2,
+          3
+        ]
+      ],
+      "chars": 2402,
+      "topic": "虚拟内存",
+      "hint_level": 0,
+      "resolved": false,
+      "personalized": true,
+      "error": "",
+      "index": 10,
+      "question": "什么是虚拟内存？",
+      "classroom_id": 4
+    },
+    {
+      "status": 200,
+      "elapsed_ms": 41823,
+      "event_counts": {
+        "sources": 1,
+        "agent": 3,
+        "token": 1865,
+        "state": 1
+      },
+      "sources": 4,
+      "source_topics": [
+        "虚拟内存与页面置换"
+      ],
+      "agents": [
+        [
+          "tutor",
+          0,
+          3
+        ],
+        [
+          "peer",
+          1,
+          3
+        ],
+        [
+          "examiner",
+          2,
+          3
+        ]
+      ],
+      "chars": 3075,
+      "topic": "虚拟内存",
+      "hint_level": 0,
+      "resolved": false,
+      "personalized": true,
+      "error": "",
+      "index": 11,
+      "question": "页面置换 LRU 是怎么工作的？",
+      "classroom_id": 4
+    },
+    {
+      "status": 200,
+      "elapsed_ms": 46788,
+      "event_counts": {
+        "sources": 1,
+        "agent": 3,
+        "token": 1794,
+        "state": 1
+      },
+      "sources": 4,
+      "source_topics": [
+        "虚拟内存与页面置换"
+      ],
+      "agents": [
+        [
+          "tutor",
+          0,
+          3
+        ],
+        [
+          "peer",
+          1,
+          3
+        ],
+        [
+          "examiner",
+          2,
+          3
+        ]
+      ],
+      "chars": 2960,
+      "topic": "页面置换算法",
+      "hint_level": 0,
+      "resolved": false,
+      "personalized": true,
+      "error": "",
+      "index": 12,
+      "question": "LRU 和 FIFO 有什么区别，会出现 Belady 异常吗？",
+      "classroom_id": 4
+    },
+    {
+      "status": 200,
+      "elapsed_ms": 27028,
+      "event_counts": {
+        "sources": 1,
+        "agent": 3,
+        "token": 1256,
+        "state": 1
+      },
+      "sources": 4,
+      "source_topics": [
+        "TCP 三次握手与四次挥手"
+      ],
+      "agents": [
+        [
+          "tutor",
+          0,
+          3
+        ],
+        [
+          "peer",
+          1,
+          3
+        ],
+        [
+          "examiner",
+          2,
+          3
+        ]
+      ],
+      "chars": 2244,
+      "topic": "tcp 三次握手",
+      "hint_level": 0,
+      "resolved": false,
+      "personalized": true,
+      "error": "",
+      "index": 13,
+      "question": "TCP 三次握手的过程是怎样的？",
+      "classroom_id": 4
+    },
+    {
+      "status": 200,
+      "elapsed_ms": 66017,
+      "event_counts": {
+        "sources": 1,
+        "agent": 3,
+        "token": 1586,
+        "state": 1
+      },
+      "sources": 4,
+      "source_topics": [
+        "TCP 三次握手与四次挥手"
+      ],
+      "agents": [
+        [
+          "tutor",
+          0,
+          3
+        ],
+        [
+          "peer",
+          1,
+          3
+        ],
+        [
+          "examiner",
+          2,
+          3
+        ]
+      ],
+      "chars": 2775,
+      "topic": "tcp 三次握手",
+      "hint_level": 3,
+      "resolved": false,
+      "personalized": true,
+      "error": "",
+      "index": 14,
+      "question": "为什么需要三次握手，两次不行吗？",
+      "classroom_id": 4
+    },
+    {
+      "status": 200,
+      "elapsed_ms": 35366,
+      "event_counts": {
+        "sources": 1,
+        "agent": 3,
+        "token": 1104,
+        "state": 1
+      },
+      "sources": 4,
+      "source_topics": [
+        "TCP 三次握手与四次挥手"
+      ],
+      "agents": [
+        [
+          "tutor",
+          0,
+          3
+        ],
+        [
+          "peer",
+          1,
+          3
+        ],
+        [
+          "examiner",
+          2,
+          3
+        ]
+      ],
+      "chars": 1899,
+      "topic": "tcp四次挥手time_wait",
+      "hint_level": 0,
+      "resolved": false,
+      "personalized": true,
+      "error": "",
+      "index": 15,
+      "question": "TCP 四次挥手为什么要等 TIME_WAIT？",
+      "classroom_id": 4
+    },
+    {
+      "status": 200,
+      "elapsed_ms": 24002,
+      "event_counts": {
+        "sources": 1,
+        "agent": 3,
+        "token": 1159,
+        "state": 1
+      },
+      "sources": 4,
+      "source_topics": [
+        "TCP 与 UDP",
+        "TCP/IP 分层模型与 ARP / DNS"
+      ],
+      "agents": [
+        [
+          "tutor",
+          0,
+          3
+        ],
+        [
+          "peer",
+          1,
+          3
+        ],
+        [
+          "examiner",
+          2,
+          3
+        ]
+      ],
+      "chars": 1949,
+      "topic": "tcp与udp的区别",
+      "hint_level": 0,
+      "resolved": false,
+      "personalized": true,
+      "error": "",
+      "index": 16,
+      "question": "TCP 和 UDP 该怎么选？",
+      "classroom_id": 4
+    },
+    {
+      "status": 200,
+      "elapsed_ms": 27778,
+      "event_counts": {
+        "sources": 1,
+        "agent": 3,
+        "token": 1194,
+        "state": 1
+      },
+      "sources": 4,
+      "source_topics": [
+        "HTTPS 与 TLS 握手",
+        "TCP 与 UDP",
+        "TCP/IP 分层模型与 ARP / DNS"
+      ],
+      "agents": [
+        [
+          "tutor",
+          0,
+          3
+        ],
+        [
+          "peer",
+          1,
+          3
+        ],
+        [
+          "examiner",
+          2,
+          3
+        ]
+      ],
+      "chars": 2114,
+      "topic": "https与http的区别",
+      "hint_level": 0,
+      "resolved": false,
+      "personalized": true,
+      "error": "",
+      "index": 17,
+      "question": "HTTPS 和 HTTP 有什么不同？",
+      "classroom_id": 4
+    },
+    {
+      "status": 200,
+      "elapsed_ms": 35395,
+      "event_counts": {
+        "sources": 1,
+        "agent": 3,
+        "token": 1351,
+        "state": 1
+      },
+      "sources": 4,
+      "source_topics": [
+        "HTTPS 与 TLS 握手",
+        "TCP/IP 分层模型与 ARP / DNS"
+      ],
+      "agents": [
+        [
+          "tutor",
+          0,
+          3
+        ],
+        [
+          "peer",
+          1,
+          3
+        ],
+        [
+          "examiner",
+          2,
+          3
+        ]
+      ],
+      "chars": 2446,
+      "topic": "https与http的区别",
+      "hint_level": 3,
+      "resolved": false,
+      "personalized": true,
+      "error": "",
+      "index": 18,
+      "question": "TLS 握手大概做了什么事？",
+      "classroom_id": 4
+    },
+    {
+      "status": 200,
+      "elapsed_ms": 24769,
+      "event_counts": {
+        "sources": 1,
+        "agent": 3,
+        "token": 1191,
+        "state": 1
+      },
+      "sources": 4,
+      "source_topics": [
+        "TCP/IP 分层模型与 ARP / DNS"
+      ],
+      "agents": [
+        [
+          "tutor",
+          0,
+          3
+        ],
+        [
+          "peer",
+          1,
+          3
+        ],
+        [
+          "examiner",
+          2,
+          3
+        ]
+      ],
+      "chars": 1943,
+      "topic": "tcp/ip 分层模型",
+      "hint_level": 0,
+      "resolved": false,
+      "personalized": true,
+      "error": "",
+      "index": 19,
+      "question": "TCP/IP 分层模型有几层，各层负责什么？",
+      "classroom_id": 4
+    },
+    {
+      "status": 200,
+      "elapsed_ms": 25496,
+      "event_counts": {
+        "sources": 1,
+        "agent": 3,
+        "token": 758,
+        "state": 1
+      },
+      "sources": 4,
+      "source_topics": [
+        "TCP 与 UDP",
+        "TCP/IP 分层模型与 ARP / DNS"
+      ],
+      "agents": [
+        [
+          "tutor",
+          0,
+          3
+        ],
+        [
+          "peer",
+          1,
+          3
+        ],
+        [
+          "examiner",
+          2,
+          3
+        ]
+      ],
+      "chars": 1270,
+      "topic": "dns 使用 udp",
+      "hint_level": 0,
+      "resolved": false,
+      "personalized": true,
+      "error": "",
+      "index": 20,
+      "question": "为什么 DNS 用 UDP？",
+      "classroom_id": 4
+    },
+    {
+      "status": 200,
+      "elapsed_ms": 39061,
+      "event_counts": {
+        "sources": 1,
+        "agent": 3,
+        "token": 1403,
+        "state": 1
+      },
+      "sources": 4,
+      "source_topics": [
+        "TCP/IP 分层模型与 ARP / DNS",
+        "虚拟内存与页面置换"
+      ],
+      "agents": [
+        [
+          "tutor",
+          0,
+          3
+        ],
+        [
+          "peer",
+          1,
+          3
+        ],
+        [
+          "examiner",
+          2,
+          3
+        ]
+      ],
+      "chars": 2819,
+      "topic": "mybatis 缓存",
+      "hint_level": 0,
+      "resolved": false,
+      "personalized": true,
+      "error": "",
+      "index": 21,
+      "question": "换成 mybatis 的缓存该怎么设计？",
+      "classroom_id": 4
+    },
+    {
+      "status": 200,
+      "elapsed_ms": 30634,
+      "event_counts": {
+        "sources": 1,
+        "agent": 3,
+        "token": 1035,
+        "state": 1
+      },
+      "sources": 4,
+      "source_topics": [
+        "TCP 三次握手与四次挥手",
+        "TCP 与 UDP",
+        "死锁",
+        "虚拟内存与页面置换"
+      ],
+      "agents": [
+        [
+          "tutor",
+          0,
+          3
+        ],
+        [
+          "peer",
+          1,
+          3
+        ],
+        [
+          "examiner",
+          2,
+          3
+        ]
+      ],
+      "chars": 1813,
+      "topic": "mybatis 缓存",
+      "hint_level": 2,
+      "resolved": false,
+      "personalized": true,
+      "error": "",
+      "index": 22,
+      "question": "刚才说的这些里面，哪个最常在面试被追问？",
+      "classroom_id": 4
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "tag": "BGE",
+  "model": "BAAI/bge-reranker-v2-m3-int8",
+  "queries": 40,
+  "documents": 160,
+  "docs_per_query": 4.0,
+  "load_ms": 1634.9,
+  "rss_before_mb": 260.3,
+  "rss_after_mb": 1086.3,
+  "rss_delta_mb": 826.0,
+  "lat_mean_ms": 363.6,
+  "lat_p50_ms": 368.0,
+  "lat_p90_ms": 395.8,
+  "lat_p95_ms": 409.7,
+  "lat_p99_ms": 425.7,
+  "lat_max_ms": 427.0,
+  "throughput_docs_per_s": 11.0,
+  "samples": 200
+}

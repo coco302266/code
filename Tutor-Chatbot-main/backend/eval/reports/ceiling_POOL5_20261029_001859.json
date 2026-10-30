@@ -1,0 +1,39 @@
+{
+  "tag": "POOL5",
+  "ts": "2026-10-29T00:18:59",
+  "config": {
+    "model": "local:.model_cache\\models--onnx-community--bge-reranker-v2-m3-ONNX\\snapshots\\930e38609a0e848e391a2bba0bf52317850e7b25",
+    "enable_rerank": true,
+    "rerank_text": "child_title",
+    "child_overfetch": 5,
+    "parent_pool_k": 0,
+    "inject_k": 3,
+    "source_quota": 0
+  },
+  "cases": 71,
+  "mean_pool_n": 11.4507,
+  "mean_gold_n": 4.493,
+  "mean_pool_hit_n": 3.0141,
+  "hard_miss_cases": 0,
+  "recall_pool_all": 0.996,
+  "recall_oracle": 0.9139,
+  "recall_actual": 0.7874,
+  "ndcg_oracle": 0.9976,
+  "ndcg_actual": 0.8701,
+  "precision_oracle": 0.6549,
+  "precision_actual": 0.5657,
+  "achieved": 0.7874,
+  "loss_rerank": 0.1264,
+  "loss_retrieval": 0.0861,
+  "rerank_headroom_pp": 12.75,
+  "latency": {
+    "rerank_p95_ms": 1812.0,
+    "retrieval_p95_ms": 1837.8
+  },
+  "loss_breakdown": {
+    "recall_loss_pp": 0.4,
+    "window_loss_pp": 8.21,
+    "ranking_loss_pp": 12.65,
+    "sum_pp": 21.26
+  }
+}

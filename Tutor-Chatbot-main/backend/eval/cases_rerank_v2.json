@@ -1,0 +1,3820 @@
+{
+  "version": 2,
+  "note": "检索评测集。expected 用「归一化后子串匹配」判定：去空格、转小写后，任一条召回切片的 topic 包含任一个期望子串即算命中。expected 一律写完整 topic 名（知识文档一级标题），不写简写——短子串（如 https）虽也能命中，但会让按 topic 统计题量时把一个知识点拆成两行。kind 六类：in-kb（库内单知识点）/ cross（跨知识点）/ follow-up（省略式追问，须带 topic）/ kb-interview（从知识库「## 面试常问」小节抽出，标签来自文档归属，零标注成本）/ oos（库外，无期望，只用于观察是否误召回）/ cascade（级联失败评测，带 assumed_wrong_topic，只被 eval/e2e_runner.run_cascade 消费，smoke_rag.load_cases 跳过、不计入 L1 题集口径）。topic 表示「这一轮之前评估节点抽出的知识点」，用来覆盖追问场景；不写 topic 的按第一轮直问处理。aspect 记录问法类型，用于检查覆盖面。 ｜ rerank v2：新增 hard_negatives（整节零增益 parent；现有 gold 在 parent 粒度为全相关，相邻节不可用），见 scripts/build_rerank_hardneg.py",
+  "cases": [
+    {
+      "id": "dl-1",
+      "query": "死锁产生的四个必要条件是什么？",
+      "expected": [
+        "死锁"
+      ],
+      "kind": "in-kb",
+      "aspect": "定义",
+      "relevant_chunks": [
+        [
+          "cs/os/deadlock.md",
+          6,
+          1.0
+        ],
+        [
+          "cs/os/deadlock.md",
+          102,
+          1.0
+        ],
+        [
+          "cs/os/deadlock.md",
+          922,
+          0.5
+        ],
+        [
+          "cs/os/deadlock.md",
+          1525,
+          0.0
+        ]
+      ],
+      "gold_source": "topic-derived+llm-refined",
+      "_note": "[AI标注·待人工复核] gain 三档由裁判 LLM 标注（3 票多数，平票取低档）",
+      "hard_negatives": [
+        "cs/os/deadlock.md#3"
+      ],
+      "hard_neg_source": "zero-gain-parent",
+      "hard_neg_slices": [
+        [
+          "cs/os/deadlock.md",
+          1525,
+          0.0
+        ]
+      ]
+    },
+    {
+      "id": "dl-2",
+      "query": "死锁的预防和避免有什么区别？",
+      "expected": [
+        "死锁"
+      ],
+      "kind": "in-kb",
+      "aspect": "区别",
+      "relevant_chunks": [
+        [
+          "cs/os/deadlock.md",
+          6,
+          0.5
+        ],
+        [
+          "cs/os/deadlock.md",
+          102,
+          1.0
+        ],
+        [
+          "cs/os/deadlock.md",
+          922,
+          0.5
+        ],
+        [
+          "cs/os/deadlock.md",
+          1525,
+          0.0
+        ]
+      ],
+      "gold_source": "topic-derived+llm-refined",
+      "_note": "[AI标注·待人工复核] gain 三档由裁判 LLM 标注（3 票多数，平票取低档）",
+      "hard_negatives": [
+        "cs/os/deadlock.md#3"
+      ],
+      "hard_neg_source": "zero-gain-parent",
+      "hard_neg_slices": [
+        [
+          "cs/os/deadlock.md",
+          1525,
+          0.0
+        ]
+      ]
+    },
+    {
+      "id": "dl-3",
+      "query": "银行家算法是做什么的？",
+      "expected": [
+        "死锁"
+      ],
+      "kind": "in-kb",
+      "aspect": "原理",
+      "relevant_chunks": [
+        [
+          "cs/os/deadlock.md",
+          6,
+          0.0
+        ],
+        [
+          "cs/os/deadlock.md",
+          102,
+          1.0
+        ],
+        [
+          "cs/os/deadlock.md",
+          922,
+          0.0
+        ],
+        [
+          "cs/os/deadlock.md",
+          1525,
+          0.0
+        ]
+      ],
+      "gold_source": "topic-derived+llm-refined",
+      "_note": "[AI标注·待人工复核] gain 三档由裁判 LLM 标注（3 票多数，平票取低档）",
+      "hard_negatives": [
+        "cs/os/deadlock.md#0",
+        "cs/os/deadlock.md#2",
+        "cs/os/deadlock.md#3"
+      ],
+      "hard_neg_source": "zero-gain-parent",
+      "hard_neg_slices": [
+        [
+          "cs/os/deadlock.md",
+          6,
+          0.0
+        ],
+        [
+          "cs/os/deadlock.md",
+          922,
+          0.0
+        ],
+        [
+          "cs/os/deadlock.md",
+          1525,
+          0.0
+        ]
+      ]
+    },
+    {
+      "id": "cx-1",
+      "query": "死锁和进程调度算法有关系吗？",
+      "expected": [
+        "死锁",
+        "进程调度算法"
+      ],
+      "kind": "cross",
+      "aspect": "跨知识点",
+      "relevant_chunks": [
+        [
+          "cs/os/deadlock.md",
+          6,
+          0.5
+        ],
+        [
+          "cs/os/deadlock.md",
+          102,
+          0.5
+        ],
+        [
+          "cs/os/deadlock.md",
+          922,
+          0.5
+        ],
+        [
+          "cs/os/deadlock.md",
+          1525,
+          0.0
+        ],
+        [
+          "cs/os/scheduling.md",
+          10,
+          0.5
+        ],
+        [
+          "cs/os/scheduling.md",
+          100,
+          0.5
+        ],
+        [
+          "cs/os/scheduling.md",
+          1069,
+          0.5
+        ],
+        [
+          "cs/os/scheduling.md",
+          1588,
+          0.5
+        ]
+      ],
+      "gold_source": "topic-derived+llm-refined",
+      "_note": "[AI标注·待人工复核] gain 三档由裁判 LLM 标注（3 票多数，平票取低档）",
+      "hard_negatives": [
+        "cs/os/deadlock.md#3"
+      ],
+      "hard_neg_source": "zero-gain-parent",
+      "hard_neg_slices": [
+        [
+          "cs/os/deadlock.md",
+          1525,
+          0.0
+        ]
+      ]
+    },
+    {
+      "id": "fl-2",
+      "query": "那怎么预防呢？",
+      "topic": "死锁",
+      "expected": [
+        "死锁"
+      ],
+      "kind": "follow-up",
+      "aspect": "回归追问",
+      "relevant_chunks": [
+        [
+          "cs/os/deadlock.md",
+          6,
+          0.5
+        ],
+        [
+          "cs/os/deadlock.md",
+          102,
+          1.0
+        ],
+        [
+          "cs/os/deadlock.md",
+          922,
+          0.5
+        ],
+        [
+          "cs/os/deadlock.md",
+          1525,
+          0.5
+        ]
+      ],
+      "gold_source": "topic-derived+llm-refined",
+      "_note": "[AI标注·待人工复核] gain 三档由裁判 LLM 标注（3 票多数，平票取低档）"
+    },
+    {
+      "id": "fl-6",
+      "query": "能举个实际例子吗？",
+      "topic": "死锁",
+      "expected": [
+        "死锁"
+      ],
+      "kind": "follow-up",
+      "aspect": "回归追问",
+      "relevant_chunks": [
+        [
+          "cs/os/deadlock.md",
+          6,
+          0.5
+        ],
+        [
+          "cs/os/deadlock.md",
+          102,
+          0.5
+        ],
+        [
+          "cs/os/deadlock.md",
+          922,
+          1.0
+        ],
+        [
+          "cs/os/deadlock.md",
+          1525,
+          1.0
+        ]
+      ],
+      "gold_source": "topic-derived+llm-refined",
+      "_note": "[AI标注·待人工复核] gain 三档由裁判 LLM 标注（3 票多数，平票取低档）"
+    },
+    {
+      "id": "iv-20",
+      "query": "数据库里怎么避免死锁？",
+      "expected": [
+        "死锁"
+      ],
+      "kind": "kb-interview",
+      "aspect": "面试常问",
+      "relevant_chunks": [
+        [
+          "cs/os/deadlock.md",
+          6,
+          0.5
+        ],
+        [
+          "cs/os/deadlock.md",
+          102,
+          0.5
+        ],
+        [
+          "cs/os/deadlock.md",
+          922,
+          0.5
+        ],
+        [
+          "cs/os/deadlock.md",
+          1525,
+          1.0
+        ]
+      ],
+      "gold_source": "topic-derived+llm-refined",
+      "_note": "[AI标注·待人工复核] gain 三档由裁判 LLM 标注（3 票多数，平票取低档）"
+    },
+    {
+      "id": "iv-21",
+      "query": "写一个必然死锁的代码？",
+      "expected": [
+        "死锁"
+      ],
+      "kind": "kb-interview",
+      "aspect": "面试常问",
+      "relevant_chunks": [
+        [
+          "cs/os/deadlock.md",
+          6,
+          0.5
+        ],
+        [
+          "cs/os/deadlock.md",
+          102,
+          0.5
+        ],
+        [
+          "cs/os/deadlock.md",
+          922,
+          0.5
+        ],
+        [
+          "cs/os/deadlock.md",
+          1525,
+          1.0
+        ]
+      ],
+      "gold_source": "topic-derived+llm-refined",
+      "_note": "[AI标注·待人工复核] gain 三档由裁判 LLM 标注（3 票多数，平票取低档）"
+    },
+    {
+      "id": "iv-22",
+      "query": "怎么排查线上死锁？",
+      "expected": [
+        "死锁"
+      ],
+      "kind": "kb-interview",
+      "aspect": "面试常问",
+      "relevant_chunks": [
+        [
+          "cs/os/deadlock.md",
+          6,
+          0.5
+        ],
+        [
+          "cs/os/deadlock.md",
+          102,
+          0.5
+        ],
+        [
+          "cs/os/deadlock.md",
+          922,
+          0.5
+        ],
+        [
+          "cs/os/deadlock.md",
+          1525,
+          1.0
+        ]
+      ],
+      "gold_source": "topic-derived+llm-refined",
+      "_note": "[AI标注·待人工复核] gain 三档由裁判 LLM 标注（3 票多数，平票取低档）"
+    },
+    {
+      "id": "iv-23",
+      "query": "死锁和死循环是一回事吗？",
+      "expected": [
+        "死锁"
+      ],
+      "kind": "kb-interview",
+      "aspect": "面试常问",
+      "relevant_chunks": [
+        [
+          "cs/os/deadlock.md",
+          6,
+          0.5
+        ],
+        [
+          "cs/os/deadlock.md",
+          102,
+          0.5
+        ],
+        [
+          "cs/os/deadlock.md",
+          922,
+          0.5
+        ],
+        [
+          "cs/os/deadlock.md",
+          1525,
+          1.0
+        ]
+      ],
+      "gold_source": "topic-derived+llm-refined",
+      "_note": "[AI标注·待人工复核] gain 三档由裁判 LLM 标注（3 票多数，平票取低档）"
+    },
+    {
+      "id": "pt-1",
+      "query": "进程和线程有什么区别？",
+      "expected": [
+        "进程与线程"
+      ],
+      "kind": "in-kb",
+      "aspect": "区别",
+      "relevant_chunks": [
+        [
+          "cs/os/process-thread.md",
+          9,
+          1.0
+        ],
+        [
+          "cs/os/process-thread.md",
+          101,
+          1.0
+        ],
+        [
+          "cs/os/process-thread.md",
+          687,
+          0.5
+        ],
+        [
+          "cs/os/process-thread.md",
+          1502,
+          0.5
+        ]
+      ],
+      "gold_source": "topic-derived+llm-refined",
+      "_note": "[AI标注·待人工复核] gain 三档由裁判 LLM 标注（3 票多数，平票取低档）"
+    },
+    {
+      "id": "pt-2",
+      "query": "进程间通信有哪几种方式？",
+      "expected": [
+        "进程与线程",
+        "进程间通信（IPC）"
+      ],
+      "kind": "in-kb",
+      "aspect": "列举",
+      "relevant_chunks": [
+        [
+          "cs/os/process-thread.md",
+          9,
+          0.0
+        ],
+        [
+          "cs/os/process-thread.md",
+          101,
+          1.0
+        ],
+        [
+          "cs/os/process-thread.md",
+          687,
+          1.0
+        ],
+        [
+          "cs/os/process-thread.md",
+          1502,
+          0.0
+        ],
+        [
+          "cs/os/ipc.md",
+          14,
+          1.0
+        ],
+        [
+          "cs/os/ipc.md",
+          124,
+          1.0
+        ],
+        [
+          "cs/os/ipc.md",
+          606,
+          0.5
+        ],
+        [
+          "cs/os/ipc.md",
+          931,
+          0.5
+        ]
+      ],
+      "gold_source": "topic-derived+llm-refined",
+      "_note": "[AI标注·待人工复核] gain 三档由裁判 LLM 标注（3 票多数，平票取低档）",
+      "hard_negatives": [
+        "cs/os/process-thread.md#0",
+        "cs/os/process-thread.md#3"
+      ],
+      "hard_neg_source": "zero-gain-parent",
+      "hard_neg_slices": [
+        [
+          "cs/os/process-thread.md",
+          9,
+          0.0
+        ],
+        [
+          "cs/os/process-thread.md",
+          1502,
+          0.0
+        ]
+      ]
+    },
+    {
+      "id": "pt-3",
+      "query": "线程切换和进程切换哪个开销大，为什么？",
+      "expected": [
+        "进程与线程"
+      ],
+      "kind": "in-kb",
+      "aspect": "比较",
+      "relevant_chunks": [
+        [
+          "cs/os/process-thread.md",
+          9,
+          0.5
+        ],
+        [
+          "cs/os/process-thread.md",
+          101,
+          1.0
+        ],
+        [
+          "cs/os/process-thread.md",
+          687,
+          1.0
+        ],
+        [
+          "cs/os/process-thread.md",
+          1502,
+          0.0
+        ]
+      ],
+      "gold_source": "topic-derived+llm-refined",
+      "_note": "[AI标注·待人工复核] gain 三档由裁判 LLM 标注（3 票多数，平票取低档）",
+      "hard_negatives": [
+        "cs/os/process-thread.md#3"
+      ],
+      "hard_neg_source": "zero-gain-parent",
+      "hard_neg_slices": [
+        [
+          "cs/os/process-thread.md",
+          1502,
+          0.0
+        ]
+      ]
+    },
+    {
+      "id": "fl-4",
+      "query": "切换开销哪个大？",
+      "topic": "进程与线程",
+      "expected": [
+        "进程与线程"
+      ],
+      "kind": "follow-up",
+      "aspect": "回归追问",
+      "relevant_chunks": [
+        [
+          "cs/os/process-thread.md",
+          9,
+          0.5
+        ],
+        [
+          "cs/os/process-thread.md",
+          101,
+          1.0
+        ],
+        [
+          "cs/os/process-thread.md",
+          687,
+          1.0
+        ],
+        [
+          "cs/os/process-thread.md",
+          1502,
+          0.0
+        ]
+      ],
+      "gold_source": "topic-derived+llm-refined",
+      "_note": "[AI标注·待人工复核] gain 三档由裁判 LLM 标注（3 票多数，平票取低档）",
+      "hard_negatives": [
+        "cs/os/process-thread.md#3"
+      ],
+      "hard_neg_source": "zero-gain-parent",
+      "hard_neg_slices": [
+        [
+          "cs/os/process-thread.md",
+          1502,
+          0.0
+        ]
+      ]
+    },
+    {
+      "id": "iv-28",
+      "query": "线程崩溃为什么会导致进程退出？",
+      "expected": [
+        "进程与线程"
+      ],
+      "kind": "kb-interview",
+      "aspect": "面试常问",
+      "relevant_chunks": [
+        [
+          "cs/os/process-thread.md",
+          9,
+          0.5
+        ],
+        [
+          "cs/os/process-thread.md",
+          101,
+          0.5
+        ],
+        [
+          "cs/os/process-thread.md",
+          687,
+          0.0
+        ],
+        [
+          "cs/os/process-thread.md",
+          1502,
+          1.0
+        ]
+      ],
+      "gold_source": "topic-derived+llm-refined",
+      "_note": "[AI标注·待人工复核] gain 三档由裁判 LLM 标注（3 票多数，平票取低档）",
+      "hard_negatives": [
+        "cs/os/process-thread.md#2"
+      ],
+      "hard_neg_source": "zero-gain-parent",
+      "hard_neg_slices": [
+        [
+          "cs/os/process-thread.md",
+          687,
+          0.0
+        ]
+      ]
+    },
+    {
+      "id": "iv-29",
+      "query": "多进程和多线程怎么选？",
+      "expected": [
+        "进程与线程"
+      ],
+      "kind": "kb-interview",
+      "aspect": "面试常问",
+      "relevant_chunks": [
+        [
+          "cs/os/process-thread.md",
+          9,
+          0.5
+        ],
+        [
+          "cs/os/process-thread.md",
+          101,
+          1.0
+        ],
+        [
+          "cs/os/process-thread.md",
+          687,
+          0.5
+        ],
+        [
+          "cs/os/process-thread.md",
+          1502,
+          1.0
+        ]
+      ],
+      "gold_source": "topic-derived+llm-refined",
+      "_note": "[AI标注·待人工复核] gain 三档由裁判 LLM 标注（3 票多数，平票取低档）"
+    },
+    {
+      "id": "iv-30",
+      "query": "协程是什么？",
+      "expected": [
+        "进程与线程"
+      ],
+      "kind": "kb-interview",
+      "aspect": "面试常问",
+      "relevant_chunks": [
+        [
+          "cs/os/process-thread.md",
+          9,
+          0.0
+        ],
+        [
+          "cs/os/process-thread.md",
+          101,
+          0.0
+        ],
+        [
+          "cs/os/process-thread.md",
+          687,
+          0.5
+        ],
+        [
+          "cs/os/process-thread.md",
+          1502,
+          1.0
+        ]
+      ],
+      "gold_source": "topic-derived+llm-refined",
+      "_note": "[AI标注·待人工复核] gain 三档由裁判 LLM 标注（3 票多数，平票取低档）",
+      "hard_negatives": [
+        "cs/os/process-thread.md#0",
+        "cs/os/process-thread.md#1"
+      ],
+      "hard_neg_source": "zero-gain-parent",
+      "hard_neg_slices": [
+        [
+          "cs/os/process-thread.md",
+          9,
+          0.0
+        ],
+        [
+          "cs/os/process-thread.md",
+          101,
+          0.0
+        ]
+      ]
+    },
+    {
+      "id": "iv-31",
+      "query": "进程有哪些状态？",
+      "expected": [
+        "进程与线程"
+      ],
+      "kind": "kb-interview",
+      "aspect": "面试常问",
+      "relevant_chunks": [
+        [
+          "cs/os/process-thread.md",
+          9,
+          0.0
+        ],
+        [
+          "cs/os/process-thread.md",
+          101,
+          0.0
+        ],
+        [
+          "cs/os/process-thread.md",
+          687,
+          0.0
+        ],
+        [
+          "cs/os/process-thread.md",
+          1502,
+          1.0
+        ]
+      ],
+      "gold_source": "topic-derived+llm-refined",
+      "_note": "[AI标注·待人工复核] gain 三档由裁判 LLM 标注（3 票多数，平票取低档）",
+      "hard_negatives": [
+        "cs/os/process-thread.md#0",
+        "cs/os/process-thread.md#1",
+        "cs/os/process-thread.md#2"
+      ],
+      "hard_neg_source": "zero-gain-parent",
+      "hard_neg_slices": [
+        [
+          "cs/os/process-thread.md",
+          9,
+          0.0
+        ],
+        [
+          "cs/os/process-thread.md",
+          101,
+          0.0
+        ],
+        [
+          "cs/os/process-thread.md",
+          687,
+          0.0
+        ]
+      ]
+    },
+    {
+      "id": "sc-1",
+      "query": "常见的进程调度算法有哪些？",
+      "expected": [
+        "进程调度算法"
+      ],
+      "kind": "in-kb",
+      "aspect": "列举",
+      "relevant_chunks": [
+        [
+          "cs/os/scheduling.md",
+          10,
+          0.5
+        ],
+        [
+          "cs/os/scheduling.md",
+          100,
+          1.0
+        ],
+        [
+          "cs/os/scheduling.md",
+          1069,
+          0.5
+        ],
+        [
+          "cs/os/scheduling.md",
+          1588,
+          0.5
+        ]
+      ],
+      "gold_source": "topic-derived+llm-refined",
+      "_note": "[AI标注·待人工复核] gain 三档由裁判 LLM 标注（3 票多数，平票取低档）"
+    },
+    {
+      "id": "sc-2",
+      "query": "多级反馈队列是怎么工作的？",
+      "expected": [
+        "进程调度算法"
+      ],
+      "kind": "in-kb",
+      "aspect": "原理",
+      "relevant_chunks": [
+        [
+          "cs/os/scheduling.md",
+          10,
+          0.5
+        ],
+        [
+          "cs/os/scheduling.md",
+          100,
+          1.0
+        ],
+        [
+          "cs/os/scheduling.md",
+          1069,
+          0.0
+        ],
+        [
+          "cs/os/scheduling.md",
+          1588,
+          0.0
+        ]
+      ],
+      "gold_source": "topic-derived+llm-refined",
+      "_note": "[AI标注·待人工复核] gain 三档由裁判 LLM 标注（3 票多数，平票取低档）",
+      "hard_negatives": [
+        "cs/os/scheduling.md#2",
+        "cs/os/scheduling.md#3"
+      ],
+      "hard_neg_source": "zero-gain-parent",
+      "hard_neg_slices": [
+        [
+          "cs/os/scheduling.md",
+          1069,
+          0.0
+        ],
+        [
+          "cs/os/scheduling.md",
+          1588,
+          0.0
+        ]
+      ]
+    },
+    {
+      "id": "sc-3",
+      "query": "时间片轮转的时间片设多大合适？",
+      "expected": [
+        "进程调度算法"
+      ],
+      "kind": "in-kb",
+      "aspect": "场景",
+      "relevant_chunks": [
+        [
+          "cs/os/scheduling.md",
+          10,
+          0.5
+        ],
+        [
+          "cs/os/scheduling.md",
+          100,
+          0.5
+        ],
+        [
+          "cs/os/scheduling.md",
+          1069,
+          1.0
+        ],
+        [
+          "cs/os/scheduling.md",
+          1588,
+          1.0
+        ]
+      ],
+      "gold_source": "topic-derived+llm-refined",
+      "_note": "[AI标注·待人工复核] gain 三档由裁判 LLM 标注（3 票多数，平票取低档）"
+    },
+    {
+      "id": "fl-8",
+      "query": "它和死锁有关系吗？",
+      "topic": "进程调度算法",
+      "expected": [
+        "进程调度算法"
+      ],
+      "kind": "follow-up",
+      "aspect": "回归追问",
+      "relevant_chunks": [
+        [
+          "cs/os/scheduling.md",
+          10,
+          0.0
+        ],
+        [
+          "cs/os/scheduling.md",
+          100,
+          0.0
+        ],
+        [
+          "cs/os/scheduling.md",
+          1069,
+          0.5
+        ],
+        [
+          "cs/os/scheduling.md",
+          1588,
+          0.0
+        ]
+      ],
+      "gold_source": "topic-derived+llm-refined",
+      "_note": "[AI标注·待人工复核] gain 三档由裁判 LLM 标注（3 票多数，平票取低档）",
+      "hard_negatives": [
+        "cs/os/scheduling.md#0",
+        "cs/os/scheduling.md#1",
+        "cs/os/scheduling.md#3"
+      ],
+      "hard_neg_source": "zero-gain-parent",
+      "hard_neg_slices": [
+        [
+          "cs/os/scheduling.md",
+          10,
+          0.0
+        ],
+        [
+          "cs/os/scheduling.md",
+          100,
+          0.0
+        ],
+        [
+          "cs/os/scheduling.md",
+          1588,
+          0.0
+        ]
+      ]
+    },
+    {
+      "id": "iv-32",
+      "query": "SJF 为什么平均周转时间最优？",
+      "expected": [
+        "进程调度算法"
+      ],
+      "kind": "kb-interview",
+      "aspect": "面试常问",
+      "relevant_chunks": [
+        [
+          "cs/os/scheduling.md",
+          10,
+          0.0
+        ],
+        [
+          "cs/os/scheduling.md",
+          100,
+          0.5
+        ],
+        [
+          "cs/os/scheduling.md",
+          1069,
+          0.0
+        ],
+        [
+          "cs/os/scheduling.md",
+          1588,
+          1.0
+        ]
+      ],
+      "gold_source": "topic-derived+llm-refined",
+      "_note": "[AI标注·待人工复核] gain 三档由裁判 LLM 标注（3 票多数，平票取低档）",
+      "hard_negatives": [
+        "cs/os/scheduling.md#0",
+        "cs/os/scheduling.md#2"
+      ],
+      "hard_neg_source": "zero-gain-parent",
+      "hard_neg_slices": [
+        [
+          "cs/os/scheduling.md",
+          10,
+          0.0
+        ],
+        [
+          "cs/os/scheduling.md",
+          1069,
+          0.0
+        ]
+      ]
+    },
+    {
+      "id": "iv-33",
+      "query": "怎么解决优先级调度的饥饿？",
+      "expected": [
+        "进程调度算法"
+      ],
+      "kind": "kb-interview",
+      "aspect": "面试常问",
+      "relevant_chunks": [
+        [
+          "cs/os/scheduling.md",
+          10,
+          0.0
+        ],
+        [
+          "cs/os/scheduling.md",
+          100,
+          1.0
+        ],
+        [
+          "cs/os/scheduling.md",
+          1069,
+          0.0
+        ],
+        [
+          "cs/os/scheduling.md",
+          1588,
+          1.0
+        ]
+      ],
+      "gold_source": "topic-derived+llm-refined",
+      "_note": "[AI标注·待人工复核] gain 三档由裁判 LLM 标注（3 票多数，平票取低档）",
+      "hard_negatives": [
+        "cs/os/scheduling.md#0",
+        "cs/os/scheduling.md#2"
+      ],
+      "hard_neg_source": "zero-gain-parent",
+      "hard_neg_slices": [
+        [
+          "cs/os/scheduling.md",
+          10,
+          0.0
+        ],
+        [
+          "cs/os/scheduling.md",
+          1069,
+          0.0
+        ]
+      ]
+    },
+    {
+      "id": "iv-34",
+      "query": "RR 的时间片设为多少合适？",
+      "expected": [
+        "进程调度算法"
+      ],
+      "kind": "kb-interview",
+      "aspect": "面试常问",
+      "relevant_chunks": [
+        [
+          "cs/os/scheduling.md",
+          10,
+          0.0
+        ],
+        [
+          "cs/os/scheduling.md",
+          100,
+          0.5
+        ],
+        [
+          "cs/os/scheduling.md",
+          1069,
+          1.0
+        ],
+        [
+          "cs/os/scheduling.md",
+          1588,
+          1.0
+        ]
+      ],
+      "gold_source": "topic-derived+llm-refined",
+      "_note": "[AI标注·待人工复核] gain 三档由裁判 LLM 标注（3 票多数，平票取低档）",
+      "hard_negatives": [
+        "cs/os/scheduling.md#0"
+      ],
+      "hard_neg_source": "zero-gain-parent",
+      "hard_neg_slices": [
+        [
+          "cs/os/scheduling.md",
+          10,
+          0.0
+        ]
+      ]
+    },
+    {
+      "id": "iv-35",
+      "query": "进程切换和线程切换开销差在哪？",
+      "expected": [
+        "进程调度算法"
+      ],
+      "kind": "kb-interview",
+      "aspect": "面试常问",
+      "relevant_chunks": [
+        [
+          "cs/os/scheduling.md",
+          10,
+          0.0
+        ],
+        [
+          "cs/os/scheduling.md",
+          100,
+          0.0
+        ],
+        [
+          "cs/os/scheduling.md",
+          1069,
+          0.0
+        ],
+        [
+          "cs/os/scheduling.md",
+          1588,
+          1.0
+        ]
+      ],
+      "gold_source": "topic-derived+llm-refined",
+      "_note": "[AI标注·待人工复核] gain 三档由裁判 LLM 标注（3 票多数，平票取低档）",
+      "hard_negatives": [
+        "cs/os/scheduling.md#0",
+        "cs/os/scheduling.md#1",
+        "cs/os/scheduling.md#2"
+      ],
+      "hard_neg_source": "zero-gain-parent",
+      "hard_neg_slices": [
+        [
+          "cs/os/scheduling.md",
+          10,
+          0.0
+        ],
+        [
+          "cs/os/scheduling.md",
+          100,
+          0.0
+        ],
+        [
+          "cs/os/scheduling.md",
+          1069,
+          0.0
+        ]
+      ]
+    },
+    {
+      "id": "vm-1",
+      "query": "为什么需要虚拟内存？",
+      "expected": [
+        "虚拟内存与页面置换"
+      ],
+      "kind": "in-kb",
+      "aspect": "为什么",
+      "relevant_chunks": [
+        [
+          "cs/os/memory-management.md",
+          13,
+          1.0
+        ],
+        [
+          "cs/os/memory-management.md",
+          125,
+          1.0
+        ],
+        [
+          "cs/os/memory-management.md",
+          1152,
+          0.5
+        ],
+        [
+          "cs/os/memory-management.md",
+          1614,
+          0.0
+        ]
+      ],
+      "gold_source": "topic-derived+llm-refined",
+      "_note": "[AI标注·待人工复核] gain 三档由裁判 LLM 标注（3 票多数，平票取低档）",
+      "hard_negatives": [
+        "cs/os/memory-management.md#3"
+      ],
+      "hard_neg_source": "zero-gain-parent",
+      "hard_neg_slices": [
+        [
+          "cs/os/memory-management.md",
+          1614,
+          0.0
+        ]
+      ]
+    },
+    {
+      "id": "vm-2",
+      "query": "LRU 页面置换算法怎么实现？",
+      "expected": [
+        "虚拟内存与页面置换"
+      ],
+      "kind": "in-kb",
+      "aspect": "怎么做",
+      "relevant_chunks": [
+        [
+          "cs/os/memory-management.md",
+          13,
+          0.0
+        ],
+        [
+          "cs/os/memory-management.md",
+          125,
+          0.5
+        ],
+        [
+          "cs/os/memory-management.md",
+          1152,
+          0.0
+        ],
+        [
+          "cs/os/memory-management.md",
+          1614,
+          1.0
+        ]
+      ],
+      "gold_source": "topic-derived+llm-refined",
+      "_note": "[AI标注·待人工复核] gain 三档由裁判 LLM 标注（3 票多数，平票取低档）",
+      "hard_negatives": [
+        "cs/os/memory-management.md#0",
+        "cs/os/memory-management.md#2"
+      ],
+      "hard_neg_source": "zero-gain-parent",
+      "hard_neg_slices": [
+        [
+          "cs/os/memory-management.md",
+          13,
+          0.0
+        ],
+        [
+          "cs/os/memory-management.md",
+          1152,
+          0.0
+        ]
+      ]
+    },
+    {
+      "id": "vm-3",
+      "query": "缺页中断处理的过程是怎样的？",
+      "expected": [
+        "虚拟内存与页面置换",
+        "中断、异常与系统调用：用户态与内核态"
+      ],
+      "kind": "in-kb",
+      "aspect": "流程",
+      "relevant_chunks": [
+        [
+          "cs/os/interrupt-syscall.md",
+          22,
+          0.0
+        ],
+        [
+          "cs/os/interrupt-syscall.md",
+          147,
+          0.5
+        ],
+        [
+          "cs/os/interrupt-syscall.md",
+          621,
+          1.0
+        ],
+        [
+          "cs/os/interrupt-syscall.md",
+          1015,
+          0.0
+        ],
+        [
+          "cs/os/memory-management.md",
+          13,
+          0.0
+        ],
+        [
+          "cs/os/memory-management.md",
+          125,
+          1.0
+        ],
+        [
+          "cs/os/memory-management.md",
+          1152,
+          0.5
+        ],
+        [
+          "cs/os/memory-management.md",
+          1614,
+          0.0
+        ]
+      ],
+      "gold_source": "topic-derived+llm-refined",
+      "_note": "[AI标注·待人工复核] gain 三档由裁判 LLM 标注（3 票多数，平票取低档）",
+      "hard_negatives": [
+        "cs/os/interrupt-syscall.md#0",
+        "cs/os/interrupt-syscall.md#3",
+        "cs/os/memory-management.md#0",
+        "cs/os/memory-management.md#3"
+      ],
+      "hard_neg_source": "zero-gain-parent",
+      "hard_neg_slices": [
+        [
+          "cs/os/interrupt-syscall.md",
+          22,
+          0.0
+        ],
+        [
+          "cs/os/interrupt-syscall.md",
+          1015,
+          0.0
+        ],
+        [
+          "cs/os/memory-management.md",
+          13,
+          0.0
+        ],
+        [
+          "cs/os/memory-management.md",
+          1614,
+          0.0
+        ]
+      ]
+    },
+    {
+      "id": "fl-1",
+      "query": "它有什么缺点？",
+      "topic": "虚拟内存与页面置换",
+      "expected": [
+        "虚拟内存与页面置换"
+      ],
+      "kind": "follow-up",
+      "aspect": "回归追问",
+      "relevant_chunks": [
+        [
+          "cs/os/memory-management.md",
+          13,
+          0.5
+        ],
+        [
+          "cs/os/memory-management.md",
+          125,
+          0.5
+        ],
+        [
+          "cs/os/memory-management.md",
+          1152,
+          0.5
+        ],
+        [
+          "cs/os/memory-management.md",
+          1614,
+          0.5
+        ]
+      ],
+      "gold_source": "topic-derived+llm-refined",
+      "_note": "[AI标注·待人工复核] gain 三档由裁判 LLM 标注（3 票多数，平票取低档）"
+    },
+    {
+      "id": "iv-24",
+      "query": "LRU 怎么实现？",
+      "expected": [
+        "虚拟内存与页面置换"
+      ],
+      "kind": "kb-interview",
+      "aspect": "面试常问",
+      "relevant_chunks": [
+        [
+          "cs/os/memory-management.md",
+          13,
+          0.0
+        ],
+        [
+          "cs/os/memory-management.md",
+          125,
+          0.5
+        ],
+        [
+          "cs/os/memory-management.md",
+          1152,
+          0.0
+        ],
+        [
+          "cs/os/memory-management.md",
+          1614,
+          1.0
+        ]
+      ],
+      "gold_source": "topic-derived+llm-refined",
+      "_note": "[AI标注·待人工复核] gain 三档由裁判 LLM 标注（3 票多数，平票取低档）",
+      "hard_negatives": [
+        "cs/os/memory-management.md#0",
+        "cs/os/memory-management.md#2"
+      ],
+      "hard_neg_source": "zero-gain-parent",
+      "hard_neg_slices": [
+        [
+          "cs/os/memory-management.md",
+          13,
+          0.0
+        ],
+        [
+          "cs/os/memory-management.md",
+          1152,
+          0.0
+        ]
+      ]
+    },
+    {
+      "id": "iv-25",
+      "query": "虚拟地址空间布局？",
+      "expected": [
+        "虚拟内存与页面置换"
+      ],
+      "kind": "kb-interview",
+      "aspect": "面试常问",
+      "relevant_chunks": [
+        [
+          "cs/os/memory-management.md",
+          13,
+          0.5
+        ],
+        [
+          "cs/os/memory-management.md",
+          125,
+          0.0
+        ],
+        [
+          "cs/os/memory-management.md",
+          1152,
+          0.0
+        ],
+        [
+          "cs/os/memory-management.md",
+          1614,
+          1.0
+        ]
+      ],
+      "gold_source": "topic-derived+llm-refined",
+      "_note": "[AI标注·待人工复核] gain 三档由裁判 LLM 标注（3 票多数，平票取低档）",
+      "hard_negatives": [
+        "cs/os/memory-management.md#1",
+        "cs/os/memory-management.md#2"
+      ],
+      "hard_neg_source": "zero-gain-parent",
+      "hard_neg_slices": [
+        [
+          "cs/os/memory-management.md",
+          125,
+          0.0
+        ],
+        [
+          "cs/os/memory-management.md",
+          1152,
+          0.0
+        ]
+      ]
+    },
+    {
+      "id": "iv-26",
+      "query": "TLB 什么时候要刷新？",
+      "expected": [
+        "虚拟内存与页面置换"
+      ],
+      "kind": "kb-interview",
+      "aspect": "面试常问",
+      "relevant_chunks": [
+        [
+          "cs/os/memory-management.md",
+          13,
+          0.0
+        ],
+        [
+          "cs/os/memory-management.md",
+          125,
+          0.5
+        ],
+        [
+          "cs/os/memory-management.md",
+          1152,
+          0.5
+        ],
+        [
+          "cs/os/memory-management.md",
+          1614,
+          1.0
+        ]
+      ],
+      "gold_source": "topic-derived+llm-refined",
+      "_note": "[AI标注·待人工复核] gain 三档由裁判 LLM 标注（3 票多数，平票取低档）",
+      "hard_negatives": [
+        "cs/os/memory-management.md#0"
+      ],
+      "hard_neg_source": "zero-gain-parent",
+      "hard_neg_slices": [
+        [
+          "cs/os/memory-management.md",
+          13,
+          0.0
+        ]
+      ]
+    },
+    {
+      "id": "iv-27",
+      "query": "什么是内存映射 mmap？",
+      "expected": [
+        "虚拟内存与页面置换"
+      ],
+      "kind": "kb-interview",
+      "aspect": "面试常问",
+      "relevant_chunks": [
+        [
+          "cs/os/memory-management.md",
+          13,
+          0.0
+        ],
+        [
+          "cs/os/memory-management.md",
+          125,
+          0.0
+        ],
+        [
+          "cs/os/memory-management.md",
+          1152,
+          0.5
+        ],
+        [
+          "cs/os/memory-management.md",
+          1614,
+          1.0
+        ]
+      ],
+      "gold_source": "topic-derived+llm-refined",
+      "_note": "[AI标注·待人工复核] gain 三档由裁判 LLM 标注（3 票多数，平票取低档）",
+      "hard_negatives": [
+        "cs/os/memory-management.md#0",
+        "cs/os/memory-management.md#1"
+      ],
+      "hard_neg_source": "zero-gain-parent",
+      "hard_neg_slices": [
+        [
+          "cs/os/memory-management.md",
+          13,
+          0.0
+        ],
+        [
+          "cs/os/memory-management.md",
+          125,
+          0.0
+        ]
+      ]
+    },
+    {
+      "id": "hs-1",
+      "query": "HTTPS 和 HTTP 有什么不同？",
+      "expected": [
+        "HTTPS 与 TLS 握手"
+      ],
+      "kind": "in-kb",
+      "aspect": "区别",
+      "relevant_chunks": [
+        [
+          "cs/network/http-https.md",
+          18,
+          1.0
+        ],
+        [
+          "cs/network/http-https.md",
+          121,
+          1.0
+        ],
+        [
+          "cs/network/http-https.md",
+          1893,
+          0.5
+        ],
+        [
+          "cs/network/http-https.md",
+          2536,
+          0.5
+        ],
+        [
+          "cs/network/http-https.md",
+          3469,
+          0.5
+        ]
+      ],
+      "gold_source": "topic-derived+llm-refined",
+      "_note": "[AI标注·待人工复核] gain 三档由裁判 LLM 标注（3 票多数，平票取低档）"
+    },
+    {
+      "id": "hs-2",
+      "query": "TLS 握手为什么要用三个随机数？",
+      "expected": [
+        "HTTPS 与 TLS 握手"
+      ],
+      "kind": "in-kb",
+      "aspect": "为什么",
+      "relevant_chunks": [
+        [
+          "cs/network/http-https.md",
+          18,
+          0.0
+        ],
+        [
+          "cs/network/http-https.md",
+          121,
+          1.0
+        ],
+        [
+          "cs/network/http-https.md",
+          1893,
+          0.0
+        ],
+        [
+          "cs/network/http-https.md",
+          2536,
+          0.0
+        ],
+        [
+          "cs/network/http-https.md",
+          3469,
+          0.0
+        ]
+      ],
+      "gold_source": "topic-derived+llm-refined",
+      "_note": "[AI标注·待人工复核] gain 三档由裁判 LLM 标注（3 票多数，平票取低档）",
+      "hard_negatives": [
+        "cs/network/http-https.md#0",
+        "cs/network/http-https.md#2",
+        "cs/network/http-https.md#3",
+        "cs/network/http-https.md#4"
+      ],
+      "hard_neg_source": "zero-gain-parent",
+      "hard_neg_slices": [
+        [
+          "cs/network/http-https.md",
+          18,
+          0.0
+        ],
+        [
+          "cs/network/http-https.md",
+          1893,
+          0.0
+        ],
+        [
+          "cs/network/http-https.md",
+          2536,
+          0.0
+        ],
+        [
+          "cs/network/http-https.md",
+          3469,
+          0.0
+        ]
+      ]
+    },
+    {
+      "id": "hs-3",
+      "query": "数字签名怎么保证证书不被篡改？",
+      "expected": [
+        "HTTPS 与 TLS 握手"
+      ],
+      "kind": "in-kb",
+      "aspect": "原理",
+      "relevant_chunks": [
+        [
+          "cs/network/http-https.md",
+          18,
+          0.0
+        ],
+        [
+          "cs/network/http-https.md",
+          121,
+          0.5
+        ],
+        [
+          "cs/network/http-https.md",
+          1893,
+          1.0
+        ],
+        [
+          "cs/network/http-https.md",
+          2536,
+          0.0
+        ],
+        [
+          "cs/network/http-https.md",
+          3469,
+          0.5
+        ]
+      ],
+      "gold_source": "topic-derived+llm-refined",
+      "_note": "[AI标注·待人工复核] gain 三档由裁判 LLM 标注（3 票多数，平票取低档）",
+      "hard_negatives": [
+        "cs/network/http-https.md#0",
+        "cs/network/http-https.md#3"
+      ],
+      "hard_neg_source": "zero-gain-parent",
+      "hard_neg_slices": [
+        [
+          "cs/network/http-https.md",
+          18,
+          0.0
+        ],
+        [
+          "cs/network/http-https.md",
+          2536,
+          0.0
+        ]
+      ]
+    },
+    {
+      "id": "hs-4",
+      "query": "TLS 1.3 相比 1.2 改了什么？",
+      "expected": [
+        "HTTPS 与 TLS 握手"
+      ],
+      "kind": "in-kb",
+      "aspect": "对比",
+      "relevant_chunks": [
+        [
+          "cs/network/http-https.md",
+          18,
+          0.0
+        ],
+        [
+          "cs/network/http-https.md",
+          121,
+          1.0
+        ],
+        [
+          "cs/network/http-https.md",
+          1893,
+          0.0
+        ],
+        [
+          "cs/network/http-https.md",
+          2536,
+          0.5
+        ],
+        [
+          "cs/network/http-https.md",
+          3469,
+          0.0
+        ]
+      ],
+      "gold_source": "topic-derived+llm-refined",
+      "_note": "[AI标注·待人工复核] gain 三档由裁判 LLM 标注（3 票多数，平票取低档）",
+      "hard_negatives": [
+        "cs/network/http-https.md#0",
+        "cs/network/http-https.md#2",
+        "cs/network/http-https.md#4"
+      ],
+      "hard_neg_source": "zero-gain-parent",
+      "hard_neg_slices": [
+        [
+          "cs/network/http-https.md",
+          18,
+          0.0
+        ],
+        [
+          "cs/network/http-https.md",
+          1893,
+          0.0
+        ],
+        [
+          "cs/network/http-https.md",
+          3469,
+          0.0
+        ]
+      ]
+    },
+    {
+      "id": "cx-2",
+      "query": "HTTPS 握手和 TCP 三次握手有什么联系？",
+      "expected": [
+        "HTTPS 与 TLS 握手",
+        "TCP 三次握手与四次挥手"
+      ],
+      "kind": "cross",
+      "aspect": "跨知识点",
+      "relevant_chunks": [
+        [
+          "cs/network/http-https.md",
+          18,
+          0.5
+        ],
+        [
+          "cs/network/http-https.md",
+          121,
+          0.5
+        ],
+        [
+          "cs/network/http-https.md",
+          1893,
+          0.0
+        ],
+        [
+          "cs/network/http-https.md",
+          2536,
+          0.0
+        ],
+        [
+          "cs/network/http-https.md",
+          3469,
+          0.0
+        ],
+        [
+          "cs/network/tcp-handshake.md",
+          17,
+          0.5
+        ],
+        [
+          "cs/network/tcp-handshake.md",
+          113,
+          0.5
+        ],
+        [
+          "cs/network/tcp-handshake.md",
+          1826,
+          0.5
+        ],
+        [
+          "cs/network/tcp-handshake.md",
+          2341,
+          0.5
+        ]
+      ],
+      "gold_source": "topic-derived+llm-refined",
+      "_note": "[AI标注·待人工复核] gain 三档由裁判 LLM 标注（3 票多数，平票取低档）",
+      "hard_negatives": [
+        "cs/network/http-https.md#2",
+        "cs/network/http-https.md#3",
+        "cs/network/http-https.md#4"
+      ],
+      "hard_neg_source": "zero-gain-parent",
+      "hard_neg_slices": [
+        [
+          "cs/network/http-https.md",
+          1893,
+          0.0
+        ],
+        [
+          "cs/network/http-https.md",
+          2536,
+          0.0
+        ],
+        [
+          "cs/network/http-https.md",
+          3469,
+          0.0
+        ]
+      ]
+    },
+    {
+      "id": "fl-5",
+      "query": "性能开销体现在哪？",
+      "topic": "HTTPS 与 TLS 握手",
+      "expected": [
+        "HTTPS 与 TLS 握手"
+      ],
+      "kind": "follow-up",
+      "aspect": "回归追问",
+      "relevant_chunks": [
+        [
+          "cs/network/http-https.md",
+          18,
+          0.0
+        ],
+        [
+          "cs/network/http-https.md",
+          121,
+          0.5
+        ],
+        [
+          "cs/network/http-https.md",
+          1893,
+          0.5
+        ],
+        [
+          "cs/network/http-https.md",
+          2536,
+          1.0
+        ],
+        [
+          "cs/network/http-https.md",
+          3469,
+          0.0
+        ]
+      ],
+      "gold_source": "topic-derived+llm-refined",
+      "_note": "[AI标注·待人工复核] gain 三档由裁判 LLM 标注（3 票多数，平票取低档）",
+      "hard_negatives": [
+        "cs/network/http-https.md#0",
+        "cs/network/http-https.md#4"
+      ],
+      "hard_neg_source": "zero-gain-parent",
+      "hard_neg_slices": [
+        [
+          "cs/network/http-https.md",
+          18,
+          0.0
+        ],
+        [
+          "cs/network/http-https.md",
+          3469,
+          0.0
+        ]
+      ]
+    },
+    {
+      "id": "iv-1",
+      "query": "HTTPS 握手用了几种加密？",
+      "expected": [
+        "HTTPS 与 TLS 握手"
+      ],
+      "kind": "kb-interview",
+      "aspect": "面试常问",
+      "relevant_chunks": [
+        [
+          "cs/network/http-https.md",
+          18,
+          0.5
+        ],
+        [
+          "cs/network/http-https.md",
+          121,
+          1.0
+        ],
+        [
+          "cs/network/http-https.md",
+          1893,
+          0.5
+        ],
+        [
+          "cs/network/http-https.md",
+          2536,
+          0.5
+        ],
+        [
+          "cs/network/http-https.md",
+          3469,
+          1.0
+        ]
+      ],
+      "gold_source": "topic-derived+llm-refined",
+      "_note": "[AI标注·待人工复核] gain 三档由裁判 LLM 标注（3 票多数，平票取低档）"
+    },
+    {
+      "id": "iv-2",
+      "query": "为什么需要 CA？",
+      "expected": [
+        "HTTPS 与 TLS 握手"
+      ],
+      "kind": "kb-interview",
+      "aspect": "面试常问",
+      "relevant_chunks": [
+        [
+          "cs/network/http-https.md",
+          18,
+          0.0
+        ],
+        [
+          "cs/network/http-https.md",
+          121,
+          1.0
+        ],
+        [
+          "cs/network/http-https.md",
+          1893,
+          1.0
+        ],
+        [
+          "cs/network/http-https.md",
+          2536,
+          0.0
+        ],
+        [
+          "cs/network/http-https.md",
+          3469,
+          1.0
+        ]
+      ],
+      "gold_source": "topic-derived+llm-refined",
+      "_note": "[AI标注·待人工复核] gain 三档由裁判 LLM 标注（3 票多数，平票取低档）",
+      "hard_negatives": [
+        "cs/network/http-https.md#0",
+        "cs/network/http-https.md#3"
+      ],
+      "hard_neg_source": "zero-gain-parent",
+      "hard_neg_slices": [
+        [
+          "cs/network/http-https.md",
+          18,
+          0.0
+        ],
+        [
+          "cs/network/http-https.md",
+          2536,
+          0.0
+        ]
+      ]
+    },
+    {
+      "id": "iv-3",
+      "query": "银行 U 盾为什么安全？",
+      "expected": [
+        "HTTPS 与 TLS 握手"
+      ],
+      "kind": "kb-interview",
+      "aspect": "面试常问",
+      "relevant_chunks": [
+        [
+          "cs/network/http-https.md",
+          18,
+          0.0
+        ],
+        [
+          "cs/network/http-https.md",
+          121,
+          0.0
+        ],
+        [
+          "cs/network/http-https.md",
+          1893,
+          0.0
+        ],
+        [
+          "cs/network/http-https.md",
+          2536,
+          0.0
+        ],
+        [
+          "cs/network/http-https.md",
+          3469,
+          1.0
+        ]
+      ],
+      "gold_source": "topic-derived+llm-refined",
+      "_note": "[AI标注·待人工复核] gain 三档由裁判 LLM 标注（3 票多数，平票取低档）",
+      "hard_negatives": [
+        "cs/network/http-https.md#0",
+        "cs/network/http-https.md#1",
+        "cs/network/http-https.md#2",
+        "cs/network/http-https.md#3"
+      ],
+      "hard_neg_source": "zero-gain-parent",
+      "hard_neg_slices": [
+        [
+          "cs/network/http-https.md",
+          18,
+          0.0
+        ],
+        [
+          "cs/network/http-https.md",
+          121,
+          0.0
+        ],
+        [
+          "cs/network/http-https.md",
+          1893,
+          0.0
+        ],
+        [
+          "cs/network/http-https.md",
+          2536,
+          0.0
+        ]
+      ]
+    },
+    {
+      "id": "iv-4",
+      "query": "HTTPS 抓包原理？",
+      "expected": [
+        "HTTPS 与 TLS 握手"
+      ],
+      "kind": "kb-interview",
+      "aspect": "面试常问",
+      "relevant_chunks": [
+        [
+          "cs/network/http-https.md",
+          18,
+          0.5
+        ],
+        [
+          "cs/network/http-https.md",
+          121,
+          0.5
+        ],
+        [
+          "cs/network/http-https.md",
+          1893,
+          1.0
+        ],
+        [
+          "cs/network/http-https.md",
+          2536,
+          0.0
+        ],
+        [
+          "cs/network/http-https.md",
+          3469,
+          1.0
+        ]
+      ],
+      "gold_source": "topic-derived+llm-refined",
+      "_note": "[AI标注·待人工复核] gain 三档由裁判 LLM 标注（3 票多数，平票取低档）",
+      "hard_negatives": [
+        "cs/network/http-https.md#3"
+      ],
+      "hard_neg_source": "zero-gain-parent",
+      "hard_neg_slices": [
+        [
+          "cs/network/http-https.md",
+          2536,
+          0.0
+        ]
+      ]
+    },
+    {
+      "id": "iv-5",
+      "query": "WebSocket 和 HTTP 什么关系？",
+      "expected": [
+        "HTTPS 与 TLS 握手"
+      ],
+      "kind": "kb-interview",
+      "aspect": "面试常问",
+      "relevant_chunks": [
+        [
+          "cs/network/http-https.md",
+          18,
+          0.0
+        ],
+        [
+          "cs/network/http-https.md",
+          121,
+          0.5
+        ],
+        [
+          "cs/network/http-https.md",
+          1893,
+          0.0
+        ],
+        [
+          "cs/network/http-https.md",
+          2536,
+          0.0
+        ],
+        [
+          "cs/network/http-https.md",
+          3469,
+          1.0
+        ]
+      ],
+      "gold_source": "topic-derived+llm-refined",
+      "_note": "[AI标注·待人工复核] gain 三档由裁判 LLM 标注（3 票多数，平票取低档）",
+      "hard_negatives": [
+        "cs/network/http-https.md#0",
+        "cs/network/http-https.md#2",
+        "cs/network/http-https.md#3"
+      ],
+      "hard_neg_source": "zero-gain-parent",
+      "hard_neg_slices": [
+        [
+          "cs/network/http-https.md",
+          18,
+          0.0
+        ],
+        [
+          "cs/network/http-https.md",
+          1893,
+          0.0
+        ],
+        [
+          "cs/network/http-https.md",
+          2536,
+          0.0
+        ]
+      ]
+    },
+    {
+      "id": "th-1",
+      "query": "TCP 为什么需要三次握手，两次不行吗？",
+      "expected": [
+        "TCP 三次握手与四次挥手"
+      ],
+      "kind": "in-kb",
+      "aspect": "为什么",
+      "relevant_chunks": [
+        [
+          "cs/network/tcp-handshake.md",
+          17,
+          1.0
+        ],
+        [
+          "cs/network/tcp-handshake.md",
+          113,
+          1.0
+        ],
+        [
+          "cs/network/tcp-handshake.md",
+          1826,
+          0.5
+        ],
+        [
+          "cs/network/tcp-handshake.md",
+          2341,
+          1.0
+        ]
+      ],
+      "gold_source": "topic-derived+llm-refined",
+      "_note": "[AI标注·待人工复核] gain 三档由裁判 LLM 标注（3 票多数，平票取低档）"
+    },
+    {
+      "id": "th-2",
+      "query": "为什么挥手要四次，握手只要三次？",
+      "expected": [
+        "TCP 三次握手与四次挥手"
+      ],
+      "kind": "in-kb",
+      "aspect": "对比",
+      "relevant_chunks": [
+        [
+          "cs/network/tcp-handshake.md",
+          17,
+          1.0
+        ],
+        [
+          "cs/network/tcp-handshake.md",
+          113,
+          1.0
+        ],
+        [
+          "cs/network/tcp-handshake.md",
+          1826,
+          0.0
+        ],
+        [
+          "cs/network/tcp-handshake.md",
+          2341,
+          0.5
+        ]
+      ],
+      "gold_source": "topic-derived+llm-refined",
+      "_note": "[AI标注·待人工复核] gain 三档由裁判 LLM 标注（3 票多数，平票取低档）",
+      "hard_negatives": [
+        "cs/network/tcp-handshake.md#2"
+      ],
+      "hard_neg_source": "zero-gain-parent",
+      "hard_neg_slices": [
+        [
+          "cs/network/tcp-handshake.md",
+          1826,
+          0.0
+        ]
+      ]
+    },
+    {
+      "id": "th-3",
+      "query": "TIME_WAIT 为什么要等 2MSL？",
+      "expected": [
+        "TCP 三次握手与四次挥手"
+      ],
+      "kind": "in-kb",
+      "aspect": "为什么",
+      "relevant_chunks": [
+        [
+          "cs/network/tcp-handshake.md",
+          17,
+          0.0
+        ],
+        [
+          "cs/network/tcp-handshake.md",
+          113,
+          1.0
+        ],
+        [
+          "cs/network/tcp-handshake.md",
+          1826,
+          0.0
+        ],
+        [
+          "cs/network/tcp-handshake.md",
+          2341,
+          0.5
+        ]
+      ],
+      "gold_source": "topic-derived+llm-refined",
+      "_note": "[AI标注·待人工复核] gain 三档由裁判 LLM 标注（3 票多数，平票取低档）",
+      "hard_negatives": [
+        "cs/network/tcp-handshake.md#0",
+        "cs/network/tcp-handshake.md#2"
+      ],
+      "hard_neg_source": "zero-gain-parent",
+      "hard_neg_slices": [
+        [
+          "cs/network/tcp-handshake.md",
+          17,
+          0.0
+        ],
+        [
+          "cs/network/tcp-handshake.md",
+          1826,
+          0.0
+        ]
+      ]
+    },
+    {
+      "id": "th-4",
+      "query": "TIME_WAIT 过多怎么处理？",
+      "expected": [
+        "TCP 三次握手与四次挥手"
+      ],
+      "kind": "in-kb",
+      "aspect": "怎么做",
+      "relevant_chunks": [
+        [
+          "cs/network/tcp-handshake.md",
+          17,
+          0.0
+        ],
+        [
+          "cs/network/tcp-handshake.md",
+          113,
+          1.0
+        ],
+        [
+          "cs/network/tcp-handshake.md",
+          1826,
+          0.0
+        ],
+        [
+          "cs/network/tcp-handshake.md",
+          2341,
+          0.0
+        ]
+      ],
+      "gold_source": "topic-derived+llm-refined",
+      "_note": "[AI标注·待人工复核] gain 三档由裁判 LLM 标注（3 票多数，平票取低档）",
+      "hard_negatives": [
+        "cs/network/tcp-handshake.md#0",
+        "cs/network/tcp-handshake.md#2",
+        "cs/network/tcp-handshake.md#3"
+      ],
+      "hard_neg_source": "zero-gain-parent",
+      "hard_neg_slices": [
+        [
+          "cs/network/tcp-handshake.md",
+          17,
+          0.0
+        ],
+        [
+          "cs/network/tcp-handshake.md",
+          1826,
+          0.0
+        ],
+        [
+          "cs/network/tcp-handshake.md",
+          2341,
+          0.0
+        ]
+      ]
+    },
+    {
+      "id": "fl-3",
+      "query": "为什么不能是两次？",
+      "topic": "TCP 三次握手与四次挥手",
+      "expected": [
+        "TCP 三次握手与四次挥手"
+      ],
+      "kind": "follow-up",
+      "aspect": "回归追问",
+      "relevant_chunks": [
+        [
+          "cs/network/tcp-handshake.md",
+          17,
+          0.5
+        ],
+        [
+          "cs/network/tcp-handshake.md",
+          113,
+          1.0
+        ],
+        [
+          "cs/network/tcp-handshake.md",
+          1826,
+          0.0
+        ],
+        [
+          "cs/network/tcp-handshake.md",
+          2341,
+          0.5
+        ]
+      ],
+      "gold_source": "topic-derived+llm-refined",
+      "_note": "[AI标注·待人工复核] gain 三档由裁判 LLM 标注（3 票多数，平票取低档）",
+      "hard_negatives": [
+        "cs/network/tcp-handshake.md#2"
+      ],
+      "hard_neg_source": "zero-gain-parent",
+      "hard_neg_slices": [
+        [
+          "cs/network/tcp-handshake.md",
+          1826,
+          0.0
+        ]
+      ]
+    },
+    {
+      "id": "iv-6",
+      "query": "握手能携带数据吗？",
+      "expected": [
+        "TCP 三次握手与四次挥手"
+      ],
+      "kind": "kb-interview",
+      "aspect": "面试常问",
+      "relevant_chunks": [
+        [
+          "cs/network/tcp-handshake.md",
+          17,
+          0.0
+        ],
+        [
+          "cs/network/tcp-handshake.md",
+          113,
+          0.5
+        ],
+        [
+          "cs/network/tcp-handshake.md",
+          1826,
+          0.0
+        ],
+        [
+          "cs/network/tcp-handshake.md",
+          2341,
+          1.0
+        ]
+      ],
+      "gold_source": "topic-derived+llm-refined",
+      "_note": "[AI标注·待人工复核] gain 三档由裁判 LLM 标注（3 票多数，平票取低档）",
+      "hard_negatives": [
+        "cs/network/tcp-handshake.md#0",
+        "cs/network/tcp-handshake.md#2"
+      ],
+      "hard_neg_source": "zero-gain-parent",
+      "hard_neg_slices": [
+        [
+          "cs/network/tcp-handshake.md",
+          17,
+          0.0
+        ],
+        [
+          "cs/network/tcp-handshake.md",
+          1826,
+          0.0
+        ]
+      ]
+    },
+    {
+      "id": "iv-7",
+      "query": "TCP 为什么是三次不是四次？",
+      "expected": [
+        "TCP 三次握手与四次挥手"
+      ],
+      "kind": "kb-interview",
+      "aspect": "面试常问",
+      "relevant_chunks": [
+        [
+          "cs/network/tcp-handshake.md",
+          17,
+          0.5
+        ],
+        [
+          "cs/network/tcp-handshake.md",
+          113,
+          1.0
+        ],
+        [
+          "cs/network/tcp-handshake.md",
+          1826,
+          0.0
+        ],
+        [
+          "cs/network/tcp-handshake.md",
+          2341,
+          1.0
+        ]
+      ],
+      "gold_source": "topic-derived+llm-refined",
+      "_note": "[AI标注·待人工复核] gain 三档由裁判 LLM 标注（3 票多数，平票取低档）",
+      "hard_negatives": [
+        "cs/network/tcp-handshake.md#2"
+      ],
+      "hard_neg_source": "zero-gain-parent",
+      "hard_neg_slices": [
+        [
+          "cs/network/tcp-handshake.md",
+          1826,
+          0.0
+        ]
+      ]
+    },
+    {
+      "id": "iv-8",
+      "query": "close_wait 过多说明什么？",
+      "expected": [
+        "TCP 三次握手与四次挥手"
+      ],
+      "kind": "kb-interview",
+      "aspect": "面试常问",
+      "relevant_chunks": [
+        [
+          "cs/network/tcp-handshake.md",
+          17,
+          0.0
+        ],
+        [
+          "cs/network/tcp-handshake.md",
+          113,
+          0.5
+        ],
+        [
+          "cs/network/tcp-handshake.md",
+          1826,
+          0.0
+        ],
+        [
+          "cs/network/tcp-handshake.md",
+          2341,
+          1.0
+        ]
+      ],
+      "gold_source": "topic-derived+llm-refined",
+      "_note": "[AI标注·待人工复核] gain 三档由裁判 LLM 标注（3 票多数，平票取低档）",
+      "hard_negatives": [
+        "cs/network/tcp-handshake.md#0",
+        "cs/network/tcp-handshake.md#2"
+      ],
+      "hard_neg_source": "zero-gain-parent",
+      "hard_neg_slices": [
+        [
+          "cs/network/tcp-handshake.md",
+          17,
+          0.0
+        ],
+        [
+          "cs/network/tcp-handshake.md",
+          1826,
+          0.0
+        ]
+      ]
+    },
+    {
+      "id": "iv-9",
+      "query": "MSL 和 TTL 的区别？",
+      "expected": [
+        "TCP 三次握手与四次挥手"
+      ],
+      "kind": "kb-interview",
+      "aspect": "面试常问",
+      "relevant_chunks": [
+        [
+          "cs/network/tcp-handshake.md",
+          17,
+          0.0
+        ],
+        [
+          "cs/network/tcp-handshake.md",
+          113,
+          0.5
+        ],
+        [
+          "cs/network/tcp-handshake.md",
+          1826,
+          0.0
+        ],
+        [
+          "cs/network/tcp-handshake.md",
+          2341,
+          1.0
+        ]
+      ],
+      "gold_source": "topic-derived+llm-refined",
+      "_note": "[AI标注·待人工复核] gain 三档由裁判 LLM 标注（3 票多数，平票取低档）",
+      "hard_negatives": [
+        "cs/network/tcp-handshake.md#0",
+        "cs/network/tcp-handshake.md#2"
+      ],
+      "hard_neg_source": "zero-gain-parent",
+      "hard_neg_slices": [
+        [
+          "cs/network/tcp-handshake.md",
+          17,
+          0.0
+        ],
+        [
+          "cs/network/tcp-handshake.md",
+          1826,
+          0.0
+        ]
+      ]
+    },
+    {
+      "id": "ti-1",
+      "query": "OSI 七层模型和 TCP/IP 四层怎么对应？",
+      "expected": [
+        "TCP/IP 分层模型与 ARP / DNS"
+      ],
+      "kind": "in-kb",
+      "aspect": "对比",
+      "relevant_chunks": [
+        [
+          "cs/network/tcp-ip-model.md",
+          26,
+          0.5
+        ],
+        [
+          "cs/network/tcp-ip-model.md",
+          176,
+          0.5
+        ],
+        [
+          "cs/network/tcp-ip-model.md",
+          2172,
+          0.0
+        ],
+        [
+          "cs/network/tcp-ip-model.md",
+          2779,
+          0.0
+        ]
+      ],
+      "gold_source": "topic-derived+llm-refined",
+      "_note": "[AI标注·待人工复核] gain 三档由裁判 LLM 标注（3 票多数，平票取低档）",
+      "hard_negatives": [
+        "cs/network/tcp-ip-model.md#2",
+        "cs/network/tcp-ip-model.md#3"
+      ],
+      "hard_neg_source": "zero-gain-parent",
+      "hard_neg_slices": [
+        [
+          "cs/network/tcp-ip-model.md",
+          2172,
+          0.0
+        ],
+        [
+          "cs/network/tcp-ip-model.md",
+          2779,
+          0.0
+        ]
+      ]
+    },
+    {
+      "id": "ti-2",
+      "query": "ARP 是干什么的？",
+      "expected": [
+        "TCP/IP 分层模型与 ARP / DNS"
+      ],
+      "kind": "in-kb",
+      "aspect": "定义",
+      "relevant_chunks": [
+        [
+          "cs/network/tcp-ip-model.md",
+          26,
+          1.0
+        ],
+        [
+          "cs/network/tcp-ip-model.md",
+          176,
+          1.0
+        ],
+        [
+          "cs/network/tcp-ip-model.md",
+          2172,
+          0.0
+        ],
+        [
+          "cs/network/tcp-ip-model.md",
+          2779,
+          1.0
+        ]
+      ],
+      "gold_source": "topic-derived+llm-refined",
+      "_note": "[AI标注·待人工复核] gain 三档由裁判 LLM 标注（3 票多数，平票取低档）",
+      "hard_negatives": [
+        "cs/network/tcp-ip-model.md#2"
+      ],
+      "hard_neg_source": "zero-gain-parent",
+      "hard_neg_slices": [
+        [
+          "cs/network/tcp-ip-model.md",
+          2172,
+          0.0
+        ]
+      ]
+    },
+    {
+      "id": "ti-3",
+      "query": "DNS 解析的完整过程是怎样的？",
+      "expected": [
+        "TCP/IP 分层模型与 ARP / DNS",
+        "DNS 域名解析"
+      ],
+      "kind": "in-kb",
+      "aspect": "流程",
+      "relevant_chunks": [
+        [
+          "cs/network/dns.md",
+          12,
+          1.0
+        ],
+        [
+          "cs/network/dns.md",
+          122,
+          1.0
+        ],
+        [
+          "cs/network/dns.md",
+          629,
+          0.5
+        ],
+        [
+          "cs/network/dns.md",
+          963,
+          0.5
+        ],
+        [
+          "cs/network/tcp-ip-model.md",
+          26,
+          0.0
+        ],
+        [
+          "cs/network/tcp-ip-model.md",
+          176,
+          1.0
+        ],
+        [
+          "cs/network/tcp-ip-model.md",
+          2172,
+          0.0
+        ],
+        [
+          "cs/network/tcp-ip-model.md",
+          2779,
+          0.0
+        ]
+      ],
+      "gold_source": "topic-derived+llm-refined",
+      "_note": "[AI标注·待人工复核] gain 三档由裁判 LLM 标注（3 票多数，平票取低档）",
+      "hard_negatives": [
+        "cs/network/tcp-ip-model.md#0",
+        "cs/network/tcp-ip-model.md#2",
+        "cs/network/tcp-ip-model.md#3"
+      ],
+      "hard_neg_source": "zero-gain-parent",
+      "hard_neg_slices": [
+        [
+          "cs/network/tcp-ip-model.md",
+          26,
+          0.0
+        ],
+        [
+          "cs/network/tcp-ip-model.md",
+          2172,
+          0.0
+        ],
+        [
+          "cs/network/tcp-ip-model.md",
+          2779,
+          0.0
+        ]
+      ]
+    },
+    {
+      "id": "iv-10",
+      "query": "从浏览器输入 URL 到页面显示发生了什么？",
+      "expected": [
+        "TCP/IP 分层模型与 ARP / DNS",
+        "DNS 域名解析"
+      ],
+      "kind": "kb-interview",
+      "aspect": "面试常问",
+      "relevant_chunks": [
+        [
+          "cs/network/dns.md",
+          12,
+          0.5
+        ],
+        [
+          "cs/network/dns.md",
+          122,
+          0.5
+        ],
+        [
+          "cs/network/dns.md",
+          629,
+          0.5
+        ],
+        [
+          "cs/network/dns.md",
+          963,
+          1.0
+        ],
+        [
+          "cs/network/tcp-ip-model.md",
+          26,
+          0.5
+        ],
+        [
+          "cs/network/tcp-ip-model.md",
+          176,
+          0.5
+        ],
+        [
+          "cs/network/tcp-ip-model.md",
+          2172,
+          0.0
+        ],
+        [
+          "cs/network/tcp-ip-model.md",
+          2779,
+          1.0
+        ]
+      ],
+      "gold_source": "topic-derived+llm-refined",
+      "_note": "[AI标注·待人工复核] gain 三档由裁判 LLM 标注（3 票多数，平票取低档）",
+      "hard_negatives": [
+        "cs/network/tcp-ip-model.md#2"
+      ],
+      "hard_neg_source": "zero-gain-parent",
+      "hard_neg_slices": [
+        [
+          "cs/network/tcp-ip-model.md",
+          2172,
+          0.0
+        ]
+      ]
+    },
+    {
+      "id": "iv-11",
+      "query": "ARP 和 DNS 的区别？",
+      "expected": [
+        "TCP/IP 分层模型与 ARP / DNS"
+      ],
+      "kind": "kb-interview",
+      "aspect": "面试常问",
+      "relevant_chunks": [
+        [
+          "cs/network/tcp-ip-model.md",
+          26,
+          1.0
+        ],
+        [
+          "cs/network/tcp-ip-model.md",
+          176,
+          1.0
+        ],
+        [
+          "cs/network/tcp-ip-model.md",
+          2172,
+          0.0
+        ],
+        [
+          "cs/network/tcp-ip-model.md",
+          2779,
+          1.0
+        ]
+      ],
+      "gold_source": "topic-derived+llm-refined",
+      "_note": "[AI标注·待人工复核] gain 三档由裁判 LLM 标注（3 票多数，平票取低档）",
+      "hard_negatives": [
+        "cs/network/tcp-ip-model.md#2"
+      ],
+      "hard_neg_source": "zero-gain-parent",
+      "hard_neg_slices": [
+        [
+          "cs/network/tcp-ip-model.md",
+          2172,
+          0.0
+        ]
+      ]
+    },
+    {
+      "id": "iv-12",
+      "query": "为什么有了 IP 地址还要 MAC 地址？",
+      "expected": [
+        "TCP/IP 分层模型与 ARP / DNS"
+      ],
+      "kind": "kb-interview",
+      "aspect": "面试常问",
+      "relevant_chunks": [
+        [
+          "cs/network/tcp-ip-model.md",
+          26,
+          0.5
+        ],
+        [
+          "cs/network/tcp-ip-model.md",
+          176,
+          1.0
+        ],
+        [
+          "cs/network/tcp-ip-model.md",
+          2172,
+          0.0
+        ],
+        [
+          "cs/network/tcp-ip-model.md",
+          2779,
+          1.0
+        ]
+      ],
+      "gold_source": "topic-derived+llm-refined",
+      "_note": "[AI标注·待人工复核] gain 三档由裁判 LLM 标注（3 票多数，平票取低档）",
+      "hard_negatives": [
+        "cs/network/tcp-ip-model.md#2"
+      ],
+      "hard_neg_source": "zero-gain-parent",
+      "hard_neg_slices": [
+        [
+          "cs/network/tcp-ip-model.md",
+          2172,
+          0.0
+        ]
+      ]
+    },
+    {
+      "id": "iv-13",
+      "query": "交换机和路由器的区别？",
+      "expected": [
+        "TCP/IP 分层模型与 ARP / DNS"
+      ],
+      "kind": "kb-interview",
+      "aspect": "面试常问",
+      "relevant_chunks": [
+        [
+          "cs/network/tcp-ip-model.md",
+          26,
+          0.0
+        ],
+        [
+          "cs/network/tcp-ip-model.md",
+          176,
+          0.0
+        ],
+        [
+          "cs/network/tcp-ip-model.md",
+          2172,
+          0.0
+        ],
+        [
+          "cs/network/tcp-ip-model.md",
+          2779,
+          1.0
+        ]
+      ],
+      "gold_source": "topic-derived+llm-refined",
+      "_note": "[AI标注·待人工复核] gain 三档由裁判 LLM 标注（3 票多数，平票取低档）",
+      "hard_negatives": [
+        "cs/network/tcp-ip-model.md#0",
+        "cs/network/tcp-ip-model.md#1",
+        "cs/network/tcp-ip-model.md#2"
+      ],
+      "hard_neg_source": "zero-gain-parent",
+      "hard_neg_slices": [
+        [
+          "cs/network/tcp-ip-model.md",
+          26,
+          0.0
+        ],
+        [
+          "cs/network/tcp-ip-model.md",
+          176,
+          0.0
+        ],
+        [
+          "cs/network/tcp-ip-model.md",
+          2172,
+          0.0
+        ]
+      ]
+    },
+    {
+      "id": "iv-14",
+      "query": "ping 用的什么协议？",
+      "expected": [
+        "TCP/IP 分层模型与 ARP / DNS"
+      ],
+      "kind": "kb-interview",
+      "aspect": "面试常问",
+      "relevant_chunks": [
+        [
+          "cs/network/tcp-ip-model.md",
+          26,
+          0.0
+        ],
+        [
+          "cs/network/tcp-ip-model.md",
+          176,
+          0.5
+        ],
+        [
+          "cs/network/tcp-ip-model.md",
+          2172,
+          1.0
+        ],
+        [
+          "cs/network/tcp-ip-model.md",
+          2779,
+          1.0
+        ]
+      ],
+      "gold_source": "topic-derived+llm-refined",
+      "_note": "[AI标注·待人工复核] gain 三档由裁判 LLM 标注（3 票多数，平票取低档）",
+      "hard_negatives": [
+        "cs/network/tcp-ip-model.md#0"
+      ],
+      "hard_neg_source": "zero-gain-parent",
+      "hard_neg_slices": [
+        [
+          "cs/network/tcp-ip-model.md",
+          26,
+          0.0
+        ]
+      ]
+    },
+    {
+      "id": "tu-1",
+      "query": "TCP 和 UDP 该怎么选？",
+      "expected": [
+        "tcp 与 udp"
+      ],
+      "kind": "in-kb",
+      "aspect": "场景",
+      "relevant_chunks": [
+        [
+          "cs/network/tcp-vs-udp.md",
+          13,
+          1.0
+        ],
+        [
+          "cs/network/tcp-vs-udp.md",
+          111,
+          1.0
+        ],
+        [
+          "cs/network/tcp-vs-udp.md",
+          712,
+          0.5
+        ],
+        [
+          "cs/network/tcp-vs-udp.md",
+          1905,
+          0.5
+        ]
+      ],
+      "gold_source": "topic-derived+llm-refined",
+      "_note": "[AI标注·待人工复核] gain 三档由裁判 LLM 标注（3 票多数，平票取低档）"
+    },
+    {
+      "id": "tu-2",
+      "query": "TCP 的拥塞控制分为哪几个阶段？",
+      "expected": [
+        "tcp 与 udp"
+      ],
+      "kind": "in-kb",
+      "aspect": "列举",
+      "relevant_chunks": [
+        [
+          "cs/network/tcp-vs-udp.md",
+          13,
+          0.5
+        ],
+        [
+          "cs/network/tcp-vs-udp.md",
+          111,
+          1.0
+        ],
+        [
+          "cs/network/tcp-vs-udp.md",
+          712,
+          1.0
+        ],
+        [
+          "cs/network/tcp-vs-udp.md",
+          1905,
+          0.0
+        ]
+      ],
+      "gold_source": "topic-derived+llm-refined",
+      "_note": "[AI标注·待人工复核] gain 三档由裁判 LLM 标注（3 票多数，平票取低档）",
+      "hard_negatives": [
+        "cs/network/tcp-vs-udp.md#3"
+      ],
+      "hard_neg_source": "zero-gain-parent",
+      "hard_neg_slices": [
+        [
+          "cs/network/tcp-vs-udp.md",
+          1905,
+          0.0
+        ]
+      ]
+    },
+    {
+      "id": "tu-3",
+      "query": "TCP 粘包是怎么产生的？",
+      "expected": [
+        "tcp 与 udp"
+      ],
+      "kind": "in-kb",
+      "aspect": "原理",
+      "relevant_chunks": [
+        [
+          "cs/network/tcp-vs-udp.md",
+          13,
+          0.0
+        ],
+        [
+          "cs/network/tcp-vs-udp.md",
+          111,
+          0.5
+        ],
+        [
+          "cs/network/tcp-vs-udp.md",
+          712,
+          1.0
+        ],
+        [
+          "cs/network/tcp-vs-udp.md",
+          1905,
+          0.0
+        ]
+      ],
+      "gold_source": "topic-derived+llm-refined",
+      "_note": "[AI标注·待人工复核] gain 三档由裁判 LLM 标注（3 票多数，平票取低档）",
+      "hard_negatives": [
+        "cs/network/tcp-vs-udp.md#0",
+        "cs/network/tcp-vs-udp.md#3"
+      ],
+      "hard_neg_source": "zero-gain-parent",
+      "hard_neg_slices": [
+        [
+          "cs/network/tcp-vs-udp.md",
+          13,
+          0.0
+        ],
+        [
+          "cs/network/tcp-vs-udp.md",
+          1905,
+          0.0
+        ]
+      ]
+    },
+    {
+      "id": "fl-7",
+      "query": "这两个协议该怎么选？",
+      "topic": "TCP 与 UDP",
+      "expected": [
+        "tcp 与 udp"
+      ],
+      "kind": "follow-up",
+      "aspect": "回归追问",
+      "relevant_chunks": [
+        [
+          "cs/network/tcp-vs-udp.md",
+          13,
+          1.0
+        ],
+        [
+          "cs/network/tcp-vs-udp.md",
+          111,
+          1.0
+        ],
+        [
+          "cs/network/tcp-vs-udp.md",
+          712,
+          0.5
+        ],
+        [
+          "cs/network/tcp-vs-udp.md",
+          1905,
+          0.5
+        ]
+      ],
+      "gold_source": "topic-derived+llm-refined",
+      "_note": "[AI标注·待人工复核] gain 三档由裁判 LLM 标注（3 票多数，平票取低档）"
+    },
+    {
+      "id": "oos-1",
+      "query": "Redis 持久化有哪几种方式？",
+      "expected": [],
+      "kind": "oos",
+      "aspect": "库外"
+    },
+    {
+      "id": "oos-2",
+      "query": "MySQL 索引为什么用 B+ 树？",
+      "expected": [],
+      "kind": "oos",
+      "aspect": "库外"
+    },
+    {
+      "id": "oos-3",
+      "query": "Java 的 HashMap 线程安全吗？",
+      "expected": [],
+      "kind": "oos",
+      "aspect": "库外"
+    },
+    {
+      "id": "oos-4",
+      "query": "什么是 CAP 定理？",
+      "expected": [],
+      "kind": "oos",
+      "aspect": "库外"
+    },
+    {
+      "id": "iv-15",
+      "query": "TCP 比 UDP 慢在哪？",
+      "expected": [
+        "TCP 与 UDP"
+      ],
+      "kind": "kb-interview",
+      "aspect": "面试常问",
+      "relevant_chunks": [
+        [
+          "cs/network/tcp-vs-udp.md",
+          13,
+          1.0
+        ],
+        [
+          "cs/network/tcp-vs-udp.md",
+          111,
+          1.0
+        ],
+        [
+          "cs/network/tcp-vs-udp.md",
+          712,
+          0.5
+        ],
+        [
+          "cs/network/tcp-vs-udp.md",
+          1905,
+          1.0
+        ]
+      ],
+      "gold_source": "topic-derived+llm-refined",
+      "_note": "[AI标注·待人工复核] gain 三档由裁判 LLM 标注（3 票多数，平票取低档）"
+    },
+    {
+      "id": "iv-16",
+      "query": "为什么 DNS 用 UDP？",
+      "expected": [
+        "TCP 与 UDP"
+      ],
+      "kind": "kb-interview",
+      "aspect": "面试常问",
+      "relevant_chunks": [
+        [
+          "cs/network/tcp-vs-udp.md",
+          13,
+          0.5
+        ],
+        [
+          "cs/network/tcp-vs-udp.md",
+          111,
+          0.5
+        ],
+        [
+          "cs/network/tcp-vs-udp.md",
+          712,
+          0.0
+        ],
+        [
+          "cs/network/tcp-vs-udp.md",
+          1905,
+          1.0
+        ]
+      ],
+      "gold_source": "topic-derived+llm-refined",
+      "_note": "[AI标注·待人工复核] gain 三档由裁判 LLM 标注（3 票多数，平票取低档）",
+      "hard_negatives": [
+        "cs/network/tcp-vs-udp.md#2"
+      ],
+      "hard_neg_source": "zero-gain-parent",
+      "hard_neg_slices": [
+        [
+          "cs/network/tcp-vs-udp.md",
+          712,
+          0.0
+        ]
+      ]
+    },
+    {
+      "id": "iv-17",
+      "query": "UDP 怎么实现可靠传输？",
+      "expected": [
+        "TCP 与 UDP"
+      ],
+      "kind": "kb-interview",
+      "aspect": "面试常问",
+      "relevant_chunks": [
+        [
+          "cs/network/tcp-vs-udp.md",
+          13,
+          0.5
+        ],
+        [
+          "cs/network/tcp-vs-udp.md",
+          111,
+          1.0
+        ],
+        [
+          "cs/network/tcp-vs-udp.md",
+          712,
+          0.5
+        ],
+        [
+          "cs/network/tcp-vs-udp.md",
+          1905,
+          1.0
+        ]
+      ],
+      "gold_source": "topic-derived+llm-refined",
+      "_note": "[AI标注·待人工复核] gain 三档由裁判 LLM 标注（3 票多数，平票取低档）"
+    },
+    {
+      "id": "iv-18",
+      "query": "MSS 和 MTU 的关系？",
+      "expected": [
+        "TCP 与 UDP"
+      ],
+      "kind": "kb-interview",
+      "aspect": "面试常问",
+      "relevant_chunks": [
+        [
+          "cs/network/tcp-vs-udp.md",
+          13,
+          0.0
+        ],
+        [
+          "cs/network/tcp-vs-udp.md",
+          111,
+          0.0
+        ],
+        [
+          "cs/network/tcp-vs-udp.md",
+          712,
+          0.0
+        ],
+        [
+          "cs/network/tcp-vs-udp.md",
+          1905,
+          1.0
+        ]
+      ],
+      "gold_source": "topic-derived+llm-refined",
+      "_note": "[AI标注·待人工复核] gain 三档由裁判 LLM 标注（3 票多数，平票取低档）",
+      "hard_negatives": [
+        "cs/network/tcp-vs-udp.md#0",
+        "cs/network/tcp-vs-udp.md#1",
+        "cs/network/tcp-vs-udp.md#2"
+      ],
+      "hard_neg_source": "zero-gain-parent",
+      "hard_neg_slices": [
+        [
+          "cs/network/tcp-vs-udp.md",
+          13,
+          0.0
+        ],
+        [
+          "cs/network/tcp-vs-udp.md",
+          111,
+          0.0
+        ],
+        [
+          "cs/network/tcp-vs-udp.md",
+          712,
+          0.0
+        ]
+      ]
+    },
+    {
+      "id": "iv-19",
+      "query": "TCP 的 keepalive 和 HTTP 的 Keep-Alive 是一回事吗？",
+      "expected": [
+        "TCP 与 UDP"
+      ],
+      "kind": "kb-interview",
+      "aspect": "面试常问",
+      "relevant_chunks": [
+        [
+          "cs/network/tcp-vs-udp.md",
+          13,
+          0.0
+        ],
+        [
+          "cs/network/tcp-vs-udp.md",
+          111,
+          0.0
+        ],
+        [
+          "cs/network/tcp-vs-udp.md",
+          712,
+          0.0
+        ],
+        [
+          "cs/network/tcp-vs-udp.md",
+          1905,
+          1.0
+        ]
+      ],
+      "gold_source": "topic-derived+llm-refined",
+      "_note": "[AI标注·待人工复核] gain 三档由裁判 LLM 标注（3 票多数，平票取低档）",
+      "hard_negatives": [
+        "cs/network/tcp-vs-udp.md#0",
+        "cs/network/tcp-vs-udp.md#1",
+        "cs/network/tcp-vs-udp.md#2"
+      ],
+      "hard_neg_source": "zero-gain-parent",
+      "hard_neg_slices": [
+        [
+          "cs/network/tcp-vs-udp.md",
+          13,
+          0.0
+        ],
+        [
+          "cs/network/tcp-vs-udp.md",
+          111,
+          0.0
+        ],
+        [
+          "cs/network/tcp-vs-udp.md",
+          712,
+          0.0
+        ]
+      ]
+    },
+    {
+      "id": "csc-1",
+      "query": "HTTPS 和 HTTP 有什么不同？",
+      "expected": [
+        "HTTPS 与 TLS 握手"
+      ],
+      "kind": "cascade",
+      "aspect": "级联",
+      "assumed_wrong_topic": "TCP 三次握手与四次挥手",
+      "relevant_chunks": [
+        [
+          "cs/network/http-https.md",
+          18,
+          1.0
+        ],
+        [
+          "cs/network/http-https.md",
+          121,
+          1.0
+        ],
+        [
+          "cs/network/http-https.md",
+          1893,
+          0.5
+        ],
+        [
+          "cs/network/http-https.md",
+          2536,
+          0.5
+        ],
+        [
+          "cs/network/http-https.md",
+          3469,
+          0.5
+        ]
+      ],
+      "gold_source": "topic-derived+llm-refined",
+      "_note": "[AI标注·待人工复核] gain 三档由裁判 LLM 标注（3 票多数，平票取低档）"
+    },
+    {
+      "id": "csc-2",
+      "query": "TCP 和 UDP 该怎么选？",
+      "expected": [
+        "TCP 与 UDP"
+      ],
+      "kind": "cascade",
+      "aspect": "级联",
+      "assumed_wrong_topic": "TCP/IP 分层模型与 ARP / DNS",
+      "relevant_chunks": [
+        [
+          "cs/network/tcp-vs-udp.md",
+          13,
+          1.0
+        ],
+        [
+          "cs/network/tcp-vs-udp.md",
+          111,
+          1.0
+        ],
+        [
+          "cs/network/tcp-vs-udp.md",
+          712,
+          0.5
+        ],
+        [
+          "cs/network/tcp-vs-udp.md",
+          1905,
+          0.5
+        ]
+      ],
+      "gold_source": "topic-derived+llm-refined",
+      "_note": "[AI标注·待人工复核] gain 三档由裁判 LLM 标注（3 票多数，平票取低档）"
+    },
+    {
+      "id": "csc-3",
+      "query": "为什么线程切换比进程切换开销小？",
+      "expected": [
+        "进程与线程"
+      ],
+      "kind": "cascade",
+      "aspect": "级联",
+      "assumed_wrong_topic": "进程调度算法",
+      "relevant_chunks": [
+        [
+          "cs/os/process-thread.md",
+          9,
+          0.5
+        ],
+        [
+          "cs/os/process-thread.md",
+          101,
+          1.0
+        ],
+        [
+          "cs/os/process-thread.md",
+          687,
+          1.0
+        ],
+        [
+          "cs/os/process-thread.md",
+          1502,
+          0.0
+        ]
+      ],
+      "gold_source": "topic-derived+llm-refined",
+      "_note": "[AI标注·待人工复核] gain 三档由裁判 LLM 标注（3 票多数，平票取低档）",
+      "hard_negatives": [
+        "cs/os/process-thread.md#3"
+      ],
+      "hard_neg_source": "zero-gain-parent",
+      "hard_neg_slices": [
+        [
+          "cs/os/process-thread.md",
+          1502,
+          0.0
+        ]
+      ]
+    },
+    {
+      "id": "csc-4",
+      "query": "时间片轮转和优先级调度该怎么选？",
+      "expected": [
+        "进程调度算法"
+      ],
+      "kind": "cascade",
+      "aspect": "级联",
+      "assumed_wrong_topic": "进程与线程",
+      "relevant_chunks": [
+        [
+          "cs/os/scheduling.md",
+          10,
+          1.0
+        ],
+        [
+          "cs/os/scheduling.md",
+          100,
+          1.0
+        ],
+        [
+          "cs/os/scheduling.md",
+          1069,
+          0.5
+        ],
+        [
+          "cs/os/scheduling.md",
+          1588,
+          0.5
+        ]
+      ],
+      "gold_source": "topic-derived+llm-refined",
+      "_note": "[AI标注·待人工复核] gain 三档由裁判 LLM 标注（3 票多数，平票取低档）"
+    },
+    {
+      "id": "csc-5",
+      "query": "页面置换 LRU 是怎么工作的？",
+      "expected": [
+        "虚拟内存与页面置换"
+      ],
+      "kind": "cascade",
+      "aspect": "级联",
+      "assumed_wrong_topic": "死锁",
+      "relevant_chunks": [
+        [
+          "cs/os/memory-management.md",
+          13,
+          0.5
+        ],
+        [
+          "cs/os/memory-management.md",
+          125,
+          1.0
+        ],
+        [
+          "cs/os/memory-management.md",
+          1152,
+          0.0
+        ],
+        [
+          "cs/os/memory-management.md",
+          1614,
+          1.0
+        ]
+      ],
+      "gold_source": "topic-derived+llm-refined",
+      "_note": "[AI标注·待人工复核] gain 三档由裁判 LLM 标注（3 票多数，平票取低档）",
+      "hard_negatives": [
+        "cs/os/memory-management.md#2"
+      ],
+      "hard_neg_source": "zero-gain-parent",
+      "hard_neg_slices": [
+        [
+          "cs/os/memory-management.md",
+          1152,
+          0.0
+        ]
+      ]
+    },
+    {
+      "id": "csc-6",
+      "query": "死锁的预防和避免有什么区别？",
+      "expected": [
+        "死锁"
+      ],
+      "kind": "cascade",
+      "aspect": "级联",
+      "assumed_wrong_topic": "虚拟内存与页面置换",
+      "relevant_chunks": [
+        [
+          "cs/os/deadlock.md",
+          6,
+          0.5
+        ],
+        [
+          "cs/os/deadlock.md",
+          102,
+          1.0
+        ],
+        [
+          "cs/os/deadlock.md",
+          922,
+          0.5
+        ],
+        [
+          "cs/os/deadlock.md",
+          1525,
+          0.0
+        ]
+      ],
+      "gold_source": "topic-derived+llm-refined",
+      "_note": "[AI标注·待人工复核] gain 三档由裁判 LLM 标注（3 票多数，平票取低档）",
+      "hard_negatives": [
+        "cs/os/deadlock.md#3"
+      ],
+      "hard_neg_source": "zero-gain-parent",
+      "hard_neg_slices": [
+        [
+          "cs/os/deadlock.md",
+          1525,
+          0.0
+        ]
+      ]
+    },
+    {
+      "id": "csc-7",
+      "query": "TCP 四次挥手为什么要等 TIME_WAIT？",
+      "expected": [
+        "TCP 三次握手与四次挥手"
+      ],
+      "kind": "cascade",
+      "aspect": "级联",
+      "assumed_wrong_topic": "HTTPS 与 TLS 握手",
+      "relevant_chunks": [
+        [
+          "cs/network/tcp-handshake.md",
+          17,
+          0.0
+        ],
+        [
+          "cs/network/tcp-handshake.md",
+          113,
+          1.0
+        ],
+        [
+          "cs/network/tcp-handshake.md",
+          1826,
+          0.0
+        ],
+        [
+          "cs/network/tcp-handshake.md",
+          2341,
+          0.5
+        ]
+      ],
+      "gold_source": "topic-derived+llm-refined",
+      "_note": "[AI标注·待人工复核] gain 三档由裁判 LLM 标注（3 票多数，平票取低档）",
+      "hard_negatives": [
+        "cs/network/tcp-handshake.md#0",
+        "cs/network/tcp-handshake.md#2"
+      ],
+      "hard_neg_source": "zero-gain-parent",
+      "hard_neg_slices": [
+        [
+          "cs/network/tcp-handshake.md",
+          17,
+          0.0
+        ],
+        [
+          "cs/network/tcp-handshake.md",
+          1826,
+          0.0
+        ]
+      ]
+    },
+    {
+      "id": "csc-8",
+      "query": "为什么 DNS 用 UDP？",
+      "expected": [
+        "TCP/IP 分层模型与 ARP / DNS"
+      ],
+      "kind": "cascade",
+      "aspect": "级联",
+      "assumed_wrong_topic": "TCP 与 UDP",
+      "relevant_chunks": [
+        [
+          "cs/network/tcp-ip-model.md",
+          26,
+          0.0
+        ],
+        [
+          "cs/network/tcp-ip-model.md",
+          176,
+          1.0
+        ],
+        [
+          "cs/network/tcp-ip-model.md",
+          2172,
+          0.0
+        ],
+        [
+          "cs/network/tcp-ip-model.md",
+          2779,
+          0.0
+        ]
+      ],
+      "gold_source": "topic-derived+llm-refined",
+      "_note": "[AI标注·待人工复核] gain 三档由裁判 LLM 标注（3 票多数，平票取低档）",
+      "hard_negatives": [
+        "cs/network/tcp-ip-model.md#0",
+        "cs/network/tcp-ip-model.md#2",
+        "cs/network/tcp-ip-model.md#3"
+      ],
+      "hard_neg_source": "zero-gain-parent",
+      "hard_neg_slices": [
+        [
+          "cs/network/tcp-ip-model.md",
+          26,
+          0.0
+        ],
+        [
+          "cs/network/tcp-ip-model.md",
+          2172,
+          0.0
+        ],
+        [
+          "cs/network/tcp-ip-model.md",
+          2779,
+          0.0
+        ]
+      ]
+    }
+  ],
+  "gold_granularity": "parent",
+  "gold_index_fingerprint": "sha256:2db8513a61f312a1a43eeaa9564abd5c",
+  "hard_neg_stats": {
+    "cases_with_neg": 58,
+    "cases_without_neg": 25,
+    "mean_negs_per_case": 1.35,
+    "gain_hist": {
+      "0.0": 112,
+      "0.5": 123,
+      "1.0": 117
+    },
+    "parents_total": 81,
+    "sources_total": 20,
+    "note": "hard_negatives 是 parent_id；判据=整节被标注切片全部 gain<=0"
+  }
+}

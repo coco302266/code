@@ -1,0 +1,21 @@
+{
+  "timestamp": "2026-10-24T22:10:27",
+  "events_file": "D:\\code\\AI-Classroom-M4-20261022\\AI-Classroom\\Tutor-Chatbot-main\\backend\\logs\\kb_gap_events.jsonl",
+  "total_events": 2,
+  "distinct_topics": 1,
+  "topics": [
+    {
+      "topic": "redis 持久化",
+      "count": 2,
+      "sample_queries": [
+        "Redis 持久化有哪几种方式？",
+        "Redis 持久化有哪几种方式？"
+      ],
+      "first_date": "2026-10-24",
+      "last_date": "2026-10-24"
+    }
+  ],
+  "by_date": {
+    "2026-10-24": 2
+  }
+}

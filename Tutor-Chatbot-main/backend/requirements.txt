@@ -1,0 +1,34 @@
+fastapi
+uvicorn
+langchain
+langchain-ollama
+langchain-core
+langchain-groq
+langchain-google-genai
+langchain-text-splitters
+langchain-community
+langchain-chroma
+langchain-openai
+chromadb
+langgraph
+python-dotenv
+pydantic
+slowapi
+httpx
+pypdf
+python-multipart
+fastembed
+
+# 检索增强（XB-9）：BM25 混合召回 + 中文分词；重排复用 fastembed 自带 TextCrossEncoder
+rank_bm25
+jieba
+
+# T3 MySQL 持久化
+sqlalchemy
+pymysql
+cryptography
+
+# T7 教师备课资源（真 .pptx 渲染）
+python-pptx==1.0.2
+lxml==6.1.3
+XlsxWriter==3.2.9

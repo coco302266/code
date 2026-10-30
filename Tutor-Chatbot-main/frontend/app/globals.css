@@ -1,0 +1,83 @@
+@import "tailwindcss";
+
+/* 设计令牌：浅色、克制的学习类产品风格（参考 QQ 群聊的信息密度，去掉花哨动效）。 */
+@theme {
+  --color-canvas: #f4f5f7;
+  --color-panel: #ffffff;
+  --color-soft: #fafbfc;
+  --color-line: #e3e5e9;
+  --color-ink: #1f2328;
+  --color-sub: #656d76;
+  --color-hint: #8b939c;
+  --color-brand: #2f6feb;
+  --color-brand-soft: #eaf0fd;
+  --color-teacher: #b45309;
+  --color-teacher-soft: #fdf3e3;
+  --color-ai: #0f6e56;
+  --color-ai-soft: #e6f5f0;
+  --color-danger: #b42318;
+  --color-danger-soft: #fdeceb;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  background: var(--color-canvas);
+  color: var(--color-ink);
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft YaHei",
+    "PingFang SC", "Hiragino Sans GB", "Noto Sans SC", sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* 桌面客户端里禁止误拖动选中整页，输入区单独放开 */
+body {
+  user-select: none;
+}
+input,
+textarea,
+[data-selectable] {
+  user-select: text;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-thumb {
+  background: #cfd3d8;
+  border: 3px solid transparent;
+  border-radius: 8px;
+  background-clip: content-box;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #b3b9c0;
+  background-clip: content-box;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.rise {
+  animation: rise 0.18s ease-out both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rise {
+    animation: none;
+  }
+}

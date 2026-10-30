@@ -1,0 +1,59 @@
+{
+  "k": 3,
+  "paired_cases": 78,
+  "points": 339,
+  "changed_points": 89,
+  "shift_directions": {
+    "0.5->0.0": 62,
+    "1.0->0.0": 5,
+    "1.0->0.5": 11,
+    "0.0->0.5": 9,
+    "0.5->1.0": 2
+  },
+  "old": {
+    "cases": 78,
+    "annotated_cases": 78,
+    "fallback_cases": 0,
+    "recall_at_k": 0.8955,
+    "precision_at_k": 0.4765,
+    "noise_rate": 0.2478,
+    "mrr": 0.8803,
+    "ndcg_at_k": 0.7559,
+    "ndcg_at_k_fallback": null,
+    "ndcg_clamped_cases": 13
+  },
+  "qwen": {
+    "cases": 78,
+    "annotated_cases": 78,
+    "fallback_cases": 0,
+    "recall_at_k": 1.0613,
+    "precision_at_k": 0.4658,
+    "noise_rate": 0.2692,
+    "mrr": 0.8932,
+    "ndcg_at_k": 0.8047,
+    "ndcg_at_k_fallback": null,
+    "ndcg_clamped_cases": 27
+  },
+  "delta": {
+    "recall": {
+      "mean_pp": 16.59,
+      "sd_pp": 32.99,
+      "changed_cases": 44
+    },
+    "precision": {
+      "mean_pp": -1.07,
+      "sd_pp": 8.99,
+      "changed_cases": 15
+    },
+    "ndcg": {
+      "mean_pp": 4.89,
+      "sd_pp": 15.61,
+      "changed_cases": 41
+    },
+    "mrr": {
+      "mean_pp": 1.28,
+      "sd_pp": 11.25,
+      "changed_cases": 4
+    }
+  }
+}

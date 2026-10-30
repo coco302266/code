@@ -1,0 +1,60 @@
+{
+  "tag": "BASE278",
+  "ts": "2026-10-28T22:50:37",
+  "config": {
+    "model": "local:.model_cache_local\\bge-reranker-base",
+    "enable_rerank": true,
+    "rerank_text": "child_title",
+    "head_chars": 480,
+    "pool_k": 0,
+    "overfetch": 1,
+    "batch": 1,
+    "parent_child": true,
+    "inject_k": 3,
+    "relevance_floor": -2.0,
+    "per_doc_floor": -8.0
+  },
+  "cases": 71,
+  "recall_at_k": 0.7782,
+  "precision_at_k": 0.5493,
+  "noise_rate": 0.3169,
+  "hard_neg_rate": 0.1218,
+  "hard_neg_cases": 53,
+  "mrr": 0.9648,
+  "ndcg_at_k": 0.8532,
+  "top1": 68,
+  "top3": 70,
+  "total": 71,
+  "mean_parent_pool": 4.2113,
+  "mean_injected": 2.9577,
+  "rerank_p95_ms": 907.0,
+  "rerank_mean_ms": 758.4085,
+  "avg_secs": 0.8055,
+  "l1_p95_secs": 0.9953,
+  "degraded_cases": 0,
+  "degraded_rate": 0.0,
+  "rerank_fail_cases": 0,
+  "delta_vs": {
+    "B0": {
+      "recall_at_k": -0.0127,
+      "precision_at_k": -0.0141,
+      "mrr": 0.0,
+      "ndcg_at_k": 0.0371
+    },
+    "B1": {
+      "recall_at_k": -0.0127,
+      "precision_at_k": -0.0141,
+      "mrr": 0.0,
+      "ndcg_at_k": -0.0168,
+      "rerank_p95_ms": -175.0
+    }
+  },
+  "gates": {
+    "beats_b0_ndcg": true,
+    "recall_ge_b1_plus_1_5pp": false,
+    "latency_within_safe_line": true,
+    "l1_p95_within_3s": true,
+    "degraded_rate_ok": true,
+    "passed": false
+  }
+}

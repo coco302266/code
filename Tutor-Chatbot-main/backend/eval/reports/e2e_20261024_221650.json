@@ -1,0 +1,119 @@
+{
+  "timestamp": "2026-10-24T22:16:50",
+  "index_fingerprint": "sha256:36b5581ee4fd322c31d65c2d2d4106ec",
+  "cases_file": "D:\\code\\AI-Classroom-M4-20261022\\AI-Classroom\\Tutor-Chatbot-main\\backend\\rag_eval_cases.json",
+  "layers": {
+    "L1": null,
+    "L2": null,
+    "L3": {
+      "aggregate": {
+        "cases": 6,
+        "contradiction_rate": 0.0,
+        "factual_judged": 6,
+        "hallucination_rate": 0.0,
+        "hallucination_judged": 6,
+        "material_utilization": 0.5,
+        "utilization_judged": 2,
+        "empty_source_declaration": 0.0,
+        "empty_source_cases": 4
+      },
+      "per_case": [
+        {
+          "query": "Redis 持久化有哪几种方式？",
+          "topic": "",
+          "factual_consistency": "无关",
+          "consistency_votes": 3,
+          "hallucination_ratio": 0.0,
+          "hallucination_votes": 3,
+          "material_utilization": null,
+          "used_indices": [],
+          "utilization_votes": 0,
+          "empty_source_declared": false,
+          "kind": "oos",
+          "retrieved_chunks": 0
+        },
+        {
+          "query": "MySQL 索引为什么用 B+ 树？",
+          "topic": "",
+          "factual_consistency": "无关",
+          "consistency_votes": 3,
+          "hallucination_ratio": 0.0,
+          "hallucination_votes": 3,
+          "material_utilization": null,
+          "used_indices": [],
+          "utilization_votes": 0,
+          "empty_source_declared": false,
+          "kind": "oos",
+          "retrieved_chunks": 0
+        },
+        {
+          "query": "Java 的 HashMap 线程安全吗？",
+          "topic": "",
+          "factual_consistency": "无关",
+          "consistency_votes": 3,
+          "hallucination_ratio": 0.0,
+          "hallucination_votes": 3,
+          "material_utilization": null,
+          "used_indices": [],
+          "utilization_votes": 0,
+          "empty_source_declared": false,
+          "kind": "oos",
+          "retrieved_chunks": 0
+        },
+        {
+          "query": "什么是 CAP 定理？",
+          "topic": "",
+          "factual_consistency": "无关",
+          "consistency_votes": 3,
+          "hallucination_ratio": 0.0,
+          "hallucination_votes": 3,
+          "material_utilization": null,
+          "used_indices": [],
+          "utilization_votes": 0,
+          "empty_source_declared": false,
+          "kind": "oos",
+          "retrieved_chunks": 0
+        },
+        {
+          "query": "页面置换 LRU 是怎么工作的？",
+          "topic": "",
+          "factual_consistency": "一致",
+          "consistency_votes": 3,
+          "hallucination_ratio": 0.0,
+          "hallucination_votes": 3,
+          "material_utilization": 0.5,
+          "used_indices": [
+            1,
+            2
+          ],
+          "utilization_votes": 3,
+          "empty_source_declared": null,
+          "kind": "cascade",
+          "retrieved_chunks": 4
+        },
+        {
+          "query": "SJF 为什么平均周转时间最优？",
+          "topic": "",
+          "factual_consistency": "一致",
+          "consistency_votes": 3,
+          "hallucination_ratio": 0.0,
+          "hallucination_votes": 3,
+          "material_utilization": 0.5,
+          "used_indices": [
+            1,
+            2
+          ],
+          "utilization_votes": 3,
+          "empty_source_declared": null,
+          "kind": "kb-interview",
+          "retrieved_chunks": 4
+        }
+      ]
+    },
+    "L4": null
+  },
+  "gate": {
+    "passed": true,
+    "failures": []
+  }
+}

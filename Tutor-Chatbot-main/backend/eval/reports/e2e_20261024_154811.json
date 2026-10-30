@@ -1,0 +1,188 @@
+{
+  "timestamp": "2026-10-24T15:48:11",
+  "index_fingerprint": "sha256:36b5581ee4fd322c31d65c2d2d4106ec",
+  "cases_file": "D:\\code\\AI-Classroom-M4-20261022\\AI-Classroom\\Tutor-Chatbot-main\\backend\\rag_eval_cases.json",
+  "layers": {
+    "L1": null,
+    "L2": null,
+    "L3": {
+      "aggregate": {
+        "cases": 10,
+        "contradiction_rate": 0.0,
+        "factual_judged": 10,
+        "hallucination_rate": 0.09,
+        "hallucination_judged": 10,
+        "material_utilization": 0.3,
+        "utilization_judged": 10,
+        "empty_source_declaration": null,
+        "empty_source_cases": 0
+      },
+      "per_case": [
+        {
+          "query": "Redis 持久化有哪几种方式？",
+          "topic": "",
+          "factual_consistency": "无关",
+          "consistency_votes": 3,
+          "hallucination_ratio": 0.9,
+          "hallucination_votes": 3,
+          "material_utilization": 0.0,
+          "used_indices": [],
+          "utilization_votes": 3,
+          "empty_source_declared": null,
+          "kind": "oos",
+          "retrieved_chunks": 4
+        },
+        {
+          "query": "MySQL 索引为什么用 B+ 树？",
+          "topic": "",
+          "factual_consistency": "无关",
+          "consistency_votes": 3,
+          "hallucination_ratio": 0.0,
+          "hallucination_votes": 3,
+          "material_utilization": 0.0,
+          "used_indices": [],
+          "utilization_votes": 3,
+          "empty_source_declared": null,
+          "kind": "oos",
+          "retrieved_chunks": 4
+        },
+        {
+          "query": "Java 的 HashMap 线程安全吗？",
+          "topic": "",
+          "factual_consistency": "一致",
+          "consistency_votes": 3,
+          "hallucination_ratio": 0.0,
+          "hallucination_votes": 3,
+          "material_utilization": 0.0,
+          "used_indices": [],
+          "utilization_votes": 3,
+          "empty_source_declared": null,
+          "kind": "oos",
+          "retrieved_chunks": 4
+        },
+        {
+          "query": "什么是 CAP 定理？",
+          "topic": "",
+          "factual_consistency": "无关",
+          "consistency_votes": 3,
+          "hallucination_ratio": 0.0,
+          "hallucination_votes": 3,
+          "material_utilization": 0.0,
+          "used_indices": [],
+          "utilization_votes": 3,
+          "empty_source_declared": null,
+          "kind": "oos",
+          "retrieved_chunks": 4
+        },
+        {
+          "query": "SJF 为什么平均周转时间最优？",
+          "topic": "",
+          "factual_consistency": "一致",
+          "consistency_votes": 3,
+          "hallucination_ratio": 0.0,
+          "hallucination_votes": 3,
+          "material_utilization": 0.75,
+          "used_indices": [
+            1,
+            2,
+            4
+          ],
+          "utilization_votes": 3,
+          "empty_source_declared": null,
+          "kind": "kb-interview",
+          "retrieved_chunks": 4
+        },
+        {
+          "query": "死锁和死循环是一回事吗？",
+          "topic": "",
+          "factual_consistency": "一致",
+          "consistency_votes": 3,
+          "hallucination_ratio": 0.0,
+          "hallucination_votes": 3,
+          "material_utilization": 0.5,
+          "used_indices": [
+            1,
+            2
+          ],
+          "utilization_votes": 3,
+          "empty_source_declared": null,
+          "kind": "kb-interview",
+          "retrieved_chunks": 4
+        },
+        {
+          "query": "性能开销体现在哪？",
+          "topic": "HTTPS 与 TLS 握手",
+          "factual_consistency": "一致",
+          "consistency_votes": 3,
+          "hallucination_ratio": 0.0,
+          "hallucination_votes": 3,
+          "material_utilization": 0.75,
+          "used_indices": [
+            1,
+            3,
+            4
+          ],
+          "utilization_votes": 3,
+          "empty_source_declared": null,
+          "kind": "follow-up",
+          "retrieved_chunks": 4
+        },
+        {
+          "query": "银行家算法是做什么的？",
+          "topic": "",
+          "factual_consistency": "一致",
+          "consistency_votes": 3,
+          "hallucination_ratio": 0.0,
+          "hallucination_votes": 3,
+          "material_utilization": 0.25,
+          "used_indices": [
+            1
+          ],
+          "utilization_votes": 3,
+          "empty_source_declared": null,
+          "kind": "in-kb",
+          "retrieved_chunks": 4
+        },
+        {
+          "query": "RR 的时间片设为多少合适？",
+          "topic": "",
+          "factual_consistency": "一致",
+          "consistency_votes": 3,
+          "hallucination_ratio": 0.0,
+          "hallucination_votes": 3,
+          "material_utilization": 0.5,
+          "used_indices": [
+            1,
+            2
+          ],
+          "utilization_votes": 3,
+          "empty_source_declared": null,
+          "kind": "kb-interview",
+          "retrieved_chunks": 4
+        },
+        {
+          "query": "写一个必然死锁的代码？",
+          "topic": "",
+          "factual_consistency": "一致",
+          "consistency_votes": 3,
+          "hallucination_ratio": 0.0,
+          "hallucination_votes": 3,
+          "material_utilization": 0.25,
+          "used_indices": [
+            1
+          ],
+          "utilization_votes": 3,
+          "empty_source_declared": null,
+          "kind": "kb-interview",
+          "retrieved_chunks": 4
+        }
+      ]
+    }
+  },
+  "gate": {
+    "passed": false,
+    "failures": [
+      "L3 空资料声明率缺失（无 oos 用例或全部判失败），硬门禁无从判定"
+    ]
+  }
+}

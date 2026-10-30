@@ -1,0 +1,9 @@
+{
+  "index_fingerprint": "sha256:2db8513a61f312a1a43eeaa9564abd5c",
+  "embed_model": "BAAI/bge-small-zh-v1.5",
+  "chunks_count": 235,
+  "eval_cases_count": 83,
+  "created_at": "2026-10-26 01:55:30",
+  "collection": "cs_basics",
+  "chunk_mode": "parent-child"
+}

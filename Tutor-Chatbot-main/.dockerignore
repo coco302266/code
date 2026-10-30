@@ -1,0 +1,21 @@
+# 构建上下文排除项（上下文 = Tutor-Chatbot-main/）
+**/__pycache__
+**/*.pyc
+backend/venv
+backend/.env
+backend/.model_cache
+backend/.model_cache_local
+backend/chroma_kb
+backend/chroma_classrooms
+backend/classroom_docs
+backend/logs
+backend/_chroma_archive
+backend/backup_*
+backend/chroma_*
+backend/*.log
+frontend/node_modules
+frontend/.next
+frontend/out
+frontend/tsconfig.tsbuildinfo
+.git
+*.pdf

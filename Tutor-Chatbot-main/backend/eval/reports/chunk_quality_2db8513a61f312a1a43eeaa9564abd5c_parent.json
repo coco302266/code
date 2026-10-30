@@ -1,0 +1,1875 @@
+{
+  "timestamp": "2026-10-25T21:53:51",
+  "granularity": "parent",
+  "detected_granularity": "parent",
+  "index_fingerprint": "sha256:2db8513a61f312a1a43eeaa9564abd5c",
+  "chunks_count": 77,
+  "child_count": 235,
+  "parent_count": 77,
+  "topics": {
+    "DNS 域名解析": 4,
+    "HTTP 基础：方法、状态码与缓存": 4,
+    "HTTPS 与 TLS 握手": 5,
+    "TCP 三次握手与四次挥手": 4,
+    "TCP 与 UDP": 4,
+    "TCP 可靠传输：确认、重传、滑动窗口与拥塞控制": 4,
+    "TCP/IP 分层模型与 ARP / DNS": 4,
+    "中断、异常与系统调用：用户态与内核态": 4,
+    "哈希表": 4,
+    "并发与锁：互斥、信号量、条件变量与读写锁": 4,
+    "排序算法": 4,
+    "数据库索引与事务": 4,
+    "文件系统：inode、目录与软硬链接": 4,
+    "树与堆": 4,
+    "死锁": 4,
+    "虚拟内存与页面置换": 4,
+    "进程与线程": 4,
+    "进程调度算法": 4,
+    "进程间通信（IPC）": 4
+  },
+  "independence": {
+    "summary": {
+      "median": 1.7465,
+      "min": 1.2182,
+      "max": 2.4438,
+      "below_1": 0,
+      "note": "比值 = 跨主题平均距离 / 同主题平均距离，越大越好；<1 的片与隔壁主题贴得比同主题还近"
+    },
+    "per_chunk": [
+      {
+        "chunk": [
+          "cs/db/index-transaction.md",
+          12
+        ],
+        "topic": "数据库索引与事务",
+        "independence": 1.5799,
+        "same_topic_mean_dist": 0.2528,
+        "cross_topic_mean_dist": 0.3994
+      },
+      {
+        "chunk": [
+          "cs/db/index-transaction.md",
+          136
+        ],
+        "topic": "数据库索引与事务",
+        "independence": 1.6073,
+        "same_topic_mean_dist": 0.2391,
+        "cross_topic_mean_dist": 0.3843
+      },
+      {
+        "chunk": [
+          "cs/db/index-transaction.md",
+          537
+        ],
+        "topic": "数据库索引与事务",
+        "independence": 1.5082,
+        "same_topic_mean_dist": 0.2617,
+        "cross_topic_mean_dist": 0.3947
+      },
+      {
+        "chunk": [
+          "cs/db/index-transaction.md",
+          840
+        ],
+        "topic": "数据库索引与事务",
+        "independence": 1.7044,
+        "same_topic_mean_dist": 0.2491,
+        "cross_topic_mean_dist": 0.4246
+      },
+      {
+        "chunk": [
+          "cs/dsa/hash-table.md",
+          7
+        ],
+        "topic": "哈希表",
+        "independence": 2.286,
+        "same_topic_mean_dist": 0.1966,
+        "cross_topic_mean_dist": 0.4493
+      },
+      {
+        "chunk": [
+          "cs/dsa/hash-table.md",
+          113
+        ],
+        "topic": "哈希表",
+        "independence": 2.3325,
+        "same_topic_mean_dist": 0.1856,
+        "cross_topic_mean_dist": 0.433
+      },
+      {
+        "chunk": [
+          "cs/dsa/hash-table.md",
+          539
+        ],
+        "topic": "哈希表",
+        "independence": 1.912,
+        "same_topic_mean_dist": 0.2263,
+        "cross_topic_mean_dist": 0.4328
+      },
+      {
+        "chunk": [
+          "cs/dsa/hash-table.md",
+          835
+        ],
+        "topic": "哈希表",
+        "independence": 1.7373,
+        "same_topic_mean_dist": 0.2425,
+        "cross_topic_mean_dist": 0.4212
+      },
+      {
+        "chunk": [
+          "cs/dsa/sorting.md",
+          8
+        ],
+        "topic": "排序算法",
+        "independence": 2.007,
+        "same_topic_mean_dist": 0.2368,
+        "cross_topic_mean_dist": 0.4752
+      },
+      {
+        "chunk": [
+          "cs/dsa/sorting.md",
+          150
+        ],
+        "topic": "排序算法",
+        "independence": 1.6152,
+        "same_topic_mean_dist": 0.2667,
+        "cross_topic_mean_dist": 0.4308
+      },
+      {
+        "chunk": [
+          "cs/dsa/sorting.md",
+          579
+        ],
+        "topic": "排序算法",
+        "independence": 2.0957,
+        "same_topic_mean_dist": 0.2117,
+        "cross_topic_mean_dist": 0.4437
+      },
+      {
+        "chunk": [
+          "cs/dsa/sorting.md",
+          902
+        ],
+        "topic": "排序算法",
+        "independence": 2.298,
+        "same_topic_mean_dist": 0.2082,
+        "cross_topic_mean_dist": 0.4784
+      },
+      {
+        "chunk": [
+          "cs/dsa/tree-heap.md",
+          7
+        ],
+        "topic": "树与堆",
+        "independence": 2.4438,
+        "same_topic_mean_dist": 0.2042,
+        "cross_topic_mean_dist": 0.4989
+      },
+      {
+        "chunk": [
+          "cs/dsa/tree-heap.md",
+          130
+        ],
+        "topic": "树与堆",
+        "independence": 2.3245,
+        "same_topic_mean_dist": 0.1972,
+        "cross_topic_mean_dist": 0.4585
+      },
+      {
+        "chunk": [
+          "cs/dsa/tree-heap.md",
+          529
+        ],
+        "topic": "树与堆",
+        "independence": 2.3032,
+        "same_topic_mean_dist": 0.1789,
+        "cross_topic_mean_dist": 0.412
+      },
+      {
+        "chunk": [
+          "cs/dsa/tree-heap.md",
+          857
+        ],
+        "topic": "树与堆",
+        "independence": 1.8065,
+        "same_topic_mean_dist": 0.2317,
+        "cross_topic_mean_dist": 0.4185
+      },
+      {
+        "chunk": [
+          "cs/network/dns.md",
+          12
+        ],
+        "topic": "DNS 域名解析",
+        "independence": 1.7312,
+        "same_topic_mean_dist": 0.2636,
+        "cross_topic_mean_dist": 0.4563
+      },
+      {
+        "chunk": [
+          "cs/network/dns.md",
+          122
+        ],
+        "topic": "DNS 域名解析",
+        "independence": 1.7293,
+        "same_topic_mean_dist": 0.2324,
+        "cross_topic_mean_dist": 0.4019
+      },
+      {
+        "chunk": [
+          "cs/network/dns.md",
+          629
+        ],
+        "topic": "DNS 域名解析",
+        "independence": 1.2698,
+        "same_topic_mean_dist": 0.2896,
+        "cross_topic_mean_dist": 0.3678
+      },
+      {
+        "chunk": [
+          "cs/network/dns.md",
+          963
+        ],
+        "topic": "DNS 域名解析",
+        "independence": 1.2623,
+        "same_topic_mean_dist": 0.3218,
+        "cross_topic_mean_dist": 0.4062
+      },
+      {
+        "chunk": [
+          "cs/network/http-basics.md",
+          21
+        ],
+        "topic": "HTTP 基础：方法、状态码与缓存",
+        "independence": 1.2182,
+        "same_topic_mean_dist": 0.3362,
+        "cross_topic_mean_dist": 0.4096
+      },
+      {
+        "chunk": [
+          "cs/network/http-basics.md",
+          139
+        ],
+        "topic": "HTTP 基础：方法、状态码与缓存",
+        "independence": 1.3692,
+        "same_topic_mean_dist": 0.2714,
+        "cross_topic_mean_dist": 0.3716
+      },
+      {
+        "chunk": [
+          "cs/network/http-basics.md",
+          679
+        ],
+        "topic": "HTTP 基础：方法、状态码与缓存",
+        "independence": 1.5426,
+        "same_topic_mean_dist": 0.2573,
+        "cross_topic_mean_dist": 0.3969
+      },
+      {
+        "chunk": [
+          "cs/network/http-basics.md",
+          1040
+        ],
+        "topic": "HTTP 基础：方法、状态码与缓存",
+        "independence": 1.5412,
+        "same_topic_mean_dist": 0.2669,
+        "cross_topic_mean_dist": 0.4114
+      },
+      {
+        "chunk": [
+          "cs/network/http-https.md",
+          18
+        ],
+        "topic": "HTTPS 与 TLS 握手",
+        "independence": 1.5226,
+        "same_topic_mean_dist": 0.2806,
+        "cross_topic_mean_dist": 0.4272
+      },
+      {
+        "chunk": [
+          "cs/network/http-https.md",
+          121
+        ],
+        "topic": "HTTPS 与 TLS 握手",
+        "independence": 2.0576,
+        "same_topic_mean_dist": 0.2111,
+        "cross_topic_mean_dist": 0.4344
+      },
+      {
+        "chunk": [
+          "cs/network/http-https.md",
+          1893
+        ],
+        "topic": "HTTPS 与 TLS 握手",
+        "independence": 1.7674,
+        "same_topic_mean_dist": 0.2366,
+        "cross_topic_mean_dist": 0.4182
+      },
+      {
+        "chunk": [
+          "cs/network/http-https.md",
+          2536
+        ],
+        "topic": "HTTPS 与 TLS 握手",
+        "independence": 1.2304,
+        "same_topic_mean_dist": 0.3183,
+        "cross_topic_mean_dist": 0.3916
+      },
+      {
+        "chunk": [
+          "cs/network/http-https.md",
+          3469
+        ],
+        "topic": "HTTPS 与 TLS 握手",
+        "independence": 1.7465,
+        "same_topic_mean_dist": 0.2349,
+        "cross_topic_mean_dist": 0.4102
+      },
+      {
+        "chunk": [
+          "cs/network/tcp-handshake.md",
+          17
+        ],
+        "topic": "TCP 三次握手与四次挥手",
+        "independence": 1.8253,
+        "same_topic_mean_dist": 0.2726,
+        "cross_topic_mean_dist": 0.4975
+      },
+      {
+        "chunk": [
+          "cs/network/tcp-handshake.md",
+          113
+        ],
+        "topic": "TCP 三次握手与四次挥手",
+        "independence": 2.0354,
+        "same_topic_mean_dist": 0.2156,
+        "cross_topic_mean_dist": 0.4387
+      },
+      {
+        "chunk": [
+          "cs/network/tcp-handshake.md",
+          1826
+        ],
+        "topic": "TCP 三次握手与四次挥手",
+        "independence": 1.399,
+        "same_topic_mean_dist": 0.2586,
+        "cross_topic_mean_dist": 0.3617
+      },
+      {
+        "chunk": [
+          "cs/network/tcp-handshake.md",
+          2341
+        ],
+        "topic": "TCP 三次握手与四次挥手",
+        "independence": 1.5552,
+        "same_topic_mean_dist": 0.2292,
+        "cross_topic_mean_dist": 0.3565
+      },
+      {
+        "chunk": [
+          "cs/network/tcp-ip-model.md",
+          26
+        ],
+        "topic": "TCP/IP 分层模型与 ARP / DNS",
+        "independence": 1.7158,
+        "same_topic_mean_dist": 0.2601,
+        "cross_topic_mean_dist": 0.4463
+      },
+      {
+        "chunk": [
+          "cs/network/tcp-ip-model.md",
+          176
+        ],
+        "topic": "TCP/IP 分层模型与 ARP / DNS",
+        "independence": 1.9883,
+        "same_topic_mean_dist": 0.1849,
+        "cross_topic_mean_dist": 0.3677
+      },
+      {
+        "chunk": [
+          "cs/network/tcp-ip-model.md",
+          2172
+        ],
+        "topic": "TCP/IP 分层模型与 ARP / DNS",
+        "independence": 1.722,
+        "same_topic_mean_dist": 0.2242,
+        "cross_topic_mean_dist": 0.3861
+      },
+      {
+        "chunk": [
+          "cs/network/tcp-ip-model.md",
+          2779
+        ],
+        "topic": "TCP/IP 分层模型与 ARP / DNS",
+        "independence": 1.8494,
+        "same_topic_mean_dist": 0.2035,
+        "cross_topic_mean_dist": 0.3764
+      },
+      {
+        "chunk": [
+          "cs/network/tcp-reliable.md",
+          28
+        ],
+        "topic": "TCP 可靠传输：确认、重传、滑动窗口与拥塞控制",
+        "independence": 2.1257,
+        "same_topic_mean_dist": 0.1854,
+        "cross_topic_mean_dist": 0.394
+      },
+      {
+        "chunk": [
+          "cs/network/tcp-reliable.md",
+          125
+        ],
+        "topic": "TCP 可靠传输：确认、重传、滑动窗口与拥塞控制",
+        "independence": 2.2289,
+        "same_topic_mean_dist": 0.1714,
+        "cross_topic_mean_dist": 0.3821
+      },
+      {
+        "chunk": [
+          "cs/network/tcp-reliable.md",
+          519
+        ],
+        "topic": "TCP 可靠传输：确认、重传、滑动窗口与拥塞控制",
+        "independence": 1.8811,
+        "same_topic_mean_dist": 0.2058,
+        "cross_topic_mean_dist": 0.3871
+      },
+      {
+        "chunk": [
+          "cs/network/tcp-reliable.md",
+          848
+        ],
+        "topic": "TCP 可靠传输：确认、重传、滑动窗口与拥塞控制",
+        "independence": 1.8652,
+        "same_topic_mean_dist": 0.1988,
+        "cross_topic_mean_dist": 0.3709
+      },
+      {
+        "chunk": [
+          "cs/network/tcp-vs-udp.md",
+          13
+        ],
+        "topic": "TCP 与 UDP",
+        "independence": 1.55,
+        "same_topic_mean_dist": 0.2791,
+        "cross_topic_mean_dist": 0.4327
+      },
+      {
+        "chunk": [
+          "cs/network/tcp-vs-udp.md",
+          111
+        ],
+        "topic": "TCP 与 UDP",
+        "independence": 1.8383,
+        "same_topic_mean_dist": 0.2134,
+        "cross_topic_mean_dist": 0.3923
+      },
+      {
+        "chunk": [
+          "cs/network/tcp-vs-udp.md",
+          712
+        ],
+        "topic": "TCP 与 UDP",
+        "independence": 1.4193,
+        "same_topic_mean_dist": 0.2649,
+        "cross_topic_mean_dist": 0.376
+      },
+      {
+        "chunk": [
+          "cs/network/tcp-vs-udp.md",
+          1905
+        ],
+        "topic": "TCP 与 UDP",
+        "independence": 1.5403,
+        "same_topic_mean_dist": 0.2327,
+        "cross_topic_mean_dist": 0.3585
+      },
+      {
+        "chunk": [
+          "cs/os/concurrency-lock.md",
+          24
+        ],
+        "topic": "并发与锁：互斥、信号量、条件变量与读写锁",
+        "independence": 1.3898,
+        "same_topic_mean_dist": 0.2987,
+        "cross_topic_mean_dist": 0.4152
+      },
+      {
+        "chunk": [
+          "cs/os/concurrency-lock.md",
+          129
+        ],
+        "topic": "并发与锁：互斥、信号量、条件变量与读写锁",
+        "independence": 1.6993,
+        "same_topic_mean_dist": 0.2381,
+        "cross_topic_mean_dist": 0.4046
+      },
+      {
+        "chunk": [
+          "cs/os/concurrency-lock.md",
+          551
+        ],
+        "topic": "并发与锁：互斥、信号量、条件变量与读写锁",
+        "independence": 1.5418,
+        "same_topic_mean_dist": 0.2658,
+        "cross_topic_mean_dist": 0.4098
+      },
+      {
+        "chunk": [
+          "cs/os/concurrency-lock.md",
+          894
+        ],
+        "topic": "并发与锁：互斥、信号量、条件变量与读写锁",
+        "independence": 1.3282,
+        "same_topic_mean_dist": 0.2872,
+        "cross_topic_mean_dist": 0.3815
+      },
+      {
+        "chunk": [
+          "cs/os/deadlock.md",
+          6
+        ],
+        "topic": "死锁",
+        "independence": 1.785,
+        "same_topic_mean_dist": 0.2805,
+        "cross_topic_mean_dist": 0.5007
+      },
+      {
+        "chunk": [
+          "cs/os/deadlock.md",
+          102
+        ],
+        "topic": "死锁",
+        "independence": 1.4564,
+        "same_topic_mean_dist": 0.2902,
+        "cross_topic_mean_dist": 0.4227
+      },
+      {
+        "chunk": [
+          "cs/os/deadlock.md",
+          922
+        ],
+        "topic": "死锁",
+        "independence": 1.8289,
+        "same_topic_mean_dist": 0.2214,
+        "cross_topic_mean_dist": 0.405
+      },
+      {
+        "chunk": [
+          "cs/os/deadlock.md",
+          1525
+        ],
+        "topic": "死锁",
+        "independence": 1.4574,
+        "same_topic_mean_dist": 0.2817,
+        "cross_topic_mean_dist": 0.4106
+      },
+      {
+        "chunk": [
+          "cs/os/filesystem.md",
+          22
+        ],
+        "topic": "文件系统：inode、目录与软硬链接",
+        "independence": 1.8311,
+        "same_topic_mean_dist": 0.2436,
+        "cross_topic_mean_dist": 0.4461
+      },
+      {
+        "chunk": [
+          "cs/os/filesystem.md",
+          144
+        ],
+        "topic": "文件系统：inode、目录与软硬链接",
+        "independence": 1.9663,
+        "same_topic_mean_dist": 0.2174,
+        "cross_topic_mean_dist": 0.4275
+      },
+      {
+        "chunk": [
+          "cs/os/filesystem.md",
+          543
+        ],
+        "topic": "文件系统：inode、目录与软硬链接",
+        "independence": 1.4562,
+        "same_topic_mean_dist": 0.283,
+        "cross_topic_mean_dist": 0.4121
+      },
+      {
+        "chunk": [
+          "cs/os/filesystem.md",
+          900
+        ],
+        "topic": "文件系统：inode、目录与软硬链接",
+        "independence": 1.6696,
+        "same_topic_mean_dist": 0.2428,
+        "cross_topic_mean_dist": 0.4053
+      },
+      {
+        "chunk": [
+          "cs/os/interrupt-syscall.md",
+          22
+        ],
+        "topic": "中断、异常与系统调用：用户态与内核态",
+        "independence": 1.7583,
+        "same_topic_mean_dist": 0.2288,
+        "cross_topic_mean_dist": 0.4024
+      },
+      {
+        "chunk": [
+          "cs/os/interrupt-syscall.md",
+          147
+        ],
+        "topic": "中断、异常与系统调用：用户态与内核态",
+        "independence": 1.9669,
+        "same_topic_mean_dist": 0.1999,
+        "cross_topic_mean_dist": 0.3933
+      },
+      {
+        "chunk": [
+          "cs/os/interrupt-syscall.md",
+          621
+        ],
+        "topic": "中断、异常与系统调用：用户态与内核态",
+        "independence": 1.9239,
+        "same_topic_mean_dist": 0.1886,
+        "cross_topic_mean_dist": 0.3628
+      },
+      {
+        "chunk": [
+          "cs/os/interrupt-syscall.md",
+          1015
+        ],
+        "topic": "中断、异常与系统调用：用户态与内核态",
+        "independence": 2.0245,
+        "same_topic_mean_dist": 0.2013,
+        "cross_topic_mean_dist": 0.4075
+      },
+      {
+        "chunk": [
+          "cs/os/ipc.md",
+          14
+        ],
+        "topic": "进程间通信（IPC）",
+        "independence": 1.5461,
+        "same_topic_mean_dist": 0.2518,
+        "cross_topic_mean_dist": 0.3892
+      },
+      {
+        "chunk": [
+          "cs/os/ipc.md",
+          124
+        ],
+        "topic": "进程间通信（IPC）",
+        "independence": 1.6827,
+        "same_topic_mean_dist": 0.224,
+        "cross_topic_mean_dist": 0.377
+      },
+      {
+        "chunk": [
+          "cs/os/ipc.md",
+          606
+        ],
+        "topic": "进程间通信（IPC）",
+        "independence": 1.5979,
+        "same_topic_mean_dist": 0.2255,
+        "cross_topic_mean_dist": 0.3603
+      },
+      {
+        "chunk": [
+          "cs/os/ipc.md",
+          931
+        ],
+        "topic": "进程间通信（IPC）",
+        "independence": 1.6519,
+        "same_topic_mean_dist": 0.2298,
+        "cross_topic_mean_dist": 0.3797
+      },
+      {
+        "chunk": [
+          "cs/os/memory-management.md",
+          13
+        ],
+        "topic": "虚拟内存与页面置换",
+        "independence": 2.0314,
+        "same_topic_mean_dist": 0.2258,
+        "cross_topic_mean_dist": 0.4587
+      },
+      {
+        "chunk": [
+          "cs/os/memory-management.md",
+          125
+        ],
+        "topic": "虚拟内存与页面置换",
+        "independence": 2.0395,
+        "same_topic_mean_dist": 0.1989,
+        "cross_topic_mean_dist": 0.4057
+      },
+      {
+        "chunk": [
+          "cs/os/memory-management.md",
+          1152
+        ],
+        "topic": "虚拟内存与页面置换",
+        "independence": 1.904,
+        "same_topic_mean_dist": 0.2097,
+        "cross_topic_mean_dist": 0.3993
+      },
+      {
+        "chunk": [
+          "cs/os/memory-management.md",
+          1614
+        ],
+        "topic": "虚拟内存与页面置换",
+        "independence": 1.3677,
+        "same_topic_mean_dist": 0.2695,
+        "cross_topic_mean_dist": 0.3686
+      },
+      {
+        "chunk": [
+          "cs/os/process-thread.md",
+          9
+        ],
+        "topic": "进程与线程",
+        "independence": 1.8744,
+        "same_topic_mean_dist": 0.2347,
+        "cross_topic_mean_dist": 0.44
+      },
+      {
+        "chunk": [
+          "cs/os/process-thread.md",
+          101
+        ],
+        "topic": "进程与线程",
+        "independence": 2.2068,
+        "same_topic_mean_dist": 0.165,
+        "cross_topic_mean_dist": 0.3641
+      },
+      {
+        "chunk": [
+          "cs/os/process-thread.md",
+          687
+        ],
+        "topic": "进程与线程",
+        "independence": 1.8569,
+        "same_topic_mean_dist": 0.2014,
+        "cross_topic_mean_dist": 0.3741
+      },
+      {
+        "chunk": [
+          "cs/os/process-thread.md",
+          1502
+        ],
+        "topic": "进程与线程",
+        "independence": 1.8296,
+        "same_topic_mean_dist": 0.2168,
+        "cross_topic_mean_dist": 0.3966
+      },
+      {
+        "chunk": [
+          "cs/os/scheduling.md",
+          10
+        ],
+        "topic": "进程调度算法",
+        "independence": 1.7012,
+        "same_topic_mean_dist": 0.2774,
+        "cross_topic_mean_dist": 0.4719
+      },
+      {
+        "chunk": [
+          "cs/os/scheduling.md",
+          100
+        ],
+        "topic": "进程调度算法",
+        "independence": 1.9817,
+        "same_topic_mean_dist": 0.2006,
+        "cross_topic_mean_dist": 0.3975
+      },
+      {
+        "chunk": [
+          "cs/os/scheduling.md",
+          1069
+        ],
+        "topic": "进程调度算法",
+        "independence": 1.6802,
+        "same_topic_mean_dist": 0.2386,
+        "cross_topic_mean_dist": 0.4009
+      },
+      {
+        "chunk": [
+          "cs/os/scheduling.md",
+          1588
+        ],
+        "topic": "进程调度算法",
+        "independence": 1.814,
+        "same_topic_mean_dist": 0.2225,
+        "cross_topic_mean_dist": 0.4035
+      }
+    ]
+  },
+  "generalist": {
+    "queries_used": 79,
+    "top_k": 3,
+    "threshold": 3,
+    "flagged_count": 10,
+    "flagged": [
+      {
+        "chunk": [
+          "cs/network/tcp-vs-udp.md",
+          1905
+        ],
+        "topics": [
+          "https与tls握手",
+          "tcp/ip分层模型与arp/dns",
+          "tcp三次握手与四次挥手",
+          "tcp与udp",
+          "虚拟内存与页面置换"
+        ]
+      },
+      {
+        "chunk": [
+          "cs/os/deadlock.md",
+          922
+        ],
+        "topics": [
+          "https与tls握手",
+          "tcp三次握手与四次挥手",
+          "死锁",
+          "进程调度算法"
+        ]
+      },
+      {
+        "chunk": [
+          "cs/os/scheduling.md",
+          100
+        ],
+        "topics": [
+          "tcp/ip分层模型与arp/dns",
+          "死锁",
+          "虚拟内存与页面置换",
+          "进程调度算法"
+        ]
+      },
+      {
+        "chunk": [
+          "cs/os/memory-management.md",
+          125
+        ],
+        "topics": [
+          "https与tls握手",
+          "tcp/ip分层模型与arp/dns",
+          "死锁",
+          "虚拟内存与页面置换"
+        ]
+      },
+      {
+        "chunk": [
+          "cs/os/ipc.md",
+          14
+        ],
+        "topics": [
+          "https与tls握手",
+          "tcp/ip分层模型与arp/dns",
+          "虚拟内存与页面置换",
+          "进程与线程"
+        ]
+      },
+      {
+        "chunk": [
+          "cs/network/http-basics.md",
+          1040
+        ],
+        "topics": [
+          "https与tls握手",
+          "tcp/ip分层模型与arp/dns",
+          "tcp三次握手与四次挥手",
+          "tcp与udp"
+        ]
+      },
+      {
+        "chunk": [
+          "cs/os/process-thread.md",
+          101
+        ],
+        "topics": [
+          "https与tls握手",
+          "进程与线程",
+          "进程调度算法"
+        ]
+      },
+      {
+        "chunk": [
+          "cs/network/tcp-ip-model.md",
+          2779
+        ],
+        "topics": [
+          "https与tls握手",
+          "tcp/ip分层模型与arp/dns",
+          "tcp三次握手与四次挥手"
+        ]
+      },
+      {
+        "chunk": [
+          "cs/network/tcp-handshake.md",
+          113
+        ],
+        "topics": [
+          "https与tls握手",
+          "tcp三次握手与四次挥手",
+          "tcp与udp"
+        ]
+      },
+      {
+        "chunk": [
+          "cs/network/tcp-ip-model.md",
+          176
+        ],
+        "topics": [
+          "tcp/ip分层模型与arp/dns",
+          "tcp三次握手与四次挥手",
+          "tcp与udp"
+        ]
+      }
+    ],
+    "note": "出现在 ≥3 个不同期望主题 query 的 top3 = 综合型 chunk（万金油），建议人工拆分；口径是纯向量检索，与生产重排链路不同，不与 L1 指标混算"
+  },
+  "completeness": {
+    "summary": {
+      "count": 77,
+      "heading_orphan": null,
+      "empty_body": 0,
+      "mid_sentence_end": 0,
+      "offset_untrusted": 0,
+      "density_min": 0.51,
+      "density_median": 2.17,
+      "note": "切片开头落在句中不算缺陷（chunk_overlap=80 的有意重叠）；mid_sentence_end 只看结尾；heading_orphan / empty_body 互斥：child 粒度看前者，parent 粒度看后者（另一个为 null = 不适用）"
+    },
+    "per_chunk": [
+      {
+        "chunk": [
+          "cs/db/index-transaction.md",
+          12
+        ],
+        "topic": "数据库索引与事务",
+        "density_per_100": 1.64,
+        "heading_orphan": false,
+        "empty_body": false,
+        "mid_sentence_end": "ok",
+        "offset_trusted": true
+      },
+      {
+        "chunk": [
+          "cs/db/index-transaction.md",
+          136
+        ],
+        "topic": "数据库索引与事务",
+        "density_per_100": 3.26,
+        "heading_orphan": false,
+        "empty_body": false,
+        "mid_sentence_end": "ok",
+        "offset_trusted": true
+      },
+      {
+        "chunk": [
+          "cs/db/index-transaction.md",
+          537
+        ],
+        "topic": "数据库索引与事务",
+        "density_per_100": 2.33,
+        "heading_orphan": false,
+        "empty_body": false,
+        "mid_sentence_end": "ok",
+        "offset_trusted": true
+      },
+      {
+        "chunk": [
+          "cs/db/index-transaction.md",
+          840
+        ],
+        "topic": "数据库索引与事务",
+        "density_per_100": 3.05,
+        "heading_orphan": false,
+        "empty_body": false,
+        "mid_sentence_end": "ok",
+        "offset_trusted": true
+      },
+      {
+        "chunk": [
+          "cs/dsa/hash-table.md",
+          7
+        ],
+        "topic": "哈希表",
+        "density_per_100": 2.88,
+        "heading_orphan": false,
+        "empty_body": false,
+        "mid_sentence_end": "ok",
+        "offset_trusted": true
+      },
+      {
+        "chunk": [
+          "cs/dsa/hash-table.md",
+          113
+        ],
+        "topic": "哈希表",
+        "density_per_100": 3.3,
+        "heading_orphan": false,
+        "empty_body": false,
+        "mid_sentence_end": "ok",
+        "offset_trusted": true
+      },
+      {
+        "chunk": [
+          "cs/dsa/hash-table.md",
+          539
+        ],
+        "topic": "哈希表",
+        "density_per_100": 2.38,
+        "heading_orphan": false,
+        "empty_body": false,
+        "mid_sentence_end": "ok",
+        "offset_trusted": true
+      },
+      {
+        "chunk": [
+          "cs/dsa/hash-table.md",
+          835
+        ],
+        "topic": "哈希表",
+        "density_per_100": 2.2,
+        "heading_orphan": false,
+        "empty_body": false,
+        "mid_sentence_end": "ok",
+        "offset_trusted": true
+      },
+      {
+        "chunk": [
+          "cs/dsa/sorting.md",
+          8
+        ],
+        "topic": "排序算法",
+        "density_per_100": 3.57,
+        "heading_orphan": false,
+        "empty_body": false,
+        "mid_sentence_end": "ok",
+        "offset_trusted": true
+      },
+      {
+        "chunk": [
+          "cs/dsa/sorting.md",
+          150
+        ],
+        "topic": "排序算法",
+        "density_per_100": 2.81,
+        "heading_orphan": false,
+        "empty_body": false,
+        "mid_sentence_end": "ok",
+        "offset_trusted": true
+      },
+      {
+        "chunk": [
+          "cs/dsa/sorting.md",
+          579
+        ],
+        "topic": "排序算法",
+        "density_per_100": 2.18,
+        "heading_orphan": false,
+        "empty_body": false,
+        "mid_sentence_end": "ok",
+        "offset_trusted": true
+      },
+      {
+        "chunk": [
+          "cs/dsa/sorting.md",
+          902
+        ],
+        "topic": "排序算法",
+        "density_per_100": 2.12,
+        "heading_orphan": false,
+        "empty_body": false,
+        "mid_sentence_end": "ok",
+        "offset_trusted": true
+      },
+      {
+        "chunk": [
+          "cs/dsa/tree-heap.md",
+          7
+        ],
+        "topic": "树与堆",
+        "density_per_100": 2.48,
+        "heading_orphan": false,
+        "empty_body": false,
+        "mid_sentence_end": "ok",
+        "offset_trusted": true
+      },
+      {
+        "chunk": [
+          "cs/dsa/tree-heap.md",
+          130
+        ],
+        "topic": "树与堆",
+        "density_per_100": 2.77,
+        "heading_orphan": false,
+        "empty_body": false,
+        "mid_sentence_end": "ok",
+        "offset_trusted": true
+      },
+      {
+        "chunk": [
+          "cs/dsa/tree-heap.md",
+          529
+        ],
+        "topic": "树与堆",
+        "density_per_100": 2.45,
+        "heading_orphan": false,
+        "empty_body": false,
+        "mid_sentence_end": "ok",
+        "offset_trusted": true
+      },
+      {
+        "chunk": [
+          "cs/dsa/tree-heap.md",
+          857
+        ],
+        "topic": "树与堆",
+        "density_per_100": 2.27,
+        "heading_orphan": false,
+        "empty_body": false,
+        "mid_sentence_end": "ok",
+        "offset_trusted": true
+      },
+      {
+        "chunk": [
+          "cs/network/dns.md",
+          12
+        ],
+        "topic": "DNS 域名解析",
+        "density_per_100": 1.85,
+        "heading_orphan": false,
+        "empty_body": false,
+        "mid_sentence_end": "ok",
+        "offset_trusted": true
+      },
+      {
+        "chunk": [
+          "cs/network/dns.md",
+          122
+        ],
+        "topic": "DNS 域名解析",
+        "density_per_100": 2.97,
+        "heading_orphan": false,
+        "empty_body": false,
+        "mid_sentence_end": "ok",
+        "offset_trusted": true
+      },
+      {
+        "chunk": [
+          "cs/network/dns.md",
+          629
+        ],
+        "topic": "DNS 域名解析",
+        "density_per_100": 2.71,
+        "heading_orphan": false,
+        "empty_body": false,
+        "mid_sentence_end": "ok",
+        "offset_trusted": true
+      },
+      {
+        "chunk": [
+          "cs/network/dns.md",
+          963
+        ],
+        "topic": "DNS 域名解析",
+        "density_per_100": 1.79,
+        "heading_orphan": false,
+        "empty_body": false,
+        "mid_sentence_end": "ok",
+        "offset_trusted": true
+      },
+      {
+        "chunk": [
+          "cs/network/http-basics.md",
+          21
+        ],
+        "topic": "HTTP 基础：方法、状态码与缓存",
+        "density_per_100": 1.72,
+        "heading_orphan": false,
+        "empty_body": false,
+        "mid_sentence_end": "ok",
+        "offset_trusted": true
+      },
+      {
+        "chunk": [
+          "cs/network/http-basics.md",
+          139
+        ],
+        "topic": "HTTP 基础：方法、状态码与缓存",
+        "density_per_100": 2.42,
+        "heading_orphan": false,
+        "empty_body": false,
+        "mid_sentence_end": "ok",
+        "offset_trusted": true
+      },
+      {
+        "chunk": [
+          "cs/network/http-basics.md",
+          679
+        ],
+        "topic": "HTTP 基础：方法、状态码与缓存",
+        "density_per_100": 2.51,
+        "heading_orphan": false,
+        "empty_body": false,
+        "mid_sentence_end": "ok",
+        "offset_trusted": true
+      },
+      {
+        "chunk": [
+          "cs/network/http-basics.md",
+          1040
+        ],
+        "topic": "HTTP 基础：方法、状态码与缓存",
+        "density_per_100": 1.63,
+        "heading_orphan": false,
+        "empty_body": false,
+        "mid_sentence_end": "ok",
+        "offset_trusted": true
+      },
+      {
+        "chunk": [
+          "cs/network/http-https.md",
+          18
+        ],
+        "topic": "HTTPS 与 TLS 握手",
+        "density_per_100": 1.98,
+        "heading_orphan": false,
+        "empty_body": false,
+        "mid_sentence_end": "ok",
+        "offset_trusted": true
+      },
+      {
+        "chunk": [
+          "cs/network/http-https.md",
+          121
+        ],
+        "topic": "HTTPS 与 TLS 握手",
+        "density_per_100": 1.58,
+        "heading_orphan": false,
+        "empty_body": false,
+        "mid_sentence_end": "ok",
+        "offset_trusted": true
+      },
+      {
+        "chunk": [
+          "cs/network/http-https.md",
+          1893
+        ],
+        "topic": "HTTPS 与 TLS 握手",
+        "density_per_100": 1.25,
+        "heading_orphan": false,
+        "empty_body": false,
+        "mid_sentence_end": "ok",
+        "offset_trusted": true
+      },
+      {
+        "chunk": [
+          "cs/network/http-https.md",
+          2536
+        ],
+        "topic": "HTTPS 与 TLS 握手",
+        "density_per_100": 1.72,
+        "heading_orphan": false,
+        "empty_body": false,
+        "mid_sentence_end": "ok",
+        "offset_trusted": true
+      },
+      {
+        "chunk": [
+          "cs/network/http-https.md",
+          3469
+        ],
+        "topic": "HTTPS 与 TLS 握手",
+        "density_per_100": 1.44,
+        "heading_orphan": false,
+        "empty_body": false,
+        "mid_sentence_end": "ok",
+        "offset_trusted": true
+      },
+      {
+        "chunk": [
+          "cs/network/tcp-handshake.md",
+          17
+        ],
+        "topic": "TCP 三次握手与四次挥手",
+        "density_per_100": 2.13,
+        "heading_orphan": false,
+        "empty_body": false,
+        "mid_sentence_end": "ok",
+        "offset_trusted": true
+      },
+      {
+        "chunk": [
+          "cs/network/tcp-handshake.md",
+          113
+        ],
+        "topic": "TCP 三次握手与四次挥手",
+        "density_per_100": 2.05,
+        "heading_orphan": false,
+        "empty_body": false,
+        "mid_sentence_end": "ok",
+        "offset_trusted": true
+      },
+      {
+        "chunk": [
+          "cs/network/tcp-handshake.md",
+          1826
+        ],
+        "topic": "TCP 三次握手与四次挥手",
+        "density_per_100": 2.34,
+        "heading_orphan": false,
+        "empty_body": false,
+        "mid_sentence_end": "ok",
+        "offset_trusted": true
+      },
+      {
+        "chunk": [
+          "cs/network/tcp-handshake.md",
+          2341
+        ],
+        "topic": "TCP 三次握手与四次挥手",
+        "density_per_100": 2.42,
+        "heading_orphan": false,
+        "empty_body": false,
+        "mid_sentence_end": "ok",
+        "offset_trusted": true
+      },
+      {
+        "chunk": [
+          "cs/network/tcp-ip-model.md",
+          26
+        ],
+        "topic": "TCP/IP 分层模型与 ARP / DNS",
+        "density_per_100": 1.35,
+        "heading_orphan": false,
+        "empty_body": false,
+        "mid_sentence_end": "ok",
+        "offset_trusted": true
+      },
+      {
+        "chunk": [
+          "cs/network/tcp-ip-model.md",
+          176
+        ],
+        "topic": "TCP/IP 分层模型与 ARP / DNS",
+        "density_per_100": 0.8,
+        "heading_orphan": false,
+        "empty_body": false,
+        "mid_sentence_end": "ok",
+        "offset_trusted": true
+      },
+      {
+        "chunk": [
+          "cs/network/tcp-ip-model.md",
+          2172
+        ],
+        "topic": "TCP/IP 分层模型与 ARP / DNS",
+        "density_per_100": 1.16,
+        "heading_orphan": false,
+        "empty_body": false,
+        "mid_sentence_end": "ok",
+        "offset_trusted": true
+      },
+      {
+        "chunk": [
+          "cs/network/tcp-ip-model.md",
+          2779
+        ],
+        "topic": "TCP/IP 分层模型与 ARP / DNS",
+        "density_per_100": 1.69,
+        "heading_orphan": false,
+        "empty_body": false,
+        "mid_sentence_end": "ok",
+        "offset_trusted": true
+      },
+      {
+        "chunk": [
+          "cs/network/tcp-reliable.md",
+          28
+        ],
+        "topic": "TCP 可靠传输：确认、重传、滑动窗口与拥塞控制",
+        "density_per_100": 4.21,
+        "heading_orphan": false,
+        "empty_body": false,
+        "mid_sentence_end": "ok",
+        "offset_trusted": true
+      },
+      {
+        "chunk": [
+          "cs/network/tcp-reliable.md",
+          125
+        ],
+        "topic": "TCP 可靠传输：确认、重传、滑动窗口与拥塞控制",
+        "density_per_100": 2.81,
+        "heading_orphan": false,
+        "empty_body": false,
+        "mid_sentence_end": "ok",
+        "offset_trusted": true
+      },
+      {
+        "chunk": [
+          "cs/network/tcp-reliable.md",
+          519
+        ],
+        "topic": "TCP 可靠传输：确认、重传、滑动窗口与拥塞控制",
+        "density_per_100": 2.75,
+        "heading_orphan": false,
+        "empty_body": false,
+        "mid_sentence_end": "ok",
+        "offset_trusted": true
+      },
+      {
+        "chunk": [
+          "cs/network/tcp-reliable.md",
+          848
+        ],
+        "topic": "TCP 可靠传输：确认、重传、滑动窗口与拥塞控制",
+        "density_per_100": 1.91,
+        "heading_orphan": false,
+        "empty_body": false,
+        "mid_sentence_end": "ok",
+        "offset_trusted": true
+      },
+      {
+        "chunk": [
+          "cs/network/tcp-vs-udp.md",
+          13
+        ],
+        "topic": "TCP 与 UDP",
+        "density_per_100": 3.12,
+        "heading_orphan": false,
+        "empty_body": false,
+        "mid_sentence_end": "ok",
+        "offset_trusted": true
+      },
+      {
+        "chunk": [
+          "cs/network/tcp-vs-udp.md",
+          111
+        ],
+        "topic": "TCP 与 UDP",
+        "density_per_100": 1.0,
+        "heading_orphan": false,
+        "empty_body": false,
+        "mid_sentence_end": "ok",
+        "offset_trusted": true
+      },
+      {
+        "chunk": [
+          "cs/network/tcp-vs-udp.md",
+          712
+        ],
+        "topic": "TCP 与 UDP",
+        "density_per_100": 1.76,
+        "heading_orphan": false,
+        "empty_body": false,
+        "mid_sentence_end": "ok",
+        "offset_trusted": true
+      },
+      {
+        "chunk": [
+          "cs/network/tcp-vs-udp.md",
+          1905
+        ],
+        "topic": "TCP 与 UDP",
+        "density_per_100": 2.04,
+        "heading_orphan": false,
+        "empty_body": false,
+        "mid_sentence_end": "ok",
+        "offset_trusted": true
+      },
+      {
+        "chunk": [
+          "cs/os/concurrency-lock.md",
+          24
+        ],
+        "topic": "并发与锁：互斥、信号量、条件变量与读写锁",
+        "density_per_100": 4.85,
+        "heading_orphan": false,
+        "empty_body": false,
+        "mid_sentence_end": "ok",
+        "offset_trusted": true
+      },
+      {
+        "chunk": [
+          "cs/os/concurrency-lock.md",
+          129
+        ],
+        "topic": "并发与锁：互斥、信号量、条件变量与读写锁",
+        "density_per_100": 2.86,
+        "heading_orphan": false,
+        "empty_body": false,
+        "mid_sentence_end": "ok",
+        "offset_trusted": true
+      },
+      {
+        "chunk": [
+          "cs/os/concurrency-lock.md",
+          551
+        ],
+        "topic": "并发与锁：互斥、信号量、条件变量与读写锁",
+        "density_per_100": 2.05,
+        "heading_orphan": false,
+        "empty_body": false,
+        "mid_sentence_end": "ok",
+        "offset_trusted": true
+      },
+      {
+        "chunk": [
+          "cs/os/concurrency-lock.md",
+          894
+        ],
+        "topic": "并发与锁：互斥、信号量、条件变量与读写锁",
+        "density_per_100": 2.05,
+        "heading_orphan": false,
+        "empty_body": false,
+        "mid_sentence_end": "ok",
+        "offset_trusted": true
+      },
+      {
+        "chunk": [
+          "cs/os/deadlock.md",
+          6
+        ],
+        "topic": "死锁",
+        "density_per_100": 2.13,
+        "heading_orphan": false,
+        "empty_body": false,
+        "mid_sentence_end": "ok",
+        "offset_trusted": true
+      },
+      {
+        "chunk": [
+          "cs/os/deadlock.md",
+          102
+        ],
+        "topic": "死锁",
+        "density_per_100": 1.96,
+        "heading_orphan": false,
+        "empty_body": false,
+        "mid_sentence_end": "ok",
+        "offset_trusted": true
+      },
+      {
+        "chunk": [
+          "cs/os/deadlock.md",
+          922
+        ],
+        "topic": "死锁",
+        "density_per_100": 1.83,
+        "heading_orphan": false,
+        "empty_body": false,
+        "mid_sentence_end": "ok",
+        "offset_trusted": true
+      },
+      {
+        "chunk": [
+          "cs/os/deadlock.md",
+          1525
+        ],
+        "topic": "死锁",
+        "density_per_100": 2.14,
+        "heading_orphan": false,
+        "empty_body": false,
+        "mid_sentence_end": "ok",
+        "offset_trusted": true
+      },
+      {
+        "chunk": [
+          "cs/os/filesystem.md",
+          22
+        ],
+        "topic": "文件系统：inode、目录与软硬链接",
+        "density_per_100": 2.5,
+        "heading_orphan": false,
+        "empty_body": false,
+        "mid_sentence_end": "ok",
+        "offset_trusted": true
+      },
+      {
+        "chunk": [
+          "cs/os/filesystem.md",
+          144
+        ],
+        "topic": "文件系统：inode、目录与软硬链接",
+        "density_per_100": 3.02,
+        "heading_orphan": false,
+        "empty_body": false,
+        "mid_sentence_end": "ok",
+        "offset_trusted": true
+      },
+      {
+        "chunk": [
+          "cs/os/filesystem.md",
+          543
+        ],
+        "topic": "文件系统：inode、目录与软硬链接",
+        "density_per_100": 1.97,
+        "heading_orphan": false,
+        "empty_body": false,
+        "mid_sentence_end": "ok",
+        "offset_trusted": true
+      },
+      {
+        "chunk": [
+          "cs/os/filesystem.md",
+          900
+        ],
+        "topic": "文件系统：inode、目录与软硬链接",
+        "density_per_100": 1.81,
+        "heading_orphan": false,
+        "empty_body": false,
+        "mid_sentence_end": "ok",
+        "offset_trusted": true
+      },
+      {
+        "chunk": [
+          "cs/os/interrupt-syscall.md",
+          22
+        ],
+        "topic": "中断、异常与系统调用：用户态与内核态",
+        "density_per_100": 3.25,
+        "heading_orphan": false,
+        "empty_body": false,
+        "mid_sentence_end": "ok",
+        "offset_trusted": true
+      },
+      {
+        "chunk": [
+          "cs/os/interrupt-syscall.md",
+          147
+        ],
+        "topic": "中断、异常与系统调用：用户态与内核态",
+        "density_per_100": 2.54,
+        "heading_orphan": false,
+        "empty_body": false,
+        "mid_sentence_end": "ok",
+        "offset_trusted": true
+      },
+      {
+        "chunk": [
+          "cs/os/interrupt-syscall.md",
+          621
+        ],
+        "topic": "中断、异常与系统调用：用户态与内核态",
+        "density_per_100": 2.04,
+        "heading_orphan": false,
+        "empty_body": false,
+        "mid_sentence_end": "ok",
+        "offset_trusted": true
+      },
+      {
+        "chunk": [
+          "cs/os/interrupt-syscall.md",
+          1015
+        ],
+        "topic": "中断、异常与系统调用：用户态与内核态",
+        "density_per_100": 2.26,
+        "heading_orphan": false,
+        "empty_body": false,
+        "mid_sentence_end": "ok",
+        "offset_trusted": true
+      },
+      {
+        "chunk": [
+          "cs/os/ipc.md",
+          14
+        ],
+        "topic": "进程间通信（IPC）",
+        "density_per_100": 3.7,
+        "heading_orphan": false,
+        "empty_body": false,
+        "mid_sentence_end": "ok",
+        "offset_trusted": true
+      },
+      {
+        "chunk": [
+          "cs/os/ipc.md",
+          124
+        ],
+        "topic": "进程间通信（IPC）",
+        "density_per_100": 2.5,
+        "heading_orphan": false,
+        "empty_body": false,
+        "mid_sentence_end": "ok",
+        "offset_trusted": true
+      },
+      {
+        "chunk": [
+          "cs/os/ipc.md",
+          606
+        ],
+        "topic": "进程间通信（IPC）",
+        "density_per_100": 2.48,
+        "heading_orphan": false,
+        "empty_body": false,
+        "mid_sentence_end": "ok",
+        "offset_trusted": true
+      },
+      {
+        "chunk": [
+          "cs/os/ipc.md",
+          931
+        ],
+        "topic": "进程间通信（IPC）",
+        "density_per_100": 3.45,
+        "heading_orphan": false,
+        "empty_body": false,
+        "mid_sentence_end": "ok",
+        "offset_trusted": true
+      },
+      {
+        "chunk": [
+          "cs/os/memory-management.md",
+          13
+        ],
+        "topic": "虚拟内存与页面置换",
+        "density_per_100": 1.82,
+        "heading_orphan": false,
+        "empty_body": false,
+        "mid_sentence_end": "ok",
+        "offset_trusted": true
+      },
+      {
+        "chunk": [
+          "cs/os/memory-management.md",
+          125
+        ],
+        "topic": "虚拟内存与页面置换",
+        "density_per_100": 1.37,
+        "heading_orphan": false,
+        "empty_body": false,
+        "mid_sentence_end": "ok",
+        "offset_trusted": true
+      },
+      {
+        "chunk": [
+          "cs/os/memory-management.md",
+          1152
+        ],
+        "topic": "虚拟内存与页面置换",
+        "density_per_100": 2.17,
+        "heading_orphan": false,
+        "empty_body": false,
+        "mid_sentence_end": "ok",
+        "offset_trusted": true
+      },
+      {
+        "chunk": [
+          "cs/os/memory-management.md",
+          1614
+        ],
+        "topic": "虚拟内存与页面置换",
+        "density_per_100": 2.02,
+        "heading_orphan": false,
+        "empty_body": false,
+        "mid_sentence_end": "ok",
+        "offset_trusted": true
+      },
+      {
+        "chunk": [
+          "cs/os/process-thread.md",
+          9
+        ],
+        "topic": "进程与线程",
+        "density_per_100": 2.22,
+        "heading_orphan": false,
+        "empty_body": false,
+        "mid_sentence_end": "ok",
+        "offset_trusted": true
+      },
+      {
+        "chunk": [
+          "cs/os/process-thread.md",
+          101
+        ],
+        "topic": "进程与线程",
+        "density_per_100": 0.51,
+        "heading_orphan": false,
+        "empty_body": false,
+        "mid_sentence_end": "ok",
+        "offset_trusted": true
+      },
+      {
+        "chunk": [
+          "cs/os/process-thread.md",
+          687
+        ],
+        "topic": "进程与线程",
+        "density_per_100": 1.6,
+        "heading_orphan": false,
+        "empty_body": false,
+        "mid_sentence_end": "ok",
+        "offset_trusted": true
+      },
+      {
+        "chunk": [
+          "cs/os/process-thread.md",
+          1502
+        ],
+        "topic": "进程与线程",
+        "density_per_100": 2.42,
+        "heading_orphan": false,
+        "empty_body": false,
+        "mid_sentence_end": "ok",
+        "offset_trusted": true
+      },
+      {
+        "chunk": [
+          "cs/os/scheduling.md",
+          10
+        ],
+        "topic": "进程调度算法",
+        "density_per_100": 2.27,
+        "heading_orphan": false,
+        "empty_body": false,
+        "mid_sentence_end": "ok",
+        "offset_trusted": true
+      },
+      {
+        "chunk": [
+          "cs/os/scheduling.md",
+          100
+        ],
+        "topic": "进程调度算法",
+        "density_per_100": 0.72,
+        "heading_orphan": false,
+        "empty_body": false,
+        "mid_sentence_end": "ok",
+        "offset_trusted": true
+      },
+      {
+        "chunk": [
+          "cs/os/scheduling.md",
+          1069
+        ],
+        "topic": "进程调度算法",
+        "density_per_100": 1.74,
+        "heading_orphan": false,
+        "empty_body": false,
+        "mid_sentence_end": "ok",
+        "offset_trusted": true
+      },
+      {
+        "chunk": [
+          "cs/os/scheduling.md",
+          1588
+        ],
+        "topic": "进程调度算法",
+        "density_per_100": 1.5,
+        "heading_orphan": false,
+        "empty_body": false,
+        "mid_sentence_end": "ok",
+        "offset_trusted": true
+      }
+    ]
+  }
+}

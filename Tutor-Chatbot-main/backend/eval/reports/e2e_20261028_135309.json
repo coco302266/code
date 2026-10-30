@@ -1,0 +1,39 @@
+{
+  "timestamp": "2026-10-28T13:53:09",
+  "index_fingerprint": "sha256:bbe0cdc42635ac1c936d678ad22f3e8c",
+  "cases_file": "D:\\code\\AI-Classroom-M4-20261022\\AI-Classroom\\Tutor-Chatbot-main\\backend\\rag_eval_cases.json",
+  "layers": {
+    "L1": {
+      "granularity": "parent",
+      "inject_k": 3,
+      "top1": 68,
+      "top3": 70,
+      "total": 71,
+      "recall_at_k": 0.7909,
+      "precision_at_k": 0.5634,
+      "noise_rate": 0.3052,
+      "mrr": 0.9648,
+      "ndcg_at_k": 0.87,
+      "annotated_cases": 71,
+      "fallback_cases": 0,
+      "ndcg_clamped_cases": 0,
+      "avg_secs": 0.9681,
+      "p95_secs": 1.1084,
+      "degraded_cases": 0
+    },
+    "L2": {
+      "ndcg_rerank_on": 0.87,
+      "ndcg_rerank_off": 0.8161,
+      "uplift": 0.0539,
+      "rerank_p95_ms": 1079.0,
+      "top1_on": 68,
+      "top1_off": 63
+    },
+    "L3": null,
+    "L4": null
+  },
+  "gate": {
+    "passed": true,
+    "failures": []
+  }
+}

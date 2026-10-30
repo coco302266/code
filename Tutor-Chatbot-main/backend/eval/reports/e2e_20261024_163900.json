@@ -1,0 +1,366 @@
+{
+  "timestamp": "2026-10-24T16:39:00",
+  "index_fingerprint": "sha256:36b5581ee4fd322c31d65c2d2d4106ec",
+  "cases_file": "D:\\code\\AI-Classroom-M4-20261022\\AI-Classroom\\Tutor-Chatbot-main\\backend\\rag_eval_cases.json",
+  "layers": {
+    "L1": null,
+    "L2": null,
+    "L3": null,
+    "L4": {
+      "cascade": {
+        "cases_count": 8,
+        "baseline_top1_rate": 1.0,
+        "cascade_top1_hold_rate": 0.625,
+        "cascade_top3_hold_rate": 0.875,
+        "per_case": [
+          {
+            "id": "csc-1",
+            "query": "HTTPS 和 HTTP 有什么不同？",
+            "expected": [
+              "HTTPS 与 TLS 握手"
+            ],
+            "assumed_wrong_topic": "TCP 三次握手与四次挥手",
+            "baseline_top1": true,
+            "baseline_top3": true,
+            "wrong_top1": false,
+            "wrong_top3": false,
+            "wrong_got": [
+              "TCP 三次握手与四次挥手",
+              "TCP 与 UDP",
+              "TCP 三次握手与四次挥手",
+              "TCP 三次握手与四次挥手"
+            ]
+          },
+          {
+            "id": "csc-2",
+            "query": "TCP 和 UDP 该怎么选？",
+            "expected": [
+              "TCP 与 UDP"
+            ],
+            "assumed_wrong_topic": "TCP/IP 分层模型与 ARP / DNS",
+            "baseline_top1": true,
+            "baseline_top3": true,
+            "wrong_top1": true,
+            "wrong_top3": true,
+            "wrong_got": [
+              "TCP 与 UDP",
+              "TCP/IP 分层模型与 ARP / DNS",
+              "TCP 与 UDP",
+              "TCP 与 UDP"
+            ]
+          },
+          {
+            "id": "csc-3",
+            "query": "为什么线程切换比进程切换开销小？",
+            "expected": [
+              "进程与线程"
+            ],
+            "assumed_wrong_topic": "进程调度算法",
+            "baseline_top1": true,
+            "baseline_top3": true,
+            "wrong_top1": true,
+            "wrong_top3": true,
+            "wrong_got": [
+              "进程与线程",
+              "进程与线程",
+              "进程调度算法",
+              "进程与线程"
+            ]
+          },
+          {
+            "id": "csc-4",
+            "query": "时间片轮转和优先级调度该怎么选？",
+            "expected": [
+              "进程调度算法"
+            ],
+            "assumed_wrong_topic": "进程与线程",
+            "baseline_top1": true,
+            "baseline_top3": true,
+            "wrong_top1": false,
+            "wrong_top3": true,
+            "wrong_got": [
+              "进程与线程",
+              "进程调度算法",
+              "进程调度算法",
+              "进程调度算法"
+            ]
+          },
+          {
+            "id": "csc-5",
+            "query": "页面置换 LRU 是怎么工作的？",
+            "expected": [
+              "虚拟内存与页面置换"
+            ],
+            "assumed_wrong_topic": "死锁",
+            "baseline_top1": true,
+            "baseline_top3": true,
+            "wrong_top1": true,
+            "wrong_top3": true,
+            "wrong_got": [
+              "虚拟内存与页面置换",
+              "虚拟内存与页面置换",
+              "死锁",
+              "死锁"
+            ]
+          },
+          {
+            "id": "csc-6",
+            "query": "死锁的预防和避免有什么区别？",
+            "expected": [
+              "死锁"
+            ],
+            "assumed_wrong_topic": "虚拟内存与页面置换",
+            "baseline_top1": true,
+            "baseline_top3": true,
+            "wrong_top1": false,
+            "wrong_top3": true,
+            "wrong_got": [
+              "虚拟内存与页面置换",
+              "虚拟内存与页面置换",
+              "死锁",
+              "死锁"
+            ]
+          },
+          {
+            "id": "csc-7",
+            "query": "TCP 四次挥手为什么要等 TIME_WAIT？",
+            "expected": [
+              "TCP 三次握手与四次挥手"
+            ],
+            "assumed_wrong_topic": "HTTPS 与 TLS 握手",
+            "baseline_top1": true,
+            "baseline_top3": true,
+            "wrong_top1": true,
+            "wrong_top3": true,
+            "wrong_got": [
+              "TCP 三次握手与四次挥手",
+              "TCP 三次握手与四次挥手",
+              "TCP 三次握手与四次挥手",
+              "TCP 三次握手与四次挥手"
+            ]
+          },
+          {
+            "id": "csc-8",
+            "query": "为什么 DNS 用 UDP？",
+            "expected": [
+              "TCP/IP 分层模型与 ARP / DNS"
+            ],
+            "assumed_wrong_topic": "TCP 与 UDP",
+            "baseline_top1": true,
+            "baseline_top3": true,
+            "wrong_top1": true,
+            "wrong_top3": true,
+            "wrong_got": [
+              "TCP/IP 分层模型与 ARP / DNS",
+              "TCP 与 UDP",
+              "TCP 与 UDP",
+              "TCP 与 UDP"
+            ]
+          }
+        ],
+        "note": "软门禁（提案 §3.6）：hold_rate = topic 被换成错主题后 top1/top3 仍命中的比例。强制拼错 topic 比生产 _should_augment_with_topic 更严，量的是最坏情况。"
+      },
+      "e2e": {
+        "base_url": "http://127.0.0.1:8000",
+        "classroom_id": 5,
+        "cases_count": 10,
+        "success": 10,
+        "success_rate": 1.0,
+        "e2e_p95_secs": 18.463,
+        "avg_sources": 4.0,
+        "state_present_rate": 1.0,
+        "topic_match_rate": 0.3333,
+        "per_case": [
+          {
+            "id": "oos-1",
+            "kind": "oos",
+            "query": "Redis 持久化有哪几种方式？",
+            "status": 200,
+            "elapsed_secs": 8.093,
+            "sources": 4,
+            "source_topics": [
+              "TCP 与 UDP",
+              "TCP/IP 分层模型与 ARP / DNS",
+              "进程与线程",
+              "进程调度算法"
+            ],
+            "chars": 595,
+            "state_topic": "redis 持久化",
+            "hint_level": 0,
+            "state_present": true,
+            "topic_match": null,
+            "error": ""
+          },
+          {
+            "id": "oos-2",
+            "kind": "oos",
+            "query": "MySQL 索引为什么用 B+ 树？",
+            "status": 200,
+            "elapsed_secs": 12.397,
+            "sources": 4,
+            "source_topics": [
+              "TCP 与 UDP",
+              "TCP/IP 分层模型与 ARP / DNS",
+              "死锁"
+            ],
+            "chars": 741,
+            "state_topic": "mysql 索引 b+ 树",
+            "hint_level": 0,
+            "state_present": true,
+            "topic_match": null,
+            "error": ""
+          },
+          {
+            "id": "oos-3",
+            "kind": "oos",
+            "query": "Java 的 HashMap 线程安全吗？",
+            "status": 200,
+            "elapsed_secs": 11.698,
+            "sources": 4,
+            "source_topics": [
+              "HTTPS 与 TLS 握手",
+              "死锁",
+              "进程与线程"
+            ],
+            "chars": 946,
+            "state_topic": "hashmap 线程安全",
+            "hint_level": 0,
+            "state_present": true,
+            "topic_match": null,
+            "error": ""
+          },
+          {
+            "id": "oos-4",
+            "kind": "oos",
+            "query": "什么是 CAP 定理？",
+            "status": 200,
+            "elapsed_secs": 12.04,
+            "sources": 4,
+            "source_topics": [
+              "TCP 三次握手与四次挥手",
+              "TCP 与 UDP",
+              "TCP/IP 分层模型与 ARP / DNS",
+              "进程与线程"
+            ],
+            "chars": 652,
+            "state_topic": "cap 定理",
+            "hint_level": 0,
+            "state_present": true,
+            "topic_match": null,
+            "error": ""
+          },
+          {
+            "id": "iv-32",
+            "kind": "kb-interview",
+            "query": "SJF 为什么平均周转时间最优？",
+            "status": 200,
+            "elapsed_secs": 18.463,
+            "sources": 4,
+            "source_topics": [
+              "进程调度算法"
+            ],
+            "chars": 712,
+            "state_topic": "短作业优先调度算法",
+            "hint_level": 0,
+            "state_present": true,
+            "topic_match": false,
+            "error": ""
+          },
+          {
+            "id": "iv-23",
+            "kind": "kb-interview",
+            "query": "死锁和死循环是一回事吗？",
+            "status": 200,
+            "elapsed_secs": 9.535,
+            "sources": 4,
+            "source_topics": [
+              "TCP 与 UDP",
+              "死锁"
+            ],
+            "chars": 683,
+            "state_topic": "死锁与死循环的区别",
+            "hint_level": 0,
+            "state_present": true,
+            "topic_match": true,
+            "error": ""
+          },
+          {
+            "id": "fl-5",
+            "kind": "follow-up",
+            "query": "性能开销体现在哪？",
+            "status": 200,
+            "elapsed_secs": 17.974,
+            "sources": 4,
+            "source_topics": [
+              "死锁"
+            ],
+            "chars": 883,
+            "state_topic": "死锁与死循环的区别",
+            "hint_level": 2,
+            "state_present": true,
+            "topic_match": false,
+            "error": ""
+          },
+          {
+            "id": "dl-3",
+            "kind": "in-kb",
+            "query": "银行家算法是做什么的？",
+            "status": 200,
+            "elapsed_secs": 8.278,
+            "sources": 4,
+            "source_topics": [
+              "死锁",
+              "虚拟内存与页面置换",
+              "进程调度算法"
+            ],
+            "chars": 656,
+            "state_topic": "银行家算法",
+            "hint_level": 0,
+            "state_present": true,
+            "topic_match": false,
+            "error": ""
+          },
+          {
+            "id": "iv-34",
+            "kind": "kb-interview",
+            "query": "RR 的时间片设为多少合适？",
+            "status": 200,
+            "elapsed_secs": 9.747,
+            "sources": 4,
+            "source_topics": [
+              "进程调度算法"
+            ],
+            "chars": 548,
+            "state_topic": "时间片轮转",
+            "hint_level": 0,
+            "state_present": true,
+            "topic_match": false,
+            "error": ""
+          },
+          {
+            "id": "iv-21",
+            "kind": "kb-interview",
+            "query": "写一个必然死锁的代码？",
+            "status": 200,
+            "elapsed_secs": 11.522,
+            "sources": 4,
+            "source_topics": [
+              "死锁"
+            ],
+            "chars": 934,
+            "state_topic": "死锁",
+            "hint_level": 0,
+            "state_present": true,
+            "topic_match": true,
+            "error": ""
+          }
+        ],
+        "note": "提案 §2.5：L4 不进 CI，只出报告。state_present_rate 以 personalized 键存在为准（降级流无 state，见 B_WORKLOG XB-6/XB-8）；topic_match_rate 是主题保持的代理值（state.topic 归一化匹配 expected），非提案的逐轮漂移率口径。"
+      }
+    }
+  },
+  "gate": {
+    "passed": true,
+    "failures": []
+  }
+}

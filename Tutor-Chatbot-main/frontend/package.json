@@ -1,0 +1,35 @@
+{
+  "name": "ai-classroom-client",
+  "version": "0.1.0",
+  "private": true,
+  "description": "AI Classroom 桌面客户端（面向计算机八股学习的 AI 智能教室）",
+  "main": "electron/main.js",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint",
+    "client": "electron .",
+    "client:static": "electron . --static"
+  },
+  "dependencies": {
+    "next": "^16.2.11",
+    "react": "19.2.4",
+    "react-dom": "19.2.4"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "electron": "^44.7.2",
+    "eslint": "^9",
+    "eslint-config-next": "16.2.11",
+    "tailwindcss": "^4",
+    "typescript": "^5"
+  },
+  "overrides": {
+    "postcss": "^8.5.10",
+    "sharp": "^0.35.0"
+  }
+}

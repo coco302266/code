@@ -1,0 +1,104 @@
+name: ai-classroom
+
+# 部署目录：Tutor-Chatbot-main/deploy/
+# 前置：cp .env.docker.example .env  并填入 LLM_API_KEY / MySQL 密码
+# 启动：docker compose up -d --build
+#
+# 图形： web(nginx:80) ──/api──▶ backend(uvicorn:8000) ──▶ mysql:3306
+#        web 同时托管前端静态产物 out/
+
+services:
+  mysql:
+    image: mysql:8.0
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE:-ai_classroom}
+      MYSQL_USER: ${MYSQL_USER:-ai_classroom}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    command:
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
+    volumes:
+      - mysql_data:/var/lib/mysql
+    # 不映射宿主端口：backend 走 compose 内部网络访问 mysql。
+    # 宿主若已有 MySQL 占着 3306，映射会直接启动失败；需要外部连库时再临时加
+    #   - "127.0.0.1:13306:3306"
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h 127.0.0.1 -u root -p$$MYSQL_ROOT_PASSWORD || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  backend:
+    build:
+      context: ..
+      dockerfile: deploy/backend.Dockerfile
+    image: ai-classroom-backend:latest
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      # 覆盖 .env 里的本机地址，指向容器网络内的 mysql
+      MYSQL_HOST: mysql
+      MYSQL_PORT: "3306"
+      MYSQL_DATABASE: ${MYSQL_DATABASE:-ai_classroom}
+      MYSQL_USER: ${MYSQL_USER:-ai_classroom}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      # 数据目录固定到容器内路径（对应下方卷挂载）
+      KNOWLEDGE_PERSIST_DIR: /app/chroma_kb
+      CLASSROOM_CHROMA_DIR: /app/chroma_classrooms
+      CLASSROOM_DOCS_DIR: /app/classroom_docs
+      FASTEMBED_CACHE_PATH: /app/.model_cache
+    volumes:
+      # 模型缓存：5.8G，不进镜像（离线可用）。
+      # 必须 rw：fastembed 要在缓存目录内建 .locks 做文件锁，只读会直接报错。
+      - ../backend/.model_cache:/app/.model_cache
+      # 向量库与课堂原件：复用宿主机现有数据，可写
+      - ../backend/chroma_kb:/app/chroma_kb
+      - ../backend/chroma_classrooms:/app/chroma_classrooms
+      - ../backend/classroom_docs:/app/classroom_docs
+    depends_on:
+      mysql:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "http://127.0.0.1:8000/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 5
+      start_period: 90s
+
+  # 一次性建库建表（init_db.py），跑完即退出；可重复执行
+  init:
+    image: ai-classroom-backend:latest
+    build:
+      context: ..
+      dockerfile: deploy/backend.Dockerfile
+    env_file: .env
+    environment:
+      MYSQL_HOST: mysql
+      MYSQL_PORT: "3306"
+      MYSQL_DATABASE: ${MYSQL_DATABASE:-ai_classroom}
+      MYSQL_USER: ${MYSQL_USER:-ai_classroom}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    command: ["python", "init_db.py"]
+    depends_on:
+      mysql:
+        condition: service_healthy
+    restart: "no"
+
+  web:
+    build:
+      context: ..
+      dockerfile: deploy/frontend.Dockerfile
+      args:
+        NEXT_PUBLIC_BACKEND_URL: /api
+    image: ai-classroom-web:latest
+    restart: unless-stopped
+    ports:
+      - "8080:80"
+    depends_on:
+      backend:
+        condition: service_healthy
+
+volumes:
+  mysql_data:

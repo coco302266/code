@@ -1,0 +1,2725 @@
+{
+  "generated_at": "20261030_030046",
+  "votes": 3,
+  "docs": [
+    "cs/network/http-https.md",
+    "cs/os/deadlock.md",
+    "cs/network/tcp-handshake.md"
+  ],
+  "a_name": "Qwen(裁判通道)",
+  "b_name": null,
+  "labels": [
+    {
+      "query": "CA对证书内容做哈希再签名有什么作用？",
+      "source": "cs/network/http-https.md",
+      "parent_start": 18,
+      "a": 0.0,
+      "b": null,
+      "g": 0.0
+    },
+    {
+      "query": "CA对证书内容做哈希再签名有什么作用？",
+      "source": "cs/network/http-https.md",
+      "parent_start": 121,
+      "a": 0.5,
+      "b": null,
+      "g": 0.5
+    },
+    {
+      "query": "CA对证书内容做哈希再签名有什么作用？",
+      "source": "cs/network/http-https.md",
+      "parent_start": 1893,
+      "a": 1.0,
+      "b": null,
+      "g": 1.0
+    },
+    {
+      "query": "CA对证书内容做哈希再签名有什么作用？",
+      "source": "cs/network/http-https.md",
+      "parent_start": 2536,
+      "a": 0.0,
+      "b": null,
+      "g": 0.0
+    },
+    {
+      "query": "CA对证书内容做哈希再签名有什么作用？",
+      "source": "cs/network/http-https.md",
+      "parent_start": 3469,
+      "a": 0.0,
+      "b": null,
+      "g": 0.0
+    },
+    {
+      "query": "HTTPS 和 HTTP 有什么不同？",
+      "source": "cs/network/http-https.md",
+      "parent_start": 18,
+      "a": 1.0,
+      "b": null,
+      "g": 1.0
+    },
+    {
+      "query": "HTTPS 和 HTTP 有什么不同？",
+      "source": "cs/network/http-https.md",
+      "parent_start": 121,
+      "a": 0.5,
+      "b": null,
+      "g": 1.0
+    },
+    {
+      "query": "HTTPS 和 HTTP 有什么不同？",
+      "source": "cs/network/http-https.md",
+      "parent_start": 1893,
+      "a": 0.0,
+      "b": null,
+      "g": 0.5
+    },
+    {
+      "query": "HTTPS 和 HTTP 有什么不同？",
+      "source": "cs/network/http-https.md",
+      "parent_start": 2536,
+      "a": 0.5,
+      "b": null,
+      "g": 0.5
+    },
+    {
+      "query": "HTTPS 和 HTTP 有什么不同？",
+      "source": "cs/network/http-https.md",
+      "parent_start": 3469,
+      "a": 0.0,
+      "b": null,
+      "g": 0.5
+    },
+    {
+      "query": "HTTPS 抓包原理？",
+      "source": "cs/network/http-https.md",
+      "parent_start": 18,
+      "a": 0.0,
+      "b": null,
+      "g": 0.5
+    },
+    {
+      "query": "HTTPS 抓包原理？",
+      "source": "cs/network/http-https.md",
+      "parent_start": 121,
+      "a": 0.0,
+      "b": null,
+      "g": 0.5
+    },
+    {
+      "query": "HTTPS 抓包原理？",
+      "source": "cs/network/http-https.md",
+      "parent_start": 1893,
+      "a": 0.0,
+      "b": null,
+      "g": 1.0
+    },
+    {
+      "query": "HTTPS 抓包原理？",
+      "source": "cs/network/http-https.md",
+      "parent_start": 2536,
+      "a": 0.0,
+      "b": null,
+      "g": 0.0
+    },
+    {
+      "query": "HTTPS 抓包原理？",
+      "source": "cs/network/http-https.md",
+      "parent_start": 3469,
+      "a": 1.0,
+      "b": null,
+      "g": 1.0
+    },
+    {
+      "query": "HTTPS 握手和 TCP 三次握手有什么联系？",
+      "source": "cs/network/http-https.md",
+      "parent_start": 18,
+      "a": 0.0,
+      "b": null,
+      "g": 0.5
+    },
+    {
+      "query": "HTTPS 握手和 TCP 三次握手有什么联系？",
+      "source": "cs/network/http-https.md",
+      "parent_start": 121,
+      "a": 0.0,
+      "b": null,
+      "g": 0.5
+    },
+    {
+      "query": "HTTPS 握手和 TCP 三次握手有什么联系？",
+      "source": "cs/network/http-https.md",
+      "parent_start": 1893,
+      "a": 0.0,
+      "b": null,
+      "g": 0.0
+    },
+    {
+      "query": "HTTPS 握手和 TCP 三次握手有什么联系？",
+      "source": "cs/network/http-https.md",
+      "parent_start": 2536,
+      "a": 0.0,
+      "b": null,
+      "g": 0.0
+    },
+    {
+      "query": "HTTPS 握手和 TCP 三次握手有什么联系？",
+      "source": "cs/network/http-https.md",
+      "parent_start": 3469,
+      "a": 0.0,
+      "b": null,
+      "g": 0.0
+    },
+    {
+      "query": "HTTPS 握手用了几种加密？",
+      "source": "cs/network/http-https.md",
+      "parent_start": 18,
+      "a": 0.5,
+      "b": null,
+      "g": 0.5
+    },
+    {
+      "query": "HTTPS 握手用了几种加密？",
+      "source": "cs/network/http-https.md",
+      "parent_start": 121,
+      "a": 0.5,
+      "b": null,
+      "g": 1.0
+    },
+    {
+      "query": "HTTPS 握手用了几种加密？",
+      "source": "cs/network/http-https.md",
+      "parent_start": 1893,
+      "a": 0.0,
+      "b": null,
+      "g": 0.5
+    },
+    {
+      "query": "HTTPS 握手用了几种加密？",
+      "source": "cs/network/http-https.md",
+      "parent_start": 2536,
+      "a": 0.0,
+      "b": null,
+      "g": 0.5
+    },
+    {
+      "query": "HTTPS 握手用了几种加密？",
+      "source": "cs/network/http-https.md",
+      "parent_start": 3469,
+      "a": 1.0,
+      "b": null,
+      "g": 1.0
+    },
+    {
+      "query": "HTTPS后续传输数据主要用对称加密吗？",
+      "source": "cs/network/http-https.md",
+      "parent_start": 18,
+      "a": 1.0,
+      "b": null,
+      "g": 1.0
+    },
+    {
+      "query": "HTTPS后续传输数据主要用对称加密吗？",
+      "source": "cs/network/http-https.md",
+      "parent_start": 121,
+      "a": 0.5,
+      "b": null,
+      "g": 1.0
+    },
+    {
+      "query": "HTTPS后续传输数据主要用对称加密吗？",
+      "source": "cs/network/http-https.md",
+      "parent_start": 1893,
+      "a": 0.0,
+      "b": null,
+      "g": 0.5
+    },
+    {
+      "query": "HTTPS后续传输数据主要用对称加密吗？",
+      "source": "cs/network/http-https.md",
+      "parent_start": 2536,
+      "a": 0.5,
+      "b": null,
+      "g": 0.5
+    },
+    {
+      "query": "HTTPS后续传输数据主要用对称加密吗？",
+      "source": "cs/network/http-https.md",
+      "parent_start": 3469,
+      "a": 0.0,
+      "b": null,
+      "g": 1.0
+    },
+    {
+      "query": "HTTPS和HTTP、TLS之间是什么关系？",
+      "source": "cs/network/http-https.md",
+      "parent_start": 18,
+      "a": 1.0,
+      "b": null,
+      "g": 1.0
+    },
+    {
+      "query": "HTTPS和HTTP、TLS之间是什么关系？",
+      "source": "cs/network/http-https.md",
+      "parent_start": 121,
+      "a": 0.5,
+      "b": null,
+      "g": 0.0
+    },
+    {
+      "query": "HTTPS和HTTP、TLS之间是什么关系？",
+      "source": "cs/network/http-https.md",
+      "parent_start": 1893,
+      "a": 0.0,
+      "b": null,
+      "g": 0.0
+    },
+    {
+      "query": "HTTPS和HTTP、TLS之间是什么关系？",
+      "source": "cs/network/http-https.md",
+      "parent_start": 2536,
+      "a": 0.0,
+      "b": null,
+      "g": 0.0
+    },
+    {
+      "query": "HTTPS和HTTP、TLS之间是什么关系？",
+      "source": "cs/network/http-https.md",
+      "parent_start": 3469,
+      "a": 0.0,
+      "b": null,
+      "g": 0.0
+    },
+    {
+      "query": "HTTPS握手通常用非对称、对称和哈希三类算法吗？",
+      "source": "cs/network/http-https.md",
+      "parent_start": 18,
+      "a": 0.5,
+      "b": null,
+      "g": 0.5
+    },
+    {
+      "query": "HTTPS握手通常用非对称、对称和哈希三类算法吗？",
+      "source": "cs/network/http-https.md",
+      "parent_start": 121,
+      "a": 0.5,
+      "b": null,
+      "g": 0.5
+    },
+    {
+      "query": "HTTPS握手通常用非对称、对称和哈希三类算法吗？",
+      "source": "cs/network/http-https.md",
+      "parent_start": 1893,
+      "a": 0.0,
+      "b": null,
+      "g": 0.5
+    },
+    {
+      "query": "HTTPS握手通常用非对称、对称和哈希三类算法吗？",
+      "source": "cs/network/http-https.md",
+      "parent_start": 2536,
+      "a": 0.0,
+      "b": null,
+      "g": 0.0
+    },
+    {
+      "query": "HTTPS握手通常用非对称、对称和哈希三类算法吗？",
+      "source": "cs/network/http-https.md",
+      "parent_start": 3469,
+      "a": 1.0,
+      "b": null,
+      "g": 1.0
+    },
+    {
+      "query": "HTTPS比HTTP慢几倍这种说法准确吗？",
+      "source": "cs/network/http-https.md",
+      "parent_start": 18,
+      "a": 0.0,
+      "b": null,
+      "g": 0.0
+    },
+    {
+      "query": "HTTPS比HTTP慢几倍这种说法准确吗？",
+      "source": "cs/network/http-https.md",
+      "parent_start": 121,
+      "a": 0.0,
+      "b": null,
+      "g": 0.0
+    },
+    {
+      "query": "HTTPS比HTTP慢几倍这种说法准确吗？",
+      "source": "cs/network/http-https.md",
+      "parent_start": 1893,
+      "a": 0.0,
+      "b": null,
+      "g": 0.0
+    },
+    {
+      "query": "HTTPS比HTTP慢几倍这种说法准确吗？",
+      "source": "cs/network/http-https.md",
+      "parent_start": 2536,
+      "a": 1.0,
+      "b": null,
+      "g": 1.0
+    },
+    {
+      "query": "HTTPS比HTTP慢几倍这种说法准确吗？",
+      "source": "cs/network/http-https.md",
+      "parent_start": 3469,
+      "a": 0.0,
+      "b": null,
+      "g": 0.0
+    },
+    {
+      "query": "HTTPS额外延迟一般是几毫秒到十几毫秒吗？",
+      "source": "cs/network/http-https.md",
+      "parent_start": 18,
+      "a": 0.0,
+      "b": null,
+      "g": 0.0
+    },
+    {
+      "query": "HTTPS额外延迟一般是几毫秒到十几毫秒吗？",
+      "source": "cs/network/http-https.md",
+      "parent_start": 121,
+      "a": 0.0,
+      "b": null,
+      "g": 0.0
+    },
+    {
+      "query": "HTTPS额外延迟一般是几毫秒到十几毫秒吗？",
+      "source": "cs/network/http-https.md",
+      "parent_start": 1893,
+      "a": 0.0,
+      "b": null,
+      "g": 0.0
+    },
+    {
+      "query": "HTTPS额外延迟一般是几毫秒到十几毫秒吗？",
+      "source": "cs/network/http-https.md",
+      "parent_start": 2536,
+      "a": 1.0,
+      "b": null,
+      "g": 1.0
+    },
+    {
+      "query": "HTTPS额外延迟一般是几毫秒到十几毫秒吗？",
+      "source": "cs/network/http-https.md",
+      "parent_start": 3469,
+      "a": 0.0,
+      "b": null,
+      "g": 0.0
+    },
+    {
+      "query": "TLS 1.2和TLS 1.3的握手RTT有何区别？",
+      "source": "cs/network/http-https.md",
+      "parent_start": 18,
+      "a": 0.0,
+      "b": null,
+      "g": 0.0
+    },
+    {
+      "query": "TLS 1.2和TLS 1.3的握手RTT有何区别？",
+      "source": "cs/network/http-https.md",
+      "parent_start": 121,
+      "a": 0.5,
+      "b": null,
+      "g": 0.5
+    },
+    {
+      "query": "TLS 1.2和TLS 1.3的握手RTT有何区别？",
+      "source": "cs/network/http-https.md",
+      "parent_start": 1893,
+      "a": 0.0,
+      "b": null,
+      "g": 0.0
+    },
+    {
+      "query": "TLS 1.2和TLS 1.3的握手RTT有何区别？",
+      "source": "cs/network/http-https.md",
+      "parent_start": 2536,
+      "a": 0.5,
+      "b": null,
+      "g": 1.0
+    },
+    {
+      "query": "TLS 1.2和TLS 1.3的握手RTT有何区别？",
+      "source": "cs/network/http-https.md",
+      "parent_start": 3469,
+      "a": 0.0,
+      "b": null,
+      "g": 0.0
+    },
+    {
+      "query": "TLS 1.2完整握手采用哪种密钥交换方式？",
+      "source": "cs/network/http-https.md",
+      "parent_start": 18,
+      "a": 0.0,
+      "b": null,
+      "g": 0.0
+    },
+    {
+      "query": "TLS 1.2完整握手采用哪种密钥交换方式？",
+      "source": "cs/network/http-https.md",
+      "parent_start": 121,
+      "a": 1.0,
+      "b": null,
+      "g": 1.0
+    },
+    {
+      "query": "TLS 1.2完整握手采用哪种密钥交换方式？",
+      "source": "cs/network/http-https.md",
+      "parent_start": 1893,
+      "a": 0.0,
+      "b": null,
+      "g": 0.0
+    },
+    {
+      "query": "TLS 1.2完整握手采用哪种密钥交换方式？",
+      "source": "cs/network/http-https.md",
+      "parent_start": 2536,
+      "a": 0.0,
+      "b": null,
+      "g": 0.0
+    },
+    {
+      "query": "TLS 1.2完整握手采用哪种密钥交换方式？",
+      "source": "cs/network/http-https.md",
+      "parent_start": 3469,
+      "a": 0.0,
+      "b": null,
+      "g": 0.0
+    },
+    {
+      "query": "TLS 1.3 相比 1.2 改了什么？",
+      "source": "cs/network/http-https.md",
+      "parent_start": 18,
+      "a": 0.0,
+      "b": null,
+      "g": 0.0
+    },
+    {
+      "query": "TLS 1.3 相比 1.2 改了什么？",
+      "source": "cs/network/http-https.md",
+      "parent_start": 121,
+      "a": 1.0,
+      "b": null,
+      "g": 1.0
+    },
+    {
+      "query": "TLS 1.3 相比 1.2 改了什么？",
+      "source": "cs/network/http-https.md",
+      "parent_start": 1893,
+      "a": 0.0,
+      "b": null,
+      "g": 0.0
+    },
+    {
+      "query": "TLS 1.3 相比 1.2 改了什么？",
+      "source": "cs/network/http-https.md",
+      "parent_start": 2536,
+      "a": 0.5,
+      "b": null,
+      "g": 0.5
+    },
+    {
+      "query": "TLS 1.3 相比 1.2 改了什么？",
+      "source": "cs/network/http-https.md",
+      "parent_start": 3469,
+      "a": 0.0,
+      "b": null,
+      "g": 0.0
+    },
+    {
+      "query": "TLS 1.3会话复用能达到几RTT握手？",
+      "source": "cs/network/http-https.md",
+      "parent_start": 18,
+      "a": 0.0,
+      "b": null,
+      "g": 0.0
+    },
+    {
+      "query": "TLS 1.3会话复用能达到几RTT握手？",
+      "source": "cs/network/http-https.md",
+      "parent_start": 121,
+      "a": 0.5,
+      "b": null,
+      "g": 1.0
+    },
+    {
+      "query": "TLS 1.3会话复用能达到几RTT握手？",
+      "source": "cs/network/http-https.md",
+      "parent_start": 1893,
+      "a": 0.0,
+      "b": null,
+      "g": 0.0
+    },
+    {
+      "query": "TLS 1.3会话复用能达到几RTT握手？",
+      "source": "cs/network/http-https.md",
+      "parent_start": 2536,
+      "a": 0.5,
+      "b": null,
+      "g": 1.0
+    },
+    {
+      "query": "TLS 1.3会话复用能达到几RTT握手？",
+      "source": "cs/network/http-https.md",
+      "parent_start": 3469,
+      "a": 0.0,
+      "b": null,
+      "g": 0.0
+    },
+    {
+      "query": "TLS 握手为什么要用三个随机数？",
+      "source": "cs/network/http-https.md",
+      "parent_start": 18,
+      "a": 0.0,
+      "b": null,
+      "g": 0.0
+    },
+    {
+      "query": "TLS 握手为什么要用三个随机数？",
+      "source": "cs/network/http-https.md",
+      "parent_start": 121,
+      "a": 1.0,
+      "b": null,
+      "g": 1.0
+    },
+    {
+      "query": "TLS 握手为什么要用三个随机数？",
+      "source": "cs/network/http-https.md",
+      "parent_start": 1893,
+      "a": 0.0,
+      "b": null,
+      "g": 0.0
+    },
+    {
+      "query": "TLS 握手为什么要用三个随机数？",
+      "source": "cs/network/http-https.md",
+      "parent_start": 2536,
+      "a": 0.0,
+      "b": null,
+      "g": 0.0
+    },
+    {
+      "query": "TLS 握手为什么要用三个随机数？",
+      "source": "cs/network/http-https.md",
+      "parent_start": 3469,
+      "a": 0.0,
+      "b": null,
+      "g": 0.0
+    },
+    {
+      "query": "WebSocket 和 HTTP 什么关系？",
+      "source": "cs/network/http-https.md",
+      "parent_start": 18,
+      "a": 0.0,
+      "b": null,
+      "g": 0.0
+    },
+    {
+      "query": "WebSocket 和 HTTP 什么关系？",
+      "source": "cs/network/http-https.md",
+      "parent_start": 121,
+      "a": 0.0,
+      "b": null,
+      "g": 0.5
+    },
+    {
+      "query": "WebSocket 和 HTTP 什么关系？",
+      "source": "cs/network/http-https.md",
+      "parent_start": 1893,
+      "a": 0.0,
+      "b": null,
+      "g": 0.0
+    },
+    {
+      "query": "WebSocket 和 HTTP 什么关系？",
+      "source": "cs/network/http-https.md",
+      "parent_start": 2536,
+      "a": 0.0,
+      "b": null,
+      "g": 0.0
+    },
+    {
+      "query": "WebSocket 和 HTTP 什么关系？",
+      "source": "cs/network/http-https.md",
+      "parent_start": 3469,
+      "a": 1.0,
+      "b": null,
+      "g": 1.0
+    },
+    {
+      "query": "为什么不能全程只用非对称加密？",
+      "source": "cs/network/http-https.md",
+      "parent_start": 18,
+      "a": 0.5,
+      "b": null,
+      "g": 0.5
+    },
+    {
+      "query": "为什么不能全程只用非对称加密？",
+      "source": "cs/network/http-https.md",
+      "parent_start": 121,
+      "a": 1.0,
+      "b": null,
+      "g": 1.0
+    },
+    {
+      "query": "为什么不能全程只用非对称加密？",
+      "source": "cs/network/http-https.md",
+      "parent_start": 1893,
+      "a": 0.0,
+      "b": null,
+      "g": 0.5
+    },
+    {
+      "query": "为什么不能全程只用非对称加密？",
+      "source": "cs/network/http-https.md",
+      "parent_start": 2536,
+      "a": 0.5,
+      "b": null,
+      "g": 0.0
+    },
+    {
+      "query": "为什么不能全程只用非对称加密？",
+      "source": "cs/network/http-https.md",
+      "parent_start": 3469,
+      "a": 0.0,
+      "b": null,
+      "g": 0.0
+    },
+    {
+      "query": "为什么说HTTPS需要CA作为可信第三方？",
+      "source": "cs/network/http-https.md",
+      "parent_start": 18,
+      "a": 0.0,
+      "b": null,
+      "g": 0.0
+    },
+    {
+      "query": "为什么说HTTPS需要CA作为可信第三方？",
+      "source": "cs/network/http-https.md",
+      "parent_start": 121,
+      "a": 0.5,
+      "b": null,
+      "g": 0.5
+    },
+    {
+      "query": "为什么说HTTPS需要CA作为可信第三方？",
+      "source": "cs/network/http-https.md",
+      "parent_start": 1893,
+      "a": 0.0,
+      "b": null,
+      "g": 0.5
+    },
+    {
+      "query": "为什么说HTTPS需要CA作为可信第三方？",
+      "source": "cs/network/http-https.md",
+      "parent_start": 2536,
+      "a": 0.0,
+      "b": null,
+      "g": 0.0
+    },
+    {
+      "query": "为什么说HTTPS需要CA作为可信第三方？",
+      "source": "cs/network/http-https.md",
+      "parent_start": 3469,
+      "a": 1.0,
+      "b": null,
+      "g": 1.0
+    },
+    {
+      "query": "为什么需要 CA？",
+      "source": "cs/network/http-https.md",
+      "parent_start": 18,
+      "a": 0.0,
+      "b": null,
+      "g": 0.0
+    },
+    {
+      "query": "为什么需要 CA？",
+      "source": "cs/network/http-https.md",
+      "parent_start": 121,
+      "a": 0.5,
+      "b": null,
+      "g": 1.0
+    },
+    {
+      "query": "为什么需要 CA？",
+      "source": "cs/network/http-https.md",
+      "parent_start": 1893,
+      "a": 0.0,
+      "b": null,
+      "g": 1.0
+    },
+    {
+      "query": "为什么需要 CA？",
+      "source": "cs/network/http-https.md",
+      "parent_start": 2536,
+      "a": 0.0,
+      "b": null,
+      "g": 0.0
+    },
+    {
+      "query": "为什么需要 CA？",
+      "source": "cs/network/http-https.md",
+      "parent_start": 3469,
+      "a": 1.0,
+      "b": null,
+      "g": 1.0
+    },
+    {
+      "query": "只用对称加密时密钥分发有什么风险？",
+      "source": "cs/network/http-https.md",
+      "parent_start": 18,
+      "a": 0.5,
+      "b": null,
+      "g": 0.5
+    },
+    {
+      "query": "只用对称加密时密钥分发有什么风险？",
+      "source": "cs/network/http-https.md",
+      "parent_start": 121,
+      "a": 1.0,
+      "b": null,
+      "g": 1.0
+    },
+    {
+      "query": "只用对称加密时密钥分发有什么风险？",
+      "source": "cs/network/http-https.md",
+      "parent_start": 1893,
+      "a": 0.0,
+      "b": null,
+      "g": 0.0
+    },
+    {
+      "query": "只用对称加密时密钥分发有什么风险？",
+      "source": "cs/network/http-https.md",
+      "parent_start": 2536,
+      "a": 0.0,
+      "b": null,
+      "g": 0.0
+    },
+    {
+      "query": "只用对称加密时密钥分发有什么风险？",
+      "source": "cs/network/http-https.md",
+      "parent_start": 3469,
+      "a": 0.0,
+      "b": null,
+      "g": 0.0
+    },
+    {
+      "query": "客户端不校验证书会怎样遭遇中间人攻击？",
+      "source": "cs/network/http-https.md",
+      "parent_start": 18,
+      "a": 0.0,
+      "b": null,
+      "g": 0.0
+    },
+    {
+      "query": "客户端不校验证书会怎样遭遇中间人攻击？",
+      "source": "cs/network/http-https.md",
+      "parent_start": 121,
+      "a": 0.0,
+      "b": null,
+      "g": 0.5
+    },
+    {
+      "query": "客户端不校验证书会怎样遭遇中间人攻击？",
+      "source": "cs/network/http-https.md",
+      "parent_start": 1893,
+      "a": 1.0,
+      "b": null,
+      "g": 1.0
+    },
+    {
+      "query": "客户端不校验证书会怎样遭遇中间人攻击？",
+      "source": "cs/network/http-https.md",
+      "parent_start": 2536,
+      "a": 0.0,
+      "b": null,
+      "g": 0.0
+    },
+    {
+      "query": "客户端不校验证书会怎样遭遇中间人攻击？",
+      "source": "cs/network/http-https.md",
+      "parent_start": 3469,
+      "a": 0.0,
+      "b": null,
+      "g": 0.5
+    },
+    {
+      "query": "性能开销体现在哪？",
+      "source": "cs/network/http-https.md",
+      "parent_start": 18,
+      "a": 0.0,
+      "b": null,
+      "g": 0.0
+    },
+    {
+      "query": "性能开销体现在哪？",
+      "source": "cs/network/http-https.md",
+      "parent_start": 121,
+      "a": 0.0,
+      "b": null,
+      "g": 0.5
+    },
+    {
+      "query": "性能开销体现在哪？",
+      "source": "cs/network/http-https.md",
+      "parent_start": 1893,
+      "a": 0.0,
+      "b": null,
+      "g": 0.5
+    },
+    {
+      "query": "性能开销体现在哪？",
+      "source": "cs/network/http-https.md",
+      "parent_start": 2536,
+      "a": 1.0,
+      "b": null,
+      "g": 1.0
+    },
+    {
+      "query": "性能开销体现在哪？",
+      "source": "cs/network/http-https.md",
+      "parent_start": 3469,
+      "a": 0.0,
+      "b": null,
+      "g": 0.0
+    },
+    {
+      "query": "握手中非对称加密主要负责解决什么？",
+      "source": "cs/network/http-https.md",
+      "parent_start": 18,
+      "a": 1.0,
+      "b": null,
+      "g": 1.0
+    },
+    {
+      "query": "握手中非对称加密主要负责解决什么？",
+      "source": "cs/network/http-https.md",
+      "parent_start": 121,
+      "a": 0.5,
+      "b": null,
+      "g": 1.0
+    },
+    {
+      "query": "握手中非对称加密主要负责解决什么？",
+      "source": "cs/network/http-https.md",
+      "parent_start": 1893,
+      "a": 0.0,
+      "b": null,
+      "g": 0.5
+    },
+    {
+      "query": "握手中非对称加密主要负责解决什么？",
+      "source": "cs/network/http-https.md",
+      "parent_start": 2536,
+      "a": 0.0,
+      "b": null,
+      "g": 0.5
+    },
+    {
+      "query": "握手中非对称加密主要负责解决什么？",
+      "source": "cs/network/http-https.md",
+      "parent_start": 3469,
+      "a": 0.0,
+      "b": null,
+      "g": 0.5
+    },
+    {
+      "query": "数字签名怎么保证证书不被篡改？",
+      "source": "cs/network/http-https.md",
+      "parent_start": 18,
+      "a": 0.0,
+      "b": null,
+      "g": 0.0
+    },
+    {
+      "query": "数字签名怎么保证证书不被篡改？",
+      "source": "cs/network/http-https.md",
+      "parent_start": 121,
+      "a": 0.0,
+      "b": null,
+      "g": 0.5
+    },
+    {
+      "query": "数字签名怎么保证证书不被篡改？",
+      "source": "cs/network/http-https.md",
+      "parent_start": 1893,
+      "a": 1.0,
+      "b": null,
+      "g": 1.0
+    },
+    {
+      "query": "数字签名怎么保证证书不被篡改？",
+      "source": "cs/network/http-https.md",
+      "parent_start": 2536,
+      "a": 0.0,
+      "b": null,
+      "g": 0.0
+    },
+    {
+      "query": "数字签名怎么保证证书不被篡改？",
+      "source": "cs/network/http-https.md",
+      "parent_start": 3469,
+      "a": 0.0,
+      "b": null,
+      "g": 0.5
+    },
+    {
+      "query": "校验证书时主要确认公钥属于目标服务器吗？",
+      "source": "cs/network/http-https.md",
+      "parent_start": 18,
+      "a": 0.0,
+      "b": null,
+      "g": 0.0
+    },
+    {
+      "query": "校验证书时主要确认公钥属于目标服务器吗？",
+      "source": "cs/network/http-https.md",
+      "parent_start": 121,
+      "a": 0.5,
+      "b": null,
+      "g": 0.5
+    },
+    {
+      "query": "校验证书时主要确认公钥属于目标服务器吗？",
+      "source": "cs/network/http-https.md",
+      "parent_start": 1893,
+      "a": 1.0,
+      "b": null,
+      "g": 1.0
+    },
+    {
+      "query": "校验证书时主要确认公钥属于目标服务器吗？",
+      "source": "cs/network/http-https.md",
+      "parent_start": 2536,
+      "a": 0.0,
+      "b": null,
+      "g": 0.0
+    },
+    {
+      "query": "校验证书时主要确认公钥属于目标服务器吗？",
+      "source": "cs/network/http-https.md",
+      "parent_start": 3469,
+      "a": 0.0,
+      "b": null,
+      "g": 0.0
+    },
+    {
+      "query": "银行 U 盾为什么安全？",
+      "source": "cs/network/http-https.md",
+      "parent_start": 18,
+      "a": 0.0,
+      "b": null,
+      "g": 0.0
+    },
+    {
+      "query": "银行 U 盾为什么安全？",
+      "source": "cs/network/http-https.md",
+      "parent_start": 121,
+      "a": 0.0,
+      "b": null,
+      "g": 0.0
+    },
+    {
+      "query": "银行 U 盾为什么安全？",
+      "source": "cs/network/http-https.md",
+      "parent_start": 1893,
+      "a": 0.0,
+      "b": null,
+      "g": 0.0
+    },
+    {
+      "query": "银行 U 盾为什么安全？",
+      "source": "cs/network/http-https.md",
+      "parent_start": 2536,
+      "a": 0.0,
+      "b": null,
+      "g": 0.0
+    },
+    {
+      "query": "银行 U 盾为什么安全？",
+      "source": "cs/network/http-https.md",
+      "parent_start": 3469,
+      "a": 1.0,
+      "b": null,
+      "g": 1.0
+    },
+    {
+      "query": "银行U盾的私钥为什么不容易被导出？",
+      "source": "cs/network/http-https.md",
+      "parent_start": 18,
+      "a": 0.0,
+      "b": null,
+      "g": 0.0
+    },
+    {
+      "query": "银行U盾的私钥为什么不容易被导出？",
+      "source": "cs/network/http-https.md",
+      "parent_start": 121,
+      "a": 0.0,
+      "b": null,
+      "g": 0.0
+    },
+    {
+      "query": "银行U盾的私钥为什么不容易被导出？",
+      "source": "cs/network/http-https.md",
+      "parent_start": 1893,
+      "a": 0.0,
+      "b": null,
+      "g": 0.0
+    },
+    {
+      "query": "银行U盾的私钥为什么不容易被导出？",
+      "source": "cs/network/http-https.md",
+      "parent_start": 2536,
+      "a": 0.0,
+      "b": null,
+      "g": 0.0
+    },
+    {
+      "query": "银行U盾的私钥为什么不容易被导出？",
+      "source": "cs/network/http-https.md",
+      "parent_start": 3469,
+      "a": 1.0,
+      "b": null,
+      "g": 1.0
+    },
+    {
+      "query": "不可剥夺条件要求资源只能由谁释放？",
+      "source": "cs/os/deadlock.md",
+      "parent_start": 6,
+      "a": 0.5,
+      "b": null,
+      "g": 0.0
+    },
+    {
+      "query": "不可剥夺条件要求资源只能由谁释放？",
+      "source": "cs/os/deadlock.md",
+      "parent_start": 102,
+      "a": 1.0,
+      "b": null,
+      "g": 1.0
+    },
+    {
+      "query": "不可剥夺条件要求资源只能由谁释放？",
+      "source": "cs/os/deadlock.md",
+      "parent_start": 922,
+      "a": 0.0,
+      "b": null,
+      "g": 0.0
+    },
+    {
+      "query": "不可剥夺条件要求资源只能由谁释放？",
+      "source": "cs/os/deadlock.md",
+      "parent_start": 1525,
+      "a": 0.0,
+      "b": null,
+      "g": 0.0
+    },
+    {
+      "query": "两个线程怎样加锁会构造出必然死锁？",
+      "source": "cs/os/deadlock.md",
+      "parent_start": 6,
+      "a": 0.0,
+      "b": null,
+      "g": 0.0
+    },
+    {
+      "query": "两个线程怎样加锁会构造出必然死锁？",
+      "source": "cs/os/deadlock.md",
+      "parent_start": 102,
+      "a": 0.5,
+      "b": null,
+      "g": 0.0
+    },
+    {
+      "query": "两个线程怎样加锁会构造出必然死锁？",
+      "source": "cs/os/deadlock.md",
+      "parent_start": 922,
+      "a": 0.0,
+      "b": null,
+      "g": 0.5
+    },
+    {
+      "query": "两个线程怎样加锁会构造出必然死锁？",
+      "source": "cs/os/deadlock.md",
+      "parent_start": 1525,
+      "a": 1.0,
+      "b": null,
+      "g": 1.0
+    },
+    {
+      "query": "互斥条件对资源占用提出了什么要求？",
+      "source": "cs/os/deadlock.md",
+      "parent_start": 6,
+      "a": 0.5,
+      "b": null,
+      "g": 0.0
+    },
+    {
+      "query": "互斥条件对资源占用提出了什么要求？",
+      "source": "cs/os/deadlock.md",
+      "parent_start": 102,
+      "a": 1.0,
+      "b": null,
+      "g": 1.0
+    },
+    {
+      "query": "互斥条件对资源占用提出了什么要求？",
+      "source": "cs/os/deadlock.md",
+      "parent_start": 922,
+      "a": 0.0,
+      "b": null,
+      "g": 0.0
+    },
+    {
+      "query": "互斥条件对资源占用提出了什么要求？",
+      "source": "cs/os/deadlock.md",
+      "parent_start": 1525,
+      "a": 0.0,
+      "b": null,
+      "g": 0.0
+    },
+    {
+      "query": "产生死锁必须同时满足哪四个条件？",
+      "source": "cs/os/deadlock.md",
+      "parent_start": 6,
+      "a": 1.0,
+      "b": null,
+      "g": 0.5
+    },
+    {
+      "query": "产生死锁必须同时满足哪四个条件？",
+      "source": "cs/os/deadlock.md",
+      "parent_start": 102,
+      "a": 1.0,
+      "b": null,
+      "g": 1.0
+    },
+    {
+      "query": "产生死锁必须同时满足哪四个条件？",
+      "source": "cs/os/deadlock.md",
+      "parent_start": 922,
+      "a": 0.0,
+      "b": null,
+      "g": 0.0
+    },
+    {
+      "query": "产生死锁必须同时满足哪四个条件？",
+      "source": "cs/os/deadlock.md",
+      "parent_start": 1525,
+      "a": 0.0,
+      "b": null,
+      "g": 0.0
+    },
+    {
+      "query": "写一个必然死锁的代码？",
+      "source": "cs/os/deadlock.md",
+      "parent_start": 6,
+      "a": 0.0,
+      "b": null,
+      "g": 0.5
+    },
+    {
+      "query": "写一个必然死锁的代码？",
+      "source": "cs/os/deadlock.md",
+      "parent_start": 102,
+      "a": 0.0,
+      "b": null,
+      "g": 0.5
+    },
+    {
+      "query": "写一个必然死锁的代码？",
+      "source": "cs/os/deadlock.md",
+      "parent_start": 922,
+      "a": 0.0,
+      "b": null,
+      "g": 0.5
+    },
+    {
+      "query": "写一个必然死锁的代码？",
+      "source": "cs/os/deadlock.md",
+      "parent_start": 1525,
+      "a": 1.0,
+      "b": null,
+      "g": 1.0
+    },
+    {
+      "query": "固定加锁顺序为什么能避免死锁环？",
+      "source": "cs/os/deadlock.md",
+      "parent_start": 6,
+      "a": 0.0,
+      "b": null,
+      "g": 0.0
+    },
+    {
+      "query": "固定加锁顺序为什么能避免死锁环？",
+      "source": "cs/os/deadlock.md",
+      "parent_start": 102,
+      "a": 0.5,
+      "b": null,
+      "g": 0.5
+    },
+    {
+      "query": "固定加锁顺序为什么能避免死锁环？",
+      "source": "cs/os/deadlock.md",
+      "parent_start": 922,
+      "a": 1.0,
+      "b": null,
+      "g": 1.0
+    },
+    {
+      "query": "固定加锁顺序为什么能避免死锁环？",
+      "source": "cs/os/deadlock.md",
+      "parent_start": 1525,
+      "a": 0.0,
+      "b": null,
+      "g": 0.5
+    },
+    {
+      "query": "循环等待条件形成了怎样的等待链？",
+      "source": "cs/os/deadlock.md",
+      "parent_start": 6,
+      "a": 0.5,
+      "b": null,
+      "g": 0.0
+    },
+    {
+      "query": "循环等待条件形成了怎样的等待链？",
+      "source": "cs/os/deadlock.md",
+      "parent_start": 102,
+      "a": 1.0,
+      "b": null,
+      "g": 1.0
+    },
+    {
+      "query": "循环等待条件形成了怎样的等待链？",
+      "source": "cs/os/deadlock.md",
+      "parent_start": 922,
+      "a": 0.0,
+      "b": null,
+      "g": 0.5
+    },
+    {
+      "query": "循环等待条件形成了怎样的等待链？",
+      "source": "cs/os/deadlock.md",
+      "parent_start": 1525,
+      "a": 0.0,
+      "b": null,
+      "g": 0.0
+    },
+    {
+      "query": "怎么排查线上死锁？",
+      "source": "cs/os/deadlock.md",
+      "parent_start": 6,
+      "a": 0.0,
+      "b": null,
+      "g": 0.5
+    },
+    {
+      "query": "怎么排查线上死锁？",
+      "source": "cs/os/deadlock.md",
+      "parent_start": 102,
+      "a": 0.0,
+      "b": null,
+      "g": 0.5
+    },
+    {
+      "query": "怎么排查线上死锁？",
+      "source": "cs/os/deadlock.md",
+      "parent_start": 922,
+      "a": 0.0,
+      "b": null,
+      "g": 0.5
+    },
+    {
+      "query": "怎么排查线上死锁？",
+      "source": "cs/os/deadlock.md",
+      "parent_start": 1525,
+      "a": 1.0,
+      "b": null,
+      "g": 1.0
+    },
+    {
+      "query": "按编号从小到大申请锁如何防止互相等待？",
+      "source": "cs/os/deadlock.md",
+      "parent_start": 6,
+      "a": 0.0,
+      "b": null,
+      "g": 0.0
+    },
+    {
+      "query": "按编号从小到大申请锁如何防止互相等待？",
+      "source": "cs/os/deadlock.md",
+      "parent_start": 102,
+      "a": 0.5,
+      "b": null,
+      "g": 0.5
+    },
+    {
+      "query": "按编号从小到大申请锁如何防止互相等待？",
+      "source": "cs/os/deadlock.md",
+      "parent_start": 922,
+      "a": 1.0,
+      "b": null,
+      "g": 1.0
+    },
+    {
+      "query": "按编号从小到大申请锁如何防止互相等待？",
+      "source": "cs/os/deadlock.md",
+      "parent_start": 1525,
+      "a": 0.0,
+      "b": null,
+      "g": 0.0
+    },
+    {
+      "query": "数据库里怎么避免死锁？",
+      "source": "cs/os/deadlock.md",
+      "parent_start": 6,
+      "a": 0.0,
+      "b": null,
+      "g": 0.5
+    },
+    {
+      "query": "数据库里怎么避免死锁？",
+      "source": "cs/os/deadlock.md",
+      "parent_start": 102,
+      "a": 0.0,
+      "b": null,
+      "g": 0.5
+    },
+    {
+      "query": "数据库里怎么避免死锁？",
+      "source": "cs/os/deadlock.md",
+      "parent_start": 922,
+      "a": 0.0,
+      "b": null,
+      "g": 0.5
+    },
+    {
+      "query": "数据库里怎么避免死锁？",
+      "source": "cs/os/deadlock.md",
+      "parent_start": 1525,
+      "a": 1.0,
+      "b": null,
+      "g": 1.0
+    },
+    {
+      "query": "数据库里避免死锁可以采用哪些常见办法？",
+      "source": "cs/os/deadlock.md",
+      "parent_start": 6,
+      "a": 0.0,
+      "b": null,
+      "g": 0.0
+    },
+    {
+      "query": "数据库里避免死锁可以采用哪些常见办法？",
+      "source": "cs/os/deadlock.md",
+      "parent_start": 102,
+      "a": 0.0,
+      "b": null,
+      "g": 0.5
+    },
+    {
+      "query": "数据库里避免死锁可以采用哪些常见办法？",
+      "source": "cs/os/deadlock.md",
+      "parent_start": 922,
+      "a": 0.0,
+      "b": null,
+      "g": 0.5
+    },
+    {
+      "query": "数据库里避免死锁可以采用哪些常见办法？",
+      "source": "cs/os/deadlock.md",
+      "parent_start": 1525,
+      "a": 1.0,
+      "b": null,
+      "g": 1.0
+    },
+    {
+      "query": "死锁产生的四个必要条件是什么？",
+      "source": "cs/os/deadlock.md",
+      "parent_start": 6,
+      "a": 1.0,
+      "b": null,
+      "g": 1.0
+    },
+    {
+      "query": "死锁产生的四个必要条件是什么？",
+      "source": "cs/os/deadlock.md",
+      "parent_start": 102,
+      "a": 1.0,
+      "b": null,
+      "g": 1.0
+    },
+    {
+      "query": "死锁产生的四个必要条件是什么？",
+      "source": "cs/os/deadlock.md",
+      "parent_start": 922,
+      "a": 0.0,
+      "b": null,
+      "g": 0.5
+    },
+    {
+      "query": "死锁产生的四个必要条件是什么？",
+      "source": "cs/os/deadlock.md",
+      "parent_start": 1525,
+      "a": 0.0,
+      "b": null,
+      "g": 0.0
+    },
+    {
+      "query": "死锁到底是一种什么样的永久阻塞状态？",
+      "source": "cs/os/deadlock.md",
+      "parent_start": 6,
+      "a": 1.0,
+      "b": null,
+      "g": 1.0
+    },
+    {
+      "query": "死锁到底是一种什么样的永久阻塞状态？",
+      "source": "cs/os/deadlock.md",
+      "parent_start": 102,
+      "a": 0.0,
+      "b": null,
+      "g": 0.0
+    },
+    {
+      "query": "死锁到底是一种什么样的永久阻塞状态？",
+      "source": "cs/os/deadlock.md",
+      "parent_start": 922,
+      "a": 0.5,
+      "b": null,
+      "g": 0.5
+    },
+    {
+      "query": "死锁到底是一种什么样的永久阻塞状态？",
+      "source": "cs/os/deadlock.md",
+      "parent_start": 1525,
+      "a": 0.0,
+      "b": null,
+      "g": 0.0
+    },
+    {
+      "query": "死锁和死循环是一回事吗？",
+      "source": "cs/os/deadlock.md",
+      "parent_start": 6,
+      "a": 0.0,
+      "b": null,
+      "g": 0.5
+    },
+    {
+      "query": "死锁和死循环是一回事吗？",
+      "source": "cs/os/deadlock.md",
+      "parent_start": 102,
+      "a": 0.0,
+      "b": null,
+      "g": 0.5
+    },
+    {
+      "query": "死锁和死循环是一回事吗？",
+      "source": "cs/os/deadlock.md",
+      "parent_start": 922,
+      "a": 0.0,
+      "b": null,
+      "g": 0.5
+    },
+    {
+      "query": "死锁和死循环是一回事吗？",
+      "source": "cs/os/deadlock.md",
+      "parent_start": 1525,
+      "a": 1.0,
+      "b": null,
+      "g": 1.0
+    },
+    {
+      "query": "死锁和进程调度算法有关系吗？",
+      "source": "cs/os/deadlock.md",
+      "parent_start": 6,
+      "a": 0.0,
+      "b": null,
+      "g": 0.5
+    },
+    {
+      "query": "死锁和进程调度算法有关系吗？",
+      "source": "cs/os/deadlock.md",
+      "parent_start": 102,
+      "a": 0.0,
+      "b": null,
+      "g": 0.5
+    },
+    {
+      "query": "死锁和进程调度算法有关系吗？",
+      "source": "cs/os/deadlock.md",
+      "parent_start": 922,
+      "a": 0.5,
+      "b": null,
+      "g": 0.5
+    },
+    {
+      "query": "死锁和进程调度算法有关系吗？",
+      "source": "cs/os/deadlock.md",
+      "parent_start": 1525,
+      "a": 0.0,
+      "b": null,
+      "g": 0.0
+    },
+    {
+      "query": "死锁的预防和避免有什么区别？",
+      "source": "cs/os/deadlock.md",
+      "parent_start": 6,
+      "a": 0.5,
+      "b": null,
+      "g": 0.5
+    },
+    {
+      "query": "死锁的预防和避免有什么区别？",
+      "source": "cs/os/deadlock.md",
+      "parent_start": 102,
+      "a": 1.0,
+      "b": null,
+      "g": 1.0
+    },
+    {
+      "query": "死锁的预防和避免有什么区别？",
+      "source": "cs/os/deadlock.md",
+      "parent_start": 922,
+      "a": 0.0,
+      "b": null,
+      "g": 0.5
+    },
+    {
+      "query": "死锁的预防和避免有什么区别？",
+      "source": "cs/os/deadlock.md",
+      "parent_start": 1525,
+      "a": 0.0,
+      "b": null,
+      "g": 0.0
+    },
+    {
+      "query": "破坏互斥和破坏循环等待都能预防死锁吗？",
+      "source": "cs/os/deadlock.md",
+      "parent_start": 6,
+      "a": 0.5,
+      "b": null,
+      "g": 0.5
+    },
+    {
+      "query": "破坏互斥和破坏循环等待都能预防死锁吗？",
+      "source": "cs/os/deadlock.md",
+      "parent_start": 102,
+      "a": 1.0,
+      "b": null,
+      "g": 1.0
+    },
+    {
+      "query": "破坏互斥和破坏循环等待都能预防死锁吗？",
+      "source": "cs/os/deadlock.md",
+      "parent_start": 922,
+      "a": 0.0,
+      "b": null,
+      "g": 0.5
+    },
+    {
+      "query": "破坏互斥和破坏循环等待都能预防死锁吗？",
+      "source": "cs/os/deadlock.md",
+      "parent_start": 1525,
+      "a": 0.0,
+      "b": null,
+      "g": 0.0
+    },
+    {
+      "query": "破坏四个必要条件中的任意一个会怎样？",
+      "source": "cs/os/deadlock.md",
+      "parent_start": 6,
+      "a": 1.0,
+      "b": null,
+      "g": 1.0
+    },
+    {
+      "query": "破坏四个必要条件中的任意一个会怎样？",
+      "source": "cs/os/deadlock.md",
+      "parent_start": 102,
+      "a": 0.5,
+      "b": null,
+      "g": 0.5
+    },
+    {
+      "query": "破坏四个必要条件中的任意一个会怎样？",
+      "source": "cs/os/deadlock.md",
+      "parent_start": 922,
+      "a": 0.0,
+      "b": null,
+      "g": 0.5
+    },
+    {
+      "query": "破坏四个必要条件中的任意一个会怎样？",
+      "source": "cs/os/deadlock.md",
+      "parent_start": 1525,
+      "a": 0.0,
+      "b": null,
+      "g": 0.0
+    },
+    {
+      "query": "线上死锁用哪些工具查看线程调用情况？",
+      "source": "cs/os/deadlock.md",
+      "parent_start": 6,
+      "a": 0.0,
+      "b": null,
+      "g": 0.0
+    },
+    {
+      "query": "线上死锁用哪些工具查看线程调用情况？",
+      "source": "cs/os/deadlock.md",
+      "parent_start": 102,
+      "a": 0.0,
+      "b": null,
+      "g": 0.0
+    },
+    {
+      "query": "线上死锁用哪些工具查看线程调用情况？",
+      "source": "cs/os/deadlock.md",
+      "parent_start": 922,
+      "a": 0.0,
+      "b": null,
+      "g": 0.0
+    },
+    {
+      "query": "线上死锁用哪些工具查看线程调用情况？",
+      "source": "cs/os/deadlock.md",
+      "parent_start": 1525,
+      "a": 1.0,
+      "b": null,
+      "g": 1.0
+    },
+    {
+      "query": "能举个实际例子吗？",
+      "source": "cs/os/deadlock.md",
+      "parent_start": 6,
+      "a": 0.0,
+      "b": null,
+      "g": 0.5
+    },
+    {
+      "query": "能举个实际例子吗？",
+      "source": "cs/os/deadlock.md",
+      "parent_start": 102,
+      "a": 0.5,
+      "b": null,
+      "g": 0.5
+    },
+    {
+      "query": "能举个实际例子吗？",
+      "source": "cs/os/deadlock.md",
+      "parent_start": 922,
+      "a": 1.0,
+      "b": null,
+      "g": 1.0
+    },
+    {
+      "query": "能举个实际例子吗？",
+      "source": "cs/os/deadlock.md",
+      "parent_start": 1525,
+      "a": 0.0,
+      "b": null,
+      "g": 1.0
+    },
+    {
+      "query": "请求与保持条件具体指进程怎样做？",
+      "source": "cs/os/deadlock.md",
+      "parent_start": 6,
+      "a": 0.5,
+      "b": null,
+      "g": 0.0
+    },
+    {
+      "query": "请求与保持条件具体指进程怎样做？",
+      "source": "cs/os/deadlock.md",
+      "parent_start": 102,
+      "a": 1.0,
+      "b": null,
+      "g": 1.0
+    },
+    {
+      "query": "请求与保持条件具体指进程怎样做？",
+      "source": "cs/os/deadlock.md",
+      "parent_start": 922,
+      "a": 0.0,
+      "b": null,
+      "g": 0.0
+    },
+    {
+      "query": "请求与保持条件具体指进程怎样做？",
+      "source": "cs/os/deadlock.md",
+      "parent_start": 1525,
+      "a": 0.0,
+      "b": null,
+      "g": 0.0
+    },
+    {
+      "query": "资源有序分配为什么能破坏循环等待？",
+      "source": "cs/os/deadlock.md",
+      "parent_start": 6,
+      "a": 0.0,
+      "b": null,
+      "g": 0.0
+    },
+    {
+      "query": "资源有序分配为什么能破坏循环等待？",
+      "source": "cs/os/deadlock.md",
+      "parent_start": 102,
+      "a": 0.5,
+      "b": null,
+      "g": 0.5
+    },
+    {
+      "query": "资源有序分配为什么能破坏循环等待？",
+      "source": "cs/os/deadlock.md",
+      "parent_start": 922,
+      "a": 1.0,
+      "b": null,
+      "g": 1.0
+    },
+    {
+      "query": "资源有序分配为什么能破坏循环等待？",
+      "source": "cs/os/deadlock.md",
+      "parent_start": 1525,
+      "a": 0.0,
+      "b": null,
+      "g": 0.0
+    },
+    {
+      "query": "那怎么预防呢？",
+      "source": "cs/os/deadlock.md",
+      "parent_start": 6,
+      "a": 0.5,
+      "b": null,
+      "g": 0.5
+    },
+    {
+      "query": "那怎么预防呢？",
+      "source": "cs/os/deadlock.md",
+      "parent_start": 102,
+      "a": 1.0,
+      "b": null,
+      "g": 1.0
+    },
+    {
+      "query": "那怎么预防呢？",
+      "source": "cs/os/deadlock.md",
+      "parent_start": 922,
+      "a": 0.0,
+      "b": null,
+      "g": 0.5
+    },
+    {
+      "query": "那怎么预防呢？",
+      "source": "cs/os/deadlock.md",
+      "parent_start": 1525,
+      "a": 0.0,
+      "b": null,
+      "g": 0.5
+    },
+    {
+      "query": "银行家算法是做什么的？",
+      "source": "cs/os/deadlock.md",
+      "parent_start": 6,
+      "a": 0.0,
+      "b": null,
+      "g": 0.0
+    },
+    {
+      "query": "银行家算法是做什么的？",
+      "source": "cs/os/deadlock.md",
+      "parent_start": 102,
+      "a": 1.0,
+      "b": null,
+      "g": 1.0
+    },
+    {
+      "query": "银行家算法是做什么的？",
+      "source": "cs/os/deadlock.md",
+      "parent_start": 922,
+      "a": 0.0,
+      "b": null,
+      "g": 0.0
+    },
+    {
+      "query": "银行家算法是做什么的？",
+      "source": "cs/os/deadlock.md",
+      "parent_start": 1525,
+      "a": 0.0,
+      "b": null,
+      "g": 0.0
+    },
+    {
+      "query": "面试让写必然死锁代码，核心思路是什么？",
+      "source": "cs/os/deadlock.md",
+      "parent_start": 6,
+      "a": 0.0,
+      "b": null,
+      "g": 0.0
+    },
+    {
+      "query": "面试让写必然死锁代码，核心思路是什么？",
+      "source": "cs/os/deadlock.md",
+      "parent_start": 102,
+      "a": 0.0,
+      "b": null,
+      "g": 0.5
+    },
+    {
+      "query": "面试让写必然死锁代码，核心思路是什么？",
+      "source": "cs/os/deadlock.md",
+      "parent_start": 922,
+      "a": 0.0,
+      "b": null,
+      "g": 0.5
+    },
+    {
+      "query": "面试让写必然死锁代码，核心思路是什么？",
+      "source": "cs/os/deadlock.md",
+      "parent_start": 1525,
+      "a": 1.0,
+      "b": null,
+      "g": 1.0
+    },
+    {
+      "query": "面试问数据库避免死锁时该怎么回答？",
+      "source": "cs/os/deadlock.md",
+      "parent_start": 6,
+      "a": 0.0,
+      "b": null,
+      "g": 0.0
+    },
+    {
+      "query": "面试问数据库避免死锁时该怎么回答？",
+      "source": "cs/os/deadlock.md",
+      "parent_start": 102,
+      "a": 0.0,
+      "b": null,
+      "g": 0.5
+    },
+    {
+      "query": "面试问数据库避免死锁时该怎么回答？",
+      "source": "cs/os/deadlock.md",
+      "parent_start": 922,
+      "a": 0.0,
+      "b": null,
+      "g": 0.5
+    },
+    {
+      "query": "面试问数据库避免死锁时该怎么回答？",
+      "source": "cs/os/deadlock.md",
+      "parent_start": 1525,
+      "a": 1.0,
+      "b": null,
+      "g": 1.0
+    },
+    {
+      "query": "MSL 和 TTL 的区别？",
+      "source": "cs/network/tcp-handshake.md",
+      "parent_start": 17,
+      "a": 0.0,
+      "b": null,
+      "g": 0.0
+    },
+    {
+      "query": "MSL 和 TTL 的区别？",
+      "source": "cs/network/tcp-handshake.md",
+      "parent_start": 113,
+      "a": 0.0,
+      "b": null,
+      "g": 0.5
+    },
+    {
+      "query": "MSL 和 TTL 的区别？",
+      "source": "cs/network/tcp-handshake.md",
+      "parent_start": 1826,
+      "a": 0.0,
+      "b": null,
+      "g": 0.0
+    },
+    {
+      "query": "MSL 和 TTL 的区别？",
+      "source": "cs/network/tcp-handshake.md",
+      "parent_start": 2341,
+      "a": 1.0,
+      "b": null,
+      "g": 1.0
+    },
+    {
+      "query": "SYN Cookie主要防御哪种攻击？",
+      "source": "cs/network/tcp-handshake.md",
+      "parent_start": 17,
+      "a": 0.0,
+      "b": null,
+      "g": 0.0
+    },
+    {
+      "query": "SYN Cookie主要防御哪种攻击？",
+      "source": "cs/network/tcp-handshake.md",
+      "parent_start": 113,
+      "a": 0.0,
+      "b": null,
+      "g": 0.0
+    },
+    {
+      "query": "SYN Cookie主要防御哪种攻击？",
+      "source": "cs/network/tcp-handshake.md",
+      "parent_start": 1826,
+      "a": 1.0,
+      "b": null,
+      "g": 1.0
+    },
+    {
+      "query": "SYN Cookie主要防御哪种攻击？",
+      "source": "cs/network/tcp-handshake.md",
+      "parent_start": 2341,
+      "a": 0.0,
+      "b": null,
+      "g": 0.0
+    },
+    {
+      "query": "SYN Flood攻击怎样占满半连接队列？",
+      "source": "cs/network/tcp-handshake.md",
+      "parent_start": 17,
+      "a": 0.0,
+      "b": null,
+      "g": 0.0
+    },
+    {
+      "query": "SYN Flood攻击怎样占满半连接队列？",
+      "source": "cs/network/tcp-handshake.md",
+      "parent_start": 113,
+      "a": 0.0,
+      "b": null,
+      "g": 0.0
+    },
+    {
+      "query": "SYN Flood攻击怎样占满半连接队列？",
+      "source": "cs/network/tcp-handshake.md",
+      "parent_start": 1826,
+      "a": 1.0,
+      "b": null,
+      "g": 1.0
+    },
+    {
+      "query": "SYN Flood攻击怎样占满半连接队列？",
+      "source": "cs/network/tcp-handshake.md",
+      "parent_start": 2341,
+      "a": 0.0,
+      "b": null,
+      "g": 0.0
+    },
+    {
+      "query": "TCP 为什么是三次不是四次？",
+      "source": "cs/network/tcp-handshake.md",
+      "parent_start": 17,
+      "a": 0.5,
+      "b": null,
+      "g": 0.5
+    },
+    {
+      "query": "TCP 为什么是三次不是四次？",
+      "source": "cs/network/tcp-handshake.md",
+      "parent_start": 113,
+      "a": 0.5,
+      "b": null,
+      "g": 1.0
+    },
+    {
+      "query": "TCP 为什么是三次不是四次？",
+      "source": "cs/network/tcp-handshake.md",
+      "parent_start": 1826,
+      "a": 0.0,
+      "b": null,
+      "g": 0.0
+    },
+    {
+      "query": "TCP 为什么是三次不是四次？",
+      "source": "cs/network/tcp-handshake.md",
+      "parent_start": 2341,
+      "a": 1.0,
+      "b": null,
+      "g": 1.0
+    },
+    {
+      "query": "TCP 为什么需要三次握手，两次不行吗？",
+      "source": "cs/network/tcp-handshake.md",
+      "parent_start": 17,
+      "a": 1.0,
+      "b": null,
+      "g": 1.0
+    },
+    {
+      "query": "TCP 为什么需要三次握手，两次不行吗？",
+      "source": "cs/network/tcp-handshake.md",
+      "parent_start": 113,
+      "a": 1.0,
+      "b": null,
+      "g": 1.0
+    },
+    {
+      "query": "TCP 为什么需要三次握手，两次不行吗？",
+      "source": "cs/network/tcp-handshake.md",
+      "parent_start": 1826,
+      "a": 0.0,
+      "b": null,
+      "g": 0.5
+    },
+    {
+      "query": "TCP 为什么需要三次握手，两次不行吗？",
+      "source": "cs/network/tcp-handshake.md",
+      "parent_start": 2341,
+      "a": 0.5,
+      "b": null,
+      "g": 1.0
+    },
+    {
+      "query": "TCP为什么需要四次挥手？",
+      "source": "cs/network/tcp-handshake.md",
+      "parent_start": 17,
+      "a": 1.0,
+      "b": null,
+      "g": 1.0
+    },
+    {
+      "query": "TCP为什么需要四次挥手？",
+      "source": "cs/network/tcp-handshake.md",
+      "parent_start": 113,
+      "a": 1.0,
+      "b": null,
+      "g": 1.0
+    },
+    {
+      "query": "TCP为什么需要四次挥手？",
+      "source": "cs/network/tcp-handshake.md",
+      "parent_start": 1826,
+      "a": 0.0,
+      "b": null,
+      "g": 0.0
+    },
+    {
+      "query": "TCP为什么需要四次挥手？",
+      "source": "cs/network/tcp-handshake.md",
+      "parent_start": 2341,
+      "a": 0.0,
+      "b": null,
+      "g": 0.0
+    },
+    {
+      "query": "TCP握手为什么是三次而不是四次？",
+      "source": "cs/network/tcp-handshake.md",
+      "parent_start": 17,
+      "a": 0.5,
+      "b": null,
+      "g": 0.0
+    },
+    {
+      "query": "TCP握手为什么是三次而不是四次？",
+      "source": "cs/network/tcp-handshake.md",
+      "parent_start": 113,
+      "a": 0.5,
+      "b": null,
+      "g": 1.0
+    },
+    {
+      "query": "TCP握手为什么是三次而不是四次？",
+      "source": "cs/network/tcp-handshake.md",
+      "parent_start": 1826,
+      "a": 0.0,
+      "b": null,
+      "g": 0.0
+    },
+    {
+      "query": "TCP握手为什么是三次而不是四次？",
+      "source": "cs/network/tcp-handshake.md",
+      "parent_start": 2341,
+      "a": 1.0,
+      "b": null,
+      "g": 1.0
+    },
+    {
+      "query": "TIME_WAIT 为什么要等 2MSL？",
+      "source": "cs/network/tcp-handshake.md",
+      "parent_start": 17,
+      "a": 0.0,
+      "b": null,
+      "g": 0.0
+    },
+    {
+      "query": "TIME_WAIT 为什么要等 2MSL？",
+      "source": "cs/network/tcp-handshake.md",
+      "parent_start": 113,
+      "a": 1.0,
+      "b": null,
+      "g": 1.0
+    },
+    {
+      "query": "TIME_WAIT 为什么要等 2MSL？",
+      "source": "cs/network/tcp-handshake.md",
+      "parent_start": 1826,
+      "a": 0.0,
+      "b": null,
+      "g": 0.0
+    },
+    {
+      "query": "TIME_WAIT 为什么要等 2MSL？",
+      "source": "cs/network/tcp-handshake.md",
+      "parent_start": 2341,
+      "a": 0.0,
+      "b": null,
+      "g": 0.5
+    },
+    {
+      "query": "TIME_WAIT 过多怎么处理？",
+      "source": "cs/network/tcp-handshake.md",
+      "parent_start": 17,
+      "a": 0.0,
+      "b": null,
+      "g": 0.0
+    },
+    {
+      "query": "TIME_WAIT 过多怎么处理？",
+      "source": "cs/network/tcp-handshake.md",
+      "parent_start": 113,
+      "a": 0.0,
+      "b": null,
+      "g": 1.0
+    },
+    {
+      "query": "TIME_WAIT 过多怎么处理？",
+      "source": "cs/network/tcp-handshake.md",
+      "parent_start": 1826,
+      "a": 0.0,
+      "b": null,
+      "g": 0.0
+    },
+    {
+      "query": "TIME_WAIT 过多怎么处理？",
+      "source": "cs/network/tcp-handshake.md",
+      "parent_start": 2341,
+      "a": 0.0,
+      "b": null,
+      "g": 0.0
+    },
+    {
+      "query": "close_wait 过多说明什么？",
+      "source": "cs/network/tcp-handshake.md",
+      "parent_start": 17,
+      "a": 0.0,
+      "b": null,
+      "g": 0.0
+    },
+    {
+      "query": "close_wait 过多说明什么？",
+      "source": "cs/network/tcp-handshake.md",
+      "parent_start": 113,
+      "a": 0.0,
+      "b": null,
+      "g": 0.5
+    },
+    {
+      "query": "close_wait 过多说明什么？",
+      "source": "cs/network/tcp-handshake.md",
+      "parent_start": 1826,
+      "a": 0.0,
+      "b": null,
+      "g": 0.0
+    },
+    {
+      "query": "close_wait 过多说明什么？",
+      "source": "cs/network/tcp-handshake.md",
+      "parent_start": 2341,
+      "a": 1.0,
+      "b": null,
+      "g": 1.0
+    },
+    {
+      "query": "close_wait过多通常说明什么问题？",
+      "source": "cs/network/tcp-handshake.md",
+      "parent_start": 17,
+      "a": 0.0,
+      "b": null,
+      "g": 0.0
+    },
+    {
+      "query": "close_wait过多通常说明什么问题？",
+      "source": "cs/network/tcp-handshake.md",
+      "parent_start": 113,
+      "a": 0.0,
+      "b": null,
+      "g": 0.5
+    },
+    {
+      "query": "close_wait过多通常说明什么问题？",
+      "source": "cs/network/tcp-handshake.md",
+      "parent_start": 1826,
+      "a": 0.0,
+      "b": null,
+      "g": 0.0
+    },
+    {
+      "query": "close_wait过多通常说明什么问题？",
+      "source": "cs/network/tcp-handshake.md",
+      "parent_start": 2341,
+      "a": 1.0,
+      "b": null,
+      "g": 1.0
+    },
+    {
+      "query": "三次握手的主要目的是什么？",
+      "source": "cs/network/tcp-handshake.md",
+      "parent_start": 17,
+      "a": 1.0,
+      "b": null,
+      "g": 1.0
+    },
+    {
+      "query": "三次握手的主要目的是什么？",
+      "source": "cs/network/tcp-handshake.md",
+      "parent_start": 113,
+      "a": 0.5,
+      "b": null,
+      "g": 0.5
+    },
+    {
+      "query": "三次握手的主要目的是什么？",
+      "source": "cs/network/tcp-handshake.md",
+      "parent_start": 1826,
+      "a": 0.0,
+      "b": null,
+      "g": 0.0
+    },
+    {
+      "query": "三次握手的主要目的是什么？",
+      "source": "cs/network/tcp-handshake.md",
+      "parent_start": 2341,
+      "a": 0.0,
+      "b": null,
+      "g": 0.0
+    },
+    {
+      "query": "三次握手第一步客户端发送什么？",
+      "source": "cs/network/tcp-handshake.md",
+      "parent_start": 17,
+      "a": 0.0,
+      "b": null,
+      "g": 0.0
+    },
+    {
+      "query": "三次握手第一步客户端发送什么？",
+      "source": "cs/network/tcp-handshake.md",
+      "parent_start": 113,
+      "a": 1.0,
+      "b": null,
+      "g": 1.0
+    },
+    {
+      "query": "三次握手第一步客户端发送什么？",
+      "source": "cs/network/tcp-handshake.md",
+      "parent_start": 1826,
+      "a": 0.0,
+      "b": null,
+      "g": 0.0
+    },
+    {
+      "query": "三次握手第一步客户端发送什么？",
+      "source": "cs/network/tcp-handshake.md",
+      "parent_start": 2341,
+      "a": 0.0,
+      "b": null,
+      "g": 0.0
+    },
+    {
+      "query": "两次握手为什么无法防止历史连接？",
+      "source": "cs/network/tcp-handshake.md",
+      "parent_start": 17,
+      "a": 0.5,
+      "b": null,
+      "g": 0.0
+    },
+    {
+      "query": "两次握手为什么无法防止历史连接？",
+      "source": "cs/network/tcp-handshake.md",
+      "parent_start": 113,
+      "a": 1.0,
+      "b": null,
+      "g": 1.0
+    },
+    {
+      "query": "两次握手为什么无法防止历史连接？",
+      "source": "cs/network/tcp-handshake.md",
+      "parent_start": 1826,
+      "a": 0.0,
+      "b": null,
+      "g": 0.0
+    },
+    {
+      "query": "两次握手为什么无法防止历史连接？",
+      "source": "cs/network/tcp-handshake.md",
+      "parent_start": 2341,
+      "a": 0.0,
+      "b": null,
+      "g": 0.5
+    },
+    {
+      "query": "为什么不能是两次？",
+      "source": "cs/network/tcp-handshake.md",
+      "parent_start": 17,
+      "a": 0.5,
+      "b": null,
+      "g": 0.5
+    },
+    {
+      "query": "为什么不能是两次？",
+      "source": "cs/network/tcp-handshake.md",
+      "parent_start": 113,
+      "a": 1.0,
+      "b": null,
+      "g": 1.0
+    },
+    {
+      "query": "为什么不能是两次？",
+      "source": "cs/network/tcp-handshake.md",
+      "parent_start": 1826,
+      "a": 0.0,
+      "b": null,
+      "g": 0.0
+    },
+    {
+      "query": "为什么不能是两次？",
+      "source": "cs/network/tcp-handshake.md",
+      "parent_start": 2341,
+      "a": 0.5,
+      "b": null,
+      "g": 0.5
+    },
+    {
+      "query": "为什么挥手要四次，握手只要三次？",
+      "source": "cs/network/tcp-handshake.md",
+      "parent_start": 17,
+      "a": 1.0,
+      "b": null,
+      "g": 1.0
+    },
+    {
+      "query": "为什么挥手要四次，握手只要三次？",
+      "source": "cs/network/tcp-handshake.md",
+      "parent_start": 113,
+      "a": 1.0,
+      "b": null,
+      "g": 1.0
+    },
+    {
+      "query": "为什么挥手要四次，握手只要三次？",
+      "source": "cs/network/tcp-handshake.md",
+      "parent_start": 1826,
+      "a": 0.0,
+      "b": null,
+      "g": 0.0
+    },
+    {
+      "query": "为什么挥手要四次，握手只要三次？",
+      "source": "cs/network/tcp-handshake.md",
+      "parent_start": 2341,
+      "a": 0.0,
+      "b": null,
+      "g": 0.5
+    },
+    {
+      "query": "初始序列号为什么不能固定从0开始？",
+      "source": "cs/network/tcp-handshake.md",
+      "parent_start": 17,
+      "a": 0.0,
+      "b": null,
+      "g": 0.0
+    },
+    {
+      "query": "初始序列号为什么不能固定从0开始？",
+      "source": "cs/network/tcp-handshake.md",
+      "parent_start": 113,
+      "a": 0.0,
+      "b": null,
+      "g": 0.0
+    },
+    {
+      "query": "初始序列号为什么不能固定从0开始？",
+      "source": "cs/network/tcp-handshake.md",
+      "parent_start": 1826,
+      "a": 1.0,
+      "b": null,
+      "g": 1.0
+    },
+    {
+      "query": "初始序列号为什么不能固定从0开始？",
+      "source": "cs/network/tcp-handshake.md",
+      "parent_start": 2341,
+      "a": 0.0,
+      "b": null,
+      "g": 0.0
+    },
+    {
+      "query": "双方在什么时候进入ESTABLISHED状态？",
+      "source": "cs/network/tcp-handshake.md",
+      "parent_start": 17,
+      "a": 0.0,
+      "b": null,
+      "g": 0.0
+    },
+    {
+      "query": "双方在什么时候进入ESTABLISHED状态？",
+      "source": "cs/network/tcp-handshake.md",
+      "parent_start": 113,
+      "a": 1.0,
+      "b": null,
+      "g": 1.0
+    },
+    {
+      "query": "双方在什么时候进入ESTABLISHED状态？",
+      "source": "cs/network/tcp-handshake.md",
+      "parent_start": 1826,
+      "a": 0.0,
+      "b": null,
+      "g": 0.5
+    },
+    {
+      "query": "双方在什么时候进入ESTABLISHED状态？",
+      "source": "cs/network/tcp-handshake.md",
+      "parent_start": 2341,
+      "a": 0.0,
+      "b": null,
+      "g": 0.0
+    },
+    {
+      "query": "客户端第三次握手会发送哪些字段？",
+      "source": "cs/network/tcp-handshake.md",
+      "parent_start": 17,
+      "a": 0.0,
+      "b": null,
+      "g": 0.0
+    },
+    {
+      "query": "客户端第三次握手会发送哪些字段？",
+      "source": "cs/network/tcp-handshake.md",
+      "parent_start": 113,
+      "a": 1.0,
+      "b": null,
+      "g": 1.0
+    },
+    {
+      "query": "客户端第三次握手会发送哪些字段？",
+      "source": "cs/network/tcp-handshake.md",
+      "parent_start": 1826,
+      "a": 0.0,
+      "b": null,
+      "g": 0.0
+    },
+    {
+      "query": "客户端第三次握手会发送哪些字段？",
+      "source": "cs/network/tcp-handshake.md",
+      "parent_start": 2341,
+      "a": 0.0,
+      "b": null,
+      "g": 0.0
+    },
+    {
+      "query": "握手能携带数据吗？",
+      "source": "cs/network/tcp-handshake.md",
+      "parent_start": 17,
+      "a": 0.0,
+      "b": null,
+      "g": 0.0
+    },
+    {
+      "query": "握手能携带数据吗？",
+      "source": "cs/network/tcp-handshake.md",
+      "parent_start": 113,
+      "a": 0.0,
+      "b": null,
+      "g": 0.5
+    },
+    {
+      "query": "握手能携带数据吗？",
+      "source": "cs/network/tcp-handshake.md",
+      "parent_start": 1826,
+      "a": 0.0,
+      "b": null,
+      "g": 0.0
+    },
+    {
+      "query": "握手能携带数据吗？",
+      "source": "cs/network/tcp-handshake.md",
+      "parent_start": 2341,
+      "a": 1.0,
+      "b": null,
+      "g": 1.0
+    },
+    {
+      "query": "握手过程中哪些阶段可以携带数据？",
+      "source": "cs/network/tcp-handshake.md",
+      "parent_start": 17,
+      "a": 0.0,
+      "b": null,
+      "g": 0.0
+    },
+    {
+      "query": "握手过程中哪些阶段可以携带数据？",
+      "source": "cs/network/tcp-handshake.md",
+      "parent_start": 113,
+      "a": 0.0,
+      "b": null,
+      "g": 0.0
+    },
+    {
+      "query": "握手过程中哪些阶段可以携带数据？",
+      "source": "cs/network/tcp-handshake.md",
+      "parent_start": 1826,
+      "a": 0.0,
+      "b": null,
+      "g": 0.0
+    },
+    {
+      "query": "握手过程中哪些阶段可以携带数据？",
+      "source": "cs/network/tcp-handshake.md",
+      "parent_start": 2341,
+      "a": 1.0,
+      "b": null,
+      "g": 1.0
+    },
+    {
+      "query": "服务器发出第二次握手后进入什么状态？",
+      "source": "cs/network/tcp-handshake.md",
+      "parent_start": 17,
+      "a": 0.0,
+      "b": null,
+      "g": 0.0
+    },
+    {
+      "query": "服务器发出第二次握手后进入什么状态？",
+      "source": "cs/network/tcp-handshake.md",
+      "parent_start": 113,
+      "a": 1.0,
+      "b": null,
+      "g": 1.0
+    },
+    {
+      "query": "服务器发出第二次握手后进入什么状态？",
+      "source": "cs/network/tcp-handshake.md",
+      "parent_start": 1826,
+      "a": 0.0,
+      "b": null,
+      "g": 0.0
+    },
+    {
+      "query": "服务器发出第二次握手后进入什么状态？",
+      "source": "cs/network/tcp-handshake.md",
+      "parent_start": 2341,
+      "a": 0.0,
+      "b": null,
+      "g": 0.0
+    },
+    {
+      "query": "服务器的ACK和FIN为什么不能合并发送？",
+      "source": "cs/network/tcp-handshake.md",
+      "parent_start": 17,
+      "a": 1.0,
+      "b": null,
+      "g": 0.5
+    },
+    {
+      "query": "服务器的ACK和FIN为什么不能合并发送？",
+      "source": "cs/network/tcp-handshake.md",
+      "parent_start": 113,
+      "a": 1.0,
+      "b": null,
+      "g": 1.0
+    },
+    {
+      "query": "服务器的ACK和FIN为什么不能合并发送？",
+      "source": "cs/network/tcp-handshake.md",
+      "parent_start": 1826,
+      "a": 0.0,
+      "b": null,
+      "g": 0.0
+    },
+    {
+      "query": "服务器的ACK和FIN为什么不能合并发送？",
+      "source": "cs/network/tcp-handshake.md",
+      "parent_start": 2341,
+      "a": 0.0,
+      "b": null,
+      "g": 0.0
+    },
+    {
+      "query": "现代系统的初始序列号如何生成？",
+      "source": "cs/network/tcp-handshake.md",
+      "parent_start": 17,
+      "a": 0.0,
+      "b": null,
+      "g": 0.0
+    },
+    {
+      "query": "现代系统的初始序列号如何生成？",
+      "source": "cs/network/tcp-handshake.md",
+      "parent_start": 113,
+      "a": 0.0,
+      "b": null,
+      "g": 0.0
+    },
+    {
+      "query": "现代系统的初始序列号如何生成？",
+      "source": "cs/network/tcp-handshake.md",
+      "parent_start": 1826,
+      "a": 1.0,
+      "b": null,
+      "g": 1.0
+    },
+    {
+      "query": "现代系统的初始序列号如何生成？",
+      "source": "cs/network/tcp-handshake.md",
+      "parent_start": 2341,
+      "a": 0.0,
+      "b": null,
+      "g": 0.0
+    },
+    {
+      "query": "被动方收到FIN后一直不close会怎样？",
+      "source": "cs/network/tcp-handshake.md",
+      "parent_start": 17,
+      "a": 0.0,
+      "b": null,
+      "g": 0.0
+    },
+    {
+      "query": "被动方收到FIN后一直不close会怎样？",
+      "source": "cs/network/tcp-handshake.md",
+      "parent_start": 113,
+      "a": 0.0,
+      "b": null,
+      "g": 0.5
+    },
+    {
+      "query": "被动方收到FIN后一直不close会怎样？",
+      "source": "cs/network/tcp-handshake.md",
+      "parent_start": 1826,
+      "a": 0.0,
+      "b": null,
+      "g": 0.0
+    },
+    {
+      "query": "被动方收到FIN后一直不close会怎样？",
+      "source": "cs/network/tcp-handshake.md",
+      "parent_start": 2341,
+      "a": 1.0,
+      "b": null,
+      "g": 1.0
+    }
+  ]
+}

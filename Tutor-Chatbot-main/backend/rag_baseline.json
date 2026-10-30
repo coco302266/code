@@ -1,0 +1,1850 @@
+{
+  "config": "full",
+  "granularity": "slice",
+  "inject_k": 4,
+  "top1": 68,
+  "top3": 70,
+  "total": 71,
+  "avg_secs": 1.1809,
+  "p95_secs": 1.3602,
+  "degraded_cases": 0,
+  "cases": [
+    {
+      "query": "死锁产生的四个必要条件是什么？",
+      "topic": "",
+      "kind": "in-kb",
+      "expected": [
+        "死锁"
+      ],
+      "got": [
+        "死锁",
+        "死锁",
+        "死锁",
+        "并发与锁：互斥、信号量、条件变量与读写锁"
+      ],
+      "any_hit": true,
+      "top1": true,
+      "secs": 1.1679,
+      "degraded_components": [],
+      "degraded": "",
+      "annotated": true,
+      "recall_at_k": 1.0,
+      "precision_at_k": 0.625,
+      "mrr": 1.0,
+      "ndcg_at_k": 1.0,
+      "rerank_ms": 1159
+    },
+    {
+      "query": "死锁的预防和避免有什么区别？",
+      "topic": "",
+      "kind": "in-kb",
+      "expected": [
+        "死锁"
+      ],
+      "got": [
+        "并发与锁：互斥、信号量、条件变量与读写锁",
+        "并发与锁：互斥、信号量、条件变量与读写锁",
+        "死锁",
+        "死锁"
+      ],
+      "any_hit": true,
+      "top1": false,
+      "secs": 1.2346,
+      "degraded_components": [],
+      "degraded": "",
+      "annotated": true,
+      "recall_at_k": 0.5,
+      "precision_at_k": 0.25,
+      "mrr": 0.3333,
+      "ndcg_at_k": 0.2973,
+      "rerank_ms": 1227
+    },
+    {
+      "query": "银行家算法是做什么的？",
+      "topic": "",
+      "kind": "in-kb",
+      "expected": [
+        "死锁"
+      ],
+      "got": [
+        "死锁",
+        "死锁"
+      ],
+      "any_hit": true,
+      "top1": true,
+      "secs": 1.2663,
+      "degraded_components": [],
+      "degraded": "",
+      "annotated": true,
+      "recall_at_k": 1.0,
+      "precision_at_k": 0.25,
+      "mrr": 1.0,
+      "ndcg_at_k": 0.8155,
+      "rerank_ms": 1258
+    },
+    {
+      "query": "死锁和进程调度算法有关系吗？",
+      "topic": "",
+      "kind": "cross",
+      "expected": [
+        "死锁",
+        "进程调度算法"
+      ],
+      "got": [
+        "死锁",
+        "死锁",
+        "死锁",
+        "并发与锁：互斥、信号量、条件变量与读写锁"
+      ],
+      "any_hit": true,
+      "top1": true,
+      "secs": 1.1548,
+      "degraded_components": [],
+      "degraded": "",
+      "annotated": true,
+      "recall_at_k": 0.4286,
+      "precision_at_k": 0.375,
+      "mrr": 1.0,
+      "ndcg_at_k": 0.8319,
+      "rerank_ms": 1142
+    },
+    {
+      "query": "那怎么预防呢？",
+      "topic": "死锁",
+      "kind": "follow-up",
+      "expected": [
+        "死锁"
+      ],
+      "got": [
+        "并发与锁：互斥、信号量、条件变量与读写锁",
+        "死锁",
+        "死锁",
+        "并发与锁：互斥、信号量、条件变量与读写锁"
+      ],
+      "any_hit": true,
+      "top1": false,
+      "secs": 1.1318,
+      "degraded_components": [],
+      "degraded": "",
+      "annotated": true,
+      "recall_at_k": 0.4,
+      "precision_at_k": 0.25,
+      "mrr": 0.5,
+      "ndcg_at_k": 0.3175,
+      "rerank_ms": 1126
+    },
+    {
+      "query": "能举个实际例子吗？",
+      "topic": "死锁",
+      "kind": "follow-up",
+      "expected": [
+        "死锁"
+      ],
+      "got": [
+        "死锁",
+        "并发与锁：互斥、信号量、条件变量与读写锁",
+        "死锁",
+        "死锁"
+      ],
+      "any_hit": true,
+      "top1": true,
+      "secs": 1.113,
+      "degraded_components": [],
+      "degraded": "",
+      "annotated": true,
+      "recall_at_k": 0.5,
+      "precision_at_k": 0.375,
+      "mrr": 1.0,
+      "ndcg_at_k": 0.4605,
+      "rerank_ms": 1104
+    },
+    {
+      "query": "数据库里怎么避免死锁？",
+      "topic": "",
+      "kind": "kb-interview",
+      "expected": [
+        "死锁"
+      ],
+      "got": [
+        "死锁",
+        "并发与锁：互斥、信号量、条件变量与读写锁",
+        "死锁",
+        "死锁"
+      ],
+      "any_hit": true,
+      "top1": true,
+      "secs": 1.3765,
+      "degraded_components": [],
+      "degraded": "",
+      "annotated": true,
+      "recall_at_k": 0.8,
+      "precision_at_k": 0.5,
+      "mrr": 1.0,
+      "ndcg_at_k": 0.8229,
+      "rerank_ms": 1369
+    },
+    {
+      "query": "写一个必然死锁的代码？",
+      "topic": "",
+      "kind": "kb-interview",
+      "expected": [
+        "死锁"
+      ],
+      "got": [
+        "死锁",
+        "并发与锁：互斥、信号量、条件变量与读写锁",
+        "死锁",
+        "并发与锁：互斥、信号量、条件变量与读写锁"
+      ],
+      "any_hit": true,
+      "top1": true,
+      "secs": 1.1744,
+      "degraded_components": [],
+      "degraded": "",
+      "annotated": true,
+      "recall_at_k": 0.6,
+      "precision_at_k": 0.375,
+      "mrr": 1.0,
+      "ndcg_at_k": 0.7019,
+      "rerank_ms": 1167
+    },
+    {
+      "query": "怎么排查线上死锁？",
+      "topic": "",
+      "kind": "kb-interview",
+      "expected": [
+        "死锁"
+      ],
+      "got": [
+        "死锁",
+        "死锁",
+        "并发与锁：互斥、信号量、条件变量与读写锁",
+        "死锁"
+      ],
+      "any_hit": true,
+      "top1": true,
+      "secs": 1.0364,
+      "degraded_components": [],
+      "degraded": "",
+      "annotated": true,
+      "recall_at_k": 0.6,
+      "precision_at_k": 0.375,
+      "mrr": 1.0,
+      "ndcg_at_k": 0.5788,
+      "rerank_ms": 1029
+    },
+    {
+      "query": "死锁和死循环是一回事吗？",
+      "topic": "",
+      "kind": "kb-interview",
+      "expected": [
+        "死锁"
+      ],
+      "got": [
+        "死锁",
+        "死锁",
+        "死锁",
+        "TCP 与 UDP"
+      ],
+      "any_hit": true,
+      "top1": true,
+      "secs": 1.1059,
+      "degraded_components": [],
+      "degraded": "",
+      "annotated": true,
+      "recall_at_k": 0.6,
+      "precision_at_k": 0.375,
+      "mrr": 1.0,
+      "ndcg_at_k": 0.5983,
+      "rerank_ms": 1098
+    },
+    {
+      "query": "进程和线程有什么区别？",
+      "topic": "",
+      "kind": "in-kb",
+      "expected": [
+        "进程与线程"
+      ],
+      "got": [
+        "进程与线程",
+        "进程与线程",
+        "进程与线程",
+        "进程与线程"
+      ],
+      "any_hit": true,
+      "top1": true,
+      "secs": 1.1619,
+      "degraded_components": [],
+      "degraded": "",
+      "annotated": true,
+      "recall_at_k": 1.0,
+      "precision_at_k": 0.75,
+      "mrr": 1.0,
+      "ndcg_at_k": 1.0,
+      "rerank_ms": 1154
+    },
+    {
+      "query": "进程间通信有哪几种方式？",
+      "topic": "",
+      "kind": "in-kb",
+      "expected": [
+        "进程与线程",
+        "进程间通信（IPC）"
+      ],
+      "got": [
+        "进程间通信（IPC）",
+        "进程与线程",
+        "进程与线程",
+        "进程与线程"
+      ],
+      "any_hit": true,
+      "top1": true,
+      "secs": 1.1778,
+      "degraded_components": [],
+      "degraded": "",
+      "annotated": true,
+      "recall_at_k": 0.5,
+      "precision_at_k": 0.625,
+      "mrr": 1.0,
+      "ndcg_at_k": 0.6952,
+      "rerank_ms": 1171
+    },
+    {
+      "query": "线程切换和进程切换哪个开销大，为什么？",
+      "topic": "",
+      "kind": "in-kb",
+      "expected": [
+        "进程与线程"
+      ],
+      "got": [
+        "进程与线程",
+        "进程与线程",
+        "进程调度算法",
+        "进程与线程"
+      ],
+      "any_hit": true,
+      "top1": true,
+      "secs": 1.3602,
+      "degraded_components": [],
+      "degraded": "",
+      "annotated": true,
+      "recall_at_k": 0.8,
+      "precision_at_k": 0.5,
+      "mrr": 1.0,
+      "ndcg_at_k": 0.7157,
+      "rerank_ms": 1323
+    },
+    {
+      "query": "切换开销哪个大？",
+      "topic": "进程与线程",
+      "kind": "follow-up",
+      "expected": [
+        "进程与线程"
+      ],
+      "got": [
+        "进程与线程",
+        "进程与线程",
+        "进程调度算法",
+        "进程与线程"
+      ],
+      "any_hit": true,
+      "top1": true,
+      "secs": 1.2318,
+      "degraded_components": [],
+      "degraded": "",
+      "annotated": true,
+      "recall_at_k": 0.8,
+      "precision_at_k": 0.5,
+      "mrr": 1.0,
+      "ndcg_at_k": 0.8139,
+      "rerank_ms": 1223
+    },
+    {
+      "query": "线程崩溃为什么会导致进程退出？",
+      "topic": "",
+      "kind": "kb-interview",
+      "expected": [
+        "进程与线程"
+      ],
+      "got": [
+        "进程与线程",
+        "进程与线程",
+        "进程与线程",
+        "进程与线程"
+      ],
+      "any_hit": true,
+      "top1": true,
+      "secs": 1.0895,
+      "degraded_components": [],
+      "degraded": "",
+      "annotated": true,
+      "recall_at_k": 1.25,
+      "precision_at_k": 0.625,
+      "mrr": 1.0,
+      "ndcg_at_k": 1.0,
+      "rerank_ms": 1082
+    },
+    {
+      "query": "多进程和多线程怎么选？",
+      "topic": "",
+      "kind": "kb-interview",
+      "expected": [
+        "进程与线程"
+      ],
+      "got": [
+        "进程与线程",
+        "进程与线程",
+        "进程与线程",
+        "进程与线程"
+      ],
+      "any_hit": true,
+      "top1": true,
+      "secs": 1.2018,
+      "degraded_components": [],
+      "degraded": "",
+      "annotated": true,
+      "recall_at_k": 0.8333,
+      "precision_at_k": 0.625,
+      "mrr": 1.0,
+      "ndcg_at_k": 0.8495,
+      "rerank_ms": 1188
+    },
+    {
+      "query": "协程是什么？",
+      "topic": "",
+      "kind": "kb-interview",
+      "expected": [
+        "进程与线程"
+      ],
+      "got": [
+        "进程与线程",
+        "进程间通信（IPC）",
+        "TCP/IP 分层模型与 ARP / DNS",
+        "文件系统：inode、目录与软硬链接"
+      ],
+      "any_hit": true,
+      "top1": true,
+      "secs": 1.0636,
+      "degraded_components": [],
+      "degraded": "",
+      "annotated": true,
+      "recall_at_k": 0.3333,
+      "precision_at_k": 0.125,
+      "mrr": 1.0,
+      "ndcg_at_k": 0.3801,
+      "rerank_ms": 1056
+    },
+    {
+      "query": "进程有哪些状态？",
+      "topic": "",
+      "kind": "kb-interview",
+      "expected": [
+        "进程与线程"
+      ],
+      "got": [
+        "进程与线程",
+        "进程与线程",
+        "进程间通信（IPC）"
+      ],
+      "any_hit": true,
+      "top1": true,
+      "secs": 1.1814,
+      "degraded_components": [],
+      "degraded": "",
+      "annotated": true,
+      "recall_at_k": 1.0,
+      "precision_at_k": 0.25,
+      "mrr": 1.0,
+      "ndcg_at_k": 0.8155,
+      "rerank_ms": 1173
+    },
+    {
+      "query": "常见的进程调度算法有哪些？",
+      "topic": "",
+      "kind": "in-kb",
+      "expected": [
+        "进程调度算法"
+      ],
+      "got": [
+        "进程调度算法",
+        "进程调度算法",
+        "进程间通信（IPC）",
+        "进程与线程"
+      ],
+      "any_hit": true,
+      "top1": true,
+      "secs": 1.1623,
+      "degraded_components": [],
+      "degraded": "",
+      "annotated": true,
+      "recall_at_k": 0.4,
+      "precision_at_k": 0.25,
+      "mrr": 1.0,
+      "ndcg_at_k": 0.4579,
+      "rerank_ms": 1148
+    },
+    {
+      "query": "多级反馈队列是怎么工作的？",
+      "topic": "",
+      "kind": "in-kb",
+      "expected": [
+        "进程调度算法"
+      ],
+      "got": [
+        "进程调度算法",
+        "进程调度算法",
+        "进程调度算法",
+        "TCP 可靠传输：确认、重传、滑动窗口与拥塞控制"
+      ],
+      "any_hit": true,
+      "top1": true,
+      "secs": 1.1002,
+      "degraded_components": [],
+      "degraded": "",
+      "annotated": true,
+      "recall_at_k": 1.0,
+      "precision_at_k": 0.375,
+      "mrr": 1.0,
+      "ndcg_at_k": 0.81,
+      "rerank_ms": 1092
+    },
+    {
+      "query": "时间片轮转的时间片设多大合适？",
+      "topic": "",
+      "kind": "in-kb",
+      "expected": [
+        "进程调度算法"
+      ],
+      "got": [
+        "进程调度算法",
+        "进程调度算法",
+        "进程调度算法",
+        "进程调度算法"
+      ],
+      "any_hit": true,
+      "top1": true,
+      "secs": 1.1232,
+      "degraded_components": [],
+      "degraded": "",
+      "annotated": true,
+      "recall_at_k": 0.8333,
+      "precision_at_k": 0.625,
+      "mrr": 1.0,
+      "ndcg_at_k": 0.7615,
+      "rerank_ms": 1116
+    },
+    {
+      "query": "它和死锁有关系吗？",
+      "topic": "进程调度算法",
+      "kind": "follow-up",
+      "expected": [
+        "进程调度算法"
+      ],
+      "got": [
+        "死锁",
+        "死锁",
+        "死锁",
+        "并发与锁：互斥、信号量、条件变量与读写锁"
+      ],
+      "any_hit": false,
+      "top1": false,
+      "secs": 1.1598,
+      "degraded_components": [],
+      "degraded": "",
+      "annotated": true,
+      "recall_at_k": 0.0,
+      "precision_at_k": 0.0,
+      "mrr": 0.0,
+      "ndcg_at_k": 0.0,
+      "rerank_ms": 1151
+    },
+    {
+      "query": "SJF 为什么平均周转时间最优？",
+      "topic": "",
+      "kind": "kb-interview",
+      "expected": [
+        "进程调度算法"
+      ],
+      "got": [
+        "进程调度算法",
+        "进程调度算法",
+        "进程调度算法",
+        "进程调度算法"
+      ],
+      "any_hit": true,
+      "top1": true,
+      "secs": 1.2212,
+      "degraded_components": [],
+      "degraded": "",
+      "annotated": true,
+      "recall_at_k": 1.6667,
+      "precision_at_k": 0.625,
+      "mrr": 1.0,
+      "ndcg_at_k": 1.0,
+      "rerank_ms": 1213
+    },
+    {
+      "query": "怎么解决优先级调度的饥饿？",
+      "topic": "",
+      "kind": "kb-interview",
+      "expected": [
+        "进程调度算法"
+      ],
+      "got": [
+        "进程调度算法",
+        "死锁",
+        "进程调度算法",
+        "进程调度算法"
+      ],
+      "any_hit": true,
+      "top1": true,
+      "secs": 1.1943,
+      "degraded_components": [],
+      "degraded": "",
+      "annotated": true,
+      "recall_at_k": 1.0,
+      "precision_at_k": 0.5,
+      "mrr": 1.0,
+      "ndcg_at_k": 0.8985,
+      "rerank_ms": 1184
+    },
+    {
+      "query": "RR 的时间片设为多少合适？",
+      "topic": "",
+      "kind": "kb-interview",
+      "expected": [
+        "进程调度算法"
+      ],
+      "got": [
+        "进程调度算法",
+        "进程调度算法",
+        "进程调度算法"
+      ],
+      "any_hit": true,
+      "top1": true,
+      "secs": 1.2507,
+      "degraded_components": [],
+      "degraded": "",
+      "annotated": true,
+      "recall_at_k": 0.8,
+      "precision_at_k": 0.5,
+      "mrr": 1.0,
+      "ndcg_at_k": 0.7342,
+      "rerank_ms": 1243
+    },
+    {
+      "query": "进程切换和线程切换开销差在哪？",
+      "topic": "",
+      "kind": "kb-interview",
+      "expected": [
+        "进程调度算法"
+      ],
+      "got": [
+        "进程调度算法",
+        "进程与线程",
+        "进程与线程",
+        "进程与线程"
+      ],
+      "any_hit": true,
+      "top1": true,
+      "secs": 1.2074,
+      "degraded_components": [],
+      "degraded": "",
+      "annotated": true,
+      "recall_at_k": 0.5,
+      "precision_at_k": 0.125,
+      "mrr": 1.0,
+      "ndcg_at_k": 0.5,
+      "rerank_ms": 1200
+    },
+    {
+      "query": "为什么需要虚拟内存？",
+      "topic": "",
+      "kind": "in-kb",
+      "expected": [
+        "虚拟内存与页面置换"
+      ],
+      "got": [
+        "虚拟内存与页面置换",
+        "虚拟内存与页面置换",
+        "虚拟内存与页面置换",
+        "虚拟内存与页面置换"
+      ],
+      "any_hit": true,
+      "top1": true,
+      "secs": 1.2617,
+      "degraded_components": [],
+      "degraded": "",
+      "annotated": true,
+      "recall_at_k": 1.2,
+      "precision_at_k": 0.75,
+      "mrr": 1.0,
+      "ndcg_at_k": 1.0,
+      "rerank_ms": 1253
+    },
+    {
+      "query": "LRU 页面置换算法怎么实现？",
+      "topic": "",
+      "kind": "in-kb",
+      "expected": [
+        "虚拟内存与页面置换"
+      ],
+      "got": [
+        "虚拟内存与页面置换",
+        "虚拟内存与页面置换",
+        "虚拟内存与页面置换",
+        "虚拟内存与页面置换"
+      ],
+      "any_hit": true,
+      "top1": true,
+      "secs": 1.2313,
+      "degraded_components": [],
+      "degraded": "",
+      "annotated": true,
+      "recall_at_k": 1.3333,
+      "precision_at_k": 0.5,
+      "mrr": 1.0,
+      "ndcg_at_k": 1.0,
+      "rerank_ms": 1224
+    },
+    {
+      "query": "缺页中断处理的过程是怎样的？",
+      "topic": "",
+      "kind": "in-kb",
+      "expected": [
+        "中断、异常与系统调用：用户态与内核态",
+        "虚拟内存与页面置换"
+      ],
+      "got": [
+        "虚拟内存与页面置换",
+        "中断、异常与系统调用：用户态与内核态",
+        "虚拟内存与页面置换",
+        "中断、异常与系统调用：用户态与内核态"
+      ],
+      "any_hit": true,
+      "top1": true,
+      "secs": 1.2077,
+      "degraded_components": [],
+      "degraded": "",
+      "annotated": true,
+      "recall_at_k": 0.6667,
+      "precision_at_k": 0.5,
+      "mrr": 1.0,
+      "ndcg_at_k": 0.611,
+      "rerank_ms": 1201
+    },
+    {
+      "query": "它有什么缺点？",
+      "topic": "虚拟内存与页面置换",
+      "kind": "follow-up",
+      "expected": [
+        "虚拟内存与页面置换"
+      ],
+      "got": [
+        "虚拟内存与页面置换",
+        "虚拟内存与页面置换",
+        "虚拟内存与页面置换",
+        "虚拟内存与页面置换"
+      ],
+      "any_hit": true,
+      "top1": true,
+      "secs": 1.1194,
+      "degraded_components": [],
+      "degraded": "",
+      "annotated": true,
+      "recall_at_k": 1.0,
+      "precision_at_k": 0.5,
+      "mrr": 1.0,
+      "ndcg_at_k": 1.0,
+      "rerank_ms": 1106
+    },
+    {
+      "query": "LRU 怎么实现？",
+      "topic": "",
+      "kind": "kb-interview",
+      "expected": [
+        "虚拟内存与页面置换"
+      ],
+      "got": [
+        "虚拟内存与页面置换",
+        "虚拟内存与页面置换",
+        "虚拟内存与页面置换"
+      ],
+      "any_hit": true,
+      "top1": true,
+      "secs": 1.1661,
+      "degraded_components": [],
+      "degraded": "",
+      "annotated": true,
+      "recall_at_k": 1.3333,
+      "precision_at_k": 0.5,
+      "mrr": 1.0,
+      "ndcg_at_k": 1.0,
+      "rerank_ms": 1154
+    },
+    {
+      "query": "虚拟地址空间布局？",
+      "topic": "",
+      "kind": "kb-interview",
+      "expected": [
+        "虚拟内存与页面置换"
+      ],
+      "got": [
+        "虚拟内存与页面置换",
+        "虚拟内存与页面置换",
+        "虚拟内存与页面置换",
+        "虚拟内存与页面置换"
+      ],
+      "any_hit": true,
+      "top1": true,
+      "secs": 1.0948,
+      "degraded_components": [],
+      "degraded": "",
+      "annotated": true,
+      "recall_at_k": 1.3333,
+      "precision_at_k": 0.5,
+      "mrr": 1.0,
+      "ndcg_at_k": 1.0,
+      "rerank_ms": 1068
+    },
+    {
+      "query": "TLB 什么时候要刷新？",
+      "topic": "",
+      "kind": "kb-interview",
+      "expected": [
+        "虚拟内存与页面置换"
+      ],
+      "got": [
+        "虚拟内存与页面置换",
+        "进程与线程"
+      ],
+      "any_hit": true,
+      "top1": true,
+      "secs": 1.1806,
+      "degraded_components": [],
+      "degraded": "",
+      "annotated": true,
+      "recall_at_k": 0.25,
+      "precision_at_k": 0.125,
+      "mrr": 1.0,
+      "ndcg_at_k": 0.3194,
+      "rerank_ms": 1147
+    },
+    {
+      "query": "什么是内存映射 mmap？",
+      "topic": "",
+      "kind": "kb-interview",
+      "expected": [
+        "虚拟内存与页面置换"
+      ],
+      "got": [
+        "虚拟内存与页面置换",
+        "虚拟内存与页面置换"
+      ],
+      "any_hit": true,
+      "top1": true,
+      "secs": 1.1326,
+      "degraded_components": [],
+      "degraded": "",
+      "annotated": true,
+      "recall_at_k": 1.0,
+      "precision_at_k": 0.375,
+      "mrr": 1.0,
+      "ndcg_at_k": 0.8597,
+      "rerank_ms": 1126
+    },
+    {
+      "query": "HTTPS 和 HTTP 有什么不同？",
+      "topic": "",
+      "kind": "in-kb",
+      "expected": [
+        "HTTPS 与 TLS 握手"
+      ],
+      "got": [
+        "HTTPS 与 TLS 握手",
+        "HTTP 基础：方法、状态码与缓存",
+        "TCP/IP 分层模型与 ARP / DNS",
+        "HTTPS 与 TLS 握手"
+      ],
+      "any_hit": true,
+      "top1": true,
+      "secs": 1.141,
+      "degraded_components": [],
+      "degraded": "",
+      "annotated": true,
+      "recall_at_k": 0.2857,
+      "precision_at_k": 0.25,
+      "mrr": 1.0,
+      "ndcg_at_k": 0.3412,
+      "rerank_ms": 1134
+    },
+    {
+      "query": "TLS 握手为什么要用三个随机数？",
+      "topic": "",
+      "kind": "in-kb",
+      "expected": [
+        "HTTPS 与 TLS 握手"
+      ],
+      "got": [
+        "HTTPS 与 TLS 握手",
+        "TCP 三次握手与四次挥手",
+        "TCP 三次握手与四次挥手",
+        "TCP 三次握手与四次挥手"
+      ],
+      "any_hit": true,
+      "top1": true,
+      "secs": 1.1796,
+      "degraded_components": [],
+      "degraded": "",
+      "annotated": true,
+      "recall_at_k": 0.5,
+      "precision_at_k": 0.125,
+      "mrr": 1.0,
+      "ndcg_at_k": 0.5,
+      "rerank_ms": 1172
+    },
+    {
+      "query": "数字签名怎么保证证书不被篡改？",
+      "topic": "",
+      "kind": "in-kb",
+      "expected": [
+        "HTTPS 与 TLS 握手"
+      ],
+      "got": [
+        "HTTPS 与 TLS 握手",
+        "HTTPS 与 TLS 握手",
+        "HTTPS 与 TLS 握手"
+      ],
+      "any_hit": true,
+      "top1": true,
+      "secs": 1.096,
+      "degraded_components": [],
+      "degraded": "",
+      "annotated": true,
+      "recall_at_k": 0.75,
+      "precision_at_k": 0.375,
+      "mrr": 1.0,
+      "ndcg_at_k": 0.6806,
+      "rerank_ms": 1059
+    },
+    {
+      "query": "TLS 1.3 相比 1.2 改了什么？",
+      "topic": "",
+      "kind": "in-kb",
+      "expected": [
+        "HTTPS 与 TLS 握手"
+      ],
+      "got": [
+        "HTTPS 与 TLS 握手",
+        "HTTPS 与 TLS 握手",
+        "HTTPS 与 TLS 握手",
+        "TCP/IP 分层模型与 ARP / DNS"
+      ],
+      "any_hit": true,
+      "top1": true,
+      "secs": 1.2061,
+      "degraded_components": [],
+      "degraded": "",
+      "annotated": true,
+      "recall_at_k": 1.0,
+      "precision_at_k": 0.375,
+      "mrr": 1.0,
+      "ndcg_at_k": 0.81,
+      "rerank_ms": 1199
+    },
+    {
+      "query": "HTTPS 握手和 TCP 三次握手有什么联系？",
+      "topic": "",
+      "kind": "cross",
+      "expected": [
+        "HTTPS 与 TLS 握手",
+        "TCP 三次握手与四次挥手"
+      ],
+      "got": [
+        "TCP 三次握手与四次挥手",
+        "TCP 三次握手与四次挥手",
+        "TCP 三次握手与四次挥手",
+        "TCP/IP 分层模型与 ARP / DNS"
+      ],
+      "any_hit": true,
+      "top1": true,
+      "secs": 1.0957,
+      "degraded_components": [],
+      "degraded": "",
+      "annotated": true,
+      "recall_at_k": 0.5,
+      "precision_at_k": 0.375,
+      "mrr": 1.0,
+      "ndcg_at_k": 0.8319,
+      "rerank_ms": 1085
+    },
+    {
+      "query": "性能开销体现在哪？",
+      "topic": "HTTPS 与 TLS 握手",
+      "kind": "follow-up",
+      "expected": [
+        "HTTPS 与 TLS 握手"
+      ],
+      "got": [
+        "HTTPS 与 TLS 握手",
+        "HTTPS 与 TLS 握手",
+        "HTTPS 与 TLS 握手",
+        "HTTPS 与 TLS 握手"
+      ],
+      "any_hit": true,
+      "top1": true,
+      "secs": 1.3684,
+      "degraded_components": [],
+      "degraded": "",
+      "annotated": true,
+      "recall_at_k": 1.0,
+      "precision_at_k": 0.5,
+      "mrr": 1.0,
+      "ndcg_at_k": 0.9779,
+      "rerank_ms": 1354
+    },
+    {
+      "query": "HTTPS 握手用了几种加密？",
+      "topic": "",
+      "kind": "kb-interview",
+      "expected": [
+        "HTTPS 与 TLS 握手"
+      ],
+      "got": [
+        "HTTPS 与 TLS 握手",
+        "HTTPS 与 TLS 握手",
+        "HTTPS 与 TLS 握手",
+        "HTTPS 与 TLS 握手"
+      ],
+      "any_hit": true,
+      "top1": true,
+      "secs": 1.1212,
+      "degraded_components": [],
+      "degraded": "",
+      "annotated": true,
+      "recall_at_k": 0.7143,
+      "precision_at_k": 0.625,
+      "mrr": 1.0,
+      "ndcg_at_k": 0.8495,
+      "rerank_ms": 1113
+    },
+    {
+      "query": "为什么需要 CA？",
+      "topic": "",
+      "kind": "kb-interview",
+      "expected": [
+        "HTTPS 与 TLS 握手"
+      ],
+      "got": [
+        "HTTPS 与 TLS 握手",
+        "HTTPS 与 TLS 握手",
+        "HTTPS 与 TLS 握手"
+      ],
+      "any_hit": true,
+      "top1": true,
+      "secs": 1.1582,
+      "degraded_components": [],
+      "degraded": "",
+      "annotated": true,
+      "recall_at_k": 0.6667,
+      "precision_at_k": 0.5,
+      "mrr": 1.0,
+      "ndcg_at_k": 0.7346,
+      "rerank_ms": 1113
+    },
+    {
+      "query": "银行 U 盾为什么安全？",
+      "topic": "",
+      "kind": "kb-interview",
+      "expected": [
+        "HTTPS 与 TLS 握手"
+      ],
+      "got": [
+        "HTTPS 与 TLS 握手"
+      ],
+      "any_hit": true,
+      "top1": true,
+      "secs": 1.1388,
+      "degraded_components": [],
+      "degraded": "",
+      "annotated": true,
+      "recall_at_k": 0.5,
+      "precision_at_k": 0.125,
+      "mrr": 1.0,
+      "ndcg_at_k": 0.5,
+      "rerank_ms": 1132
+    },
+    {
+      "query": "HTTPS 抓包原理？",
+      "topic": "",
+      "kind": "kb-interview",
+      "expected": [
+        "HTTPS 与 TLS 握手"
+      ],
+      "got": [
+        "HTTPS 与 TLS 握手",
+        "HTTPS 与 TLS 握手",
+        "TCP 与 UDP",
+        "HTTPS 与 TLS 握手"
+      ],
+      "any_hit": true,
+      "top1": true,
+      "secs": 1.1908,
+      "degraded_components": [],
+      "degraded": "",
+      "annotated": true,
+      "recall_at_k": 0.5,
+      "precision_at_k": 0.375,
+      "mrr": 1.0,
+      "ndcg_at_k": 0.4917,
+      "rerank_ms": 1178
+    },
+    {
+      "query": "WebSocket 和 HTTP 什么关系？",
+      "topic": "",
+      "kind": "kb-interview",
+      "expected": [
+        "HTTPS 与 TLS 握手"
+      ],
+      "got": [
+        "HTTPS 与 TLS 握手",
+        "HTTPS 与 TLS 握手",
+        "TCP/IP 分层模型与 ARP / DNS"
+      ],
+      "any_hit": true,
+      "top1": true,
+      "secs": 1.1502,
+      "degraded_components": [],
+      "degraded": "",
+      "annotated": true,
+      "recall_at_k": 0.6667,
+      "precision_at_k": 0.25,
+      "mrr": 1.0,
+      "ndcg_at_k": 0.6199,
+      "rerank_ms": 1142
+    },
+    {
+      "query": "TCP 为什么需要三次握手，两次不行吗？",
+      "topic": "",
+      "kind": "in-kb",
+      "expected": [
+        "TCP 三次握手与四次挥手"
+      ],
+      "got": [
+        "TCP 三次握手与四次挥手",
+        "TCP 三次握手与四次挥手",
+        "TCP 三次握手与四次挥手",
+        "TCP 三次握手与四次挥手"
+      ],
+      "any_hit": true,
+      "top1": true,
+      "secs": 1.1136,
+      "degraded_components": [],
+      "degraded": "",
+      "annotated": true,
+      "recall_at_k": 0.8571,
+      "precision_at_k": 0.75,
+      "mrr": 1.0,
+      "ndcg_at_k": 0.8508,
+      "rerank_ms": 1106
+    },
+    {
+      "query": "为什么挥手要四次，握手只要三次？",
+      "topic": "",
+      "kind": "in-kb",
+      "expected": [
+        "TCP 三次握手与四次挥手"
+      ],
+      "got": [
+        "TCP 三次握手与四次挥手",
+        "TCP 三次握手与四次挥手",
+        "TCP 三次握手与四次挥手",
+        "TCP 三次握手与四次挥手"
+      ],
+      "any_hit": true,
+      "top1": true,
+      "secs": 1.1978,
+      "degraded_components": [],
+      "degraded": "",
+      "annotated": true,
+      "recall_at_k": 1.0,
+      "precision_at_k": 0.625,
+      "mrr": 1.0,
+      "ndcg_at_k": 0.8487,
+      "rerank_ms": 1163
+    },
+    {
+      "query": "TIME_WAIT 为什么要等 2MSL？",
+      "topic": "",
+      "kind": "in-kb",
+      "expected": [
+        "TCP 三次握手与四次挥手"
+      ],
+      "got": [
+        "TCP 三次握手与四次挥手",
+        "TCP 三次握手与四次挥手",
+        "TCP 三次握手与四次挥手"
+      ],
+      "any_hit": true,
+      "top1": true,
+      "secs": 1.0974,
+      "degraded_components": [],
+      "degraded": "",
+      "annotated": true,
+      "recall_at_k": 1.0,
+      "precision_at_k": 0.375,
+      "mrr": 1.0,
+      "ndcg_at_k": 0.81,
+      "rerank_ms": 1090
+    },
+    {
+      "query": "TIME_WAIT 过多怎么处理？",
+      "topic": "",
+      "kind": "in-kb",
+      "expected": [
+        "TCP 三次握手与四次挥手"
+      ],
+      "got": [
+        "TCP 三次握手与四次挥手",
+        "TCP 三次握手与四次挥手",
+        "TCP 三次握手与四次挥手",
+        "TCP 三次握手与四次挥手"
+      ],
+      "any_hit": true,
+      "top1": true,
+      "secs": 1.1429,
+      "degraded_components": [],
+      "degraded": "",
+      "annotated": true,
+      "recall_at_k": 2.0,
+      "precision_at_k": 0.5,
+      "mrr": 1.0,
+      "ndcg_at_k": 1.0,
+      "rerank_ms": 1129
+    },
+    {
+      "query": "为什么不能是两次？",
+      "topic": "TCP 三次握手与四次挥手",
+      "kind": "follow-up",
+      "expected": [
+        "TCP 三次握手与四次挥手"
+      ],
+      "got": [
+        "TCP 三次握手与四次挥手",
+        "TCP 三次握手与四次挥手",
+        "TCP 三次握手与四次挥手",
+        "TCP 三次握手与四次挥手"
+      ],
+      "any_hit": true,
+      "top1": true,
+      "secs": 1.0938,
+      "degraded_components": [],
+      "degraded": "",
+      "annotated": true,
+      "recall_at_k": 1.0,
+      "precision_at_k": 0.5,
+      "mrr": 1.0,
+      "ndcg_at_k": 0.8182,
+      "rerank_ms": 1086
+    },
+    {
+      "query": "握手能携带数据吗？",
+      "topic": "",
+      "kind": "kb-interview",
+      "expected": [
+        "TCP 三次握手与四次挥手"
+      ],
+      "got": [
+        "TCP 三次握手与四次挥手",
+        "HTTPS 与 TLS 握手",
+        "HTTPS 与 TLS 握手",
+        "TCP 三次握手与四次挥手"
+      ],
+      "any_hit": true,
+      "top1": true,
+      "secs": 1.0992,
+      "degraded_components": [],
+      "degraded": "",
+      "annotated": true,
+      "recall_at_k": 1.0,
+      "precision_at_k": 0.375,
+      "mrr": 1.0,
+      "ndcg_at_k": 0.9239,
+      "rerank_ms": 1092
+    },
+    {
+      "query": "TCP 为什么是三次不是四次？",
+      "topic": "",
+      "kind": "kb-interview",
+      "expected": [
+        "TCP 三次握手与四次挥手"
+      ],
+      "got": [
+        "TCP 三次握手与四次挥手",
+        "TCP 三次握手与四次挥手",
+        "TCP 三次握手与四次挥手",
+        "TCP 三次握手与四次挥手"
+      ],
+      "any_hit": true,
+      "top1": true,
+      "secs": 1.1331,
+      "degraded_components": [],
+      "degraded": "",
+      "annotated": true,
+      "recall_at_k": 1.0,
+      "precision_at_k": 0.625,
+      "mrr": 1.0,
+      "ndcg_at_k": 0.8487,
+      "rerank_ms": 1126
+    },
+    {
+      "query": "close_wait 过多说明什么？",
+      "topic": "",
+      "kind": "kb-interview",
+      "expected": [
+        "TCP 三次握手与四次挥手"
+      ],
+      "got": [
+        "TCP 三次握手与四次挥手",
+        "TCP 三次握手与四次挥手",
+        "TCP 三次握手与四次挥手"
+      ],
+      "any_hit": true,
+      "top1": true,
+      "secs": 1.2239,
+      "degraded_components": [],
+      "degraded": "",
+      "annotated": true,
+      "recall_at_k": 1.0,
+      "precision_at_k": 0.375,
+      "mrr": 1.0,
+      "ndcg_at_k": 0.81,
+      "rerank_ms": 1216
+    },
+    {
+      "query": "MSL 和 TTL 的区别？",
+      "topic": "",
+      "kind": "kb-interview",
+      "expected": [
+        "TCP 三次握手与四次挥手"
+      ],
+      "got": [
+        "TCP 三次握手与四次挥手",
+        "DNS 域名解析",
+        "TCP/IP 分层模型与 ARP / DNS"
+      ],
+      "any_hit": true,
+      "top1": true,
+      "secs": 1.4079,
+      "degraded_components": [],
+      "degraded": "",
+      "annotated": true,
+      "recall_at_k": 0.3333,
+      "precision_at_k": 0.125,
+      "mrr": 1.0,
+      "ndcg_at_k": 0.3801,
+      "rerank_ms": 1401
+    },
+    {
+      "query": "OSI 七层模型和 TCP/IP 四层怎么对应？",
+      "topic": "",
+      "kind": "in-kb",
+      "expected": [
+        "TCP/IP 分层模型与 ARP / DNS"
+      ],
+      "got": [
+        "TCP/IP 分层模型与 ARP / DNS",
+        "TCP/IP 分层模型与 ARP / DNS",
+        "TCP/IP 分层模型与 ARP / DNS"
+      ],
+      "any_hit": true,
+      "top1": true,
+      "secs": 1.1431,
+      "degraded_components": [],
+      "degraded": "",
+      "annotated": true,
+      "recall_at_k": 1.5,
+      "precision_at_k": 0.375,
+      "mrr": 1.0,
+      "ndcg_at_k": 1.0,
+      "rerank_ms": 1131
+    },
+    {
+      "query": "ARP 是干什么的？",
+      "topic": "",
+      "kind": "in-kb",
+      "expected": [
+        "TCP/IP 分层模型与 ARP / DNS"
+      ],
+      "got": [
+        "TCP/IP 分层模型与 ARP / DNS",
+        "TCP/IP 分层模型与 ARP / DNS",
+        "TCP/IP 分层模型与 ARP / DNS",
+        "TCP/IP 分层模型与 ARP / DNS"
+      ],
+      "any_hit": true,
+      "top1": true,
+      "secs": 1.1046,
+      "degraded_components": [],
+      "degraded": "",
+      "annotated": true,
+      "recall_at_k": 0.8333,
+      "precision_at_k": 0.625,
+      "mrr": 1.0,
+      "ndcg_at_k": 0.7184,
+      "rerank_ms": 1098
+    },
+    {
+      "query": "DNS 解析的完整过程是怎样的？",
+      "topic": "",
+      "kind": "in-kb",
+      "expected": [
+        "DNS 域名解析",
+        "TCP/IP 分层模型与 ARP / DNS"
+      ],
+      "got": [
+        "DNS 域名解析",
+        "DNS 域名解析"
+      ],
+      "any_hit": true,
+      "top1": true,
+      "secs": 1.081,
+      "degraded_components": [],
+      "degraded": "",
+      "annotated": true,
+      "recall_at_k": 0.375,
+      "precision_at_k": 0.375,
+      "mrr": 1.0,
+      "ndcg_at_k": 0.5607,
+      "rerank_ms": 1073
+    },
+    {
+      "query": "从浏览器输入 URL 到页面显示发生了什么？",
+      "topic": "",
+      "kind": "kb-interview",
+      "expected": [
+        "DNS 域名解析",
+        "TCP/IP 分层模型与 ARP / DNS"
+      ],
+      "got": [
+        "DNS 域名解析",
+        "TCP/IP 分层模型与 ARP / DNS"
+      ],
+      "any_hit": true,
+      "top1": true,
+      "secs": 1.4509,
+      "degraded_components": [],
+      "degraded": "",
+      "annotated": true,
+      "recall_at_k": 0.4444,
+      "precision_at_k": 0.5,
+      "mrr": 1.0,
+      "ndcg_at_k": 0.778,
+      "rerank_ms": 1430
+    },
+    {
+      "query": "ARP 和 DNS 的区别？",
+      "topic": "",
+      "kind": "kb-interview",
+      "expected": [
+        "TCP/IP 分层模型与 ARP / DNS"
+      ],
+      "got": [
+        "TCP/IP 分层模型与 ARP / DNS",
+        "TCP/IP 分层模型与 ARP / DNS",
+        "TCP/IP 分层模型与 ARP / DNS"
+      ],
+      "any_hit": true,
+      "top1": true,
+      "secs": 1.3246,
+      "degraded_components": [],
+      "degraded": "",
+      "annotated": true,
+      "recall_at_k": 0.6667,
+      "precision_at_k": 0.5,
+      "mrr": 1.0,
+      "ndcg_at_k": 0.648,
+      "rerank_ms": 1315
+    },
+    {
+      "query": "为什么有了 IP 地址还要 MAC 地址？",
+      "topic": "",
+      "kind": "kb-interview",
+      "expected": [
+        "TCP/IP 分层模型与 ARP / DNS"
+      ],
+      "got": [
+        "TCP/IP 分层模型与 ARP / DNS",
+        "TCP/IP 分层模型与 ARP / DNS",
+        "TCP/IP 分层模型与 ARP / DNS"
+      ],
+      "any_hit": true,
+      "top1": true,
+      "secs": 1.2077,
+      "degraded_components": [],
+      "degraded": "",
+      "annotated": true,
+      "recall_at_k": 0.6,
+      "precision_at_k": 0.375,
+      "mrr": 1.0,
+      "ndcg_at_k": 0.5665,
+      "rerank_ms": 1199
+    },
+    {
+      "query": "交换机和路由器的区别？",
+      "topic": "",
+      "kind": "kb-interview",
+      "expected": [
+        "TCP/IP 分层模型与 ARP / DNS"
+      ],
+      "got": [
+        "TCP/IP 分层模型与 ARP / DNS",
+        "TCP/IP 分层模型与 ARP / DNS",
+        "TCP/IP 分层模型与 ARP / DNS"
+      ],
+      "any_hit": true,
+      "top1": true,
+      "secs": 1.3384,
+      "degraded_components": [],
+      "degraded": "",
+      "annotated": true,
+      "recall_at_k": 1.5,
+      "precision_at_k": 0.375,
+      "mrr": 1.0,
+      "ndcg_at_k": 1.0,
+      "rerank_ms": 1330
+    },
+    {
+      "query": "ping 用的什么协议？",
+      "topic": "",
+      "kind": "kb-interview",
+      "expected": [
+        "TCP/IP 分层模型与 ARP / DNS"
+      ],
+      "got": [
+        "TCP/IP 分层模型与 ARP / DNS",
+        "TCP/IP 分层模型与 ARP / DNS",
+        "TCP/IP 分层模型与 ARP / DNS",
+        "进程间通信（IPC）"
+      ],
+      "any_hit": true,
+      "top1": true,
+      "secs": 1.0702,
+      "degraded_components": [],
+      "degraded": "",
+      "annotated": true,
+      "recall_at_k": 0.8,
+      "precision_at_k": 0.5,
+      "mrr": 1.0,
+      "ndcg_at_k": 0.7342,
+      "rerank_ms": 1063
+    },
+    {
+      "query": "TCP 和 UDP 该怎么选？",
+      "topic": "",
+      "kind": "in-kb",
+      "expected": [
+        "tcp 与 udp"
+      ],
+      "got": [
+        "TCP 与 UDP",
+        "TCP 与 UDP",
+        "TCP 与 UDP"
+      ],
+      "any_hit": true,
+      "top1": true,
+      "secs": 1.145,
+      "degraded_components": [],
+      "degraded": "",
+      "annotated": true,
+      "recall_at_k": 0.6667,
+      "precision_at_k": 0.5,
+      "mrr": 1.0,
+      "ndcg_at_k": 0.7468,
+      "rerank_ms": 1138
+    },
+    {
+      "query": "TCP 的拥塞控制分为哪几个阶段？",
+      "topic": "",
+      "kind": "in-kb",
+      "expected": [
+        "tcp 与 udp"
+      ],
+      "got": [
+        "TCP 与 UDP",
+        "TCP 可靠传输：确认、重传、滑动窗口与拥塞控制",
+        "TCP 可靠传输：确认、重传、滑动窗口与拥塞控制",
+        "TCP 可靠传输：确认、重传、滑动窗口与拥塞控制"
+      ],
+      "any_hit": true,
+      "top1": true,
+      "secs": 1.1838,
+      "degraded_components": [],
+      "degraded": "",
+      "annotated": true,
+      "recall_at_k": 0.2,
+      "precision_at_k": 0.125,
+      "mrr": 1.0,
+      "ndcg_at_k": 0.2658,
+      "rerank_ms": 1175
+    },
+    {
+      "query": "TCP 粘包是怎么产生的？",
+      "topic": "",
+      "kind": "in-kb",
+      "expected": [
+        "tcp 与 udp"
+      ],
+      "got": [
+        "TCP 与 UDP",
+        "TCP 可靠传输：确认、重传、滑动窗口与拥塞控制",
+        "TCP 与 UDP",
+        "TCP/IP 分层模型与 ARP / DNS"
+      ],
+      "any_hit": true,
+      "top1": true,
+      "secs": 1.1501,
+      "degraded_components": [],
+      "degraded": "",
+      "annotated": true,
+      "recall_at_k": 0.6667,
+      "precision_at_k": 0.25,
+      "mrr": 1.0,
+      "ndcg_at_k": 0.5701,
+      "rerank_ms": 1138
+    },
+    {
+      "query": "这两个协议该怎么选？",
+      "topic": "TCP 与 UDP",
+      "kind": "follow-up",
+      "expected": [
+        "tcp 与 udp"
+      ],
+      "got": [
+        "TCP 与 UDP",
+        "TCP/IP 分层模型与 ARP / DNS",
+        "TCP/IP 分层模型与 ARP / DNS"
+      ],
+      "any_hit": true,
+      "top1": true,
+      "secs": 1.2659,
+      "degraded_components": [],
+      "degraded": "",
+      "annotated": true,
+      "recall_at_k": 0.1667,
+      "precision_at_k": 0.125,
+      "mrr": 1.0,
+      "ndcg_at_k": 0.2385,
+      "rerank_ms": 1244
+    },
+    {
+      "query": "Redis 持久化有哪几种方式？",
+      "topic": "",
+      "kind": "oos",
+      "expected": [],
+      "got": [],
+      "any_hit": null,
+      "top1": null,
+      "secs": 1.1052,
+      "degraded_components": [],
+      "degraded": "",
+      "annotated": false,
+      "recall_at_k": 0.0,
+      "precision_at_k": 0.0,
+      "mrr": 0.0,
+      "ndcg_at_k": 0.0,
+      "rerank_ms": 1095
+    },
+    {
+      "query": "MySQL 索引为什么用 B+ 树？",
+      "topic": "",
+      "kind": "oos",
+      "expected": [],
+      "got": [
+        "数据库索引与事务",
+        "数据库索引与事务",
+        "数据库索引与事务",
+        "数据库索引与事务"
+      ],
+      "any_hit": null,
+      "top1": null,
+      "secs": 1.2527,
+      "degraded_components": [],
+      "degraded": "",
+      "annotated": false,
+      "recall_at_k": 0.0,
+      "precision_at_k": 0.0,
+      "mrr": 0.0,
+      "ndcg_at_k": 0.0,
+      "rerank_ms": 1246
+    },
+    {
+      "query": "Java 的 HashMap 线程安全吗？",
+      "topic": "",
+      "kind": "oos",
+      "expected": [],
+      "got": [],
+      "any_hit": null,
+      "top1": null,
+      "secs": 1.1223,
+      "degraded_components": [],
+      "degraded": "",
+      "annotated": false,
+      "recall_at_k": 0.0,
+      "precision_at_k": 0.0,
+      "mrr": 0.0,
+      "ndcg_at_k": 0.0,
+      "rerank_ms": 1114
+    },
+    {
+      "query": "什么是 CAP 定理？",
+      "topic": "",
+      "kind": "oos",
+      "expected": [],
+      "got": [],
+      "any_hit": null,
+      "top1": null,
+      "secs": 1.0838,
+      "degraded_components": [],
+      "degraded": "",
+      "annotated": false,
+      "recall_at_k": 0.0,
+      "precision_at_k": 0.0,
+      "mrr": 0.0,
+      "ndcg_at_k": 0.0,
+      "rerank_ms": 1069
+    },
+    {
+      "query": "TCP 比 UDP 慢在哪？",
+      "topic": "",
+      "kind": "kb-interview",
+      "expected": [
+        "TCP 与 UDP"
+      ],
+      "got": [
+        "TCP 与 UDP",
+        "TCP 与 UDP",
+        "TCP 与 UDP",
+        "HTTPS 与 TLS 握手"
+      ],
+      "any_hit": true,
+      "top1": true,
+      "secs": 1.2655,
+      "degraded_components": [],
+      "degraded": "",
+      "annotated": true,
+      "recall_at_k": 0.5714,
+      "precision_at_k": 0.5,
+      "mrr": 1.0,
+      "ndcg_at_k": 0.6672,
+      "rerank_ms": 1228
+    },
+    {
+      "query": "为什么 DNS 用 UDP？",
+      "topic": "",
+      "kind": "kb-interview",
+      "expected": [
+        "TCP 与 UDP"
+      ],
+      "got": [
+        "TCP 与 UDP",
+        "TCP/IP 分层模型与 ARP / DNS",
+        "DNS 域名解析",
+        "TCP 与 UDP"
+      ],
+      "any_hit": true,
+      "top1": true,
+      "secs": 1.2102,
+      "degraded_components": [],
+      "degraded": "",
+      "annotated": true,
+      "recall_at_k": 0.75,
+      "precision_at_k": 0.375,
+      "mrr": 1.0,
+      "ndcg_at_k": 0.7763,
+      "rerank_ms": 1204
+    },
+    {
+      "query": "UDP 怎么实现可靠传输？",
+      "topic": "",
+      "kind": "kb-interview",
+      "expected": [
+        "TCP 与 UDP"
+      ],
+      "got": [
+        "TCP 与 UDP",
+        "TCP 与 UDP",
+        "TCP 可靠传输：确认、重传、滑动窗口与拥塞控制",
+        "TCP 可靠传输：确认、重传、滑动窗口与拥塞控制"
+      ],
+      "any_hit": true,
+      "top1": true,
+      "secs": 1.0682,
+      "degraded_components": [],
+      "degraded": "",
+      "annotated": true,
+      "recall_at_k": 0.3333,
+      "precision_at_k": 0.25,
+      "mrr": 1.0,
+      "ndcg_at_k": 0.389,
+      "rerank_ms": 1061
+    },
+    {
+      "query": "MSS 和 MTU 的关系？",
+      "topic": "",
+      "kind": "kb-interview",
+      "expected": [
+        "TCP 与 UDP"
+      ],
+      "got": [
+        "TCP 与 UDP",
+        "TCP/IP 分层模型与 ARP / DNS"
+      ],
+      "any_hit": true,
+      "top1": true,
+      "secs": 1.1216,
+      "degraded_components": [],
+      "degraded": "",
+      "annotated": true,
+      "recall_at_k": 0.5,
+      "precision_at_k": 0.125,
+      "mrr": 1.0,
+      "ndcg_at_k": 0.5,
+      "rerank_ms": 1114
+    },
+    {
+      "query": "TCP 的 keepalive 和 HTTP 的 Keep-Alive 是一回事吗？",
+      "topic": "",
+      "kind": "kb-interview",
+      "expected": [
+        "TCP 与 UDP"
+      ],
+      "got": [
+        "TCP 与 UDP",
+        "TCP 可靠传输：确认、重传、滑动窗口与拥塞控制"
+      ],
+      "any_hit": true,
+      "top1": true,
+      "secs": 1.3153,
+      "degraded_components": [],
+      "degraded": "",
+      "annotated": true,
+      "recall_at_k": 0.5,
+      "precision_at_k": 0.125,
+      "mrr": 1.0,
+      "ndcg_at_k": 0.5,
+      "rerank_ms": 1299
+    }
+  ],
+  "metrics": {
+    "cases": 71,
+    "annotated_cases": 71,
+    "fallback_cases": 0,
+    "recall_at_k": 0.7692,
+    "precision_at_k": 0.4032,
+    "mrr": 0.9695,
+    "ndcg_at_k": 0.7033,
+    "ndcg_at_k_fallback": null,
+    "ndcg_clamped_cases": 9
+  }
+}

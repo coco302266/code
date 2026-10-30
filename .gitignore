@@ -1,0 +1,52 @@
+# 本地运行产物
+*.log
+.uvicorn.log
+.pip.log
+
+# 验收脚本跑完写的输出快照（每次覆盖，不进版本库）
+*_out.txt
+
+# T7 生成的 PPT 文件（运行产物，按需重新生成）
+generated/
+
+# 本机工作数据（非源码，不进版本库）
+.workbuddy/
+
+# 重建库 / 重刷金标准前的本地回滚快照（含 chroma 库 + 基线，体积大，只留本地）
+backup_chroma_*/
+backup_gold_*/
+
+# IDE
+.idea/
+
+# 密钥与本地环境（根目录再兜一层，子项目 .gitignore 已忽略 backend/.env）
+.env
+.env.*
+# 示例文件必须入库，否则新环境无参照（.env.* 会把 .env.docker.example 一起吃掉）
+!**/.env.example
+!**/*.example
+
+# ===== 重型本地产物（2026-10-30 推送 Gitee 前补）=====
+# embedding 模型缓存：合计 9.0G，首次运行自动下载，绝不能进仓库
+Tutor-Chatbot-main/backend/.model_cache*/
+# Python 虚拟环境：653M，用 requirements.txt 重建
+Tutor-Chatbot-main/backend/venv/
+# 旧向量库快照：99M，仅本地回滚用
+Tutor-Chatbot-main/backend/_chroma_archive/
+# 课堂资料向量库：含用户上传内容，属运行时数据，不进仓库
+Tutor-Chatbot-main/backend/chroma_classrooms/
+
+# 通用构建 / 字节码产物
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+node_modules/
+.next/
+out/
+dist/
+build/
+
+# 文档整理前的一次性原件备份（校验通过后即可整删）
+_docs_archive_*/

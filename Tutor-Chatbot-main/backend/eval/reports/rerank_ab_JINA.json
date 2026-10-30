@@ -1,0 +1,60 @@
+{
+  "tag": "JINA",
+  "ts": "2026-10-28T21:46:39",
+  "config": {
+    "model": "jinaai/jina-reranker-v2-base-multilingual",
+    "enable_rerank": true,
+    "rerank_text": "child_title",
+    "head_chars": 480,
+    "pool_k": 0,
+    "overfetch": 1,
+    "batch": 1,
+    "parent_child": true,
+    "inject_k": 3,
+    "relevance_floor": -2.0,
+    "per_doc_floor": -8.0
+  },
+  "cases": 71,
+  "recall_at_k": 0.7807,
+  "precision_at_k": 0.5516,
+  "noise_rate": 0.3263,
+  "hard_neg_rate": 0.1019,
+  "hard_neg_cases": 53,
+  "mrr": 0.9577,
+  "ndcg_at_k": 0.86,
+  "top1": 67,
+  "top3": 70,
+  "total": 71,
+  "mean_parent_pool": 4.2113,
+  "mean_injected": 2.9718,
+  "rerank_p95_ms": 982.0,
+  "rerank_mean_ms": 823.1831,
+  "avg_secs": 0.8624,
+  "l1_p95_secs": 1.0262,
+  "degraded_cases": 0,
+  "degraded_rate": 0.0,
+  "rerank_fail_cases": 0,
+  "delta_vs": {
+    "B0": {
+      "recall_at_k": -0.0102,
+      "precision_at_k": -0.0118,
+      "mrr": -0.0071,
+      "ndcg_at_k": 0.0439
+    },
+    "B1": {
+      "recall_at_k": -0.0102,
+      "precision_at_k": -0.0118,
+      "mrr": -0.0071,
+      "ndcg_at_k": -0.01,
+      "rerank_p95_ms": -100.0
+    }
+  },
+  "gates": {
+    "beats_b0_ndcg": true,
+    "recall_ge_b1_plus_1_5pp": false,
+    "latency_within_safe_line": true,
+    "l1_p95_within_3s": true,
+    "degraded_rate_ok": true,
+    "passed": false
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "tag": "JINA",
+  "model": "jinaai/jina-reranker-v2-base-multilingual",
+  "queries": 40,
+  "documents": 160,
+  "docs_per_query": 4.0,
+  "load_ms": 2417.8,
+  "rss_before_mb": 259.3,
+  "rss_after_mb": 1607.3,
+  "rss_delta_mb": 1348.0,
+  "lat_mean_ms": 286.0,
+  "lat_p50_ms": 284.6,
+  "lat_p90_ms": 313.8,
+  "lat_p95_ms": 330.5,
+  "lat_p99_ms": 350.6,
+  "lat_max_ms": 395.5,
+  "throughput_docs_per_s": 13.98,
+  "samples": 200
+}

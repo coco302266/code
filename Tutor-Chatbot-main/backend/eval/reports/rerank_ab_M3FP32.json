@@ -1,0 +1,60 @@
+{
+  "tag": "M3FP32",
+  "ts": "2026-10-28T23:00:21",
+  "config": {
+    "model": "local:.model_cache_local\\bge-m3-fp32",
+    "enable_rerank": true,
+    "rerank_text": "child_title",
+    "head_chars": 480,
+    "pool_k": 0,
+    "overfetch": 1,
+    "batch": 1,
+    "parent_child": true,
+    "inject_k": 3,
+    "relevance_floor": -2.0,
+    "per_doc_floor": -8.0
+  },
+  "cases": 71,
+  "recall_at_k": 0.7862,
+  "precision_at_k": 0.5587,
+  "noise_rate": 0.3052,
+  "hard_neg_rate": 0.0903,
+  "hard_neg_cases": 53,
+  "mrr": 0.9577,
+  "ndcg_at_k": 0.8619,
+  "top1": 67,
+  "top3": 70,
+  "total": 71,
+  "mean_parent_pool": 4.2113,
+  "mean_injected": 2.9437,
+  "rerank_p95_ms": 1716.0,
+  "rerank_mean_ms": 1366.8028,
+  "avg_secs": 1.438,
+  "l1_p95_secs": 1.7687,
+  "degraded_cases": 0,
+  "degraded_rate": 0.0,
+  "rerank_fail_cases": 0,
+  "delta_vs": {
+    "B0": {
+      "recall_at_k": -0.0047,
+      "precision_at_k": -0.0047,
+      "mrr": -0.0071,
+      "ndcg_at_k": 0.0458
+    },
+    "B1": {
+      "recall_at_k": -0.0047,
+      "precision_at_k": -0.0047,
+      "mrr": -0.0071,
+      "ndcg_at_k": -0.0081,
+      "rerank_p95_ms": 634.0
+    }
+  },
+  "gates": {
+    "beats_b0_ndcg": true,
+    "recall_ge_b1_plus_1_5pp": false,
+    "latency_within_safe_line": true,
+    "l1_p95_within_3s": true,
+    "degraded_rate_ok": true,
+    "passed": false
+  }
+}
