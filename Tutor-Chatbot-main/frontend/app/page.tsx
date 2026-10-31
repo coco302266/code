@@ -144,7 +144,7 @@ export default function EntryPage() {
     <div className="relative h-full overflow-hidden">
       <PageBackdrop variant="home" />
       <div className="relative z-10 flex h-full items-start justify-center overflow-auto px-6 py-10">
-        <div className="grid w-full max-w-[1000px] gap-6 rounded-2xl border border-white/70 bg-panel/70 p-6 shadow-[0_16px_40px_-20px_rgba(15,23,42,0.30)] backdrop-blur-xl sm:p-8 md:grid-cols-[1.02fr_1fr] md:items-start">
+        <div className="grid w-full max-w-[1000px] gap-6 rounded-2xl border border-white/60 bg-panel/52 p-6 shadow-[0_24px_60px_-28px_rgba(15,23,42,0.38)] backdrop-blur-2xl sm:p-8 md:grid-cols-[1.02fr_1fr] md:items-start">
         <section className="pt-2">
           <h1 className="text-[26px] font-medium leading-snug text-ink">
             AI 智能教室

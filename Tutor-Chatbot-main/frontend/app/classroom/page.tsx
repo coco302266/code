@@ -409,6 +409,13 @@ export default function ClassroomPage() {
 
   return (
     <Shell
+      backdrop={
+        scenarioKey === "debate"
+          ? "debate"
+          : scenarioKey === "group"
+            ? "group"
+            : "v1"
+      }
       backHref="/classrooms/"
       backLabel="我的课堂"
       identity={identity}
@@ -492,7 +499,7 @@ export default function ClassroomPage() {
             )}
           </div>
 
-          <div className="shrink-0 border-t border-line bg-panel px-3 py-3 sm:px-6 sm:py-3.5">
+          <div className="shrink-0 border-t border-white/60 bg-panel/70 px-3 py-3 backdrop-blur-2xl sm:px-6 sm:py-3.5">
             {/* sm 以上把输入行右移 42px（头像 32 + 间距 10），
                 让输入框左边界与气泡正文的左边界落在同一根竖线上。
                 之前两者差 42px，是整页最显眼的一处不齐。 */}
@@ -543,7 +550,7 @@ export default function ClassroomPage() {
 
         {panelOpen && (
           <aside
-            className="hidden w-[304px] shrink-0 flex-col overflow-y-auto border-l border-line bg-panel lg:flex"
+            className="hidden w-[304px] shrink-0 flex-col overflow-y-auto border-l border-white/60 bg-panel/70 backdrop-blur-2xl lg:flex"
             data-selectable
           >
             <div className="border-b border-line px-4 py-3">

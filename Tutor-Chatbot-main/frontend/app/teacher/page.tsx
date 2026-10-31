@@ -458,7 +458,7 @@ export default function TeacherPage() {
       }
     >
       <div className="mx-auto max-w-[960px] px-6 py-6">
-        <div className="flex gap-1.5 rounded-xl border border-white/70 bg-panel/82 p-1.5 shadow-[0_12px_32px_-16px_rgba(15,23,42,0.28)] backdrop-blur-xl">
+        <div className="flex gap-1.5 rounded-xl border border-white/60 bg-panel/64 p-1.5 shadow-[0_16px_40px_-20px_rgba(15,23,42,0.32)] backdrop-blur-2xl">
           {TABS.map((item) => (
             <button
               key={item.key}

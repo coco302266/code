@@ -48,7 +48,7 @@ export function Card({
   children: ReactNode;
 }) {
   const skin = glass
-    ? "border-white/70 bg-panel/82 backdrop-blur-xl shadow-[0_12px_32px_-16px_rgba(15,23,42,0.28)]"
+    ? "border-white/60 bg-panel/64 backdrop-blur-2xl shadow-[0_16px_40px_-20px_rgba(15,23,42,0.32)]"
     : "border-line bg-panel";
   return (
     <div className={`rounded-xl border ${skin} ${className}`}>{children}</div>

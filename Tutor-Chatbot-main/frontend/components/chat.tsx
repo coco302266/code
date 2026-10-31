@@ -43,29 +43,36 @@ export interface UIMsg {
  */
 const AGENT_STYLE: Record<
   string,
-  { avatar: string; bubble: string; mark: string; label: string }
+  { avatar: string; skin: string; accent: string; mark: string; label: string }
 > = {
+  // 气泡 = 更圆的淡色卡片 + 左侧一枚圆头色条 + 柔和投影，不描边。
+  // 描边一圈会在淡色底上显得生硬（像表格），改成一枚「书签条」更像对话产品；
+  // 色条用 absolute 圆头短棒（inset-y），不是整条边，视觉上更轻。
   tutor: {
-    avatar: "bg-ai-soft text-ai",
-    bubble: "border-ai-line bg-ai-soft",
+    avatar: "bg-ai-soft text-ai ring-ai-line",
+    skin: "bg-ai-soft text-ink",
+    accent: "bg-ai",
     mark: "讲",
     label: "主讲助教",
   },
   teacher: {
-    avatar: "bg-teacher-soft text-teacher",
-    bubble: "border-teacher-line bg-teacher-soft",
+    avatar: "bg-teacher-soft text-teacher ring-teacher-line",
+    skin: "bg-teacher-soft text-ink",
+    accent: "bg-teacher",
     mark: "师",
     label: "主讲教师",
   },
   peer: {
-    avatar: "bg-brand-soft text-brand",
-    bubble: "border-brand-line bg-brand-soft",
+    avatar: "bg-brand-soft text-brand ring-brand-line",
+    skin: "bg-brand-soft text-ink",
+    accent: "bg-brand",
     mark: "伴",
     label: "学伴",
   },
   examiner: {
-    avatar: "border border-line bg-soft text-sub",
-    bubble: "border-line bg-soft",
+    avatar: "bg-soft text-sub ring-line",
+    skin: "bg-soft text-ink",
+    accent: "bg-hint",
     mark: "考",
     label: "考官",
   },
@@ -75,8 +82,9 @@ const AGENT_STYLE: Record<
 export function agentMeta(role?: string | null) {
   return (
     AGENT_STYLE[role ?? ""] ?? {
-      avatar: "bg-ai-soft text-ai",
-      bubble: "border-ai-line bg-ai-soft",
+      avatar: "bg-ai-soft text-ai ring-ai-line",
+      skin: "bg-ai-soft text-ink",
+      accent: "bg-ai",
       mark: "AI",
       label: "AI 助教",
     }
@@ -98,12 +106,12 @@ export function Avatar({
   const label = isAi ? meta.mark : (name || "?").slice(0, 1);
   return (
     <span
-      className={`grid h-8 w-8 shrink-0 place-items-center rounded-lg text-[13px] font-medium ${
+      className={`grid h-9 w-9 shrink-0 place-items-center rounded-[10px] text-[14px] font-medium ring-1 ring-inset ${
         isAi
           ? meta.avatar
           : role === "teacher"
-            ? "bg-teacher-soft text-teacher"
-            : "bg-brand-soft text-brand"
+            ? "bg-teacher-soft text-teacher ring-teacher-line"
+            : "bg-brand-soft text-brand ring-brand-line"
       }`}
     >
       {label}
@@ -130,9 +138,27 @@ export function MessageRow({
     : (msg.username ?? "未知用户");
 
   return (
-    <div className="rise flex gap-2.5" data-selectable>
-      <Avatar name={msg.username} role={msg.role} agentRole={msg.agentRole} />
-      <div className="min-w-0 flex-1">
+    <div className="rise flex gap-3" data-selectable>
+      <Avatar
+        name={msg.username}
+        role={msg.role}
+        agentRole={msg.agentRole}
+      />
+      {/* 一条消息 = 一张卡片：名字行、正文、依据都收在卡片里。
+          这样在整屏照片背景上，任何文字都落在淡色底上，不会出现
+          「时间戳和依据条压在照片上读不清」的情况。头像留在卡片外侧，
+          保证一屏扫下来仍是聊天流的节奏，而不是一列卡片。 */}
+      <div
+        className={`min-w-0 flex-1 rounded-[18px] px-5 py-3.5 shadow-[0_1px_2px_rgba(15,23,42,0.05),0_14px_30px_-24px_rgba(15,23,42,0.45)] ${
+          isAi
+            ? meta.skin
+            : msg.role === "teacher"
+              ? "bg-teacher-soft text-ink"
+              : isMine
+                ? "bg-brand-soft text-ink"
+                : "bg-panel text-ink"
+        }`}
+      >
         <div className="flex flex-wrap items-center gap-2">
           <span className="text-[13px] font-medium text-ink">{name}</span>
           {isAi && <Tag tone="ai">AI</Tag>}
@@ -150,20 +176,12 @@ export function MessageRow({
           {msg.role === "teacher" && <Tag tone="teacher">教师</Tag>}
           {isMine && !isAi && <Tag tone="brand">我</Tag>}
           {msg.topic && <Tag tone="neutral">{msg.topic}</Tag>}
-          <span className="text-[12px] text-hint">
+          <span className="ml-auto text-[12px] text-hint">
             {shortTime(msg.createdAt)}
           </span>
         </div>
 
-        <div
-          className={`mt-1.5 rounded-xl border px-3.5 py-2.5 text-[14px] leading-[1.75] ${
-            isAi
-              ? `${meta.bubble} text-ink`
-              : msg.role === "teacher"
-                ? "whitespace-pre-wrap border-teacher-line bg-teacher-soft text-ink"
-                : "whitespace-pre-wrap border-line bg-panel text-ink"
-          }`}
-        >
+        <div className="mt-2 whitespace-pre-wrap text-[14px] leading-[1.75]">
           {/* AI 回答统一过一遍清洗：模型偶尔漏出的 HTML 标签在这里被还原成
               纯文本，否则学生会看到一串裸露的 <td>。详见 lib/answerFormat.ts。
               清洗完再交给 RichText：把「表头 + 虚线上划 + 数据行」的文本块
