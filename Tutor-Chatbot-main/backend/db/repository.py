@@ -305,15 +305,20 @@ def is_member(db, classroom_id: int, user_id: int | None) -> bool:
 def load_history(
     db, classroom_id: int, user_id: int | None = None, limit: int = 20
 ) -> List[HistoryMessage]:
-    """从数据库读回这个学生最近的对话，转成 LangChain 能吃的 history。
+    """从数据库读回对话历史，转成 LangChain 能吃的 history。
+
+    隔离粒度由 `user_id` 决定——二元语义，选型是调用方的责任：
+    - 传入 `user_id`：只取该学生的消息（`_owned_by` 兼容历史 NULL 公共消息），即按学生隔离；
+    - 不传（`user_id=None`，**/chat 主路径就是这种**）：取课堂全量 = 群聊共享上下文。
+
+    为什么 /chat 故意不传 user_id：同一课堂里同学要能接力追问
+    （A 问了死锁，B 接着问「那怎么预防」才接得上），上下文必须共享；
+    而「讲解深度按谁」由 `load_last_state`（严格按学生）单独负责，两者刻意分开。
+    所以本函数不强制隔离——是否隔离是调用方的决策，不是默认行为。
 
     取最近 N 条后按 id 升序排列——先取末尾再反转，避免把最老的消息
     截掉（直接 order_by(id).limit(n) 拿到的是最早的 n 条）。
-
-    同样按学生隔离（T6 修）：喂给模型的上下文里如果混着别人的问答，
-    「追问」「还是不懂」这些指代就没法判断，评估节点会以为这个学生
-    已经听了好几轮还没懂，一上来就把讲解深度抬上去。
-    教师要看全课堂的对话请用 list_messages。
+    教师/前端要看全课堂对话请用 `list_messages`。
     """
     if db is None:
         return []

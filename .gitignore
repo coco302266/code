@@ -50,3 +50,6 @@ build/
 
 # 文档整理前的一次性原件备份（校验通过后即可整删）
 _docs_archive_*/
+
+# venv 重建备份（不入库）
+venv_broken_bak_*/
