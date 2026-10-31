@@ -12,10 +12,10 @@ import type {
 type Variant = "primary" | "ghost" | "subtle" | "danger";
 
 const BTN_STYLE: Record<Variant, string> = {
-  primary: "bg-brand text-white hover:bg-[#2560d4]",
+  primary: "bg-brand text-white hover:bg-brand-strong",
   ghost: "border border-line bg-panel text-ink hover:bg-soft",
-  subtle: "bg-brand-soft text-brand hover:bg-[#dbe7fb]",
-  danger: "bg-danger text-white hover:bg-[#981d13]",
+  subtle: "bg-brand-soft text-brand hover:bg-brand-soft-strong",
+  danger: "bg-danger text-white hover:bg-danger-strong",
 };
 
 export function Btn({
@@ -26,7 +26,7 @@ export function Btn({
   return (
     <button
       {...rest}
-      className={`inline-flex shrink-0 items-center justify-center gap-1.5 rounded-lg px-3.5 py-2 text-[13px] font-medium transition-colors disabled:cursor-not-allowed disabled:opacity-55 ${BTN_STYLE[variant]} ${className}`}
+      className={`inline-flex shrink-0 items-center justify-center gap-1.5 rounded-lg px-3.5 py-2 text-[14px] font-medium transition-colors disabled:cursor-not-allowed disabled:opacity-55 ${BTN_STYLE[variant]} ${className}`}
     />
   );
 }
@@ -53,7 +53,7 @@ const TAG_STYLE: Record<Tone, string> = {
   teacher: "bg-teacher-soft text-teacher border-transparent",
   ai: "bg-ai-soft text-ai border-transparent",
   danger: "bg-danger-soft text-danger border-transparent",
-  warn: "bg-[#fef6e7] text-[#8a5a00] border-transparent",
+  warn: "bg-warn-soft text-warn-ink border-transparent",
   ok: "bg-ai-soft text-ai border-transparent",
 };
 
@@ -68,7 +68,7 @@ export function Tag({
 }) {
   return (
     <span
-      className={`inline-flex items-center gap-1 rounded-md border px-1.5 py-0.5 text-[11px] leading-4 ${TAG_STYLE[tone]} ${className}`}
+      className={`inline-flex items-center gap-1 rounded-md border px-1.5 py-0.5 text-[12px] leading-4 ${TAG_STYLE[tone]} ${className}`}
     >
       {children}
     </span>
@@ -76,10 +76,10 @@ export function Tag({
 }
 
 const BANNER_STYLE: Record<string, string> = {
-  info: "bg-brand-soft text-brand border-[#cfe0fb]",
-  ok: "bg-ai-soft text-ai border-[#c6e9df]",
-  warn: "bg-[#fef6e7] text-[#8a5a00] border-[#f6e2b8]",
-  error: "bg-danger-soft text-danger border-[#f7cdc9]",
+  info: "bg-brand-soft text-brand border-brand-line",
+  ok: "bg-ai-soft text-ai border-ok-line",
+  warn: "bg-warn-soft text-warn-ink border-warn-line",
+  error: "bg-danger-soft text-danger border-danger-line",
 };
 
 export function Banner({
@@ -93,7 +93,7 @@ export function Banner({
 }) {
   return (
     <div
-      className={`rounded-lg border px-3 py-2 text-[12.5px] leading-relaxed ${BANNER_STYLE[tone]} ${className}`}
+      className={`rounded-lg border px-3 py-2 text-[13px] leading-relaxed ${BANNER_STYLE[tone]} ${className}`}
     >
       {children}
     </div>
@@ -112,8 +112,8 @@ export function Field({
   return (
     <label className="block">
       <span className="mb-1.5 flex items-baseline gap-2">
-        <span className="text-[12.5px] font-medium text-ink">{label}</span>
-        {hint && <span className="text-[11.5px] text-hint">{hint}</span>}
+        <span className="text-[13px] font-medium text-ink">{label}</span>
+        {hint && <span className="text-[12px] text-hint">{hint}</span>}
       </span>
       {children}
     </label>
@@ -121,7 +121,7 @@ export function Field({
 }
 
 const INPUT_BASE =
-  "w-full rounded-lg border border-line bg-panel px-3 py-2 text-[13px] text-ink outline-none transition-colors placeholder:text-hint focus:border-brand focus:ring-2 focus:ring-brand-soft";
+  "w-full rounded-lg border border-line bg-panel px-3 py-2 text-[14px] text-ink outline-none transition-colors placeholder:text-hint focus:border-brand focus:ring-2 focus:ring-brand-soft";
 
 export function Input({
   className = "",
@@ -169,7 +169,7 @@ export function Spinner({ className = "" }: { className?: string }) {
 
 export function Empty({ children }: { children: ReactNode }) {
   return (
-    <div className="flex h-full items-center justify-center px-6 text-center text-[13px] text-hint">
+    <div className="flex h-full items-center justify-center px-6 text-center text-[14px] text-hint">
       {children}
     </div>
   );

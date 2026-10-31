@@ -227,7 +227,11 @@ def verify() -> None:
 
 
 def main() -> None:
-    print(f"连接串：{DATABASE_URL.replace(os.getenv('MYSQL_PASSWORD', ''), '***')}")
+    # 只在密码非空时打码：str.replace('', '***') 会在每个字符之间插一串星号，
+    # 空密码环境下把连接串打成 ***m***y***s***q***l... 完全没法看。
+    _pwd = os.getenv("MYSQL_PASSWORD", "")
+    shown = DATABASE_URL.replace(_pwd, "***") if _pwd else DATABASE_URL
+    print(f"连接串：{shown}")
     create_database_if_missing()
     create_tables()
     verify()

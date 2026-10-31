@@ -30,13 +30,13 @@ export default function WelcomeModal() {
         <div className="flex justify-end gap-3">
           <button
             onClick={handleDecline}
-            className="px-4 py-2 rounded border border-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
+            className="px-4 py-2 rounded-md border border-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
           >
             No, thanks
           </button>
           <button
             onClick={handleAgree}
-            className="px-4 py-2 rounded bg-blue-600 text-white hover:bg-blue-700"
+            className="px-4 py-2 rounded-md bg-blue-600 text-white hover:bg-blue-700"
           >
             I agree
           </button>

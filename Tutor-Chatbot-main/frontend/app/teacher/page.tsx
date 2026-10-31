@@ -456,7 +456,7 @@ export default function TeacherPage() {
         </span>
       }
     >
-      <div className="mx-auto max-w-[1000px] px-6 py-6">
+      <div className="mx-auto max-w-[960px] px-6 py-6">
         <div className="flex gap-1.5 rounded-xl border border-line bg-panel p-1.5">
           {TABS.map((item) => (
             <button
@@ -467,13 +467,13 @@ export default function TeacherPage() {
               }`}
             >
               <span
-                className={`block text-[13px] font-medium ${
+                className={`block text-[14px] font-medium ${
                   tab === item.key ? "text-brand" : "text-ink"
                 }`}
               >
                 {item.label}
               </span>
-              <span className="mt-0.5 block text-[11px] text-hint">
+              <span className="mt-0.5 hidden text-[12px] text-hint sm:block">
                 {item.hint}
               </span>
             </button>
@@ -490,9 +490,9 @@ export default function TeacherPage() {
         {tab === "room" && (
           <div className="mt-5 grid gap-5 md:grid-cols-2">
             <Card className="p-5">
-              <h2 className="text-[13px] font-medium text-ink">创建新课堂</h2>
-              <p className="mt-1 text-[11.5px] text-hint">
-                创建后会以教师身份自动加入（少了这一步，备课接口会 403）
+              <h2 className="text-[14px] font-medium text-ink">创建新课堂</h2>
+              <p className="mt-1 text-[12px] text-hint">
+                创建后你会自动成为这个课堂的教师
               </p>
               <div className="mt-4 space-y-3.5">
                 <Field label="课堂名">
@@ -530,8 +530,8 @@ export default function TeacherPage() {
             </Card>
 
             <Card className="p-5">
-              <h2 className="text-[13px] font-medium text-ink">加入已有课堂</h2>
-              <p className="mt-1 text-[11.5px] text-hint">
+              <h2 className="text-[14px] font-medium text-ink">加入已有课堂</h2>
+              <p className="mt-1 text-[12px] text-hint">
                 已经建过的课堂，用课堂号直接以教师身份加入
               </p>
               <div className="mt-4 space-y-3.5">
@@ -558,11 +558,14 @@ export default function TeacherPage() {
                 >
                   以教师身份加入
                 </Btn>
+                <p className="mt-2 text-center text-[12px] text-hint">
+                  课堂号问创建这个课堂的教师要
+                </p>
               </div>
 
               {recent.length > 0 && (
                 <div className="mt-5 border-t border-line pt-4">
-                  <p className="text-[11.5px] font-medium text-sub">
+                  <p className="text-[12px] font-medium text-sub">
                     最近用过的课堂
                   </p>
                   <div className="mt-2 flex flex-wrap gap-2">
@@ -571,7 +574,7 @@ export default function TeacherPage() {
                         key={room.id}
                         disabled={busy}
                         onClick={() => void joinRoom(room.id)}
-                        className="rounded-full border border-line px-3 py-1 text-[11.5px] text-sub transition-colors hover:border-brand hover:text-brand"
+                        className="rounded-full border border-line px-3 py-1 text-[12px] text-sub transition-colors hover:border-brand hover:text-brand"
                       >
                         #{room.id} {room.name}
                       </button>
@@ -583,24 +586,24 @@ export default function TeacherPage() {
 
             <Card className="p-5 md:col-span-2">
               <div className="flex items-center gap-2">
-                <h2 className="text-[13px] font-medium text-ink">学生名单</h2>
-                <span className="text-[11.5px] text-hint">
+                <h2 className="text-[14px] font-medium text-ink">学生名单</h2>
+                <span className="text-[12px] text-hint">
                   {classroomId ? `共 ${members.length} 人` : "还没选课堂"}
                 </span>
                 <button
                   onClick={() => void refreshMembers()}
-                  className="ml-auto text-[11px] text-hint hover:text-brand"
+                  className="ml-auto text-[12px] text-hint hover:text-brand"
                 >
                   刷新
                 </button>
               </div>
 
               {!classroomId ? (
-                <p className="mt-4 text-[12.5px] text-hint">
+                <p className="mt-4 text-[13px] text-hint">
                   先创建或加入一个课堂。
                 </p>
               ) : members.length === 0 ? (
-                <p className="mt-4 text-[12.5px] text-hint">
+                <p className="mt-4 text-[13px] text-hint">
                   还没有成员。把课堂号 {classroomId} 发给学生，他们从入口页进来即可。
                 </p>
               ) : (
@@ -613,10 +616,10 @@ export default function TeacherPage() {
                       <Tag tone={m.role === "teacher" ? "teacher" : "brand"}>
                         {m.role === "teacher" ? "教师" : "学生"}
                       </Tag>
-                      <span className="min-w-0 flex-1 truncate text-[12.5px] text-ink">
+                      <span className="min-w-0 flex-1 truncate text-[13px] text-ink">
                         {m.username}
                       </span>
-                      <span className="text-[11px] text-hint">#{m.user_id}</span>
+                      <span className="text-[12px] text-hint">#{m.user_id}</span>
                     </div>
                   ))}
                 </div>
@@ -640,8 +643,8 @@ export default function TeacherPage() {
               onDelete={handleDeleteDoc}
             />
             <Card className="p-5">
-              <h2 className="text-[13px] font-medium text-ink">备课</h2>
-              <p className="mt-1 text-[11.5px] text-hint">
+              <h2 className="text-[14px] font-medium text-ink">备课</h2>
+              <p className="mt-1 text-[12px] text-hint">
                 一次真实的大模型调用，通常要 10–30 秒
               </p>
 
@@ -686,7 +689,7 @@ export default function TeacherPage() {
                   {preparing ? "正在生成…" : result ? "重新生成" : "生成大纲"}
                 </Btn>
 
-                <p className="text-[11px] text-hint">
+                <p className="text-[12px] text-hint">
                   接口限流 5 次／分钟。生成时后端会先检索八股知识库，
                   所以大纲里的结论是有资料依据的。
                 </p>
@@ -699,7 +702,7 @@ export default function TeacherPage() {
                 <Card className="grid place-items-center p-16">
                   <div className="text-center">
                     <Spinner className="h-5 w-5 text-brand" />
-                    <p className="mt-3 text-[12.5px] text-sub">
+                    <p className="mt-3 text-[13px] text-sub">
                       正在检索知识库并生成大纲…
                       <br />
                       大模型要写完整套结构，请稍等
@@ -731,12 +734,12 @@ export default function TeacherPage() {
               <>
                 <div className="grid gap-5 md:grid-cols-[260px_1fr] md:items-start">
                   <Card className="p-4">
-                    <h2 className="text-[12.5px] font-medium text-ink">
+                    <h2 className="text-[13px] font-medium text-ink">
                       成员（点开看画像）
                     </h2>
                     <div className="mt-2.5 space-y-1">
                       {members.length === 0 ? (
-                        <p className="py-2 text-[12px] text-hint">还没有成员</p>
+                        <p className="py-2 text-[13px] text-hint">还没有成员</p>
                       ) : (
                         members.map((m) => (
                           <button
@@ -753,7 +756,7 @@ export default function TeacherPage() {
                             >
                               {m.role === "teacher" ? "师" : "生"}
                             </Tag>
-                            <span className="min-w-0 flex-1 truncate text-[12.5px] text-ink">
+                            <span className="min-w-0 flex-1 truncate text-[13px] text-ink">
                               {m.username}
                             </span>
                           </button>
@@ -763,14 +766,14 @@ export default function TeacherPage() {
                   </Card>
 
                   <Card className="p-5">
-                    <h2 className="text-[12.5px] font-medium text-ink">
+                    <h2 className="text-[13px] font-medium text-ink">
                       学生画像
                     </h2>
                     <div className="mt-3">
                       {profile ? (
                         <ProfileView profile={profile} />
                       ) : (
-                        <p className="text-[12.5px] text-hint">
+                        <p className="text-[13px] text-hint">
                           {selectedUserId === null
                             ? "点左边的成员查看画像。"
                             : profileNote || "加载中…"}
@@ -781,7 +784,7 @@ export default function TeacherPage() {
                 </div>
 
                 <Card className="p-5">
-                  <h2 className="text-[12.5px] font-medium text-ink">
+                  <h2 className="text-[13px] font-medium text-ink">
                     课堂全量对话
                     <span className="ml-2 font-normal text-hint">
                       {messages.length} 条 · 群聊视图，不按学生隔离
@@ -789,7 +792,7 @@ export default function TeacherPage() {
                   </h2>
                   <div className="mt-4 max-h-[520px] space-y-4 overflow-y-auto pr-1">
                     {messages.length === 0 ? (
-                      <p className="text-[12.5px] text-hint">
+                      <p className="text-[13px] text-hint">
                         这个课堂还没有对话。
                       </p>
                     ) : (
@@ -817,7 +820,7 @@ function OutlineCard({ result }: { result: PptOutlineResult }) {
     <Card className="p-5">
       <div className="flex flex-wrap items-start gap-3">
         <div className="min-w-0 flex-1">
-          <h2 className="text-[15px] font-medium leading-snug text-ink">
+          <h2 className="text-[16px] font-medium leading-snug text-ink">
             {outline.title || result.topic}
           </h2>
           <div className="mt-2 flex flex-wrap items-center gap-2">
@@ -827,13 +830,13 @@ function OutlineCard({ result }: { result: PptOutlineResult }) {
                 : "知识库没命中，模型自有知识生成"}
             </Tag>
             {result.audience && <Tag tone="neutral">{result.audience}</Tag>}
-            <span className="text-[11px] text-hint">主题：{result.topic}</span>
+            <span className="text-[12px] text-hint">主题：{result.topic}</span>
           </div>
         </div>
         {download_url ? (
           <a
             href={resourceUrl(download_url)}
-            className="inline-flex shrink-0 items-center gap-1.5 rounded-lg bg-brand px-3.5 py-2 text-[13px] font-medium text-white transition-colors hover:bg-[#2560d4]"
+            className="inline-flex shrink-0 items-center gap-1.5 rounded-lg bg-brand px-3.5 py-2 text-[14px] font-medium text-white transition-colors hover:bg-brand-strong"
           >
             下载 PPT
           </a>
@@ -848,7 +851,7 @@ function OutlineCard({ result }: { result: PptOutlineResult }) {
 
         {(outline.sections?.length ?? 0) > 0 && (
           <div>
-            <p className="text-[12px] font-medium text-sub">
+            <p className="text-[13px] font-medium text-sub">
               章节（{outline.sections.length}）
             </p>
             <div className="mt-2 space-y-2.5">
@@ -857,16 +860,16 @@ function OutlineCard({ result }: { result: PptOutlineResult }) {
                   key={`${section.title}-${index}`}
                   className="rounded-lg border border-line bg-soft px-3.5 py-3"
                 >
-                  <p className="text-[12.5px] font-medium text-ink">
+                  <p className="text-[13px] font-medium text-ink">
                     {index + 1}. {section.title}
                   </p>
                   <ul className="mt-1.5 space-y-1">
                     {section.points?.map((point, i) => (
                       <li
                         key={i}
-                        className="flex gap-2 text-[12px] leading-relaxed text-sub"
+                        className="flex gap-2 text-[13px] leading-relaxed text-sub"
                       >
-                        <span className="mt-[7px] h-1 w-1 shrink-0 rounded-full bg-[#b3b9c0]" />
+                        <span className="mt-[7px] h-1 w-1 shrink-0 rounded-full bg-neutral-dot" />
                         {point}
                       </li>
                     ))}
@@ -883,7 +886,7 @@ function OutlineCard({ result }: { result: PptOutlineResult }) {
       </div>
 
       {file_name && (
-        <p className="mt-5 border-t border-line pt-3 text-[11px] text-hint">
+        <p className="mt-5 border-t border-line pt-3 text-[12px] text-hint">
           文件：{file_name}（点击「下载 PPT」下载；桌面客户端会自动存到「下载」文件夹）
         </p>
       )}
@@ -895,12 +898,12 @@ function Section({ title, items }: { title: string; items?: string[] }) {
   if (!items?.length) return null;
   return (
     <div>
-      <p className="text-[12px] font-medium text-sub">{title}</p>
+      <p className="text-[13px] font-medium text-sub">{title}</p>
       <ul className="mt-1.5 space-y-1">
         {items.map((item, index) => (
           <li
             key={index}
-            className="flex gap-2 text-[12.5px] leading-relaxed text-ink"
+            className="flex gap-2 text-[13px] leading-relaxed text-ink"
           >
             <span className="mt-[7px] h-1 w-1 shrink-0 rounded-full bg-brand" />
             {item}
@@ -944,10 +947,10 @@ function MaterialsCard({
   return (
     <Card className="p-5">
       <div className="flex items-baseline justify-between gap-2">
-        <h2 className="text-[13px] font-medium text-ink">课堂资料</h2>
+        <h2 className="text-[14px] font-medium text-ink">课堂资料</h2>
         {loading && <Spinner className="text-sub" />}
       </div>
-      <p className="mt-1 text-[11.5px] leading-relaxed text-hint">
+      <p className="mt-1 text-[12px] leading-relaxed text-hint">
         上传的 PDF 会成为本课堂的长期资料，学生提问时能被检索到。
         单个文件 ≤ 10MB；抽不出文字的扫描件会被拒绝。
       </p>
@@ -980,16 +983,16 @@ function MaterialsCard({
 
         <div>
           <div className="flex items-baseline justify-between">
-            <p className="text-[11.5px] text-sub">
+            <p className="text-[12px] text-sub">
               已上传 {documents.length} 份
             </p>
             {documents.length > 0 && (
-              <p className="text-[11px] text-hint">上限 20 份 / 200MB</p>
+              <p className="text-[12px] text-hint">上限 20 份 / 200MB</p>
             )}
           </div>
 
           {documents.length === 0 ? (
-            <p className="mt-2 text-[11.5px] text-hint">
+            <p className="mt-2 text-[12px] text-hint">
               {loading ? "读取中…" : "还没有资料。上传后学生就能在问答里查到。"}
             </p>
           ) : (
@@ -998,19 +1001,19 @@ function MaterialsCard({
                 <li key={doc.doc_id} className="flex items-start gap-2 py-2">
                   <div className="min-w-0 flex-1">
                     <p
-                      className="truncate text-[12.5px] text-ink"
+                      className="truncate text-[13px] text-ink"
                       title={doc.filename}
                     >
                       {doc.filename}
                     </p>
-                    <p className="mt-0.5 text-[11px] text-hint">
+                    <p className="mt-0.5 text-[12px] text-hint">
                       {doc.chunk_count} 片 · {formatBytes(doc.file_bytes)}
                       {doc.created_at ? ` · ${formatDay(doc.created_at)}` : ""}
                     </p>
                   </div>
                   <Btn
                     variant="ghost"
-                    className="px-2 py-1 text-[11.5px]"
+                    className="px-2 py-1 text-[12px]"
                     onClick={() => onDelete(doc)}
                   >
                     删除

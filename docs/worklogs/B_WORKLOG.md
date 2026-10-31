@@ -3317,3 +3317,144 @@ InnoDB vs MyISAM  残留标签 0  分点作答
 宿主机的 `out/` 是旧产物，搜函数名搜不到会误判没生效。要验证得进容器搜
 `_next/static/chunks/`，且生产构建会压缩函数名，得搜存活的字符串常量
 （如 `&nbsp;`、正则里的 `thead|tbody|tfoot`）。
+
+---
+
+## XB-55　本机环境迁移：MySQL 实例切换 + 后端 venv 安装（工程侧，非 B 范围）
+
+- **日期**：2026-10-31
+- **越界对象**：A（`backend/` 的启动脚本、`init_db.py`、环境配置）
+- **原因**：仓库从原开发机（`D:/STUDY/AI-Classroom`，用户 `24264`）搬到本机 `E:/code`，
+  三处硬编码路径全部失效；本机 Python 一个后端依赖都没有，`backend/.env` 也不存在，
+  后端一直跑在「无数据库」模式（`/chat` 能答、`agent_runs` 零留痕、`/evaluation/*` 全空且不报错）。
+- **是否事先询问**：否（用户明确要求「起服务 + 配后端」「咋装」）。A 可按需驳回。
+- **改了哪些文件**：
+  - `backend/.env` —— 新建。`MYSQL_*` 指向本机 3306 服务实例；`LLM_*` 段留 `LLM_API_KEY=` 待用户填
+  - `backend/env.example` —— 末尾补 MYSQL 段。原文**没有**这一节，而 `db/session.py` 全靠这些变量名，
+    照示例配会配不上
+  - `backend/setup_backend.bat` —— `BASE` 改 `%~dp0` 自定位；`PY` 从写死的
+    `C:/Users/24264/.../uv/python/cpython-3.12.14` 改为 `py -3.12`；镜像顺序阿里云前置
+  - `backend/start_server.bat` —— `BASE` 改 `%~dp0` 自定位
+  - `backend/init_db.py` —— 修打码 bug：空密码时 `str.replace('', '***')` 把连接串打成
+    `***m***y***s***q***l...`，改为密码非空才打码
+- **状态**：已落地并验证。
+- **环境事实（写下来免得后人重复踩）**：
+  - 本机有两套 MySQL 服务端。用户最终注册成 Windows 服务（名 `MySQL`，自动启动）的是**安装版**：
+    `D:/mysql/MySQL Server 8.0\bin\mysqld`（8.0.41），datadir `D:/MySQL/MySQL Server 8.0\Data\`，
+    字符集 `utf8mb4 / utf8mb4_0900_ai_ci`。另一套便携版 `D:/mysql/mysql-8.0.29-winx64` 的 data 里
+    也有个 `ai_classroom`，**已作废**，别再启动它（会和 3306 抢端口）。
+  - 安装版服务的 `bind_address=*`，即监听 `0.0.0.0:3306` 而非仅本机，root 密码为弱口令。
+    对外收紧（`my.ini` 改 `bind-address=127.0.0.1` 或加防火墙规则）尚未做，待用户决定。
+  - pip 源：**清华对 pip 26 返回 403**，报错文案是 `No matching distribution found`，
+    极易误判成「没网」；`pip install -vvv` 才能看到 `"GET /simple/xxx/ 403`。换阿里云正常，
+    腾讯云 / USTC / 华为云同样可用。`pypi.org` 直连在本沙箱是 502 tunnel。
+- **验证证据**：
+  - `init_db.py` → `8 张表全部就绪 OK`（库建在服务实例里，`classroom_documents` 原先缺）
+  - `run_tests.py` → `RAN=714 FAILURES=0 ERRORS=0 SKIPPED=0`（AGENTS.md 里的 282 是旧数字，建议改）
+  - `/health` → `{"status":"ok","provider":"openai","model":"deepseek-flash","database":"up"}`
+  - ORM 写入回读：`语文测试班•中文校验` 原样读回，`utf8mb4_0900_ai_ci` 下中文无乱码，验证后已删行
+- **遗留（同日已清）**：
+  - `LLM_API_KEY` 已由用户提供并填入，`/chat` 端到端验通（SSE 序列 sources → agent → token → state → [DONE]，中文正常）
+  - 知识库 `backend/chroma_kb` 已建：**119 切片**，索引指纹 `sha256:ee2f83c53ad0186897372d421f004808`，
+    模型 `BAAI/bge-small-zh-v1.5`。实测 `TCP 为什么需要三次握手` 命中 4 条，`agent_runs.rag_hits=4`
+  - 前端 `npm ci` 完成（464MB），`next dev` 起在 3000，CORS 默认放行 `http://localhost:3000`
+- **本机两个新坑**：
+  - `huggingface.co` 在本机不可达（curl 返回 000），**必须** `HF_ENDPOINT=https://hf-mirror.com`
+    （连同 `HF_HUB_ENDPOINT`）才能下 embedding 模型，否则 `build_kb.py` 卡在 Fetching。
+  - 前端 `next.config.ts` 是 `output: "export"` + `trailingSlash: true`，所以 `/chat` 会 308 到 `/chat/`；
+    用 `curl -L` 追会报 `exit 47 too many redirects`，直接访问 `/chat/` 是 200，不是 bug。
+    `next dev` 只是预览，正式形态是 `npm run build` 出 `out/` 再由 Electron 加载。
+
+
+---
+
+## XB-56　UI 评审后的 P0 修复：表格栅格化 / 对比度 / 移动端
+
+- **日期**：2026-10-31
+- **越界对象**：C（`Tutor-Chatbot-main/frontend/`）
+- **原因**：UI 评审（4 页 × 2 视口实测）查出三处影响正确性与可用性的问题，用户要求直接修。
+- **是否事先询问**：是（评审结论先行，用户回「直接动手」）。
+- **改了哪些文件**：
+  - `frontend/components/RichText.tsx`（新建）：把「表头 + 虚线上划 + 数据行」的文本块识别成
+    表格，用 CSS grid 重排。判据三条同时满足才认（≥2 单元格 / 下一行是 `---` 分隔 /
+    再下一行也有单元格），避免把缩进代码误判成表。
+  - `frontend/components/chat.tsx`：AI 消息渲染从「整段 pre-wrap」改为 `<RichText>`，
+    用户与教师消息保持原样。
+  - `frontend/app/globals.css`：`--color-hint` `#8b939c` → `#6b7480`。
+  - `frontend/components/Shell.tsx`：顶栏改为小屏友好（状态文字与身份标签 `hidden sm:*`，
+    小屏只留状态圆点；标题 `min-w-0 flex-1 truncate`）。
+  - `frontend/app/classroom/page.tsx`：内容区与输入区 padding 改响应式；输入行 `sm:pl-[42px]`
+    与气泡左右对齐；侧栏按钮 `max-lg:hidden`。
+- **为什么表格必须在前端做**：后端把 HTML 表格转成空格对齐的纯文本（XB-54 的取向），
+  但正文是比例字体，汉字宽度是空格的两倍，**靠空格凑的列必然错位**。实测该消息里
+  `table` 标签数为 0。改前「维度 / TCP / UDP」三列与数据行错位，改后列宽由栅格保证。
+- **验证证据**：
+  - 桌面 1440：表格列宽实测 `52px / 182px / 234px`，行行对齐；输入框左边界 200 = 气泡左边界 200
+    （改前 158 vs 200，差 42px）
+  - 移动 390：顶栏由「竖排断字三行」变单行；表格三列全部可读、单元格内换行、无横向溢出
+  - `--color-hint` 对比度 3.11:1 → 4.79:1（WCAG AA 需 4.5:1）
+  - `npx tsc --noEmit` 退出 0；`run_tests.py` 仍为 `RAN=714 FAILURES=0`
+- **没做的**：P1/P2 未动 —— 字号阶收敛（11/11.5/12/12.5/13 五档共 102 处）、圆角 6 种收敛、
+  硬编码色 10 处、来源标签折叠、开发者文案下沉（「接口限流 10 次/分钟」等）、
+  四页容器宽度统一。
+
+---
+
+## XB-57　UI 评审 P1/P2：令牌收敛 + 来源折叠 + 开发者文案下沉
+
+- **日期**：2026-10-31
+- **越界对象**：C（`Tutor-Chatbot-main/frontend/`）
+- **是否事先询问**：是（评审列了 P0/P1/P2，P0 已完成见 XB-56，用户回「继续」）。
+- **改了什么**：
+  1. 字号归一：11 / 11.5 / 12 / 12.5 / 13 五档（档差 0.5px，等于没有层级）归一到
+     **12 / 13 / 14 / 16 / 18 / 26** 六档，共改 106 处。映射 11→12、11.5→12、12→13、
+     12.5→13、13→14、14/15→16。
+  2. 圆角归一：裸 `rounded`(4px) 并进 `rounded-md`，现只有 6/8/12/full 四档。
+  3. 硬编码色归零：业务页与共享组件里的 26 处十六进制全部收进 `@theme` 令牌
+     （新增 16 个：brand-strong / brand-soft-strong / brand-line / danger-strong /
+     danger-line / ai-line / teacher-line / ok / ok-line / warn / warn-soft / warn-ink /
+     warn-line / error / idle / neutral-dot）。`grep '#[0-9a-f]{6}'` 在 tsx 里现在为 0。
+     `ProfileView` 的内联 style 用 `var(--color-ok)` 这类变量，不再写死色值。
+  4. 来源标签折叠：`依据` 从「一行 3–4 个截断标签」改为「依据 · N 篇 展开/收起」，
+     点开才列出。移动端原来占三行，现在一行。
+  5. 开发者文案下沉：删掉「接口限流 10 次／分钟」「AI 不算成员，它以 assistant 身份参与对话」
+     「后端没有『列出课堂』接口」；「后端正常 · deepseek-flash / 数据库：up」收成一个
+     「后端正常」+ title 悬浮详情，数据库状态只在**不正常时**才显示；
+     「备课接口会 403」改成「创建后你会自动成为这个课堂的教师」。
+  6. 容器统一：入口 880 / 课堂列表 720 / 教师台 1000 → 全部 **960**（聊天页保持全宽）。
+  7. 教师台页签说明在 <640px 隐藏（原来 390px 下每个页签标题被挤成三行）。
+- **验证证据**：
+  - 字号分布实测：`12×46 / 13×39 / 14×20 / 16×2 / 18×1 / 26×1`（改前 5 档 102 处挤在 11–13）
+  - 圆角：`full×13 / lg×15 / md×9 / xl×6`
+  - `npx tsc --noEmit` 退出 0；`run_tests.py` 仍 `RAN=714 FAILURES=0`
+  - 桌面 1440 与移动 390 各页截图复核：无裁切、无溢出、页签单行、来源单行
+- **已知遗留**：`app/components/TutorChat.tsx`（`/chat` 页面）是一套**独立的深色 UI**
+  （zinc-900 主题、groq/gemini 通道），与四页业务流完全不是一套设计语言。
+  本次刻意未动，建议 C 决策：下线该路由，或按新令牌重做。
+
+---
+
+## XB-58　下线遗留深色页：`/chat` 改为重定向，删除 TutorChat
+
+- **日期**：2026-10-31
+- **越界对象**：C（`Tutor-Chatbot-main/frontend/`）
+- **原因**：`/chat` 挂的是 `app/components/TutorChat.tsx`，一套独立的深色 UI
+  （zinc-900 主题、气泡靠右、只认 groq/gemini、自带 provider 下拉），
+  与四页业务流不是一套设计语言，且**没有任何页面链到它**，属历史遗留。
+- **用户决策**：只要不影响后端接口与代码，用新的实现。
+- **改了什么**：
+  - `app/chat/page.tsx` 重写为兼容入口：`useRouter().replace("/classroom/")`，
+    保留一个手动链接兜底。保留 URL 而不是直接删路由 —— 书签与组员的旧链接不会变成 404。
+  - `app/components/TutorChat.tsx` 删除（`git rm`），`app/components/` 空目录一并移除。
+  - `lib/answerFormat.ts` 里指向旧文件的注释改为指向 `components/chat.tsx` 与 `RichText.tsx`。
+- **为什么不改成服务端 redirect**：`next.config.ts` 是 `output: "export"`，
+  构建期没有 Node 运行时，`redirect()` 不生效；静态导出只能靠客户端跳转。
+- **验证证据**：
+  - CDP 实测访问 `/chat/` → `location.pathname` 变为 `/classroom/`，
+    `document.querySelector('.bg-zinc-900')` 为 null（旧 UI 确实不再渲染）
+  - `npx tsc --noEmit` 退出 0
+  - `next build` 通过：`Compiled successfully in 3.3s`，5 条路由全部 `○ (Static)`
+    （`/`、`/chat`、`/classroom`、`/classrooms`、`/teacher`），`out/chat/index.html` 已生成，
+    Electron 读静态产物的路径不受影响
+  - 改动只落在 `frontend/`，后端接口与 Python 代码零改动
+- **给组员的提示**：若有人直接调 `POST /chat` 拿 SSE，那走的是后端接口，与本次无关，未受任何影响。

@@ -1,7 +1,9 @@
 "use client";
 
+import { useState } from "react";
 import type { MessageRole, SourceItem } from "@/lib/types";
 import { sanitizeAssistantText } from "@/lib/answerFormat";
+import { RichText } from "./RichText";
 import { Spinner, Tag, shortTime } from "./ui";
 
 export interface UIMsg {
@@ -45,19 +47,19 @@ const AGENT_STYLE: Record<
 > = {
   tutor: {
     avatar: "bg-ai-soft text-ai",
-    bubble: "border-[#c9e7de] bg-ai-soft",
+    bubble: "border-ai-line bg-ai-soft",
     mark: "讲",
     label: "主讲助教",
   },
   teacher: {
     avatar: "bg-teacher-soft text-teacher",
-    bubble: "border-[#f0dcbb] bg-teacher-soft",
+    bubble: "border-teacher-line bg-teacher-soft",
     mark: "师",
     label: "主讲教师",
   },
   peer: {
     avatar: "bg-brand-soft text-brand",
-    bubble: "border-[#cfe0fb] bg-brand-soft",
+    bubble: "border-brand-line bg-brand-soft",
     mark: "伴",
     label: "学伴",
   },
@@ -74,7 +76,7 @@ export function agentMeta(role?: string | null) {
   return (
     AGENT_STYLE[role ?? ""] ?? {
       avatar: "bg-ai-soft text-ai",
-      bubble: "border-[#c9e7de] bg-ai-soft",
+      bubble: "border-ai-line bg-ai-soft",
       mark: "AI",
       label: "AI 助教",
     }
@@ -96,7 +98,7 @@ export function Avatar({
   const label = isAi ? meta.mark : (name || "?").slice(0, 1);
   return (
     <span
-      className={`grid h-8 w-8 shrink-0 place-items-center rounded-lg text-[12px] font-medium ${
+      className={`grid h-8 w-8 shrink-0 place-items-center rounded-lg text-[13px] font-medium ${
         isAi
           ? meta.avatar
           : role === "teacher"
@@ -132,7 +134,7 @@ export function MessageRow({
       <Avatar name={msg.username} role={msg.role} agentRole={msg.agentRole} />
       <div className="min-w-0 flex-1">
         <div className="flex flex-wrap items-center gap-2">
-          <span className="text-[12.5px] font-medium text-ink">{name}</span>
+          <span className="text-[13px] font-medium text-ink">{name}</span>
           {isAi && <Tag tone="ai">AI</Tag>}
           {isAi && msg.agentStance && (
             <Tag tone="neutral">{msg.agentStance}</Tag>
@@ -141,35 +143,37 @@ export function MessageRow({
             msg.agentTotal !== null &&
             msg.agentTotal !== undefined &&
             msg.agentTotal > 1 && (
-              <span className="text-[11px] text-hint">
+              <span className="text-[12px] text-hint">
                 {(msg.agentIndex ?? 0) + 1}/{msg.agentTotal}
               </span>
             )}
           {msg.role === "teacher" && <Tag tone="teacher">教师</Tag>}
           {isMine && !isAi && <Tag tone="brand">我</Tag>}
           {msg.topic && <Tag tone="neutral">{msg.topic}</Tag>}
-          <span className="text-[11px] text-hint">
+          <span className="text-[12px] text-hint">
             {shortTime(msg.createdAt)}
           </span>
         </div>
 
         <div
-          className={`mt-1.5 whitespace-pre-wrap rounded-xl border px-3.5 py-2.5 text-[13px] leading-[1.75] ${
+          className={`mt-1.5 rounded-xl border px-3.5 py-2.5 text-[14px] leading-[1.75] ${
             isAi
               ? `${meta.bubble} text-ink`
               : msg.role === "teacher"
-                ? "border-[#f0dcbb] bg-teacher-soft text-ink"
-                : "border-line bg-panel text-ink"
+                ? "whitespace-pre-wrap border-teacher-line bg-teacher-soft text-ink"
+                : "whitespace-pre-wrap border-line bg-panel text-ink"
           }`}
         >
           {/* AI 回答统一过一遍清洗：模型偶尔漏出的 HTML 标签在这里被还原成
-              纯文本，否则学生会看到一串裸露的 <td>。详见 lib/answerFormat.ts。 */}
-          {isAi ? sanitizeAssistantText(msg.content) : msg.content}
+              纯文本，否则学生会看到一串裸露的 <td>。详见 lib/answerFormat.ts。
+              清洗完再交给 RichText：把「表头 + 虚线上划 + 数据行」的文本块
+              用栅格重排 —— 比例字体下靠空格对齐的表格必然错位。 */}
+          {isAi ? <RichText text={sanitizeAssistantText(msg.content)} /> : msg.content}
           {msg.streaming && msg.content && (
             <span className="ml-0.5 inline-block h-3.5 w-[2px] translate-y-[2px] animate-pulse bg-ai" />
           )}
           {msg.streaming && !msg.content && (
-            <span className="text-[12.5px] text-hint">
+            <span className="text-[13px] text-hint">
               <Spinner className="mr-1 align-middle" />
               正在检索知识库并组织讲解…
             </span>
@@ -194,13 +198,14 @@ export function MessageRow({
  * 对排查检索退化更是唯一线索 —— 检索全错时模型照样答得很好，从回答上看不出来。
  */
 function SourceLine({ sources }: { sources?: SourceItem[] }) {
+  // 折叠态只留一个入口：移动端一行四个截断标签会占掉三行，把正文挤下去，
+  // 而「本轮有没有依据」这件事一个计数就够，具体是哪几篇点开再看。
+  const [open, setOpen] = useState(false);
   if (!sources) return null;
 
   if (sources.length === 0) {
     return (
-      <p className="mt-1.5 pl-1 text-[11px] text-hint">
-        依据：模型自有知识（本轮未使用知识库资料）
-      </p>
+      <p className="mt-1.5 pl-1 text-[12px] text-hint">依据：模型自有知识</p>
     );
   }
 
@@ -240,17 +245,29 @@ function SourceLine({ sources }: { sources?: SourceItem[] }) {
     });
 
   return (
-    <div className="mt-1.5 flex flex-wrap items-center gap-1.5 pl-1">
-      <span className="text-[11px] text-hint">依据</span>
-      {chips.map((chip) => (
-        <span
-          key={chip.key}
-          title={"title" in chip ? chip.title : undefined}
-          className="rounded border border-line bg-soft px-1.5 py-0.5 text-[11px] leading-4 text-sub"
-        >
-          {chip.label}
-        </span>
-      ))}
+    <div className="mt-1.5 pl-1">
+      <button
+        type="button"
+        onClick={() => setOpen((v) => !v)}
+        className="inline-flex items-center gap-1 rounded-md px-1 py-0.5 text-[12px] text-hint transition-colors hover:bg-soft hover:text-brand"
+        aria-expanded={open}
+      >
+        依据 · {chips.length} 篇
+        <span className="text-[12px]">{open ? "收起" : "展开"}</span>
+      </button>
+      {open && (
+        <div className="mt-1.5 flex flex-wrap items-center gap-1.5">
+          {chips.map((chip) => (
+            <span
+              key={chip.key}
+              title={"title" in chip ? chip.title : undefined}
+              className="rounded-md border border-line bg-soft px-1.5 py-0.5 text-[12px] leading-5 text-sub"
+            >
+              {chip.label}
+            </span>
+          ))}
+        </div>
+      )}
     </div>
   );
 }

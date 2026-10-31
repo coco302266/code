@@ -1,5 +1,6 @@
 @echo off
-set BASE=D:\STUDY\AI-Classroom\Tutor-Chatbot-main\backend
+rem 自定位：BASE 跟着脚本走（原来写死 D:\STUDY\AI-Classroom\...，换机器必失败）。
+set "BASE=%~dp0"
 cd /d "%BASE%"
 call venv\Scripts\activate.bat
 REM Clear any proxy so the DeepSeek call does not route through a dead proxy (502).

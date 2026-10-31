@@ -25,33 +25,33 @@ export function ProfileView({ profile }: { profile: StudentProfile }) {
         <Tag tone="brand">
           {LEVEL_LABEL[profile.overall_level] ?? profile.overall_level}
         </Tag>
-        <span className="text-[11.5px] text-hint">
+        <span className="text-[12px] text-hint">
           掌握度均值 {profile.mastery_average.toFixed(2)}
         </span>
       </div>
 
       {profile.learning_preference && (
         <div>
-          <p className="text-[11.5px] font-medium text-sub">学习偏好</p>
-          <p className="mt-1 text-[12px] leading-relaxed text-ink">
+          <p className="text-[12px] font-medium text-sub">学习偏好</p>
+          <p className="mt-1 text-[13px] leading-relaxed text-ink">
             {profile.learning_preference}
           </p>
         </div>
       )}
 
       <div>
-        <p className="text-[11.5px] font-medium text-sub">
+        <p className="text-[12px] font-medium text-sub">
           知识点掌握度（{profile.topic_count} 个）
         </p>
         <div className="mt-1.5 space-y-2">
           {mastery.length === 0 ? (
-            <p className="text-[12px] text-hint">还没有记录</p>
+            <p className="text-[13px] text-hint">还没有记录</p>
           ) : (
             mastery.map(([topic, score]) => (
               <div key={topic}>
                 <div className="flex items-baseline justify-between gap-2">
-                  <span className="truncate text-[12px] text-ink">{topic}</span>
-                  <span className="shrink-0 text-[11px] text-hint">
+                  <span className="truncate text-[13px] text-ink">{topic}</span>
+                  <span className="shrink-0 text-[12px] text-hint">
                     {score.toFixed(2)}
                   </span>
                 </div>
@@ -62,10 +62,10 @@ export function ProfileView({ profile }: { profile: StudentProfile }) {
                       width: `${Math.max(2, Math.min(100, score * 100))}%`,
                       background:
                         score >= 0.7
-                          ? "#12a06b"
+                          ? "var(--color-ok)"
                           : score >= 0.4
-                            ? "#d99a1f"
-                            : "#d0453b",
+                            ? "var(--color-warn)"
+                            : "var(--color-error)",
                     }}
                   />
                 </div>
@@ -76,25 +76,25 @@ export function ProfileView({ profile }: { profile: StudentProfile }) {
       </div>
 
       <div>
-        <p className="text-[11.5px] font-medium text-sub">薄弱点</p>
+        <p className="text-[12px] font-medium text-sub">薄弱点</p>
         {profile.weak_points?.length ? (
           <ul className="mt-1.5 space-y-1.5">
             {profile.weak_points.map((point, index) => (
               <li
                 key={`${point}-${index}`}
-                className="rounded-md bg-danger-soft px-2 py-1.5 text-[11.5px] leading-relaxed text-danger"
+                className="rounded-md bg-danger-soft px-2 py-1.5 text-[12px] leading-relaxed text-danger"
               >
                 {point}
               </li>
             ))}
           </ul>
         ) : (
-          <p className="mt-1 text-[12px] text-hint">暂时没发现明显薄弱点</p>
+          <p className="mt-1 text-[13px] text-hint">暂时没发现明显薄弱点</p>
         )}
       </div>
 
       {profile.updated_at && (
-        <p className="text-[11px] text-hint">更新于 {profile.updated_at}</p>
+        <p className="text-[12px] text-hint">更新于 {profile.updated_at}</p>
       )}
     </div>
   );

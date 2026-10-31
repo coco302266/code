@@ -114,9 +114,9 @@ export default function ClassroomsPage() {
 
   return (
     <Shell backHref="/" backLabel="入口" identity={identity} title="我的课堂">
-      <div className="mx-auto max-w-[720px] px-6 py-8">
+      <div className="mx-auto max-w-[960px] px-6 py-8">
         <h1 className="text-[18px] font-medium text-ink">我的课堂</h1>
-        <p className="mt-1 text-[12.5px] text-sub">
+        <p className="mt-1 text-[13px] text-sub">
           选一个课堂进去，或者输入教师给你的课堂号。
         </p>
 
@@ -167,12 +167,10 @@ export default function ClassroomsPage() {
           </Field>
         </Card>
 
-        <h2 className="mt-8 text-[13px] font-medium text-ink">
+        <h2 className="mt-8 text-[14px] font-medium text-ink">
           最近进过的课堂
         </h2>
-        <p className="mt-1 text-[11.5px] text-hint">
-          后端没有「列出课堂」接口，这份列表存在本机。
-        </p>
+        <p className="mt-1 text-[12px] text-hint">这份列表只保存在本机。</p>
 
         <div className="mt-3 space-y-2.5">
           {recent.length === 0 ? (
@@ -184,14 +182,14 @@ export default function ClassroomsPage() {
           ) : (
             recent.map((room) => (
               <Card key={room.id} className="flex items-center gap-3 px-4 py-3.5">
-                <span className="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-brand-soft text-[13px] font-medium text-brand">
+                <span className="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-brand-soft text-[14px] font-medium text-brand">
                   {room.id}
                 </span>
                 <span className="min-w-0 flex-1">
-                  <span className="block truncate text-[13px] font-medium text-ink">
+                  <span className="block truncate text-[14px] font-medium text-ink">
                     {room.name}
                   </span>
-                  <span className="mt-0.5 block text-[11.5px] text-hint">
+                  <span className="mt-0.5 block text-[12px] text-hint">
                     课堂号 {room.id}
                   </span>
                 </span>

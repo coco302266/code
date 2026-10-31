@@ -1,0 +1,158 @@
+diff --git a/Tutor-Chatbot-main/backend/env.example b/Tutor-Chatbot-main/backend/env.example
+index 9fc5498..1044ec9 100644
+--- a/Tutor-Chatbot-main/backend/env.example
++++ b/Tutor-Chatbot-main/backend/env.example
+@@ -252,3 +252,22 @@ CLASSROOM_MAX_DISTANCE=1.25
+ # 扁平模式：K=3 / rerank_text=parent_head / floor=-8 这套调优全部失效，
+ # 实测 nDCG 0.8812 -> 0.7936（-8.76pp）。改这个开关不需要重建库。
+ RAG_PARENT_CHILD=1
++
++# ===== MySQL（可选；不配则后端跑「无数据库」模式）=====
++# 判定逻辑在 db/session.py：DATABASE_URL 或 MYSQL_HOST/USER/DATABASE 任一项
++# 存在才会建 engine；全不配时 /chat 照常回答，但 agent_runs 零留痕，
++# /evaluation/* 全空且不报错——这是最容易误判成「功能坏了」的一种状态。
++#
++# 二选一：
++#   ① 分项（推荐）：填下面 5 行
++#   ② 整串：DATABASE_URL=mysql+pymysql://user:pwd@127.0.0.1:3306/ai_classroom?charset=utf8mb4
++#
++# 本机现状（2026-10-31）：便携版 8.0.29 在 D:/mysql/mysql-8.0.29-winx64，
++# 未注册 Windows 服务，需手动起：
++#   "D:/mysql/mysql-8.0.29-winx64/bin/mysqld.exe" --defaults-file="D:/mysql/mysql-8.0.29-winx64/my.ini"
++# root 当前空密码、只绑 127.0.0.1；对外暴露前必须改密码。
++MYSQL_HOST=127.0.0.1
++MYSQL_PORT=3306
++MYSQL_USER=root
++MYSQL_PASSWORD=
++MYSQL_DATABASE=ai_classroom
+diff --git a/Tutor-Chatbot-main/backend/init_db.py b/Tutor-Chatbot-main/backend/init_db.py
+index 0adfdf9..299ab60 100644
+--- a/Tutor-Chatbot-main/backend/init_db.py
++++ b/Tutor-Chatbot-main/backend/init_db.py
+@@ -227,7 +227,11 @@ def verify() -> None:
+ 
+ 
+ def main() -> None:
+-    print(f"连接串：{DATABASE_URL.replace(os.getenv('MYSQL_PASSWORD', ''), '***')}")
++    # 只在密码非空时打码：str.replace('', '***') 会在每个字符之间插一串星号，
++    # 空密码环境下把连接串打成 ***m***y***s***q***l... 完全没法看。
++    _pwd = os.getenv("MYSQL_PASSWORD", "")
++    shown = DATABASE_URL.replace(_pwd, "***") if _pwd else DATABASE_URL
++    print(f"连接串：{shown}")
+     create_database_if_missing()
+     create_tables()
+     verify()
+diff --git a/Tutor-Chatbot-main/backend/setup_backend.bat b/Tutor-Chatbot-main/backend/setup_backend.bat
+index 1e63b75..1ee9825 100644
+--- a/Tutor-Chatbot-main/backend/setup_backend.bat
++++ b/Tutor-Chatbot-main/backend/setup_backend.bat
+@@ -1,7 +1,10 @@
+ @echo off
+-set BASE=D:\STUDY\AI-Classroom\Tutor-Chatbot-main\backend
+-set PY=C:\Users\24264\AppData\Roaming\uv\python\cpython-3.12.14-windows-x86_64-none\python.exe
++rem 自定位：脚本在 backend\ 下，BASE 跟着脚本走，换盘/换机器都不用改。
++set "BASE=%~dp0"
+ cd /d "%BASE%"
++rem 基础解释器：优先 py 启动器的 3.12（与原作者环境一致），没有就退到 PATH 里的 python。
++rem 原来写死 C:\Users\24264\...\uv\python\cpython-3.12.14，换机器必失败。
++set "PY=py -3.12"
+ 
+ echo ============================================
+ echo  AI-Classroom backend: setup and self-test
+@@ -13,22 +16,22 @@ if exist "venv\Scripts\python.exe" (
+   if errorlevel 1 (
+     echo   old venv broken, rebuilding ...
+     rmdir /s /q venv
+-    "%PY%" -m venv venv
++    %PY% -m venv venv
+   ) else (
+     echo   venv OK, skip rebuild
+   )
+ ) else (
+   echo   creating venv ...
+-  "%PY%" -m venv venv
++  %PY% -m venv venv
+ )
+ 
+ echo [2/5] Install dependencies via China mirror (needs internet) ...
+ call venv\Scripts\activate.bat
+-echo   trying Tsinghua mirror ...
+-pip install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple --trusted-host pypi.tuna.tsinghua.edu.cn --retries 5 --timeout 60
++echo   trying Aliyun mirror ...
++pip install -r requirements.txt -i https://mirrors.aliyun.com/pypi/simple/ --trusted-host mirrors.aliyun.com --retries 5 --timeout 60
+ if errorlevel 1 (
+-  echo   Tsinghua failed, trying Aliyun mirror ...
+-  pip install -r requirements.txt -i https://mirrors.aliyun.com/pypi/simple/ --trusted-host mirrors.aliyun.com --retries 5 --timeout 60
++  echo   Aliyun failed, trying Tsinghua mirror ...
++  pip install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple --trusted-host pypi.tuna.tsinghua.edu.cn --retries 5 --timeout 60
+ )
+ if errorlevel 1 (
+   echo.
+diff --git a/Tutor-Chatbot-main/backend/start_server.bat b/Tutor-Chatbot-main/backend/start_server.bat
+index 2461c0d..fddabb7 100644
+--- a/Tutor-Chatbot-main/backend/start_server.bat
++++ b/Tutor-Chatbot-main/backend/start_server.bat
+@@ -1,5 +1,6 @@
+ @echo off
+-set BASE=D:\STUDY\AI-Classroom\Tutor-Chatbot-main\backend
++rem 自定位：BASE 跟着脚本走（原来写死 D:\STUDY\AI-Classroom\...，换机器必失败）。
++set "BASE=%~dp0"
+ cd /d "%BASE%"
+ call venv\Scripts\activate.bat
+ REM Clear any proxy so the DeepSeek call does not route through a dead proxy (502).
+diff --git a/docs/worklogs/B_WORKLOG.md b/docs/worklogs/B_WORKLOG.md
+index 3061a06..ba64600 100644
+--- a/docs/worklogs/B_WORKLOG.md
++++ b/docs/worklogs/B_WORKLOG.md
+@@ -3317,3 +3317,51 @@ InnoDB vs MyISAM  残留标签 0  分点作答
+ 宿主机的 `out/` 是旧产物，搜函数名搜不到会误判没生效。要验证得进容器搜
+ `_next/static/chunks/`，且生产构建会压缩函数名，得搜存活的字符串常量
+ （如 `&nbsp;`、正则里的 `thead|tbody|tfoot`）。
++
++---
++
++## XB-55　本机环境迁移：MySQL 实例切换 + 后端 venv 安装（工程侧，非 B 范围）
++
++- **日期**：2026-10-31
++- **越界对象**：A（`backend/` 的启动脚本、`init_db.py`、环境配置）
++- **原因**：仓库从原开发机（`D:/STUDY/AI-Classroom`，用户 `24264`）搬到本机 `E:/code`，
++  三处硬编码路径全部失效；本机 Python 一个后端依赖都没有，`backend/.env` 也不存在，
++  后端一直跑在「无数据库」模式（`/chat` 能答、`agent_runs` 零留痕、`/evaluation/*` 全空且不报错）。
++- **是否事先询问**：否（用户明确要求「起服务 + 配后端」「咋装」）。A 可按需驳回。
++- **改了哪些文件**：
++  - `backend/.env` —— 新建。`MYSQL_*` 指向本机 3306 服务实例；`LLM_*` 段留 `LLM_API_KEY=` 待用户填
++  - `backend/env.example` —— 末尾补 MYSQL 段。原文**没有**这一节，而 `db/session.py` 全靠这些变量名，
++    照示例配会配不上
++  - `backend/setup_backend.bat` —— `BASE` 改 `%~dp0` 自定位；`PY` 从写死的
++    `C:/Users/24264/.../uv/python/cpython-3.12.14` 改为 `py -3.12`；镜像顺序阿里云前置
++  - `backend/start_server.bat` —— `BASE` 改 `%~dp0` 自定位
++  - `backend/init_db.py` —— 修打码 bug：空密码时 `str.replace('', '***')` 把连接串打成
++    `***m***y***s***q***l...`，改为密码非空才打码
++- **状态**：已落地并验证。
++- **环境事实（写下来免得后人重复踩）**：
++  - 本机有两套 MySQL 服务端。用户最终注册成 Windows 服务（名 `MySQL`，自动启动）的是**安装版**：
++    `D:/mysql/MySQL Server 8.0\bin\mysqld`（8.0.41），datadir `D:/MySQL/MySQL Server 8.0\Data\`，
++    字符集 `utf8mb4 / utf8mb4_0900_ai_ci`。另一套便携版 `D:/mysql/mysql-8.0.29-winx64` 的 data 里
++    也有个 `ai_classroom`，**已作废**，别再启动它（会和 3306 抢端口）。
++  - 安装版服务的 `bind_address=*`，即监听 `0.0.0.0:3306` 而非仅本机，root 密码为弱口令。
++    对外收紧（`my.ini` 改 `bind-address=127.0.0.1` 或加防火墙规则）尚未做，待用户决定。
++  - pip 源：**清华对 pip 26 返回 403**，报错文案是 `No matching distribution found`，
++    极易误判成「没网」；`pip install -vvv` 才能看到 `"GET /simple/xxx/ 403`。换阿里云正常，
++    腾讯云 / USTC / 华为云同样可用。`pypi.org` 直连在本沙箱是 502 tunnel。
++- **验证证据**：
++  - `init_db.py` → `8 张表全部就绪 OK`（库建在服务实例里，`classroom_documents` 原先缺）
++  - `run_tests.py` → `RAN=714 FAILURES=0 ERRORS=0 SKIPPED=0`（AGENTS.md 里的 282 是旧数字，建议改）
++  - `/health` → `{"status":"ok","provider":"openai","model":"deepseek-flash","database":"up"}`
++  - ORM 写入回读：`语文测试班•中文校验` 原样读回，`utf8mb4_0900_ai_ci` 下中文无乱码，验证后已删行
++- **遗留（同日已清）**：
++  - `LLM_API_KEY` 已由用户提供并填入，`/chat` 端到端验通（SSE 序列 sources → agent → token → state → [DONE]，中文正常）
++  - 知识库 `backend/chroma_kb` 已建：**119 切片**，索引指纹 `sha256:ee2f83c53ad0186897372d421f004808`，
++    模型 `BAAI/bge-small-zh-v1.5`。实测 `TCP 为什么需要三次握手` 命中 4 条，`agent_runs.rag_hits=4`
++  - 前端 `npm ci` 完成（464MB），`next dev` 起在 3000，CORS 默认放行 `http://localhost:3000`
++- **本机两个新坑**：
++  - `huggingface.co` 在本机不可达（curl 返回 000），**必须** `HF_ENDPOINT=https://hf-mirror.com`
++    （连同 `HF_HUB_ENDPOINT`）才能下 embedding 模型，否则 `build_kb.py` 卡在 Fetching。
++  - 前端 `next.config.ts` 是 `output: "export"` + `trailingSlash: true`，所以 `/chat` 会 308 到 `/chat/`；
++    用 `curl -L` 追会报 `exit 47 too many redirects`，直接访问 `/chat/` 是 200，不是 bug。
++    `next dev` 只是预览，正式形态是 `npm run build` 出 `out/` 再由 Electron 加载。
++

@@ -8,7 +8,10 @@
   --color-line: #e3e5e9;
   --color-ink: #1f2328;
   --color-sub: #656d76;
-  --color-hint: #8b939c;
+  /* 原 #8b939c 在白底上只有 3.11:1，而它承担了 11px 的时间戳、依据、提示语，
+     是「用得最密 + 对比度最低」的组合。改成 #6b7480 (4.79:1) 过 WCAG AA，
+     肉眼几乎看不出色差。 */
+  --color-hint: #6b7480;
   --color-brand: #2f6feb;
   --color-brand-soft: #eaf0fd;
   --color-teacher: #b45309;
@@ -17,6 +20,27 @@
   --color-ai-soft: #e6f5f0;
   --color-danger: #b42318;
   --color-danger-soft: #fdeceb;
+
+  /* 语义色补充：原来这些值散落在 9 个文件里写死（hover 态、状态灯、气泡描边、
+     警告色），改一处要全局搜。收进令牌后，换肤/调对比度只动这一个文件。 */
+  --color-brand-strong: #2560d4; /* 主按钮 hover */
+  --color-brand-soft-strong: #dbe7fb; /* 次按钮 hover */
+  --color-brand-line: #cfe0fb; /* 品牌色描边 */
+  --color-danger-strong: #981d13; /* 危险按钮 hover */
+
+  --color-ok: #12a06b;
+  --color-ok-line: #c6e9df;
+  --color-warn: #d99a1f;
+  --color-warn-soft: #fef6e7;
+  --color-warn-ink: #8a5a00;
+  --color-warn-line: #f6e2b8;
+  --color-error: #d0453b;
+  --color-idle: #c3c8cf;
+  --color-neutral-dot: #b3b9c0; /* 列表项目符号圆点 */
+  --color-danger-line: #f7cdc9;
+
+  --color-ai-line: #c9e7de; /* AI 气泡描边 */
+  --color-teacher-line: #f0dcbb; /* 教师气泡描边 */
 }
 
 html,

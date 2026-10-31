@@ -129,7 +129,7 @@ export default function EntryPage() {
         );
       } else if (err instanceof ApiError && err.status === 503) {
         setError(
-          "后端没有连上数据库。让后端同学把 backend/.env 里的 MYSQL_* 填好，重启服务。",
+          "后端数据库没有接通，暂时进不去。请联系管理员。",
         );
       } else {
         setError(err instanceof Error ? err.message : "进入失败，请重试");
@@ -141,13 +141,13 @@ export default function EntryPage() {
 
   return (
     <div className="flex h-full items-start justify-center overflow-auto px-6 py-10">
-      <div className="grid w-full max-w-[880px] gap-6 md:grid-cols-[1.02fr_1fr] md:items-start">
+      <div className="grid w-full max-w-[960px] gap-6 md:grid-cols-[1.02fr_1fr] md:items-start">
         <section className="pt-2">
           <Tag tone="brand">大作业 · C 部分：系统集成与前端交互</Tag>
           <h1 className="mt-3 text-[26px] font-medium leading-snug text-ink">
             AI 智能教室
           </h1>
-          <p className="mt-2 text-[13px] leading-relaxed text-sub">
+          <p className="mt-2 text-[14px] leading-relaxed text-sub">
             面向计算机八股（操作系统 / 计算机网络）的 AI 教学系统。
             一个教室，一个学科，学生在群里提问，AI 按本人画像给出个性化讲解；
             教师输入主题，AI 生成备课大纲与 PPT。
@@ -161,7 +161,7 @@ export default function EntryPage() {
             ].map(([head, body]) => (
               <li key={head} className="flex gap-2.5">
                 <span className="mt-[7px] h-1.5 w-1.5 shrink-0 rounded-full bg-brand" />
-                <span className="text-[12.5px] leading-relaxed">
+                <span className="text-[13px] leading-relaxed">
                   <span className="font-medium text-ink">{head}</span>
                   <span className="text-sub"> —— {body}</span>
                 </span>
@@ -171,7 +171,7 @@ export default function EntryPage() {
 
           {previous && (
             <Card className="mt-6 p-3.5">
-              <p className="text-[12.5px] text-sub">
+              <p className="text-[13px] text-sub">
                 上次以{" "}
                 <span className="font-medium text-ink">
                   {previous.username}
@@ -199,9 +199,9 @@ export default function EntryPage() {
         </section>
 
         <Card className="p-6">
-          <h2 className="text-[14px] font-medium text-ink">进入教室</h2>
-          <p className="mt-1 text-[12px] text-sub">
-            不需要密码。后端没有鉴权，这里选的身份就决定了你能用哪些功能。
+          <h2 className="text-[16px] font-medium text-ink">进入教室</h2>
+          <p className="mt-1 text-[13px] text-sub">
+            不需要密码：这里选的身份，决定了你能用哪些功能。
           </p>
 
           <div className="mt-5 space-y-4">
@@ -234,11 +234,11 @@ export default function EntryPage() {
                     }`}
                   >
                     <span
-                      className={`block text-[13px] font-medium ${role === value ? "text-brand" : "text-ink"}`}
+                      className={`block text-[14px] font-medium ${role === value ? "text-brand" : "text-ink"}`}
                     >
                       {label}
                     </span>
-                    <span className="mt-0.5 block text-[11.5px] text-hint">
+                    <span className="mt-0.5 block text-[12px] text-hint">
                       {desc}
                     </span>
                   </button>
@@ -262,32 +262,45 @@ export default function EntryPage() {
                 <span
                   className={`h-1.5 w-1.5 rounded-full ${
                     healthError
-                      ? "bg-[#d0453b]"
+                      ? "bg-error"
                       : health
-                        ? "bg-[#12a06b]"
-                        : "bg-[#c3c8cf]"
+                        ? "bg-ok"
+                        : "bg-idle"
                   }`}
                 />
-                <span className="text-[12px] text-sub">
+                <span
+                  className="text-[13px] text-sub"
+                  title={
+                    health
+                      ? `模型 ${health.model} · 数据库 ${health.database}`
+                      : undefined
+                  }
+                >
                   {healthError
                     ? "后端未启动"
                     : health
-                      ? `后端正常 · ${health.model}`
+                      ? "后端正常"
                       : "正在检查后端…"}
                 </span>
                 <button
                   type="button"
                   onClick={() => setShowAdvanced((v) => !v)}
-                  className="ml-auto text-[11.5px] text-hint underline-offset-2 hover:text-brand hover:underline"
+                  className="ml-auto text-[12px] text-hint underline-offset-2 hover:text-brand hover:underline"
                 >
                   {showAdvanced ? "收起" : "后端地址"}
                 </button>
               </div>
-              <p className="mt-1 text-[11.5px] text-hint">
-                数据库：{health?.database ?? "—"}
-                {health?.database === "disabled" &&
-                  "（未配置 MySQL，聊天记录不会保存）"}
-              </p>
+              {/* 数据库状态只在「不正常」时才值得占一行：正常是默认状态，
+                  把它当常驻信息展示等于把调试面板放进了首屏。 */}
+              {health && health.database !== "up" && (
+                <p className="mt-1 text-[12px] text-hint">
+                  数据库：{health.database === "disabled"
+                    ? "未配置，聊天记录不会保存"
+                    : health.database === "down"
+                      ? "连不上，聊天记录不会保存"
+                      : health.database}
+                </p>
+              )}
 
               {showAdvanced && (
                 <div className="mt-3">
@@ -331,7 +344,7 @@ export default function EntryPage() {
                   : "进入教室"}
             </Btn>
 
-            <p className="text-center text-[11.5px] text-hint">
+            <p className="text-center text-[12px] text-hint">
               学生也可以
               <Link
                 href="/classrooms/"

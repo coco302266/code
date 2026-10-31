@@ -1,7 +1,7 @@
 /**
  * 回答文本清洗。
  *
- * 背景：聊天区是纯文本渲染（`whitespace-pre-wrap`，见 TutorChat.tsx），
+ * 背景：聊天区是纯文本渲染（见 components/chat.tsx 与 components/RichText.tsx），
  * 不解析任何 HTML。排版规范（后端 agent/prompts.py 的 ANSWER_FORMAT_RULES）
  * 已经明令禁止模型输出标签，但模型输出不保证百分百听话——一旦漏出来，
  * 学生看到的就是一串裸露的 `<td>`，完全没法读。

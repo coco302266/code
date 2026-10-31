@@ -1,7 +1,10 @@
 @echo off
-set BASE=D:\STUDY\AI-Classroom\Tutor-Chatbot-main\backend
-set PY=C:\Users\24264\AppData\Roaming\uv\python\cpython-3.12.14-windows-x86_64-none\python.exe
+rem 自定位：脚本在 backend\ 下，BASE 跟着脚本走，换盘/换机器都不用改。
+set "BASE=%~dp0"
 cd /d "%BASE%"
+rem 基础解释器：优先 py 启动器的 3.12（与原作者环境一致），没有就退到 PATH 里的 python。
+rem 原来写死 C:\Users\24264\...\uv\python\cpython-3.12.14，换机器必失败。
+set "PY=py -3.12"
 
 echo ============================================
 echo  AI-Classroom backend: setup and self-test
@@ -13,22 +16,22 @@ if exist "venv\Scripts\python.exe" (
   if errorlevel 1 (
     echo   old venv broken, rebuilding ...
     rmdir /s /q venv
-    "%PY%" -m venv venv
+    %PY% -m venv venv
   ) else (
     echo   venv OK, skip rebuild
   )
 ) else (
   echo   creating venv ...
-  "%PY%" -m venv venv
+  %PY% -m venv venv
 )
 
 echo [2/5] Install dependencies via China mirror (needs internet) ...
 call venv\Scripts\activate.bat
-echo   trying Tsinghua mirror ...
-pip install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple --trusted-host pypi.tuna.tsinghua.edu.cn --retries 5 --timeout 60
+echo   trying Aliyun mirror ...
+pip install -r requirements.txt -i https://mirrors.aliyun.com/pypi/simple/ --trusted-host mirrors.aliyun.com --retries 5 --timeout 60
 if errorlevel 1 (
-  echo   Tsinghua failed, trying Aliyun mirror ...
-  pip install -r requirements.txt -i https://mirrors.aliyun.com/pypi/simple/ --trusted-host mirrors.aliyun.com --retries 5 --timeout 60
+  echo   Aliyun failed, trying Tsinghua mirror ...
+  pip install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple --trusted-host pypi.tuna.tsinghua.edu.cn --retries 5 --timeout 60
 )
 if errorlevel 1 (
   echo.

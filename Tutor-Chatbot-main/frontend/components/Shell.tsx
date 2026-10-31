@@ -53,14 +53,14 @@ export function Shell({
 
   const dot =
     db === "up"
-      ? "bg-[#12a06b]"
+      ? "bg-ok"
       : db === "down"
-        ? "bg-[#d99a1f]"
+        ? "bg-warn"
         : db === "disabled"
-          ? "bg-[#9aa2ab]"
+          ? "bg-muted"
           : db === "checking"
-            ? "bg-[#c3c8cf]"
-            : "bg-[#d0453b]";
+            ? "bg-idle"
+            : "bg-error";
 
   const dbText =
     db === "up"
@@ -75,39 +75,51 @@ export function Shell({
 
   return (
     <div className="flex h-full flex-col bg-canvas">
-      <header className="flex h-13 shrink-0 items-center gap-3 border-b border-line bg-panel px-4 py-3">
+      {/* 响应式：小屏下「数据库状态文字」和「身份标签」隐藏（状态灯保留为圆点），
+          只留返回 + 标题 + 操作按钮。否则 390px 下这四组元素会把标题挤成竖排单字。 */}
+      <header className="flex h-13 shrink-0 items-center gap-3 border-b border-line bg-panel px-3 py-3 sm:px-4">
         {backHref ? (
           <Link
             href={backHref}
-            className="rounded-md px-2 py-1 text-[12.5px] text-sub transition-colors hover:bg-soft hover:text-ink"
+            className="shrink-0 rounded-md px-2 py-1 text-[13px] text-sub transition-colors hover:bg-soft hover:text-ink"
           >
             ← {backLabel}
           </Link>
         ) : (
-          <span className="text-[13px] font-medium text-ink">AI 智能教室</span>
+          <span className="shrink-0 text-[14px] font-medium text-ink">
+            AI 智能教室
+          </span>
         )}
 
         {title && (
           <>
-            <span className="h-4 w-px bg-line" />
-            <span className="truncate text-[13px] text-ink">{title}</span>
+            <span className="hidden h-4 w-px shrink-0 bg-line sm:block" />
+            <span className="min-w-0 flex-1 truncate text-[14px] text-ink">
+              {title}
+            </span>
           </>
         )}
 
-        <div className="ml-auto flex items-center gap-2.5">
+        <div className="ml-auto flex shrink-0 items-center gap-2.5">
           {right}
           <span
             title={`${dbText} · ${backend}`}
-            className="flex items-center gap-1.5 rounded-md border border-line bg-soft px-2 py-1 text-[11.5px] text-sub"
+            className="hidden items-center gap-1.5 rounded-md border border-line bg-soft px-2 py-1 text-[12px] text-sub sm:flex"
           >
             <span className={`h-1.5 w-1.5 rounded-full ${dot}`} />
             {dbText}
           </span>
+          <span
+            title={`${dbText} · ${backend}`}
+            className={`h-2 w-2 rounded-full sm:hidden ${dot}`}
+          />
           {identity && (
-            <Tag tone={identity.role === "teacher" ? "teacher" : "brand"}>
-              {identity.username}
-              {identity.role === "teacher" ? " · 教师" : " · 学生"}
-            </Tag>
+            <span className="hidden sm:inline-flex">
+              <Tag tone={identity.role === "teacher" ? "teacher" : "brand"}>
+                {identity.username}
+                {identity.role === "teacher" ? " · 教师" : " · 学生"}
+              </Tag>
+            </span>
           )}
         </div>
       </header>

@@ -427,7 +427,11 @@ export default function ClassroomPage() {
           <Btn variant="ghost" onClick={() => void refreshMessages()}>
             刷新
           </Btn>
-          <Btn variant="ghost" onClick={() => setPanelOpen((v) => !v)}>
+          <Btn
+            variant="ghost"
+            className="max-lg:hidden"
+            onClick={() => setPanelOpen((v) => !v)}
+          >
             {panelOpen ? "收起侧栏" : "课堂侧栏"}
           </Btn>
           {iAmTeacher && (
@@ -449,11 +453,11 @@ export default function ClassroomPage() {
           <div
             ref={scrollRef}
             onScroll={handleScroll}
-            className="min-h-0 flex-1 overflow-y-auto px-6 py-5"
+            className="min-h-0 flex-1 overflow-y-auto px-3 py-4 sm:px-6 sm:py-5"
           >
             {messages.length === 0 ? (
               <div className="flex h-full flex-col items-center justify-center gap-3">
-                <p className="text-[13px] text-hint">
+                <p className="text-[14px] text-hint">
                   这个课堂还没有人提问。挑一个知识点开始吧：
                 </p>
                 <div className="flex max-w-[520px] flex-wrap justify-center gap-2">
@@ -465,7 +469,7 @@ export default function ClassroomPage() {
                         setInput(q);
                         inputRef.current?.focus();
                       }}
-                      className="rounded-full border border-line bg-panel px-3 py-1.5 text-[12px] text-sub transition-colors hover:border-brand hover:text-brand disabled:opacity-50"
+                      className="rounded-full border border-line bg-panel px-3 py-1.5 text-[13px] text-sub transition-colors hover:border-brand hover:text-brand disabled:opacity-50"
                     >
                       {q}
                     </button>
@@ -488,8 +492,11 @@ export default function ClassroomPage() {
             )}
           </div>
 
-          <div className="shrink-0 border-t border-line bg-panel px-6 py-3.5">
-            <div className="mx-auto flex max-w-[820px] items-end gap-2.5">
+          <div className="shrink-0 border-t border-line bg-panel px-3 py-3 sm:px-6 sm:py-3.5">
+            {/* sm 以上把输入行右移 42px（头像 32 + 间距 10），
+                让输入框左边界与气泡正文的左边界落在同一根竖线上。
+                之前两者差 42px，是整页最显眼的一处不齐。 */}
+            <div className="mx-auto flex max-w-[820px] items-end gap-2.5 sm:pl-[42px]">
               <Textarea
                 ref={inputRef}
                 value={input}
@@ -528,9 +535,8 @@ export default function ClassroomPage() {
                 </Btn>
               )}
             </div>
-            <p className="mx-auto mt-1.5 max-w-[820px] text-[11px] text-hint">
+            <p className="mx-auto mt-1.5 max-w-[820px] text-[12px] text-hint sm:pl-[42px]">
               同一课堂共享上下文 —— 同学的提问你能看见，也能接着追问。
-              接口限流 10 次／分钟。
             </p>
           </div>
         </section>
@@ -541,15 +547,12 @@ export default function ClassroomPage() {
             data-selectable
           >
             <div className="border-b border-line px-4 py-3">
-              <h2 className="text-[12.5px] font-medium text-ink">本课堂成员</h2>
-              <p className="mt-0.5 text-[11px] text-hint">
-                AI 不算成员，它以 assistant 身份参与对话
-              </p>
+              <h2 className="text-[13px] font-medium text-ink">本课堂成员</h2>
             </div>
 
             <div className="space-y-1 p-3">
               {members.length === 0 ? (
-                <p className="px-1 py-2 text-[12px] text-hint">加载中…</p>
+                <p className="px-1 py-2 text-[13px] text-hint">加载中…</p>
               ) : (
                 members.map((m) => (
                   <button
@@ -563,13 +566,13 @@ export default function ClassroomPage() {
                   >
                     <Avatar name={m.username} role={m.role} />
                     <span className="min-w-0 flex-1">
-                      <span className="block truncate text-[12.5px] text-ink">
+                      <span className="block truncate text-[13px] text-ink">
                         {m.username}
                         {m.user_id === identity?.userId && (
-                          <span className="ml-1 text-[11px] text-hint">我</span>
+                          <span className="ml-1 text-[12px] text-hint">我</span>
                         )}
                       </span>
-                      <span className="text-[11px] text-hint">
+                      <span className="text-[12px] text-hint">
                         {m.role === "teacher" ? "教师" : "学生"}
                       </span>
                     </span>
@@ -580,24 +583,24 @@ export default function ClassroomPage() {
 
             <div className="mt-auto border-t border-line">
               <div className="flex items-center gap-2 px-4 py-3">
-                <h2 className="text-[12.5px] font-medium text-ink">学习画像</h2>
+                <h2 className="text-[13px] font-medium text-ink">学习画像</h2>
                 <button
                   onClick={() => void refreshProfile()}
-                  className="ml-auto text-[11px] text-hint hover:text-brand"
+                  className="ml-auto text-[12px] text-hint hover:text-brand"
                 >
                   刷新
                 </button>
               </div>
               <div className="px-4 pb-4">
                 {profileMissing ? (
-                  <p className="text-[12px] leading-relaxed text-hint">
+                  <p className="text-[13px] leading-relaxed text-hint">
                     还没有这个学生的画像。画像是每轮对话自动沉淀的 ——
                     聊几轮之后就会出现。
                   </p>
                 ) : profile ? (
                   <ProfileView profile={profile} />
                 ) : (
-                  <p className="text-[12px] text-hint">加载中…</p>
+                  <p className="text-[13px] text-hint">加载中…</p>
                 )}
               </div>
             </div>
