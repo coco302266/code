@@ -17,7 +17,7 @@
 |---|---|---|
 | `scene-v1.jpg` | 1v1 辅导（两人隔桌对谈） | https://unsplash.com/photos/photo-1556761175-b413da4baf72 |
 | `scene-group.jpg` | 小组讨论（贴纸墙共创） | https://unsplash.com/photos/photo-1552664730-d307ca884978 |
-| `scene-debate.jpg` | 辩论 / 发言（观众席侧影） | https://unsplash.com/photos/photo-1540575467063-178a50c2df87 |
+| `scene-debate.jpg` | 辩论对抗（会议室长桌） | https://unsplash.com/photos/photo-1517502884422-41eaead166d4 |
 
 下载参数：`w=1600–1920&q=52–62&fm=jpg&fit=crop`，单张 150–350 KB。
 
@@ -26,7 +26,7 @@
 1. **聊天页的场景图是按 scenario 选的**，映射在 `app/classroom/page.tsx`：
    `debate → scene-debate`、`group → scene-group`、其余（含 v1）→ `scene-v1`。
    新增场景要同时补图、补映射、补 `PageBackdrop` 的变体。
-2. 聊天页的图带 **4px 模糊 + 较轻的蒙版**（约 50/42/58），因为气泡是整块淡色卡片、
+2. 聊天页的图带 **7px 模糊 + 较轻的蒙版**（约 52–54 / 44–46 / 60–62），因为气泡是整块淡色卡片、
    正文不压在照片上。其余页面是清晰原图 + 较重蒙版（52%–84%）。
 3. 选图三条硬标准：**主体要够大**（小物件裁切后就没影了 —— 换掉过一张麦克风特写，
    被右侧栏盖住）、**没有正脸特写**、**低饱和**。

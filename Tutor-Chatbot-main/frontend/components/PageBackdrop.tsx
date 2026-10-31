@@ -42,19 +42,19 @@ const IMAGES: Record<
   // 统一 14px 模糊 —— 气泡是主体，图只负责说明「这是哪种课堂」。
   v1: {
     src: "/bg/scene-v1.jpg",
-    scrim: "from-canvas/50 via-canvas/42 to-canvas/58",
-    blur: 4,
+    scrim: "from-canvas/54 via-canvas/46 to-canvas/62",
+    blur: 7,
   },
   group: {
     src: "/bg/scene-group.jpg",
-    scrim: "from-canvas/50 via-canvas/42 to-canvas/58",
-    blur: 4,
+    scrim: "from-canvas/54 via-canvas/46 to-canvas/62",
+    blur: 7,
   },
   debate: {
     // 观众席侧影：整幅都是主体，裁切不丢信息，语义上就是「台上在辩」
     src: "/bg/scene-debate.jpg",
-    scrim: "from-canvas/46 via-canvas/38 to-canvas/56",
-    blur: 4,
+    scrim: "from-canvas/52 via-canvas/44 to-canvas/60",
+    blur: 7,
     position: "50% 45%",
   },
   teacher: {

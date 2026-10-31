@@ -128,7 +128,13 @@ export function Shell({
           )}
         </div>
       </header>
-      <main className="relative z-10 min-h-0 flex-1">{children}</main>
+      {/* main 必须自己可滚：根节点是 overflow-hidden，如果这里不给滚动容器，
+          内容一旦超过视口就被直接裁掉 —— 「我的课堂」列表变长时滚不动就是这么来的。
+          聊天页不受影响：它的内容区是 h-full，再由内部那个 overflow-y-auto 滚动，
+          所以在 main 这一层不会产生第二个滚动条。 */}
+      <main className="relative z-10 min-h-0 flex-1 overflow-y-auto">
+        {children}
+      </main>
     </div>
   );
 }

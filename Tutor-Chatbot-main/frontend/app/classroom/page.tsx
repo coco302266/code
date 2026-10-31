@@ -463,24 +463,33 @@ export default function ClassroomPage() {
             className="min-h-0 flex-1 overflow-y-auto px-3 py-4 sm:px-6 sm:py-5"
           >
             {messages.length === 0 ? (
-              <div className="flex h-full flex-col items-center justify-center gap-3">
-                <p className="text-[14px] text-hint">
-                  这个课堂还没有人提问。挑一个知识点开始吧：
-                </p>
-                <div className="flex max-w-[520px] flex-wrap justify-center gap-2">
-                  {QUICK_ASKS.map((q) => (
-                    <button
-                      key={q}
-                      disabled={blocked}
-                      onClick={() => {
-                        setInput(q);
-                        inputRef.current?.focus();
-                      }}
-                      className="rounded-full border border-line bg-panel px-3 py-1.5 text-[13px] text-sub transition-colors hover:border-brand hover:text-brand disabled:opacity-50"
-                    >
-                      {q}
-                    </button>
-                  ))}
+              <div className="flex h-full flex-col items-center justify-center">
+                {/* 空状态也走「一条消息」的形态：AI 头像 + 气泡，里面带快捷提问。
+                    纯居中的一行灰字太像报错提示，用气泡说话更像课堂里有人在招呼你。 */}
+                <div className="flex w-full max-w-[640px] items-start gap-3">
+                  <span className="grid h-9 w-9 shrink-0 place-items-center rounded-[10px] bg-ai-soft text-[14px] font-medium text-ai ring-1 ring-inset ring-ai-line">
+                    讲
+                  </span>
+                  <div className="min-w-0 rounded-[18px] bg-ai-soft px-5 py-4 shadow-[0_1px_2px_rgba(15,23,42,0.05),0_14px_30px_-24px_rgba(15,23,42,0.45)]">
+                    <p className="text-[14px] leading-[1.75] text-ink">
+                      这个课堂还没有人提问。挑一个知识点开始吧：
+                    </p>
+                    <div className="mt-3 flex max-w-[520px] flex-wrap gap-2">
+                      {QUICK_ASKS.map((q) => (
+                        <button
+                          key={q}
+                          disabled={blocked}
+                          onClick={() => {
+                            setInput(q);
+                            inputRef.current?.focus();
+                          }}
+                          className="rounded-full border border-line bg-panel px-3 py-1.5 text-[13px] text-sub transition-colors hover:border-brand hover:text-brand disabled:opacity-50"
+                        >
+                          {q}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
                 </div>
               </div>
             ) : (

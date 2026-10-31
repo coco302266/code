@@ -138,7 +138,10 @@ export function MessageRow({
     : (msg.username ?? "未知用户");
 
   return (
-    <div className="rise flex gap-3" data-selectable>
+    <div
+      className={`rise flex gap-3 ${isMine ? "flex-row-reverse" : ""}`}
+      data-selectable
+    >
       <Avatar
         name={msg.username}
         role={msg.role}
@@ -147,19 +150,24 @@ export function MessageRow({
       {/* 一条消息 = 一张卡片：名字行、正文、依据都收在卡片里。
           这样在整屏照片背景上，任何文字都落在淡色底上，不会出现
           「时间戳和依据条压在照片上读不清」的情况。头像留在卡片外侧，
-          保证一屏扫下来仍是聊天流的节奏，而不是一列卡片。 */}
+          保证一屏扫下来仍是聊天流的节奏，而不是一列卡片。
+          学生（含自己）统一白底：自己的消息靠「靠右 + 头像在右」区分，
+          不再用蓝色淡底 —— 那层淡蓝压在照片上会发灰。 */}
       <div
-        className={`min-w-0 flex-1 rounded-[18px] px-5 py-3.5 shadow-[0_1px_2px_rgba(15,23,42,0.05),0_14px_30px_-24px_rgba(15,23,42,0.45)] ${
+        className={`min-w-0 max-w-[86%] rounded-[18px] px-5 py-3.5 shadow-[0_1px_2px_rgba(15,23,42,0.05),0_14px_30px_-24px_rgba(15,23,42,0.45)] ${
           isAi
             ? meta.skin
             : msg.role === "teacher"
               ? "bg-teacher-soft text-ink"
-              : isMine
-                ? "bg-brand-soft text-ink"
-                : "bg-panel text-ink"
+              : "bg-panel text-ink"
         }`}
       >
-        <div className="flex flex-wrap items-center gap-2">
+        {/* 自己的消息靠右（`flex-row-reverse` 把头像翻到右边），名字行也跟着靠右，
+            只有时间戳用 mr-auto 留在左边，避免整行挤成一团。
+            其他人（含 AI）一律靠左 —— 群聊里「谁在说话」靠左右就能分辨。 */}
+        <div
+          className={`flex flex-wrap items-center gap-2 ${isMine ? "justify-end" : ""}`}
+        >
           <span className="text-[13px] font-medium text-ink">{name}</span>
           {isAi && <Tag tone="ai">AI</Tag>}
           {isAi && msg.agentStance && (
@@ -176,7 +184,9 @@ export function MessageRow({
           {msg.role === "teacher" && <Tag tone="teacher">教师</Tag>}
           {isMine && !isAi && <Tag tone="brand">我</Tag>}
           {msg.topic && <Tag tone="neutral">{msg.topic}</Tag>}
-          <span className="ml-auto text-[12px] text-hint">
+          <span
+            className={`${isMine ? "mr-auto order-first" : "ml-auto"} text-[12px] text-hint`}
+          >
             {shortTime(msg.createdAt)}
           </span>
         </div>
