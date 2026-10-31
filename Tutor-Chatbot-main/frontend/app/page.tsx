@@ -19,7 +19,8 @@ import {
   saveIdentity,
   type Identity,
 } from "@/lib/identity";
-import { Banner, Btn, Card, Field, Input, Spinner, Tag } from "@/components/ui";
+import { Banner, Btn, Card, Field, Input, Spinner } from "@/components/ui";
+import { PageBackdrop } from "@/components/PageBackdrop";
 import type { Health, UserRole } from "@/lib/types";
 
 /**
@@ -140,11 +141,12 @@ export default function EntryPage() {
   }
 
   return (
-    <div className="flex h-full items-start justify-center overflow-auto px-6 py-10">
-      <div className="grid w-full max-w-[960px] gap-6 md:grid-cols-[1.02fr_1fr] md:items-start">
+    <div className="relative h-full overflow-hidden">
+      <PageBackdrop variant="home" />
+      <div className="relative z-10 flex h-full items-start justify-center overflow-auto px-6 py-10">
+        <div className="grid w-full max-w-[1000px] gap-6 rounded-2xl border border-white/70 bg-panel/70 p-6 shadow-[0_16px_40px_-20px_rgba(15,23,42,0.30)] backdrop-blur-xl sm:p-8 md:grid-cols-[1.02fr_1fr] md:items-start">
         <section className="pt-2">
-          <Tag tone="brand">大作业 · C 部分：系统集成与前端交互</Tag>
-          <h1 className="mt-3 text-[26px] font-medium leading-snug text-ink">
+          <h1 className="text-[26px] font-medium leading-snug text-ink">
             AI 智能教室
           </h1>
           <p className="mt-2 text-[14px] leading-relaxed text-sub">
@@ -355,6 +357,7 @@ export default function EntryPage() {
             </p>
           </div>
         </Card>
+        </div>
       </div>
     </div>
   );

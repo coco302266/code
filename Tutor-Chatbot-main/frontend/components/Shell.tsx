@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { getHealth } from "@/lib/api";
 import { getBackendUrl } from "@/lib/identity";
+import { PageBackdrop, type BackdropVariant } from "./PageBackdrop";
 import { Tag } from "./ui";
 
 export interface IdentityChip {
@@ -24,6 +25,7 @@ export function Shell({
   backLabel = "返回",
   identity,
   right,
+  backdrop,
   children,
 }: {
   title?: ReactNode;
@@ -31,6 +33,8 @@ export function Shell({
   backLabel?: string;
   identity?: IdentityChip | null;
   right?: ReactNode;
+  /** 页面背景图变体，见 components/PageBackdrop.tsx。不传就没有背景图。 */
+  backdrop?: BackdropVariant;
   children: ReactNode;
 }) {
   const [db, setDb] = useState<string>("checking");
@@ -74,10 +78,11 @@ export function Shell({
             : "后端未启动";
 
   return (
-    <div className="flex h-full flex-col bg-canvas">
+    <div className="relative flex h-full flex-col overflow-hidden bg-canvas">
+      {backdrop && <PageBackdrop variant={backdrop} />}
       {/* 响应式：小屏下「数据库状态文字」和「身份标签」隐藏（状态灯保留为圆点），
           只留返回 + 标题 + 操作按钮。否则 390px 下这四组元素会把标题挤成竖排单字。 */}
-      <header className="flex h-13 shrink-0 items-center gap-3 border-b border-line bg-panel px-3 py-3 sm:px-4">
+      <header className="relative z-10 flex h-13 shrink-0 items-center gap-3 border-b border-line bg-panel px-3 py-3 sm:px-4">
         {backHref ? (
           <Link
             href={backHref}
@@ -123,7 +128,7 @@ export function Shell({
           )}
         </div>
       </header>
-      <main className="min-h-0 flex-1">{children}</main>
+      <main className="relative z-10 min-h-0 flex-1">{children}</main>
     </div>
   );
 }

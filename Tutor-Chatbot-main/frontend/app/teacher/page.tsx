@@ -430,6 +430,7 @@ export default function TeacherPage() {
 
   return (
     <Shell
+      backdrop="teacher"
       identity={identity}
       right={
         <div className="flex items-center gap-2">
@@ -457,7 +458,7 @@ export default function TeacherPage() {
       }
     >
       <div className="mx-auto max-w-[960px] px-6 py-6">
-        <div className="flex gap-1.5 rounded-xl border border-line bg-panel p-1.5">
+        <div className="flex gap-1.5 rounded-xl border border-white/70 bg-panel/82 p-1.5 shadow-[0_12px_32px_-16px_rgba(15,23,42,0.28)] backdrop-blur-xl">
           {TABS.map((item) => (
             <button
               key={item.key}
@@ -489,7 +490,7 @@ export default function TeacherPage() {
         {/* ------------------------------ 课堂 ------------------------------ */}
         {tab === "room" && (
           <div className="mt-5 grid gap-5 md:grid-cols-2">
-            <Card className="p-5">
+            <Card glass className="p-5">
               <h2 className="text-[14px] font-medium text-ink">创建新课堂</h2>
               <p className="mt-1 text-[12px] text-hint">
                 创建后你会自动成为这个课堂的教师
@@ -529,7 +530,7 @@ export default function TeacherPage() {
               </div>
             </Card>
 
-            <Card className="p-5">
+            <Card glass className="p-5">
               <h2 className="text-[14px] font-medium text-ink">加入已有课堂</h2>
               <p className="mt-1 text-[12px] text-hint">
                 已经建过的课堂，用课堂号直接以教师身份加入
@@ -584,7 +585,7 @@ export default function TeacherPage() {
               )}
             </Card>
 
-            <Card className="p-5 md:col-span-2">
+            <Card glass className="p-5 md:col-span-2">
               <div className="flex items-center gap-2">
                 <h2 className="text-[14px] font-medium text-ink">学生名单</h2>
                 <span className="text-[12px] text-hint">
@@ -699,7 +700,7 @@ export default function TeacherPage() {
 
             <div className="min-w-0">
               {preparing ? (
-                <Card className="grid place-items-center p-16">
+                <Card glass className="grid place-items-center p-16">
                   <div className="text-center">
                     <Spinner className="h-5 w-5 text-brand" />
                     <p className="mt-3 text-[13px] text-sub">
@@ -712,7 +713,7 @@ export default function TeacherPage() {
               ) : result ? (
                 <OutlineCard result={result} />
               ) : (
-                <Card className="p-16">
+                <Card glass className="p-16">
                   <Empty>
                     还没有生成。填好主题后点「生成大纲」，
                     结果会显示在这里，并附一个可下载的 .pptx
@@ -727,7 +728,7 @@ export default function TeacherPage() {
         {tab === "records" && (
           <div className="mt-5 space-y-5">
             {!classroomId ? (
-              <Card className="p-16">
+              <Card glass className="p-16">
                 <Empty>先创建或加入一个课堂。</Empty>
               </Card>
             ) : (

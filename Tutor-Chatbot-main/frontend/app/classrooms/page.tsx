@@ -113,12 +113,22 @@ export default function ClassroomsPage() {
   }
 
   return (
-    <Shell backHref="/" backLabel="入口" identity={identity} title="我的课堂">
+    <Shell
+      backHref="/"
+      backLabel="入口"
+      identity={identity}
+      title="我的课堂"
+      backdrop="classrooms"
+    >
       <div className="mx-auto max-w-[960px] px-6 py-8">
-        <h1 className="text-[18px] font-medium text-ink">我的课堂</h1>
-        <p className="mt-1 text-[13px] text-sub">
-          选一个课堂进去，或者输入教师给你的课堂号。
-        </p>
+        {/* 标题不在卡片里，直接压在照片上会吃对比度（尤其 13px 的副标题）。
+            给一块无边框的柔光板：只有底色 + 模糊，不加描边，避免看起来又多一张卡片。 */}
+        <div className="rounded-xl bg-canvas/72 px-4 py-3 backdrop-blur-md">
+          <h1 className="text-[18px] font-medium text-ink">我的课堂</h1>
+          <p className="mt-1 text-[13px] text-sub">
+            选一个课堂进去，或者输入教师给你的课堂号。
+          </p>
+        </div>
 
         {!identity && (
           <Banner tone="warn" className="mt-5">
@@ -139,7 +149,7 @@ export default function ClassroomsPage() {
           </Banner>
         )}
 
-        <Card className="mt-6 p-5">
+        <Card glass className="mt-6 p-5">
           <Field label="用课堂号进入" hint="教师创建课堂时会拿到课堂号">
             <div className="flex gap-2">
               <Input
@@ -167,14 +177,14 @@ export default function ClassroomsPage() {
           </Field>
         </Card>
 
-        <h2 className="mt-8 text-[14px] font-medium text-ink">
-          最近进过的课堂
-        </h2>
-        <p className="mt-1 text-[12px] text-hint">这份列表只保存在本机。</p>
+        <div className="mt-8 inline-block rounded-lg bg-canvas/72 px-3 py-2 backdrop-blur-md">
+          <h2 className="text-[14px] font-medium text-ink">最近进过的课堂</h2>
+          <p className="mt-0.5 text-[12px] text-hint">这份列表只保存在本机。</p>
+        </div>
 
         <div className="mt-3 space-y-2.5">
           {recent.length === 0 ? (
-            <Card className="p-8">
+            <Card glass className="p-8">
               <Empty>
                 还没有记录。用上面的课堂号进去一次，这里就会有记录。
               </Empty>

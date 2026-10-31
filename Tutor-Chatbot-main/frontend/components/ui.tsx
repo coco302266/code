@@ -33,15 +33,25 @@ export function Btn({
 
 export function Card({
   className = "",
+  glass = false,
   children,
 }: {
   className?: string;
+  /**
+   * 玻璃卡片：浮在整屏背景图上时用。
+   *
+   * 82% 白 + 背景模糊是实测出来的下限：再透，深色正文压在照片暗部就开始费眼；
+   * 再实，就退回普通白卡，图和卡片的层次感没了。
+   * 只给「浮在照片上的大容器」用，卡片内部的小条目保持实底 —— 全玻璃会糊成一团。
+   */
+  glass?: boolean;
   children: ReactNode;
 }) {
+  const skin = glass
+    ? "border-white/70 bg-panel/82 backdrop-blur-xl shadow-[0_12px_32px_-16px_rgba(15,23,42,0.28)]"
+    : "border-line bg-panel";
   return (
-    <div className={`rounded-xl border border-line bg-panel ${className}`}>
-      {children}
-    </div>
+    <div className={`rounded-xl border ${skin} ${className}`}>{children}</div>
   );
 }
 
