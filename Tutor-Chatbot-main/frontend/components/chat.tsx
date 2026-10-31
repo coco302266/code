@@ -1,6 +1,7 @@
 "use client";
 
 import type { MessageRole, SourceItem } from "@/lib/types";
+import { sanitizeAssistantText } from "@/lib/answerFormat";
 import { Spinner, Tag, shortTime } from "./ui";
 
 export interface UIMsg {
@@ -161,7 +162,9 @@ export function MessageRow({
                 : "border-line bg-panel text-ink"
           }`}
         >
-          {msg.content}
+          {/* AI 回答统一过一遍清洗：模型偶尔漏出的 HTML 标签在这里被还原成
+              纯文本，否则学生会看到一串裸露的 <td>。详见 lib/answerFormat.ts。 */}
+          {isAi ? sanitizeAssistantText(msg.content) : msg.content}
           {msg.streaming && msg.content && (
             <span className="ml-0.5 inline-block h-3.5 w-[2px] translate-y-[2px] animate-pulse bg-ai" />
           )}

@@ -3,6 +3,7 @@
 import {useState, useRef, useEffect} from "react";
 import Link from "next/link";
 import { useTutorConsent } from "@/lib/consent";
+import { sanitizeAssistantText } from "@/lib/answerFormat";
 
 interface Message {
   id: string;
@@ -321,7 +322,10 @@ async function send() {
     let conversationLog = "";
     messages.forEach((msg) => {
       const role = msg.role === "user" ? "👤 User" : "🤖 AI Tutor";
-      conversationLog += `${role}:\n${msg.content}\n\n---\n\n`;
+      // 邮件正文同样是纯文本，标签在这里也要洗掉，否则收件人看到的是代码。
+      const body =
+        msg.role === "assistant" ? sanitizeAssistantText(msg.content) : msg.content;
+      conversationLog += `${role}:\n${body}\n\n---\n\n`;
     });
 
     await sendViaEmailJs(cfg, {
@@ -514,7 +518,9 @@ async function send() {
                     : "bg-zinc-900 border border-zinc-800 text-zinc-200 rounded-bl-sm"
                 }`}
               >
-                {msg.content}
+                {msg.role === "assistant"
+                  ? sanitizeAssistantText(msg.content)
+                  : msg.content}
                 {streaming && i === messages.length - 1 && msg.role === "assistant" && (
                   <span className="inline-block w-0.5 h-3.5 bg-zinc-400 ml-0.5 animate-pulse align-middle" />
                 )}
