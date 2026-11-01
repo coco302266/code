@@ -3777,3 +3777,9 @@ InnoDB vs MyISAM  残留标签 0  分点作答
   - 清理后核对：classrooms=1、messages=14、members=5、users=6、profiles=3、agent_runs=5、docs=1；
     `GET /classrooms?user_id=1` 与 `/classrooms/2/messages` 均正常返回。
 - **验证**：`tsc --noEmit` 0；`next build` 通过；截图确认输入区提示与模板按钮。
+
+- **回滚（同日 17:20）**：用户要求把默认后端地址改回去。`lib/identity.ts` 已还原为
+  `process.env.NEXT_PUBLIC_BACKEND_URL || "http://127.0.0.1:8000"`，
+  运行时的「按页面主机名推断」逻辑（`resolveDefaultBackendUrl`）整段移除。
+  行为回到改动前：不配环境变量就一律 127.0.0.1。
+  注意 `.env.local` 里的 `NEXT_PUBLIC_BACKEND_URL` 仍然优先生效，与代码默认值无关。
