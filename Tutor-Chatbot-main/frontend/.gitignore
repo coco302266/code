@@ -32,6 +32,8 @@ yarn-error.log*
 
 # env files (can opt-in for committing if needed)
 .env*
+# 但示例文件要能被组员看到，否则新机器不知道要配什么
+!.env.local.example
 
 # vercel
 .vercel
