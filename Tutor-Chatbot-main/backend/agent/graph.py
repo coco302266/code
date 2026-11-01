@@ -30,6 +30,16 @@ DEFAULT_MODELS = {
     "openai": "deepseek-flash",
 }
 
+# LLM-8（AGENT_PROTOCOL.md §1）：显式请求超时 + 最多 1 次重试。
+# 背景：此前 get_llm 不传 timeout，模型侧卡住时请求会一直挂着（uvicorn
+# worker 被长期占用，/chat 流式永不结束，前端一直转圈）。
+# timeout=60s：单轮 LLM 调用超过 60s 即判失败并降级（评估节点已对 LLM 失败
+# 做了 502 兜底；回答节点失败由 SSE 错误事件兜住），不会无限挂。
+# max_retries=1：底层 SDK 会对连接类/超时/限流等瞬时错误自愈 1 次，且只重试 1 次，
+# 不会把「明显会失败的请求」（如 401 缺 key）反复重试放大故障。
+LLM_TIMEOUT_SECONDS = 60
+LLM_MAX_RETRIES = 1
+
 
 def get_model(provider: str) -> str | None:
     configured_provider = os.getenv("LLM_PROVIDER")
@@ -58,7 +68,13 @@ def get_llm(provider: str | None = None):
                 "GROQ_API_KEY is not configured. Add it to backend/.env "
                 "and restart the backend."
             )
-        return ChatGroq(model=model, temperature=0.4, groq_api_key=api_key)
+        return ChatGroq(
+            model=model,
+            temperature=0.4,
+            groq_api_key=api_key,
+            timeout=LLM_TIMEOUT_SECONDS,
+            max_retries=LLM_MAX_RETRIES,
+        )
     if provider == "gemini":
         from langchain_google_genai import ChatGoogleGenerativeAI
 
@@ -87,6 +103,8 @@ def get_llm(provider: str | None = None):
             temperature=0.4,
             api_key=api_key,
             base_url=os.getenv("LLM_BASE_URL") or None,
+            timeout=LLM_TIMEOUT_SECONDS,
+            max_retries=LLM_MAX_RETRIES,
         )
 
     raise ValueError(f"Unknown provider: {provider}")

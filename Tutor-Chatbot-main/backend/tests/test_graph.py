@@ -314,5 +314,31 @@ class SuspectedMissedResolutionTests(unittest.TestCase):
         self.assertEqual(handler.messages, [])
 
 
+class LLMResilienceTests(unittest.TestCase):
+    """LLM-8：get_llm 必须给所有 provider 显式 timeout + 最多 1 次重试。
+
+    此前 get_llm 不传这两个参数，模型侧卡住时 /chat 会一直挂着。
+    这条用例锁死「参数确实传进了底层 LLM 构造」，改坏会当场变红。
+    """
+
+    def test_openai_gets_timeout_and_retry(self):
+        with patch.dict(
+            os.environ, {"LLM_API_KEY": "test-key", "LLM_BASE_URL": "http://x"}
+        ):
+            with patch("langchain_openai.ChatOpenAI") as mock_cls:
+                get_llm("openai")
+                _, kwargs = mock_cls.call_args
+                self.assertEqual(kwargs["timeout"], 60)
+                self.assertEqual(kwargs["max_retries"], 1)
+
+    def test_groq_gets_timeout_and_retry(self):
+        with patch.dict(os.environ, {"GROQ_API_KEY": "test-key"}):
+            with patch("langchain_groq.ChatGroq") as mock_cls:
+                get_llm("groq")
+                _, kwargs = mock_cls.call_args
+                self.assertEqual(kwargs["timeout"], 60)
+                self.assertEqual(kwargs["max_retries"], 1)
+
+
 if __name__ == "__main__":
     unittest.main()

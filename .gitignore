@@ -35,6 +35,8 @@ Tutor-Chatbot-main/backend/venv/
 Tutor-Chatbot-main/backend/_chroma_archive/
 # 课堂资料向量库：含用户上传内容，属运行时数据，不进仓库
 Tutor-Chatbot-main/backend/chroma_classrooms/
+# 常驻八股知识库向量（build_kb.py 生成，449 切片，运行时产物，不进仓库）
+Tutor-Chatbot-main/backend/chroma_kb/
 
 # 通用构建 / 字节码产物
 __pycache__/
@@ -50,3 +52,6 @@ build/
 
 # 文档整理前的一次性原件备份（校验通过后即可整删）
 _docs_archive_*/
+
+# venv 重建备份（不入库）
+venv_broken_bak_*/
