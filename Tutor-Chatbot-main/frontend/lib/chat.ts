@@ -19,7 +19,8 @@ import type { ChatRequestBody, SourceItem, StreamState } from "./types";
 
 /**
  * M4 的 `agent` 事件载荷 —— 一轮里第 index 个发言的角色。
- * `total` 是本轮总发言数：`v1`=1、`group`=2、`debate`=3。
+ * `total` 是本轮总发言数：常规问答为 1（v1 / group 都是主讲助教一人）；
+ * 学生 @ 出题助手时同样为 1，只是发言人换成出题助手。
  */
 export interface AgentEvent {
   role: string;

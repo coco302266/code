@@ -3709,3 +3709,71 @@ InnoDB vs MyISAM  残留标签 0  分点作答
   防火墙规则用 `Get-NetFirewallRule` 确认已启用。
 - **教训**：`localhost:3000` 正常 ≠ 换 IP 也正常。dev 与 build 行为不同，
   联调前必须在「对方的地址」上点一次按钮验证交互，而不是只看页面能不能打开。
+
+
+---
+
+## XB-69　1v1 人数闸门 / 辩论下线 / 主讲助教开关 / 学伴改出题助手（@ 触发）
+
+- **日期**：2026-11-01
+- **四条需求与落点**：
+  1. **1v1 只能 1 教师 + 1 学生**：`POST /classrooms/{id}/members` 加容量闸门，
+     超员返回 409 与可读文案（`app.py`）；统计用新增的 `count_members_by_role`
+     （`db/repository.py`）。AI 不落 `classroom_members`，所以「除主讲和出题人外」天然成立。
+     已在本课堂的人重复加入放行，否则刷新页面就 409。
+  2. **辩论下线**：`agent/scenarios.py` 删 `debate`；`OPEN_SCENARIOS` 只剩 v1/group；
+     `PageBackdrop` 删 `debate` 变体并删除 `scene-debate.jpg`（CREDITS 同步）；
+     存量数据 `UPDATE classrooms SET scenario='v1' WHERE scenario='debate'`。
+     传 `debate` 一律按未知场景回落 v1 并记 `degraded`。
+  3. **主讲助教开关**：`classrooms.use_tutor`（默认 1，`init_db.ensure_new_columns` 幂等补列）；
+     建房接口收 `use_tutor`，详情/列表返回它；前端建房表单加二选一分段控件；
+     聊天页在没有主讲助教时打 `无主讲助教 · 仅出题助手` 标签并换掉空状态文案。
+  4. **学伴→出题助手 + @**：`ROLE_LABELS['peer']` 改为「出题助手」（内部键保留，历史
+     `messages.agent_role` 不变脏）；`QUIZ_STEP` + `quiz_requested()` 判定
+     `@出题助手 / @出题 / @出题人 / @quiz`；`plan_agents(quiz_only=...)` 短路成单人计划；
+     `use_tutor=False` 时同样由出题助手兜底。
+     前端：气泡角标「伴」→「题」，输入区加 `@ 出题助手` 按钮（插入文本 + 聚焦）。
+- **验证证据**：
+  - 后端 `run_tests.py`：**RAN=721 FAILURES=0**（原 716；8 条按旧契约写的断言已改写，
+    新增 quiz/use_tutor/quiz_requested 5 条）。
+  - 接口实测：建 `use_tutor=false` 的课堂返回 `"use_tutor":false`；
+    学生 A 加入 201、学生 B 加入 **409**，文案为「这是 1v1 课堂，只能有 1 位教师和 1 位学生…」。
+  - SSE 实测：发 `@出题助手 出两道 TCP 的题` → 事件 `{"role":"peer","label":"出题助手","stance":"出题"}`；
+    在无主讲助教的课堂里发普通提问 → 同样 `role=peer`（兜底生效）。
+  - 前端 `tsc --noEmit` 0；`next build` 通过；截图确认场景下拉只剩两项、开关默认「配备主讲助教」、
+    无主讲助教课堂的标签与 @ 按钮都在。
+- **顺手修**：`lib/identity.ts` 的默认后端地址从写死 `127.0.0.1` 改成
+  「环境变量 → 当前页面主机名 + :8000 → 127.0.0.1」，因为本机 IP 一天内变了两次
+  （10.34.36.74 ↔ 10.141.46.147），写死地址每次都让前端连不上。
+- **未做**：`is_private`（私聊）仍然独立于 1v1 容量，两者语义有重叠但本次不动；
+  存量多人 v1 课堂（如果存在）不会被踢人，只拦新加入。
+
+
+---
+
+## XB-70　出题句式提示 + 测试数据清理
+
+- **日期**：2026-11-01
+- **一、出题句式提示（`app/classroom/page.tsx`）**
+  - 输入区那行从「点名它出题：只出题、不给答案」改成可直接照抄的句式：
+    `照这个说：@出题助手 针对「TCP 三次握手」出一道题`。
+    原来那句是描述，第一次用的人仍然不知道该打什么字；给例句才是可执行指令。
+  - `@ 出题助手` 按钮改为**填入模板**：`@出题助手 针对「」出一道题`，并把光标落到「」中间。
+    只填不发 —— 知识点必须由学生自己定，代填等于替他决定练什么。
+    光标定位放在 `requestAnimationFrame` 里，因为 `setState` 之后 DOM 才更新，
+    同步设置 `selectionStart` 会被重置到末尾。
+- **二、数据清理（用户确认范围：只删测试课堂）**
+  - 清理前盘点：8 个课堂 / 6 用户 / 22 消息 / 8 条 agent_runs / 5 份画像。
+  - **先备份**：`mysqldump` 全库导出到 `backend/_db_archive/backup_20261101_171435.sql`（45 KB），
+    同目录写 `MANIFEST.md` 含恢复命令。
+  - 删除的课堂：3、4、6、7、8、9、10（其中 8「计算机八股冲刺班-3」初版清单漏了，
+    执行后核对数量发现 messages 是 18 而不是预期的 14，才把它补删）。
+    连同 messages / classroom_members / student_profiles / agent_runs / classroom_documents 一并清。
+  - **保留**：课堂 2「计算机八股冲刺班」（group，14 条消息、5 个成员）与全部 6 个账号。
+  - 孤儿资料处理：`classroom_docs/3`、`classroom_docs/7` 移到
+    `backend/_db_archive/orphans/`（附 MANIFEST），**没有直接 rm**；
+    Chroma 里的 `classroom_3_docs` / `classroom_7_docs` 两个集合用 chromadb 客户端删除，
+    现在只剩 `classroom_2_docs`（可由归档原件重建）。
+  - 清理后核对：classrooms=1、messages=14、members=5、users=6、profiles=3、agent_runs=5、docs=1；
+    `GET /classrooms?user_id=1` 与 `/classrooms/2/messages` 均正常返回。
+- **验证**：`tsc --noEmit` 0；`next build` 通过；截图确认输入区提示与模板按钮。

@@ -18,10 +18,14 @@
    只给「怎么接」的角色指令，前文的**实际内容**由 app.py 在拼装提示词
    时追加（只有运行时才知道前面说了什么，静态表写不出来）。
 
-场景与角色序列：
-- `v1`    1v1 辅导：主讲助教单人（与 M1 行为完全一致，零回归）。
-- `group` 小组讨论：助教主讲 → 学伴补充 / 提不同角度。
-- `debate` 辩论对抗：助教立论 → 学伴质疑 → 考官追问收尾。
+角色与场景（2026-11-01 调整）：
+- 角色：主讲助教（tutor）、主讲教师（teacher）、出题助手（peer，内部键沿用 peer，
+  避免历史的 messages.agent_role 变成脏数据）。
+- `v1`    1v1 辅导：主讲助教单人（与 M1 行为完全一致，零回归）。成员上限 1 教师 + 1 学生。
+- `group` 小组讨论：同样是主讲助教单人，区别在于是多人课堂（无人数上限）。
+- 出题助手**不进默认编排**：默认每轮不说话，只在学生 `@出题助手` 时单独出题。
+  这是刻意的取舍——多一个自动发言位就多一次完整 LLM 调用（实测 +1.5~3 秒、额度翻倍），
+  而「出题」这个动作本身就是学生主动发起的，不需要猜。
 """
 
 from __future__ import annotations
@@ -33,7 +37,7 @@ from dataclasses import dataclass
 ROLE_LABELS: dict[str, str] = {
     "tutor": "主讲助教",
     "teacher": "主讲教师",
-    "peer": "学伴",
+    "peer": "出题助手",
     "examiner": "考官",
 }
 
@@ -87,46 +91,37 @@ SCENARIOS: dict[str, ScenarioSpec] = {
     "group": ScenarioSpec(
         key="group",
         label="小组讨论",
-        steps=(
-            AgentStep(role="tutor", stance="主讲"),
-            AgentStep(
-                role="peer",
-                stance="补充",
-                handoff=(
-                    "上面是主讲助教的讲解。请你以一起备考的学伴身份接着说："
-                    "给出你自己对这个知识点的理解，或补充一个助教没提到的角度、"
-                    "一句好记的口诀。不要重复助教已经讲过的内容，控制在 150 字以内。"
-                ),
-            ),
-        ),
-    ),
-    "debate": ScenarioSpec(
-        key="debate",
-        label="辩论对抗",
-        steps=(
-            AgentStep(role="tutor", stance="立论"),
-            AgentStep(
-                role="peer",
-                stance="质疑",
-                handoff=(
-                    "上面是主讲助教给的「标准说法」。现在请你扮演质疑者："
-                    "指出这个说法在什么前提或边界条件下不成立，或者学生最容易在"
-                    "这里产生的误解是什么。要有理有据、就事论事，不要为了反对而反对，"
-                    "控制在 150 字以内。"
-                ),
-            ),
-            AgentStep(
-                role="examiner",
-                stance="追问",
-                handoff=(
-                    "上面两位给出了不同角度的说法。请你以考官身份收尾："
-                    "针对这个知识点出 1 道能分辨「真懂」还是「背了答案」的追问题，"
-                    "并一句话说明判断标准。不要给答案，控制在 120 字以内。"
-                ),
-            ),
-        ),
+        steps=(AgentStep(role="tutor", stance="主讲"),),
     ),
 }
+
+# 出题助手的一次发言位。它不在上面的场景表里，只有学生 @ 它时才被编进计划，
+# 或者课堂关掉了主讲助教、由它独自撑起整个课堂时使用。
+QUIZ_STEP = AgentStep(
+    role="peer",
+    stance="出题",
+    handoff=(
+        "学生点名要你出题。请针对当前知识点出 2 到 3 道由浅入深的题目，"
+        "只出题、不给答案，每题后面用一句话点明它在考什么。"
+        "如果学生指定了题量和题型，以学生的要求为准。"
+    ),
+)
+
+# 学生怎么点名出题助手。逗号里是等价写法，不带 @ 的纯文本不算，
+# 否则一句「出题助手刚才说的」也会被误判成请求。
+QUIZ_MENTIONS: tuple[str, ...] = ("@出题助手", "@出题", "@出题人", "@quiz")
+
+
+def quiz_requested(text: str | None) -> bool:
+    """学生这句话是不是在叫出题助手。
+
+    纯字符串判断，不调模型也不做分词：命中即认为要出题，误判的代价只是
+    多出一道题，比漏判（学生 @ 了却没人应）体验好得多。
+    """
+    if not text:
+        return False
+    lowered = text.lower()
+    return any(token.lower() in lowered for token in QUIZ_MENTIONS)
 
 
 def normalize_scenario(scenario: str | None) -> str:

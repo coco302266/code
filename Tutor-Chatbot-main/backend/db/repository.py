@@ -61,6 +61,7 @@ def create_classroom(
     members: list[int] | None = None,
     teacher_members: list[int] | None = None,
     scenario: str = "v1",
+    use_tutor: bool = True,
 ) -> Classroom | None:
     """创建课堂。
 
@@ -81,6 +82,7 @@ def create_classroom(
         description=description,
         is_private=is_private,
         scenario=scenario,
+        use_tutor=use_tutor,
     )
     db.add(room)
     db.flush()
@@ -148,8 +150,39 @@ def save_message(
     return message
 
 
+def count_members_by_role(db, classroom_id: int) -> dict[str, int]:
+    """按角色统计课堂人数，给「1v1 课堂满员判定」用。
+
+    只数人类成员：AI 不落 classroom_members（它以 messages.role='assistant' 参与），
+    所以这里天然不包含主讲助教和出题助手 —— 与「除主讲和出题人外只能一个教师一个学生」
+    的需求正好对得上。
+    """
+    if db is None or classroom_id is None:
+        return {}
+    rows = db.execute(
+        select(ClassroomMember.role, func.count())
+        .where(ClassroomMember.classroom_id == classroom_id)
+        .group_by(ClassroomMember.role)
+    ).all()
+    return {role: int(count) for role, count in rows}
+
+
+def get_classroom_use_tutor(db, classroom_id: int) -> bool:
+    """这个课堂是否配备主讲助教。查不到按「有」处理。
+
+    默认 True 与模型层一致：宁可多一个讲解，也不要因为一次查询失败让学生
+    对着空回答——出题助手只会出题，不会讲解。
+    """
+    if db is None or classroom_id is None:
+        return True
+    value = db.execute(
+        select(Classroom.use_tutor).where(Classroom.id == classroom_id)
+    ).scalar_one_or_none()
+    return True if value is None else bool(value)
+
+
 def get_classroom_scenario(db, classroom_id: int) -> str | None:
-    """取课堂的场景（v1 / group / debate），查不到返回 None。
+    """取课堂的场景（v1 / group），查不到返回 None。
 
     单独一个函数而不是顺手在 /chat 里 join，是因为「课堂场景」要能被
     建房接口和清单接口共用；返回 None 让调用方自己决定回落值，

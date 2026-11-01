@@ -14,9 +14,24 @@ const RECENT_KEY = "ai-classroom/recent-classrooms";
 
 // 构建期注入：静态导出时 NEXT_PUBLIC_BACKEND_URL 会被写死进产物。
 // 容器部署用相对路径 /api（同源，由 nginx 反代到后端），避免远程用户连到自己的 127.0.0.1。
-// 未设置时保持本地开发的默认值，行为不变。
-export const DEFAULT_BACKEND_URL =
-  process.env.NEXT_PUBLIC_BACKEND_URL || "http://127.0.0.1:8000";
+//
+// 2026-11-01 补一条运行时兜底：没配环境变量时，用**当前页面的主机名**拼 8000，
+// 而不是写死 127.0.0.1。原因是局域网联调时机器 IP 会被 DHCP 改掉
+// （本机实测同一个下午从 10.34.36.74 变到 10.141.46.147 又变回来），
+// 写死的 127.0.0.1 在「前端跑在 A、后端跑在 B」的拓扑下必然打不通，
+// 而写死的某个 IP 过几个小时也会失效。
+// 服务端渲染阶段没有 window，回落 127.0.0.1；客户端首次用到时再按实际主机名算。
+export function resolveDefaultBackendUrl(): string {
+  if (process.env.NEXT_PUBLIC_BACKEND_URL) {
+    return process.env.NEXT_PUBLIC_BACKEND_URL;
+  }
+  if (typeof window !== "undefined" && window.location?.hostname) {
+    return `http://${window.location.hostname}:8000`;
+  }
+  return "http://127.0.0.1:8000";
+}
+
+export const DEFAULT_BACKEND_URL = resolveDefaultBackendUrl();
 
 export interface Identity {
   userId: number;
@@ -62,13 +77,13 @@ export function clearIdentity(): void {
 
 export function getBackendUrl(): string {
   if (!hasStorage()) return DEFAULT_BACKEND_URL;
-  return window.localStorage.getItem(BACKEND_KEY) || DEFAULT_BACKEND_URL;
+  return window.localStorage.getItem(BACKEND_KEY) || resolveDefaultBackendUrl();
 }
 
 export function saveBackendUrl(url: string): void {
   if (!hasStorage()) return;
   const trimmed = url.trim().replace(/\/+$/, "");
-  window.localStorage.setItem(BACKEND_KEY, trimmed || DEFAULT_BACKEND_URL);
+  window.localStorage.setItem(BACKEND_KEY, trimmed || resolveDefaultBackendUrl());
 }
 
 /** 后端没有「列出课堂」的接口，所以最近进过的课堂由客户端自己记。 */

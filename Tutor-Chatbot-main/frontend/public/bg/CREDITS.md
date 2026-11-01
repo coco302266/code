@@ -17,9 +17,11 @@
 |---|---|---|
 | `scene-v1.jpg` | 1v1 辅导（两人隔桌对谈） | https://unsplash.com/photos/photo-1556761175-b413da4baf72 |
 | `scene-group.jpg` | 小组讨论（贴纸墙共创） | https://unsplash.com/photos/photo-1552664730-d307ca884978 |
-| `scene-debate.jpg` | 辩论对抗（会议室长桌） | https://unsplash.com/photos/photo-1517502884422-41eaead166d4 |
 
 下载参数：`w=1600–1920&q=52–62&fm=jpg&fit=crop`，单张 150–350 KB。
+
+2026-11-01：辩论场景（`debate`）整体下线，`scene-debate.jpg` 已删除。
+聊天页现在只有 v1 与 group 两张场景图，映射见 `app/classroom/page.tsx`。
 
 ## 使用约束（改之前请读）
 

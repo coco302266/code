@@ -49,7 +49,7 @@ const SCROLL_BOTTOM_THRESHOLD = 80;
  *    所以不用也不该在前端维护 topic / hint_level 的本地状态。
  *    场景同理 —— 建房时已经定了，这里不传 `scenario`。
  *  - **一轮可能多个气泡**（M4）：`group` 是「助教主讲 + 学伴补充」，
- *    `debate` 再加「考官追问」。SSE 的 `agent` 事件是切换信号，
+ *    两人以上再依次接。SSE 的 `agent` 事件是切换信号，
  *    收到就新开一个气泡，之后的 token 归到该气泡。
  */
 export default function ClassroomPage() {
@@ -74,6 +74,9 @@ export default function ClassroomPage() {
     {},
   );
   const [scenarioKey, setScenarioKey] = useState<string | null>(null);
+  // 这个课堂配不配备主讲助教。关掉时整轮回答来自出题助手，标题栏要给个提示，
+  // 否则学生会以为「老师不回答是坏了」。
+  const [useTutor, setUseTutor] = useState(true);
 
   const scrollRef = useRef<HTMLDivElement>(null);
   /**
@@ -238,7 +241,10 @@ export default function ClassroomPage() {
     let alive = true;
     void getClassroom(classroomId)
       .then((room) => {
-        if (alive) setScenarioKey(room.scenario ?? "v1");
+        if (alive) {
+          setScenarioKey(room.scenario ?? "v1");
+          setUseTutor(room.use_tutor ?? true);
+        }
       })
       .catch(() => {
         // 详情拿不到就不显示场景，不影响聊天
@@ -249,6 +255,24 @@ export default function ClassroomPage() {
   }, [ready, classroomId]);
 
   // --- 发送 --------------------------------------------------------------
+
+  /**
+   * 一键填入出题句式：`@出题助手 针对「」出一道题`，光标落在引号中间。
+   *
+   * 只填模板、不直接发送：知识点得由学生自己填，代填等于替他决定练什么。
+   * 光标定位放到下一帧（setState 之后 DOM 才更新），否则 selection 会被重置到末尾。
+   */
+  function insertQuizTemplate() {
+    const template = "@出题助手 针对「」出一道题";
+    setInput((prev) => (prev.trim() ? `${prev.trimEnd()} ${template}` : template));
+    requestAnimationFrame(() => {
+      const el = inputRef.current;
+      if (!el) return;
+      const caret = el.value.lastIndexOf("「") + 1;
+      el.focus();
+      el.setSelectionRange(caret, caret);
+    });
+  }
 
   async function send(text: string) {
     const message = text.trim();
@@ -374,7 +398,7 @@ export default function ClassroomPage() {
 
     streamingRef.current = false;
     setStreaming(false);
-    // 本轮开过几个气泡就收几个尾（group 是 2 个、debate 是 3 个）
+    // 本轮开过几个气泡就收几个尾（v1 / group 都是 1 个，学生 @ 出题助手时也是 1 个）
     const keys = turnKeysRef.current;
     setMessages((prev) =>
       prev.map((msg) =>
@@ -409,13 +433,7 @@ export default function ClassroomPage() {
 
   return (
     <Shell
-      backdrop={
-        scenarioKey === "debate"
-          ? "debate"
-          : scenarioKey === "group"
-            ? "group"
-            : "v1"
-      }
+      backdrop={scenarioKey === "group" ? "group" : "v1"}
       backHref="/classrooms/"
       backLabel="我的课堂"
       identity={identity}
@@ -424,6 +442,9 @@ export default function ClassroomPage() {
           {identity?.classroomName ?? `课堂 ${classroomId ?? "—"}`}
           <span className="text-hint">#{classroomId ?? "—"}</span>
           {scenarioLabel && <Tag tone="neutral">场景：{scenarioLabel}</Tag>}
+          {/* 没有主讲助教的课堂里，回答全部来自出题助手。不标出来学生会以为
+              「助教不回话是坏了」，标一句就能把误解挡在前面。 */}
+          {!useTutor && <Tag tone="warn">无主讲助教 · 仅出题助手</Tag>}
           {state?.topic && <Tag tone="brand">正在讲：{state.topic}</Tag>}
           {state?.personalized && <Tag tone="ai">已按你的画像讲解</Tag>}
           {state?.resolved && <Tag tone="ok">已掌握</Tag>}
@@ -472,7 +493,9 @@ export default function ClassroomPage() {
                   </span>
                   <div className="min-w-0 rounded-[18px] bg-ai-soft px-5 py-4 shadow-[0_1px_2px_rgba(15,23,42,0.05),0_14px_30px_-24px_rgba(15,23,42,0.45)]">
                     <p className="text-[14px] leading-[1.75] text-ink">
-                      这个课堂还没有人提问。挑一个知识点开始吧：
+                      {useTutor
+                        ? "这个课堂还没有人提问。挑一个知识点开始吧："
+                        : "这个课堂没有配主讲助教，随时可以 @出题助手 出题练手："}
                     </p>
                     <div className="mt-3 flex max-w-[520px] flex-wrap gap-2">
                       {QUICK_ASKS.map((q) => (
@@ -512,6 +535,22 @@ export default function ClassroomPage() {
             {/* sm 以上把输入行右移 42px（头像 32 + 间距 10），
                 让输入框左边界与气泡正文的左边界落在同一根竖线上。
                 之前两者差 42px，是整页最显眼的一处不齐。 */}
+            <div className="mx-auto mb-1.5 flex max-w-[820px] flex-wrap items-center gap-2 sm:pl-[42px]">
+              <button
+                type="button"
+                disabled={blocked}
+                onClick={insertQuizTemplate}
+                className="rounded-full border border-brand-line bg-brand-soft px-3 py-1 text-[12px] text-brand transition-colors hover:bg-panel disabled:opacity-50"
+              >
+                @ 出题助手
+              </button>
+              {/* 给一句能直接抄的句式，比「点名它出题」这种描述有用得多：
+                  大多数人第一次用不知道该写什么，写长了它又当成普通提问。 */}
+              <span className="text-[12px] text-hint">
+                照这个说：
+                <span className="text-sub">@出题助手 针对「TCP 三次握手」出一道题</span>
+              </span>
+            </div>
             <div className="mx-auto flex max-w-[820px] items-end gap-2.5 sm:pl-[42px]">
               <Textarea
                 ref={inputRef}
@@ -527,7 +566,7 @@ export default function ClassroomPage() {
                 placeholder={
                   blocked
                     ? "还没有进入课堂"
-                    : "问一个计算机八股问题…（Enter 发送，Shift+Enter 换行）"
+                    : "问一个计算机八股问题…（Enter 发送，Shift+Enter 换行，@出题助手 让它出题）"
                 }
                 disabled={blocked}
                 className="max-h-[160px] min-h-[68px]"

@@ -29,8 +29,10 @@ export interface Classroom {
   description: string | null;
   /** M1：true 表示两人私聊房间。 */
   is_private?: boolean;
-  /** M4：建房即定的协作场景（v1 / group / debate）。 */
+  /** M4：建房即定的协作场景（v1 / group）。 */
   scenario?: string | null;
+  /** 是否配备主讲助教。关掉后整轮问答交给出题助手（纯练习课堂）。 */
+  use_tutor?: boolean;
   created_at?: string | null;
 }
 

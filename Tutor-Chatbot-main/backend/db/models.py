@@ -66,12 +66,17 @@ class Classroom(Base):
     description: Mapped[str | None] = mapped_column(Text, nullable=True)
     # M1 聊天室：是否为「单人私聊」房间（2 人 DM）。普通群聊为 False。
     is_private: Mapped[bool] = mapped_column(Boolean, nullable=False, default=False)
-    # M4 多场景：这个房间跑哪种协作形态（v1 一对一 / group 小组讨论 /
-    # debate 辩论对抗）。建房间时定，/chat 可按要求体覆盖。
+    # M4 多场景：这个房间跑哪种协作形态（v1 一对一 / group 小组讨论）。
+    # 建房间时定，/chat 可按要求体覆盖。
     # 用缺省 'v1' 保证存量房间行为不变——没有它，老房间会突然变成多 Agent，
     # 单轮 LLM 调用次数翻倍，既烧额度又改变既有对话体验。
     scenario: Mapped[str] = mapped_column(
         String(16), nullable=False, default="v1", server_default="v1"
+    )
+    # 这个课堂配不配备主讲助教（2026-11-01）。
+    # 关掉后整轮问答交给出题助手，课堂变成纯练习形态；默认开，存量课堂行为不变。
+    use_tutor: Mapped[bool] = mapped_column(
+        Boolean, nullable=False, default=True, server_default="1"
     )
     created_at: Mapped[dt.datetime] = mapped_column(
         DateTime, nullable=False, server_default=func.now()

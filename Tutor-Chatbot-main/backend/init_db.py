@@ -113,6 +113,18 @@ def ensure_new_columns() -> None:
             conn.commit()
         print("classrooms 表补充列： is_private TINYINT(1) NOT NULL DEFAULT 0")
 
+    # 2026-11-01：classrooms 补 use_tutor（是否配备主讲助教）。
+    # 默认 1 让存量课堂保持「有主讲助教」的既有体验。
+    if "use_tutor" not in classroom_cols:
+        with engine.connect() as conn:
+            conn.execute(
+                text(
+                    "ALTER TABLE classrooms ADD COLUMN use_tutor TINYINT(1) NOT NULL DEFAULT 1"
+                )
+            )
+            conn.commit()
+        print("classrooms 表补充列： use_tutor TINYINT(1) NOT NULL DEFAULT 1")
+
     # M2 认知诊断：student_profiles 补能力向量 / 认知风格 / 施测时间。
     # cognitive_style 允许为 NULL（"样本不足"和"没风格"是两回事），
     # ability_vector 走 NOT NULL，因为它是纯累加结构，空字典就能表达未测。

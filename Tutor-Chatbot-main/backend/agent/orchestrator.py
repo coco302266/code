@@ -27,6 +27,7 @@ from langgraph.graph import END, StateGraph
 from agent.scenarios import (
     DEFAULT_SCENARIO,
     MAX_AGENTS_PER_TURN,
+    QUIZ_STEP,
     ROLE_LABELS,
     SCENARIOS,
     ScenarioSpec,
@@ -44,6 +45,10 @@ class AgentState(TypedDict):
     strategy: str
     misconception_note: str
     resolved: bool
+    # 2026-11-01：课堂是否配备主讲助教 / 本轮是否由学生点名出题助手。
+    # 用 total=False 的 TypedDict 语义上允许缺省，取值时统一 get(..., 默认值)。
+    use_tutor: bool
+    quiz_only: bool
     # 编排产物
     steps: list[dict]
     roles: list[str]
@@ -72,15 +77,19 @@ def plan_agents(
     explicit_role: str = "tutor",
     enabled: bool | None = None,
     max_agents: int = MAX_AGENTS_PER_TURN,
+    use_tutor: bool = True,
+    quiz_only: bool = False,
 ) -> dict:
     """产出本轮编排计划（纯函数，零 LLM、零 IO，可直接单测）。
 
-    scenario      课堂或请求指定的场景（v1 / group / debate；未知回落 v1）
+    scenario      课堂或请求指定的场景（v1 / group；未知回落 v1）
     explicit_role 客户端显式指定的角色，**只在单步场景（v1）下生效**。
                   多步场景由场景自己决定角色序列——否则「小组讨论」里
                   客户端传个 examiner 就把讨论变成考试了。
     enabled       总开关，None 表示读环境变量 AGENT_COLLAB
     max_agents    单轮 Agent 数量上限，超出即截断并标记降级
+    use_tutor     这个课堂是否配备主讲助教（建房时的开关）。关掉后整轮只由出题助手应答
+    quiz_only     学生 @ 了出题助手：本轮跳过常规编排，只让出题助手出题
 
     返回：{scenario, scenario_label, steps, roles, degraded, reason}
     """
@@ -91,6 +100,15 @@ def plan_agents(
     spec: ScenarioSpec = get_scenario(raw)
     degraded = False
     reason = ""
+
+    # 学生点名出题助手：直接短路，不走场景编排。
+    # 这不是降级（degraded 保持 False）——它是学生明确要求的路径，不该被记成异常。
+    if quiz_only:
+        return _quiz_plan(spec, reason="学生 @ 了出题助手")
+
+    # 课堂关掉了主讲助教：整段计划交给出题助手，否则学生提问会没人应答。
+    if not use_tutor:
+        return _quiz_plan(spec, reason="课堂未配备主讲助教，由出题助手应答")
 
     # 空串视为「没指定」，按 v1 处理，不算降级——否则每次不带场景的普通
     # 请求都会打一条「未知场景 ''」的日志，真正的降级信号会被噪声埋掉。
@@ -132,6 +150,31 @@ def plan_agents(
         roles = roles[:max_agents]
 
     return _plan(spec, roles, degraded=degraded, reason=reason)
+
+
+def _quiz_plan(spec: ScenarioSpec, *, reason: str) -> dict:
+    """只有出题助手一个发言位的计划。
+
+    走单独构造函数而不是复用 `_plan`：出题助手不在场景表的 steps 里，
+    硬塞进去会拿不到 handoff（`_plan` 按位置匹配角色，对不上就清空指令），
+    结果就是「出题助手」收到一份没有出题要求的空指令。
+    """
+    return {
+        "scenario": spec.key,
+        "scenario_label": spec.label,
+        "steps": [
+            {
+                "role": QUIZ_STEP.role,
+                "label": QUIZ_STEP.label,
+                "stance": QUIZ_STEP.stance,
+                "handoff": QUIZ_STEP.handoff,
+                "index": 0,
+            }
+        ],
+        "roles": [QUIZ_STEP.role],
+        "degraded": False,
+        "reason": reason,
+    }
 
 
 def _valid_role(role: str | None) -> str:
@@ -177,6 +220,8 @@ def _plan_agents_node(state: AgentState) -> dict:
     return plan_agents(
         state.get("scenario"),
         explicit_role=state.get("agent_role", "tutor"),
+        use_tutor=state.get("use_tutor", True),
+        quiz_only=state.get("quiz_only", False),
     )
 
 
@@ -197,4 +242,6 @@ def orchestrate(state: dict[str, Any]) -> dict:
     return plan_agents(
         state.get("scenario"),
         explicit_role=state.get("agent_role", "tutor"),
+        use_tutor=state.get("use_tutor", True),
+        quiz_only=state.get("quiz_only", False),
     )

@@ -119,6 +119,7 @@ export function createClassroom(
   subject = "cs",
   description?: string,
   scenario?: string,
+  useTutor = true,
 ): Promise<Classroom> {
   const body: Record<string, unknown> = {
     name,
@@ -126,6 +127,7 @@ export function createClassroom(
     description: description ?? null,
   };
   if (scenario) body.scenario = scenario;
+  body.use_tutor = useTutor;
 
   return request<Classroom>("/classrooms", {
     method: "POST",

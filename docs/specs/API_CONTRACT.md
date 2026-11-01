@@ -43,6 +43,26 @@
 | 只传 `classroom_id` | **不落库**（`SessionLocal` 为空时同样不落库），也不校验身份 |
 | 两个都不传 | 退化为纯内存对话，旧前端行为不变 |
 
+## 角色与 @ 出题助手（2026-11-01）
+
+角色一共四个，中文名由后端 `agent/scenarios.py` 的 `ROLE_LABELS` 统一下发，
+前端不再维护第二份映射：
+
+```
+角色键   中文名     何时发言
+tutor    主讲助教   课堂配备主讲助教时的常规问答
+teacher  主讲教师   教师身份发言（人类，不参与 AI 编排）
+peer     出题助手   学生消息里出现 @出题助手 / @出题 / @出题人 / @quiz；或课堂关掉了主讲助教
+examiner 考官       显式 agent_role 指定（评测与调试用）
+```
+
+两条规则值得单独记住：
+
+1. **出题助手不进默认编排**。场景表里 v1 与 group 都只有 tutor 一个发言位；
+   出题助手只在被 @ 点名时才被编进计划。这样每轮不会多一次 LLM 调用。
+2. **@ 的优先级高于课堂开关**。即使课堂设置了 `use_tutor=false`，
+   学生 @ 出题助手时仍然是出题；没 @ 时则由出题助手兜底应答（否则没人回答）。
+
 > ⚠️ 前端**必须在第一次 `/chat` 之前**先建好 user / classroom / membership，否则消息不会持久化，刷新页面聊天记录就没了。
 
 > **M4 修正：不带 `classroom_id` 也会记编排留痕**（`agent_runs.classroom_id` 为 `NULL`）。
@@ -77,9 +97,9 @@
 | 1 | POST | `/chat` | 学生提问，SSE 流式返回回答（M1：`agent_role` 指定角色；**M4：`scenario` 指定场景，一轮可多个 Agent 依次发言**） | 学生 |
 | 2 | GET | `/health` | 健康检查 | 双方 |
 | 3 | POST | `/users` | 创建用户（幂等） | 双方 |
-| 4 | POST | `/classrooms` | 创建课堂（M1：`is_private` / `members` / `teacher_members`；**M4：`scenario`**） | 教师 |
-| 5 | POST | `/classrooms/{id}/members` | 加入课堂 | 双方 |
-| 6 | GET | `/classrooms/{id}` | 课堂详情（M1：返回 `is_private`；**M4：返回 `scenario`**） | 双方 |
+| 4 | POST | `/classrooms` | 创建课堂（M1：`is_private` / `members` / `teacher_members`；M4：`scenario`；**2026-11-01：`use_tutor` 是否配备主讲助教，默认 true**） | 教师 |
+| 5 | POST | `/classrooms/{id}/members` | 加入课堂。**1v1 课堂有容量闸门：1 教师 + 1 学生，超员返回 409** | 双方 |
+| 6 | GET | `/classrooms/{id}` | 课堂详情（M1：返回 `is_private`；M4：返回 `scenario`；**2026-11-01：返回 `use_tutor`**） | 双方 |
 | 7 | GET | `/classrooms` | 列出某用户加入的课堂（"我的课堂"，**M4：返回 `scenario`**） | 双方 |
 | 7.1 | GET | `/scenarios` | **M4 新增** 列出可用协作场景（建房时的下拉选项） | 双方 |
 | 7.2 | GET | `/classrooms/{id}/runs` | **M4 新增** 编排留痕：每轮实际派了哪些角色 / 是否降级 / 耗时（排障 + 评估报告） | 调试 / 教师 |
@@ -139,7 +159,7 @@
 | `session_id` | string | ❌ | — | 只有上传过 PDF 才用得到 |
 | `provider` | string | ❌ | ollama/groq/gemini/openai，默认 `openai` | 前端**不要传**，保持默认 |
 | `agent_role` | string | ❌ | tutor/teacher/peer/examiner，默认 `tutor` | **M1**：AI 以哪个角色 Agent 发言（`tutor` 主讲助教 / `teacher` 主讲教师 / `peer` 学伴 / `examiner` 考官）。落库到 `messages.agent_role`。**只在 1v1 场景生效**——多步场景（group/debate）的角色序列由场景决定，该字段被忽略 |
-| `scenario` | string \| null | ❌ | v1/group/debate，默认 `null` | **M4**：本轮跑哪种协作形态。`null` = 跟随课堂自身的 `scenario`；显式传值则覆盖（调试 / 演示用）。非法值**不报 422**，后端回落到 `v1` |
+| `scenario` | string \| null | ❌ | v1/group，默认 `null` | **M4**：本轮跑哪种协作形态。`null` = 跟随课堂自身的 `scenario`；显式传值则覆盖（调试 / 演示用）。非法值**不报 422**，后端回落到 `v1`。2026-11-01：`debate` 已下线，传它按未知场景处理（回落 v1 并记 degraded） |
 
 > 请求模型开了 `extra="forbid"`，**多传一个未知字段会直接 422**。
 

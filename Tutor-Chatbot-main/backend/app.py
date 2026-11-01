@@ -61,7 +61,7 @@ from agent.evaluation import (
 from agent.knowledge_graph import graph_payload, recommend_next
 from agent.orchestrator import agent_graph
 from agent.roles import build_role_system
-from agent.scenarios import list_scenarios, normalize_scenario
+from agent.scenarios import list_scenarios, normalize_scenario, quiz_requested
 from agent.pretest import (
     build_pretest,
     merge_ability_evidence,
@@ -127,12 +127,14 @@ from db.repository import (
     create_classroom,
     create_user,
     find_classroom_document_by_hash,
+    count_members_by_role,
     get_classroom_document,
     is_member,
     list_classroom_documents,
     list_classrooms_for_user,
     list_messages,
     get_classroom_scenario,
+    get_classroom_use_tutor,
     get_messages_by_ids,
     list_agent_runs,
     load_history,
@@ -856,6 +858,8 @@ async def chat(request: Request, body: ChatRequest):
     # M4：本轮协作场景。请求体显式指定优先（调试 / 演示用），否则等下面
     # 读到课堂后取其 scenario；两者都没有，由编排层回落到 v1。
     effective_scenario = body.scenario
+    # 这个课堂配不配备主讲助教。只有读到课堂才更新，读不到就按「有」处理。
+    classroom_use_tutor = True
     # 课堂资料是「本课堂成员可见」的内容，所以**只有成员校验真的通过**才去查。
     # 不能只看 `classroom_id is not None`：下面那段读库是 fail-open 的
     # （读失败只打日志、对话继续），一旦 DB 抖动，仅凭 id 就去查课堂库
@@ -891,10 +895,11 @@ async def chat(request: Request, body: ChatRequest):
                     db_history = load_history(db, classroom_id)
                     if db_history:
                         history = deserialize_history(db_history)
-                    # 场景的默认值来自课堂本身：建房时选了「辩论」，
-                    # 之后每轮都按辩论走，不需要前端每轮回传。
+                    # 场景的默认值来自课堂本身：建房时选了「小组讨论」，
+                    # 之后每轮都按它走，不需要前端每轮回传。
                     if effective_scenario is None:
                         effective_scenario = get_classroom_scenario(db, classroom_id)
+                    classroom_use_tutor = get_classroom_use_tutor(db, classroom_id)
                     # 服务端是状态的唯一真相源：只要落了 classroom_id，
                     # 就不再信客户端回传的 topic / hint_level。
                     body.topic, body.hint_level = load_last_state(
@@ -1240,6 +1245,9 @@ async def chat(request: Request, body: ChatRequest):
             plan_state = await agent_graph.ainvoke({
                 "scenario": effective_scenario,
                 "agent_role": body.agent_role,
+                # 学生 @ 出题助手 → 本轮只出题；课堂关掉主讲助教 → 只由出题助手应答。
+                "quiz_only": quiz_requested(body.message),
+                "use_tutor": classroom_use_tutor,
                 "topic": assessment_state["topic"],
                 "hint_level": hint_level,
                 "strategy": strategy,
@@ -1510,10 +1518,13 @@ class CreateClassroomRequest(BaseModel):
     # 创建时一次性把参与者加为成员，省去私聊建房间后再逐个 add_member。
     members: List[int] | None = None
     teacher_members: List[int] | None = None
-    # M4 多场景：这个房间跑哪种协作形态（v1 / group / debate）。
+    # 这个房间跑哪种协作形态（v1 / group）。
     # 非法值不报 422，由 normalize_scenario 回落到 v1——建房时选错场景
     # 不该让整个请求失败，回落即可，且前端能从返回的 scenario 看出被改了。
     scenario: str = "v1"
+    # 是否配备主讲助教（2026-11-01）。关掉后整轮问答交给出题助手，
+    # 课堂变成纯练习形态；默认开，与存量课堂行为一致。
+    use_tutor: bool = True
 
 
 class AddMemberRequest(BaseModel):
@@ -1567,6 +1578,7 @@ def api_create_classroom(body: CreateClassroomRequest):
             members=body.members,
             teacher_members=body.teacher_members,
             scenario=normalize_scenario(body.scenario),
+            use_tutor=body.use_tutor,
         )
         result = {
             "id": room.id,
@@ -1575,6 +1587,7 @@ def api_create_classroom(body: CreateClassroomRequest):
             "description": room.description,
             "is_private": bool(room.is_private),
             "scenario": room.scenario,
+            "use_tutor": bool(room.use_tutor),
         }
     return result
 
@@ -1798,6 +1811,31 @@ def api_add_member(classroom_id: int, body: AddMemberRequest):
             raise HTTPException(
                 status_code=404, detail=f"User {body.user_id} not found."
             )
+
+        # 1v1 课堂的人数闸门（2026-11-01）：除 AI 的主讲/出题助手外，
+        # 只能有 1 位教师 + 1 位学生。AI 不落 classroom_members，所以直接数成员即可。
+        # 已在本课堂的人再次加入要放行（add_member 本身幂等），否则刷新页面就会 409。
+        room = db.get(Classroom, classroom_id)
+        already = any(
+            m.user_id == body.user_id
+            for m in db.execute(
+                select(ClassroomMember).where(
+                    ClassroomMember.classroom_id == classroom_id
+                )
+            ).scalars()
+        )
+        if room is not None and room.scenario == "v1" and not already:
+            counts = count_members_by_role(db, classroom_id)
+            if counts.get(body.role, 0) >= 1:
+                who = "教师" if body.role == "teacher" else "学生"
+                raise HTTPException(
+                    status_code=409,
+                    detail=(
+                        f"这是 1v1 课堂，只能有 1 位教师和 1 位学生。"
+                        f"当前已经有{who}了，请换一个课堂号，"
+                        f"或让教师把它建成小组讨论。"
+                    ),
+                )
         member = add_member(db, classroom_id, body.user_id, body.role)
         result = {
             "id": member.id,
@@ -1923,6 +1961,7 @@ def api_get_classroom(classroom_id: int):
             "is_private": bool(room.is_private),
             # M4：房间跑哪种协作形态，前端据此决定要不要按角色分气泡渲染。
             "scenario": room.scenario,
+            "use_tutor": bool(room.use_tutor),
         }
     return result
 

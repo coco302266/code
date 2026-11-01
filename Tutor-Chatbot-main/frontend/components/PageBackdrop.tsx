@@ -22,8 +22,7 @@ export type BackdropVariant =
   | "classrooms"
   | "teacher"
   | "v1"
-  | "group"
-  | "debate";
+  | "group";
 
 const IMAGES: Record<
   BackdropVariant,
@@ -38,7 +37,8 @@ const IMAGES: Record<
     src: "/bg/classrooms.jpg",
     scrim: "from-canvas/78 via-canvas/62 to-canvas/84",
   },
-  // 三个课堂场景各一张：聊天页按当前课堂的 scenario 选图（见 app/classroom/page.tsx）。
+  // 两个课堂场景各一张：聊天页按当前课堂的 scenario 选图（见 app/classroom/page.tsx）。
+  // 辩论场景已于 2026-11-01 下线，对应图片 scene-debate.jpg 一并删除。
   // 统一 14px 模糊 —— 气泡是主体，图只负责说明「这是哪种课堂」。
   v1: {
     src: "/bg/scene-v1.jpg",
@@ -49,13 +49,6 @@ const IMAGES: Record<
     src: "/bg/scene-group.jpg",
     scrim: "from-canvas/54 via-canvas/46 to-canvas/62",
     blur: 7,
-  },
-  debate: {
-    // 观众席侧影：整幅都是主体，裁切不丢信息，语义上就是「台上在辩」
-    src: "/bg/scene-debate.jpg",
-    scrim: "from-canvas/52 via-canvas/44 to-canvas/60",
-    blur: 7,
-    position: "50% 45%",
   },
   teacher: {
     src: "/bg/teacher.jpg",

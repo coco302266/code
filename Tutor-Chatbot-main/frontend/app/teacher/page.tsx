@@ -65,16 +65,14 @@ const AUDIENCE = [
 /**
  * 建房时**开放**给教师的场景。
  *
- * 三个场景全部开放（2026-10-24 拍板）。原本 `debate` 一轮 3 个 Agent、
- * 实测约 14 秒，担心演示时等太久所以挂着，但作业明确要求
- * 「1v1 / 小组讨论 / 辩论对抗」三种形态，少一个就没法验收，
- * 于是放出来 —— 慢是可感知的等待，缺项是验收不通过。
+ * 2026-11-01 起只剩两种：1v1 辅导、小组讨论。
+ * `debate`（辩论对抗）按需求整体下线：场景表、背景图、选择项一并删除，
+ * 存量课堂的 scenario 已由数据迁移归一为 v1。
  *
- * 代价已经在前置处理：SSE 的 `agent` 事件带 `index` / `total`，
- * 前端能显示「第 2/3 位发言中」，把等待从「卡住了」变成「看得见的进度」。
- * 后续若觉得慢，正确的做法是后端并行/裁剪，而不是把场景藏起来。
+ * 出题助手不在这里选：它在任何场景下都存在，学生用 @ 点名才会发言，
+ * 不需要在场景下拉里占一个位置。
  */
-const OPEN_SCENARIOS = ["v1", "group", "debate"];
+const OPEN_SCENARIOS = ["v1", "group"];
 
 /** 场景拉不到时的兜底，保证建房流程不会因为一个下拉框失败而卡住。 */
 const FALLBACK_SCENARIOS: ScenarioItem[] = [
@@ -102,6 +100,9 @@ export default function TeacherPage() {
   const [newName, setNewName] = useState("计算机八股冲刺班");
   const [scenarios, setScenarios] = useState<ScenarioItem[]>([]);
   const [scenario, setScenario] = useState("v1");
+  // 是否配备主讲助教（2026-11-01）。默认开，与存量课堂一致。
+  // 关掉后这个课堂只剩出题助手，适合纯刷题自习。
+  const [useTutor, setUseTutor] = useState(true);
   const [joinId, setJoinId] = useState("");
   const [busy, setBusy] = useState(false);
   const [roomError, setRoomError] = useState("");
@@ -325,7 +326,7 @@ export default function TeacherPage() {
     setBusy(true);
     setRoomError("");
     try {
-      const room = await createClassroom(name, "cs", undefined, scenario);
+      const room = await createClassroom(name, "cs", undefined, scenario, useTutor);
       // 关键：创建课堂不会自动加成员，必须显式以 teacher 身份加入
       await addMember(room.id, identity.userId, "teacher");
       await persistIdentity(
@@ -517,6 +518,34 @@ export default function TeacherPage() {
                       </option>
                     ))}
                   </Select>
+                </Field>
+                <Field
+                  label="主讲助教"
+                  hint={
+                    useTutor
+                      ? "学生提问由主讲助教讲解；出题助手随时可用 @ 点名"
+                      : "这个课堂不配讲解老师，全部回答由出题助手给出（纯刷题）"
+                  }
+                >
+                  <div className="flex gap-1.5 rounded-lg border border-line bg-soft p-1">
+                    {[
+                      { value: true, label: "配备主讲助教" },
+                      { value: false, label: "只留出题助手" },
+                    ].map((opt) => (
+                      <button
+                        key={String(opt.value)}
+                        type="button"
+                        onClick={() => setUseTutor(opt.value)}
+                        className={`flex-1 rounded-md px-3 py-2 text-[13px] transition-colors ${
+                          useTutor === opt.value
+                            ? "bg-panel text-ink shadow-[0_1px_2px_rgba(15,23,42,0.08)]"
+                            : "text-sub hover:text-ink"
+                        }`}
+                      >
+                        {opt.label}
+                      </button>
+                    ))}
+                  </div>
                 </Field>
                 <Btn
                   variant="primary"

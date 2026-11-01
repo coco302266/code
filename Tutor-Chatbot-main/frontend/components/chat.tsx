@@ -66,8 +66,9 @@ const AGENT_STYLE: Record<
     avatar: "bg-brand-soft text-brand ring-brand-line",
     skin: "bg-brand-soft text-ink",
     accent: "bg-brand",
-    mark: "伴",
-    label: "学伴",
+    // 角标从「伴」改成「题」：出题助手的职责是出题，一眼要能认出来。
+    mark: "题",
+    label: "出题助手",
   },
   examiner: {
     avatar: "bg-soft text-sub ring-line",

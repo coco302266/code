@@ -57,7 +57,7 @@ class ChatRequest(BaseModel):
     # M1 聊天室：AI 以哪个角色 Agent 回应（tutor 主讲助教 / teacher 教师 /
     # peer 学伴 / examiner 考官）。默认 tutor，向后兼容旧前端。
     agent_role: Literal["tutor", "teacher", "peer", "examiner"] = "tutor"
-    # M4 多场景：本轮跑哪种协作形态（v1 / group / debate）。
+    # M4 多场景：本轮跑哪种协作形态（v1 / group）。
     # None = 跟随课堂自身的 scenario；显式传值则覆盖（便于调试与演示）。
     # 故意用 str 而不是 Literal：非法值由编排层回落到 v1，不该让请求 422
     # ——模型/客户端输入一律宽容解析（Bug M6 同源取舍）。
