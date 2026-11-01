@@ -53,11 +53,18 @@ async function request<T>(path: string, init?: RequestInit): Promise<T> {
   try {
     res = await fetch(`${base}${path}`, {
       ...init,
+      // 必须带超时：防火墙「静默丢弃」时 fetch 会一直挂着（浏览器默认几十秒甚至更久），
+      // 界面就永远停在「正在检查后端…」，看不出是连不上还是慢。
+      signal: init?.signal ?? AbortSignal.timeout(15000),
       headers: { "Content-Type": "application/json", ...(init?.headers ?? {}) },
     });
-  } catch {
+  } catch (err) {
+    const timeout =
+      err instanceof Error && (err.name === "TimeoutError" || err.name === "AbortError");
     throw new ApiError(
-      `连不上后端（${base}）。请确认后端已启动：uvicorn app:app --port 8000`,
+      timeout
+        ? `连不上后端（${base}）：请求超时。常见原因是防火墙没放行 8000，或后端没绑 0.0.0.0。`
+        : `连不上后端（${base}）。请确认后端已启动：uvicorn app:app --port 8000`,
     );
   }
 
@@ -86,7 +93,8 @@ export function resourceUrl(downloadUrl: string): string {
 // --- 健康检查 ------------------------------------------------------------
 
 export function getHealth(): Promise<Health> {
-  return request<Health>("/health");
+  // 5s 就够：这个接口只回一行 JSON。超时短一点，连不上时能立刻提示而不是干等。
+  return request<Health>("/health", { signal: AbortSignal.timeout(5000) });
 }
 
 // --- 用户 / 课堂 / 成员 ---------------------------------------------------

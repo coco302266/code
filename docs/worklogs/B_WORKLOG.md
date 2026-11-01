@@ -3677,3 +3677,35 @@ InnoDB vs MyISAM  残留标签 0  分点作答
   两处配置（后端 `ALLOWED_ORIGINS`、前端 `NEXT_PUBLIC_BACKEND_URL`）同步更新后重新验证通过：
   `http://10.141.46.147:8000/health` 返回 database up、前端 200、CORS 头存在。
   这条已升格成手册 5.8 节「局域网 IP 会变」，并给出固定 IP 绑定与「改完必须重启两端」的提醒。
+
+
+---
+
+## XB-68　局域网访问停在「正在检查后端…」：dev 拦跨源资源 + 防火墙漏 8000
+
+- **日期**：2026-11-01
+- **现象**：朋友的机器连同一网络，用 `http://10.141.46.147:3000` 打开页面，
+  样式正常但一直显示「正在检查后端…」，进不了课堂。
+- **定位过程与结论（两个独立问题，都会造成「连不上后端」的观感）**：
+  1. **根因是 Next dev 的跨源限制**。dev 日志里有
+     `Blocked cross-origin request to Next.js dev resource /_next/webpack-hmr from "10.141.46.147"`。
+     非 localhost 来源拿不到 `/_next` 开发资源 → 客户端脚本不执行 → 页面是没有交互的静态壳，
+     健康检查根本没发出去。实测证据：同一个页面在 `localhost:3000` 下
+     按钮有 React fiber（2 个键）、点击能切换文案；在 `10.141.46.147:3000` 下 fiber 为 0、点击无反应。
+  2. **防火墙规则挂错了程序**。入站规则里 python.exe 的放行绑定的是
+     `AppData\Local\Programs\Python\Python312\python.exe`，而后端跑的是
+     `backend/venv/Scripts/python.exe`，不在放行范围；Windows 对未放行的入站是静默丢弃，
+     浏览器表现就是一直等（不是立刻报错）。
+- **改了什么**：
+  1. `next.config.ts` 读 `ALLOWED_DEV_ORIGINS`（逗号分隔）填进 `allowedDevOrigins`，不写死 IP；
+     `frontend/.env.local` 加 `ALLOWED_DEV_ORIGINS=10.141.46.147`，
+     `frontend/.env.local.example` 补说明。
+  2. 新增两条入站规则：`AI-Classroom backend 8000`、`AI-Classroom frontend 3000`（Profile=Any）。
+  3. 顺手给 `lib/api.ts` 的 `request()` 加超时（默认 15s，`/health` 用 5s），
+     超时报错文案点明「防火墙没放行 8000，或后端没绑 0.0.0.0」——
+     原来没有超时，防火墙丢弃时会一直转圈，看不出原因。
+- **验证**：修复后同一局域网来源下 fiber 键 2 个（已水合）、后端状态显示「后端正常」、
+  副标题 `模型 deepseek-flash · 数据库 up`；聊天页渲染出 7 条消息。
+  防火墙规则用 `Get-NetFirewallRule` 确认已启用。
+- **教训**：`localhost:3000` 正常 ≠ 换 IP 也正常。dev 与 build 行为不同，
+  联调前必须在「对方的地址」上点一次按钮验证交互，而不是只看页面能不能打开。

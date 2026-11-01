@@ -1274,6 +1274,44 @@ FLUSH PRIVILEGES;
 第 4 步单独说一句：入口页的「后端地址」一旦手填过，会以 localStorage 优先于环境变量，
 之后改 `.env.local` 对这浏览器不再生效。清掉那条记录（或点面板恢复默认）才会重新读环境变量。
 
+### 5.7.1 用 IP 打开时按钮全没反应：dev 服务器拦了跨源资源
+
+这是三机拓扑里最容易被误判成「后端挂了」的问题。现象是：朋友那台机器能用
+`http://<你的IP>:3000` 打开页面，样式也对，但点任何按钮都没反应，
+右上角一直停在「正在检查后端…」。你在本机用 `localhost:3000` 打开却一切正常。
+
+原因不在后端，在 Next 16 的 dev 服务器：它默认只信任 localhost，
+其他来源请求 `/_next` 下的开发资源会被判成跨源直接拦掉。后端日志（实际是前端 dev 日志）里会写：
+
+```
+⚠ Blocked cross-origin request to Next.js dev resource /_next/webpack-hmr from "10.141.46.147".
+To allow this host in development, add it to "allowedDevOrigins" in next.config.js and restart the dev server
+```
+
+脚本跑不起来，页面就是一张没有交互的静态图，健康检查自然也不会发出去，
+所以永远停在「正在检查后端…」——它根本没检查过。
+
+本项目已经把这项做成配置，不用改代码，在 `frontend/.env.local` 里加一行、重启 dev 即可：
+
+```
+ALLOWED_DEV_ORIGINS=192.168.1.10          # 前端机自己的 IP，多个用逗号分隔
+```
+
+对应 `next.config.ts` 里读这个变量填进 `allowedDevOrigins`。
+只在 dev 模式生效，`next build` 的静态产物不受影响。
+
+判断方法：在出问题的那台机器上按 F12，控制台如果出现
+`Blocked cross-origin request to Next.js dev resource`，就是这一条。
+
+顺便说明它和防火墙的区别，两者症状很像但位置不同：
+
+```
+现象                      原因                      解决
+页面能开、按钮无反应      dev 拦住 /_next 资源      ALLOWED_DEV_ORIGINS 加 IP
+页面能开、一直转圈        防火墙丢弃 8000 端口      放行 8000 入站
+页面能开、立刻报后端未启动  前端后端地址指错/CORS 拦  改地址或加 ALLOWED_ORIGINS
+```
+
 ### 5.8 局域网 IP 会变，这是三机拓扑最隐蔽的坑
 
 家里的路由器是 DHCP，换 Wi-Fi、重启路由器、休眠唤醒都可能换 IP。本机就实际遇到过：
