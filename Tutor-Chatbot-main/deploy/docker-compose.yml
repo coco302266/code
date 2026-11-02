@@ -6,6 +6,13 @@ name: ai-classroom
 #
 # 图形： web(nginx:80) ──/api──▶ backend(uvicorn:8000) ──▶ mysql:3306
 #        web 同时托管前端静态产物 out/
+#
+# 局域网拓扑（一台做服务器，其余电脑只跑前端连同一后端）：
+#   服务器：docker compose 起全部服务，backend 留在内网、只由 web(nginx:8080) 对外。
+#   客户端：各机 `npm run dev`，把 NEXT_PUBLIC_BACKEND_URL 指到
+#           http://<服务器IP>:8080/api   （统一走 nginx，后端不裸奔）
+#   跨域：后端自动放行私网来源（见 ALLOWED_ORIGINS / app.py 私网正则），
+#         客户端无需改 IP、服务器也无需逐个登记。
 
 services:
   mysql:
@@ -49,6 +56,9 @@ services:
       CLASSROOM_CHROMA_DIR: /app/chroma_classrooms
       CLASSROOM_DOCS_DIR: /app/classroom_docs
       FASTEMBED_CACHE_PATH: /app/.model_cache
+      # CORS：显式放行本机前端与 nginx；局域网内其他电脑的前端来源由后端
+      # 内置的私网正则自动放行（见 backend/app.py），无需逐个填客户端 IP。
+      ALLOWED_ORIGINS: '["http://localhost:3000","http://localhost:8080","http://127.0.0.1:3000"]'
     volumes:
       # 模型缓存：5.8G，不进镜像（离线可用）。
       # 必须 rw：fastembed 要在缓存目录内建 .locks 做文件锁，只读会直接报错。

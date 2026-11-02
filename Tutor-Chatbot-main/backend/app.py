@@ -5,6 +5,7 @@ import ipaddress
 import json
 import logging
 import os
+import re
 import secrets
 import datetime as dt
 from functools import lru_cache
@@ -301,13 +302,27 @@ sessions: dict[str, DocumentSession] = {}
 app.state.limiter = limiter
 app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
 
+# 显式白名单（来自 ALLOWED_ORIGINS，覆盖 localhost / 公网域名等固定来源）。
+# 另用 allow_origin_regex 兜底放行「私网 / 局域网」来源：同一局域网内其他电脑
+# 跑前端连本机后端时，其来源 IP 千变万化，用正则免维护、且允许带凭据。
 allowed_origins = json.loads(
     os.getenv("ALLOWED_ORIGINS", '["http://localhost:3000"]')
+)
+
+# 局域网点对点：本机回环 + 10.x / 172.16-31.x / 192.168.x.x，任意端口。
+_PRIVATE_ORIGIN_RE = re.compile(
+    r"^https?://("
+    r"localhost|127\.0\.0\.1|"
+    r"192\.168\.\d{1,3}\.\d{1,3}|"
+    r"10\.\d{1,3}\.\d{1,3}\.\d{1,3}|"
+    r"172\.(1[6-9]|2\d|3[01])\.\d{1,3}\.\d{1,3}"
+    r")(:\d+)?$"
 )
 
 app.add_middleware(
     CORSMiddleware,
     allow_origins=allowed_origins,
+    allow_origin_regex=_PRIVATE_ORIGIN_RE.pattern,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
