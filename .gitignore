@@ -55,3 +55,6 @@ _docs_archive_*/
 
 # venv 重建备份（不入库）
 venv_broken_bak_*/
+
+# 数据库迁移用的数据快照（含真实用户名/聊天正文，属运行时数据，只留本地，不进仓库）
+Tutor-Chatbot-main/deploy/migrate_*.sql
