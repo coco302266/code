@@ -161,6 +161,43 @@ def ensure_new_columns() -> None:
             conn.commit()
         print("classrooms 表补充列： scenario VARCHAR(16) NOT NULL DEFAULT 'v1'")
 
+    # 2026-11-02：users 补 password_hash（注册登录）。
+    # 允许 NULL 是给存量账号留的迁移口子：口令上线前的账号没有密码，
+    # 首次登录时绑定（见 app.py /auth/login），不用逼所有人重建账号。
+    user_cols = {c["name"] for c in insp.get_columns("users")}
+    if "password_hash" not in user_cols:
+        with engine.connect() as conn:
+            conn.execute(
+                text("ALTER TABLE users ADD COLUMN password_hash VARCHAR(255) NULL")
+            )
+            conn.commit()
+        print("users 表补充列： password_hash VARCHAR(255) NULL")
+
+    # 2026-11-02：classrooms 补 target_student_id（1v1 指定学生）。
+    # NULL = 未指定，回到「谁先进谁占位」的老行为，所以存量课堂不受影响。
+    # 不建外键也能跑，但建了才能在学生账号被删时自动置空（SET NULL），
+    # 否则会留下一个指向不存在用户的教学房间。
+    if "target_student_id" not in classroom_cols:
+        with engine.connect() as conn:
+            conn.execute(
+                text("ALTER TABLE classrooms ADD COLUMN target_student_id INT NULL")
+            )
+            try:
+                conn.execute(
+                    text(
+                        "ALTER TABLE classrooms "
+                        "ADD CONSTRAINT fk_classrooms_target_student "
+                        "FOREIGN KEY (target_student_id) REFERENCES users(id) "
+                        "ON DELETE SET NULL"
+                    )
+                )
+            except Exception as exc:  # pragma: no cover - 约束可能已存在
+                # 名字冲突 / 引擎不支持时不该让整个 init 失败：列已经加上了，
+                # 没有外键只是少了级联保护，功能照常。
+                print(f"（跳过 target_student_id 外键：{exc}）")
+            conn.commit()
+        print("classrooms 表补充列： target_student_id INT NULL")
+
     # M4-C 评估报告：agent_runs 补 rag_hits（本轮检索命中条数）。
     # 必须先判表是否存在——这行迁移跑在 startup 钩子里，而 agent_runs 是
     # M4 才新增的表；对还没有这张表的存量库直接 get_columns 会抛

@@ -38,7 +38,14 @@ def _owned_by(user_id: int | None):
     return or_(Message.user_id == user_id, Message.user_id.is_(None))
 
 
-def create_user(db, username: str, role: str = "student") -> User | None:
+def create_user(
+    db, username: str, role: str = "student", password_hash: str | None = None
+) -> User | None:
+    """建用户（幂等：同名直接返回已有记录）。
+
+    ``password_hash`` 由调用方先算好再传进来——repository 不碰明文口令，
+    也不 import auth，避免「数据层替业务决定哈希算法」。
+    """
     if db is None:
         return None
     existing = db.execute(
@@ -46,10 +53,52 @@ def create_user(db, username: str, role: str = "student") -> User | None:
     ).scalar_one_or_none()
     if existing is not None:
         return existing
-    user = User(username=username, role=role)
+    user = User(username=username, role=role, password_hash=password_hash)
     db.add(user)
     db.flush()
     return user
+
+
+def get_user_by_username(db, username: str) -> User | None:
+    if db is None or not username:
+        return None
+    return db.execute(
+        select(User).where(User.username == username)
+    ).scalar_one_or_none()
+
+
+def list_users(db, role: str | None = None, limit: int = 200) -> list[User]:
+    """按角色列用户（教师建房时挑「指定学生」的数据源）。
+
+    limit 兜底是为了防止库大了以后一次拉全表——课堂场景里几十个学生
+    已经够用，真要全校规模应该上分页与搜索。
+    """
+    if db is None:
+        return []
+    stmt = select(User).order_by(User.id)
+    if role:
+        stmt = stmt.where(User.role == role)
+    return list(db.execute(stmt.limit(max(1, min(limit, 500)))).scalars().all())
+
+
+def set_password_hash(db, user: User, password_hash: str) -> User | None:
+    if db is None or user is None:
+        return None
+    user.password_hash = password_hash
+    db.flush()
+    return user
+
+
+def set_use_tutor(db, classroom_id: int, enabled: bool) -> bool | None:
+    """课堂「主讲助教」随开随关。返回最新状态；课堂不存在返回 None。"""
+    if db is None:
+        return None
+    room = db.get(Classroom, classroom_id)
+    if room is None:
+        return None
+    room.use_tutor = bool(enabled)
+    db.flush()
+    return bool(room.use_tutor)
 
 
 def create_classroom(
@@ -62,6 +111,7 @@ def create_classroom(
     teacher_members: list[int] | None = None,
     scenario: str = "v1",
     use_tutor: bool = True,
+    target_student_id: int | None = None,
 ) -> Classroom | None:
     """创建课堂。
 
@@ -73,6 +123,10 @@ def create_classroom(
     M4 再加 scenario：建房时就定好这个房间跑哪种协作形态。
     归一化交给 `agent.scenarios.normalize_scenario`——这里只做透传，
     repository 不该替业务决定「非法值怎么办」。
+
+    2026-11-02 加 target_student_id：1v1 课堂由教师指定学生。指定了就
+    顺手把该学生加为成员——教师建完房，学生端「我的课堂」立刻能看到，
+    不必等他先猜课堂号再手动加入。
     """
     if db is None:
         return None
@@ -83,6 +137,7 @@ def create_classroom(
         is_private=is_private,
         scenario=scenario,
         use_tutor=use_tutor,
+        target_student_id=target_student_id,
     )
     db.add(room)
     db.flush()
@@ -90,6 +145,8 @@ def create_classroom(
         add_member(db, room.id, uid, "student")
     for uid in teacher_members or []:
         add_member(db, room.id, uid, "teacher")
+    if target_student_id is not None:
+        add_member(db, room.id, target_student_id, "student")
     return room
 
 
@@ -171,7 +228,8 @@ def get_classroom_use_tutor(db, classroom_id: int) -> bool:
     """这个课堂是否配备主讲助教。查不到按「有」处理。
 
     默认 True 与模型层一致：宁可多一个讲解，也不要因为一次查询失败让学生
-    对着空回答——出题助手只会出题，不会讲解。
+    在没配助教的课堂里等到一条「本轮无 AI 发言」的提示。反过来说，关掉
+    助教后普通提问本来就不该有人代答（2026-11-02 修正）。
     """
     if db is None or classroom_id is None:
         return True
@@ -432,6 +490,8 @@ def list_classrooms_for_user(db, user_id: int) -> List[dict]:
             "role": role,
             "is_private": bool(room.is_private),
             "scenario": room.scenario,
+            # 1v1 指定学生：学生端「我的课堂」可以据此标出「这是给你开的教室」。
+            "target_student_id": room.target_student_id,
             "created_at": room.created_at.isoformat() if room.created_at else None,
         }
         for room, role in rows

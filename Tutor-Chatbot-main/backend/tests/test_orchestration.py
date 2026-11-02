@@ -177,14 +177,27 @@ class PlanAgentsTests(unittest.TestCase):
 
     def test_quiz_only_wins_over_use_tutor(self):
         """@ 的优先级高于课堂开关：即使关掉主讲助教，@ 一次仍然是出题。"""
-        plan = plan_agents("group", quiz_only=True, use_tutor=True)
+        plan = plan_agents("group", quiz_only=True, use_tutor=False)
         self.assertEqual(plan["roles"], ["peer"])
 
-    def test_no_tutor_classroom_uses_quiz_agent(self):
-        """课堂没配主讲助教时，普通提问也要有人接——由出题助手兜底。"""
-        plan = plan_agents("v1", use_tutor=False)
-        self.assertEqual(plan["roles"], ["peer"])
+    def test_no_tutor_classroom_is_silent(self):
+        """关掉主讲助教后，普通提问不该被出题助手代答——本轮没有 AI 发言。
+
+        2026-11-02 回归：此前这里返回 peer，于是在「小组讨论」里关掉助教后
+        发一句「花生在吗」，收到的是三道题。出题助手是「@ 才说话」的角色，
+        助教不在了不代表它要自动接手。
+        """
+        plan = plan_agents("group", use_tutor=False)
+        self.assertEqual(plan["steps"], [])
+        self.assertEqual(plan["roles"], [])
+        # 课堂设置决定的正常形态，不是异常兜底——记成降级会污染评估口径。
         self.assertFalse(plan["degraded"])
+
+    def test_quiz_mention_still_works_without_tutor(self):
+        """关掉助教后 @出题助手 仍然有效：那是学生主动点名，不是自动代答。"""
+        plan = plan_agents("group", quiz_only=True, use_tutor=False)
+        self.assertEqual(plan["roles"], ["peer"])
+        self.assertEqual(plan["steps"][0]["label"], "出题助手")
 
     def test_tutor_enabled_keeps_normal_plan(self):
         plan = plan_agents("v1", use_tutor=True)

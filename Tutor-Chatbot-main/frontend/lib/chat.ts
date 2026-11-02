@@ -12,6 +12,10 @@
  *      只发 token + [DONE]。收不到就保持上一轮状态，不要清空、也不要当异常。
  *   5. 回答过程中的错误走事件体的 `type=error`，HTTP 状态码这时已经是 200。
  *      不在循环里处理，模型挂掉时界面会一直转圈。
+ *   6. `notice`（M4，2026-11-02）表示「本轮没有 AI 发言」，**不是错误**：
+ *      课堂关掉主讲助教、学生又没 @ 出题助手时，流里只有
+ *      sources → notice → [DONE]。前端要把这句话显示出来，否则学生只会
+ *      看到「消息发出去没反应」。
  */
 
 import { getBackendUrl } from "./identity";
@@ -33,6 +37,12 @@ export interface AgentEvent {
 export interface StreamHandlers {
   onSources?: (items: SourceItem[]) => void;
   onAgent?: (agent: AgentEvent) => void;
+  /**
+   * 系统提示（M4，2026-11-02）：本轮没有 AI 发言时后端会发一条 notice。
+   * 典型场景是课堂关掉了主讲助教、学生也没有 @ 出题助手 —— 这时不会有
+   * token，前端必须靠这条事件把「为什么没人回」讲清楚。
+   */
+  onNotice?: (text: string) => void;
   onToken: (token: string) => void;
   onState: (state: StreamState) => void;
   onError: (message: string) => void;
@@ -162,6 +172,10 @@ export async function streamChat(
             index: Number(event.index ?? 0),
             total: Number(event.total ?? 1),
           });
+        } else if (event.type === "notice") {
+          // 本轮没有 AI 发言（关掉主讲助教且没 @ 出题助手）时的系统提示。
+          // 它不落库、不是回答，所以走独立回调，绝不拼进气泡正文。
+          handlers.onNotice?.(String(event.content ?? ""));
         } else if (event.type === "token") {
           handlers.onToken(String(event.content ?? ""));
         } else if (event.type === "state") {

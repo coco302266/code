@@ -20,6 +20,8 @@ export interface User {
   id: number;
   username: string;
   role: UserRole;
+  /** 注册时间（后端 server_default now()），注册成功页用来确认账号已落库。 */
+  created_at?: string | null;
 }
 
 export interface Classroom {
@@ -33,6 +35,12 @@ export interface Classroom {
   scenario?: string | null;
   /** 是否配备主讲助教。关掉后整轮问答交给出题助手（纯练习课堂）。 */
   use_tutor?: boolean;
+  /**
+   * 1v1 指定学生（2026-11-02）。非空时只有这位学生能进这个教室。
+   * null / undefined = 未指定，回到「谁先进谁占位」。
+   */
+  target_student_id?: number | null;
+  target_student_username?: string | null;
   created_at?: string | null;
 }
 

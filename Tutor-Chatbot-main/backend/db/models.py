@@ -42,6 +42,11 @@ class User(Base):
     id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
     username: Mapped[str] = mapped_column(String(64), unique=True, nullable=False)
     role: Mapped[str] = mapped_column(String(16), nullable=False, default="student")
+    # 注册口令的哈希（2026-11-02）。格式见 auth.py：pbkdf2_sha256$轮数$盐$摘要。
+    # 允许 NULL 是为存量账号留的迁移口子——口令功能上线前建的账号没有密码，
+    # 首次登录时绑定（/auth/login），不必逼所有人重新注册、丢历史数据。
+    # 只存哈希，任何接口都不回传这一列。
+    password_hash: Mapped[str | None] = mapped_column(String(255), nullable=True)
     created_at: Mapped[dt.datetime] = mapped_column(
         DateTime, nullable=False, server_default=func.now()
     )
@@ -74,9 +79,19 @@ class Classroom(Base):
         String(16), nullable=False, default="v1", server_default="v1"
     )
     # 这个课堂配不配备主讲助教（2026-11-01）。
-    # 关掉后整轮问答交给出题助手，课堂变成纯练习形态；默认开，存量课堂行为不变。
+    # 关掉后助教不发言：普通提问本轮无人应答，只有学生 @出题助手 才出题
+    # （2026-11-02 修正，早先是「全部交给出题助手代答」，等于把提问变成出题）。
+    # 默认开，存量课堂行为不变。
     use_tutor: Mapped[bool] = mapped_column(
         Boolean, nullable=False, default=True, server_default="1"
+    )
+    # 1v1 课堂指定的学生（2026-11-02）。
+    # NULL = 未指定，回到「谁先进谁占位」的老行为；非空时只有这位学生能进，
+    # 别人一律被 409 挡在门外（见 app.py 的 api_add_member）。
+    # 只对 scenario='v1' 有意义；小组讨论课堂留空。
+    # ondelete="SET NULL"：学生账号被删不该把课堂一起删掉，只是退回未指定。
+    target_student_id: Mapped[int | None] = mapped_column(
+        ForeignKey("users.id", ondelete="SET NULL"), nullable=True
     )
     created_at: Mapped[dt.datetime] = mapped_column(
         DateTime, nullable=False, server_default=func.now()

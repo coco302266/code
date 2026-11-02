@@ -11,6 +11,12 @@ import { Tag } from "./ui";
 export interface IdentityChip {
   username: string;
   role: "student" | "teacher";
+  /**
+   * 账号 id（2026-11-02）。顶栏常驻显示 `#12` 这类编号：
+   * 老师指定 1v1 学生、学生自查「我是不是被指定的人」都要靠它，
+   * 藏在注册成功页里第二天就忘了。
+   */
+  userId?: number;
 }
 
 /**
@@ -123,6 +129,11 @@ export function Shell({
               <Tag tone={identity.role === "teacher" ? "teacher" : "brand"}>
                 {identity.username}
                 {identity.role === "teacher" ? " · 教师" : " · 学生"}
+                {identity.userId ? (
+                  <span className="ml-1 font-mono opacity-70">
+                    #{identity.userId}
+                  </span>
+                ) : null}
               </Tag>
             </span>
           )}

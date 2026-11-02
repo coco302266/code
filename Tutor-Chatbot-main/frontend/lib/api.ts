@@ -38,14 +38,26 @@ export class ApiError extends Error {
 /** 状态码 → 人话。后端 `detail` 是英文，直接展示给同学看很奇怪。 */
 const STATUS_TEXT: Record<number, string> = {
   400: "请求内容不合法",
+  401: "用户名或密码不正确",
   403: "没有权限：你可能不在这个课堂，或以错误的身份加入",
   404: "找不到对应数据（课堂、用户或画像可能还不存在）",
+  409: "操作被拒绝（名额已满或权限冲突）",
   413: "文件太大了（PDF 上限 10MB）",
   422: "请求参数不合法",
   429: "请求太频繁了，请等一分钟再试",
   502: "模型暂时不可用，请稍后重试",
   503: "后端未就绪：数据库或模型还没配好，请检查 backend/.env",
 };
+
+/**
+ * 这几类错误的后端 `detail` 就是给人看的中文（「这是指定学生的[1v1教室]，
+ * 你不能进入」「这个用户名已经被注册了」「密码至少 6 位」），比状态码
+ * 兜底文案精确得多，直接透出。
+ *
+ * 其余状态码仍用兜底文案：那些 detail 是英文（如 "Classroom 7 not found."），
+ * 原样展示给学生等于把后端日志扔到界面上。
+ */
+const DETAIL_FIRST_STATUS = new Set([400, 401, 409, 422]);
 
 async function request<T>(path: string, init?: RequestInit): Promise<T> {
   const base = getBackendUrl();
@@ -77,7 +89,9 @@ async function request<T>(path: string, init?: RequestInit): Promise<T> {
       // 非 JSON 响应体就走状态码兜底
     }
     const friendly = STATUS_TEXT[res.status] ?? `请求失败（HTTP ${res.status}）`;
-    throw new ApiError(friendly, res.status, detail);
+    const message =
+      detail && DETAIL_FIRST_STATUS.has(res.status) ? detail : friendly;
+    throw new ApiError(message, res.status, detail);
   }
 
   if (res.status === 204) return undefined as T;
@@ -99,38 +113,97 @@ export function getHealth(): Promise<Health> {
 
 // --- 用户 / 课堂 / 成员 ---------------------------------------------------
 
-/** 幂等：重名不会报错，直接返回已有那条。 */
-export function createUser(username: string, role: UserRole): Promise<User> {
+/**
+ * 注册（2026-11-02 起必须带密码）。
+ *
+ * 后端分配的 `id` 是账号的唯一凭证：老师开 1v1 教室时就是拿它指定学生，
+ * 所以调用方要把返回的 id 展示给用户，而不是丢掉只留昵称。
+ *
+ * 重名会抛 409（ApiError.status === 409）——不再是「同名复用」，
+ * 那是口令上线前的临时做法，留着等于谁都能接管别人的账号。
+ */
+export function register(
+  username: string,
+  password: string,
+  role: UserRole,
+): Promise<User> {
   return request<User>("/users", {
     method: "POST",
-    body: JSON.stringify({ username, role }),
+    body: JSON.stringify({ username, password, role }),
   });
 }
 
 /**
- * 建房即定场景（M4）。
+ * 登录：用户名 + 密码 → 账号信息。
  *
- * `scenario` 是可选的：不传后端落 `v1`，行为与 M1 完全一致。
- * 非法值也不报 422 —— 后端 `normalize_scenario` 一律回落 `v1`，
- * 所以这里不做前端校验（契约第 3.2 节）。
+ * `password_bound` 为 true 表示这是口令功能上线前的老账号，本次登录
+ * 顺手把密码绑定上了（后端行为），界面可以提示一句。
+ * 密码错误与用户不存在都返回 401、同一句文案（避免用户名枚举）。
  */
-export function createClassroom(
-  name: string,
-  subject = "cs",
-  description?: string,
-  scenario?: string,
-  useTutor = true,
-): Promise<Classroom> {
+export function login(
+  username: string,
+  password: string,
+): Promise<User & { password_bound?: boolean }> {
+  return request<User & { password_bound?: boolean }>("/auth/login", {
+    method: "POST",
+    body: JSON.stringify({ username, password }),
+  });
+}
+
+/** 用户列表：教师建房时挑「指定学生」用。只回 id / username / role。 */
+export function listUsers(role?: UserRole): Promise<{ count: number; items: User[] }> {
+  const query = role ? `?role=${role}` : "";
+  return request<{ count: number; items: User[] }>(`/users${query}`);
+}
+
+/**
+ * 建房（M4 场景 + 2026-11-02 的 1v1 指定学生）。
+ *
+ * `targetStudentId` 只对 `scenario="v1"` 有意义：给了就只有这位学生能进。
+ * `useTutor` 现在默认 true 且建房界面不再暴露——助教改为课堂内随开随关，
+ * 建课时必须默认配备，否则老师一进来面对的是「没有讲解老师」的空课堂。
+ */
+export function createClassroom(params: {
+  name: string;
+  subject?: string;
+  description?: string | null;
+  scenario?: string;
+  useTutor?: boolean;
+  targetStudentId?: number | null;
+}): Promise<Classroom> {
   const body: Record<string, unknown> = {
-    name,
-    subject,
-    description: description ?? null,
+    name: params.name,
+    subject: params.subject ?? "cs",
+    description: params.description ?? null,
+    use_tutor: params.useTutor ?? true,
   };
-  if (scenario) body.scenario = scenario;
-  body.use_tutor = useTutor;
+  if (params.scenario) body.scenario = params.scenario;
+  // 只在真的选了学生时带上：显式传 null 与不传同义，但少一个字段更干净。
+  if (params.targetStudentId != null) {
+    body.target_student_id = params.targetStudentId;
+  }
 
   return request<Classroom>("/classrooms", {
     method: "POST",
+    body: JSON.stringify(body),
+  });
+}
+
+/**
+ * 改课堂设置（当前只有主讲助教开关）。
+ *
+ * 必须带 `teacher_id`：后端没有登录态，靠它查成员表确认操作者确实是
+ * 这个课堂的教师；不带会是 422，带错人会是 403。
+ */
+export function updateClassroom(
+  classroomId: number,
+  teacherId: number,
+  patch: { useTutor?: boolean },
+): Promise<{ id: number; use_tutor: boolean; scenario: string }> {
+  const body: Record<string, unknown> = {};
+  if (patch.useTutor !== undefined) body.use_tutor = patch.useTutor;
+  return request(`/classrooms/${classroomId}?teacher_id=${teacherId}`, {
+    method: "PATCH",
     body: JSON.stringify(body),
   });
 }

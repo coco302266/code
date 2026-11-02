@@ -163,8 +163,19 @@ data: [DONE]\n\n
 | `agent` | **每个角色发言前**各一条 | `{"type":"agent","role":"tutor","label":"主讲助教","stance":"立论","index":0,"total":3}`，见下 |
 | `token` | 逐字流式输出 | `{"type":"token","content":"片段"}` |
 | `state` | 流结束时**最后一条** | `topic` / `hint_level` / `misconception` / `resolved` / `personalized` |
+| `notice` | **2026-11-02 新增**：本轮没有 AI 发言时，替代 token 流 | `{"type":"notice","content":"主讲助教已关闭，这一轮没有 AI 回复。…"}` |
 | `error` | 流中途失败 | `{"type":"error","content":"..."}` |
 | `[DONE]` | 结束标记，**字面量，不是 JSON** | — |
+
+**`notice` 事件（M4，2026-11-02）**——「本轮刻意不派 Agent」的显式告知：
+
+- 触发条件只有一个：课堂关掉了主讲助教（`use_tutor=false`），且学生这句话**没有** @出题助手。
+- 这时流里只有 `sources` → `notice` → `[DONE]`，**没有 `agent`、没有 `token`、没有 `state`**：
+  助教不在，问题就不该被出题助手代答（出题助手是「@ 才说话」的角色）。
+- 它**不是错误**：不发 `error`、HTTP 仍是 200。前端应该把它显示成提示（本项目用顶部横幅），
+  并且**不要为它保留一个空的回答气泡**。
+- 学生消息本身照常落库（`messages`），只是没有对应的 assistant 行。
+- **向后兼容**：不认识 `notice` 的老前端会静默忽略，表现为「发出去没反应」——不崩、不报错。
 
 **`agent` 事件（M4 多智能体）**——一轮里可能有多个角色 Agent 依次发言：
 

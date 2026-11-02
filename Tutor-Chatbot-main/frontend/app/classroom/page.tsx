@@ -9,6 +9,7 @@ import {
   listMembers,
   listMessages,
   listScenarios,
+  updateClassroom,
 } from "@/lib/api";
 import { normalizeSources, streamChat } from "@/lib/chat";
 import { loadIdentity, type Identity } from "@/lib/identity";
@@ -74,9 +75,12 @@ export default function ClassroomPage() {
     {},
   );
   const [scenarioKey, setScenarioKey] = useState<string | null>(null);
-  // 这个课堂配不配备主讲助教。关掉时整轮回答来自出题助手，标题栏要给个提示，
-  // 否则学生会以为「老师不回答是坏了」。
+  // 这个课堂配不配备主讲助教。关掉后助教不发言、普通提问没人答（只有
+  // @出题助手 才出题），标题栏要给个提示，否则学生会以为「老师不回答是坏了」。
+  // 2026-11-02：教师可在本页右上角随开随关，状态落库（PATCH /classrooms/{id}），
+  // 刷新页面、其他同学看到的都是同一个状态。
   const [useTutor, setUseTutor] = useState(true);
+  const [tutorBusy, setTutorBusy] = useState(false);
 
   const scrollRef = useRef<HTMLDivElement>(null);
   /**
@@ -254,6 +258,43 @@ export default function ClassroomPage() {
     };
   }, [ready, classroomId]);
 
+  // --- 助教开关（仅教师可见） --------------------------------------------
+
+  /**
+   * 随开随关主讲助教。
+   *
+   * 关掉后助教不再回答任何问题，课堂变成「只有 @ 出题助手 才有人应」的
+   * 纯练习形态。这是「同一间教室换个用法」，所以状态必须落库而不是只改
+   * 本地 state —— 否则老师关掉、学生刷新一下又变回来了。
+   *
+   * 失败要说清楚原因：403 是「你不是这个课堂的老师」，比通用的「操作失败」
+   * 有用得多（教师换台机器用学生身份登录过，就会遇到这个）。
+   */
+  async function toggleTutor() {
+    if (!identity || !classroomId || tutorBusy) return;
+    const next = !useTutor;
+    setTutorBusy(true);
+    try {
+      const res = await updateClassroom(classroomId, identity.userId, {
+        useTutor: next,
+      });
+      setUseTutor(res.use_tutor);
+      setNotice(
+        res.use_tutor
+          ? "已开启主讲助教：学生提问由助教讲解。"
+          : "已关闭主讲助教：助教不再回答，需要出题请 @出题助手。",
+      );
+    } catch (err) {
+      if (err instanceof ApiError && err.status === 403) {
+        setNotice("只有本课堂的教师才能切换助教，请用教师账号进入。");
+      } else {
+        setNotice(err instanceof Error ? err.message : "切换助教失败");
+      }
+    } finally {
+      setTutorBusy(false);
+    }
+  }
+
   // --- 发送 --------------------------------------------------------------
 
   /**
@@ -387,6 +428,14 @@ export default function ClassroomPage() {
             topic: next.topic,
           }));
         },
+        // 关掉主讲助教、学生又没 @ 出题助手：后端不派 Agent，只发一条 notice。
+        // 这里把占位气泡摘掉（否则会留一个空气泡），改用顶部横幅说明原因。
+        // 注意别把它当错误：这是课堂设置决定的结果，不是失败。
+        onNotice: (text) => {
+          setNotice(text);
+          setMessages((prev) => prev.filter((msg) => msg.key !== aiKey));
+          turnKeysRef.current = [];
+        },
         onError: (text) =>
           patchAi(currentAiKeyRef.current, (msg) => ({
             ...msg,
@@ -442,9 +491,9 @@ export default function ClassroomPage() {
           {identity?.classroomName ?? `课堂 ${classroomId ?? "—"}`}
           <span className="text-hint">#{classroomId ?? "—"}</span>
           {scenarioLabel && <Tag tone="neutral">场景：{scenarioLabel}</Tag>}
-          {/* 没有主讲助教的课堂里，回答全部来自出题助手。不标出来学生会以为
-              「助教不回话是坏了」，标一句就能把误解挡在前面。 */}
-          {!useTutor && <Tag tone="warn">无主讲助教 · 仅出题助手</Tag>}
+          {/* 没有主讲助教的课堂：普通提问不会有 AI 回应，只有 @出题助手 才出题。
+              不标出来学生会以为「助教不回话是坏了」，标一句就能把误解挡在前面。 */}
+          {!useTutor && <Tag tone="warn">主讲助教已关闭 · @出题助手 出题</Tag>}
           {state?.topic && <Tag tone="brand">正在讲：{state.topic}</Tag>}
           {state?.personalized && <Tag tone="ai">已按你的画像讲解</Tag>}
           {state?.resolved && <Tag tone="ok">已掌握</Tag>}
@@ -462,6 +511,20 @@ export default function ClassroomPage() {
           >
             {panelOpen ? "收起侧栏" : "课堂侧栏"}
           </Btn>
+          {iAmTeacher && (
+            <Btn
+              variant={useTutor ? "ghost" : "subtle"}
+              onClick={() => void toggleTutor()}
+              disabled={tutorBusy}
+              title={
+                useTutor
+                  ? "关闭后助教不再回答，只有 @出题助手 才出题"
+                  : "重新打开主讲助教，恢复讲解"
+              }
+            >
+              {tutorBusy ? "切换中…" : useTutor ? "关闭助教" : "开启助教"}
+            </Btn>
+          )}
           {iAmTeacher && (
             <Btn variant="subtle" onClick={() => router.push("/teacher/")}>
               教师工作台
@@ -495,7 +558,7 @@ export default function ClassroomPage() {
                     <p className="text-[14px] leading-[1.75] text-ink">
                       {useTutor
                         ? "这个课堂还没有人提问。挑一个知识点开始吧："
-                        : "这个课堂没有配主讲助教，随时可以 @出题助手 出题练手："}
+                        : "这个课堂关掉了主讲助教，普通提问不会有回答。要练习请 @出题助手 出题："}
                     </p>
                     <div className="mt-3 flex max-w-[520px] flex-wrap gap-2">
                       {QUICK_ASKS.map((q) => (

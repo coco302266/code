@@ -88,7 +88,8 @@ def plan_agents(
                   客户端传个 examiner 就把讨论变成考试了。
     enabled       总开关，None 表示读环境变量 AGENT_COLLAB
     max_agents    单轮 Agent 数量上限，超出即截断并标记降级
-    use_tutor     这个课堂是否配备主讲助教（建房时的开关）。关掉后整轮只由出题助手应答
+    use_tutor     这个课堂是否配备主讲助教（建房时的开关）。关掉后助教不发言，
+                  本轮就是空计划（没有 AI 应答），除非学生 @ 了出题助手
     quiz_only     学生 @ 了出题助手：本轮跳过常规编排，只让出题助手出题
 
     返回：{scenario, scenario_label, steps, roles, degraded, reason}
@@ -106,9 +107,12 @@ def plan_agents(
     if quiz_only:
         return _quiz_plan(spec, reason="学生 @ 了出题助手")
 
-    # 课堂关掉了主讲助教：整段计划交给出题助手，否则学生提问会没人应答。
+    # 课堂关掉了主讲助教（2026-11-02 修正）：助教不发言，学生的问题也不该
+    # 转交给别人代答。出题助手是「@ 才说话」的角色——早先这里把它当成兜底
+    # 应答者，后果是关掉助教后发一句「花生在吗」也会收到三道题。现在返回
+    # 空计划：本轮没有 AI 发言，要出题由学生自己 @ 它（上面已先短路）。
     if not use_tutor:
-        return _quiz_plan(spec, reason="课堂未配备主讲助教，由出题助手应答")
+        return _silent_plan(spec, reason="课堂未配备主讲助教，本轮无 AI 发言")
 
     # 空串视为「没指定」，按 v1 处理，不算降级——否则每次不带场景的普通
     # 请求都会打一条「未知场景 ''」的日志，真正的降级信号会被噪声埋掉。
@@ -172,6 +176,26 @@ def _quiz_plan(spec: ScenarioSpec, *, reason: str) -> dict:
             }
         ],
         "roles": [QUIZ_STEP.role],
+        "degraded": False,
+        "reason": reason,
+    }
+
+
+def _silent_plan(spec: ScenarioSpec, *, reason: str) -> dict:
+    """没有任何发言位的计划：本轮不派 Agent（课堂关掉了主讲助教）。
+
+    为什么用空 steps 而不是「塞一条系统提示」：steps 决定的是**谁来调 LLM**，
+    系统提示属于事件层的事。混在一起会让 /evaluation 把「没派 Agent」
+    记成「派了一个 Agent」。
+
+    degraded 保持 False——这是课堂设置决定的正常形态，不是异常兜底。
+    记成降级会让评估口径里的降级率虚高，也会误导排查。
+    """
+    return {
+        "scenario": spec.key,
+        "scenario_label": spec.label,
+        "steps": [],
+        "roles": [],
         "degraded": False,
         "reason": reason,
     }

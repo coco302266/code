@@ -13,6 +13,7 @@ import {
   listMembers,
   listMessages,
   listScenarios,
+  listUsers,
   pptOutline,
   resourceUrl,
   uploadClassroomDocument,
@@ -31,6 +32,7 @@ import type {
   PptOutlineResult,
   ScenarioItem,
   StudentProfile,
+  User,
 } from "@/lib/types";
 import { MessageRow, type UIMsg } from "@/components/chat";
 import { ProfileView } from "@/components/ProfileView";
@@ -100,9 +102,11 @@ export default function TeacherPage() {
   const [newName, setNewName] = useState("计算机八股冲刺班");
   const [scenarios, setScenarios] = useState<ScenarioItem[]>([]);
   const [scenario, setScenario] = useState("v1");
-  // 是否配备主讲助教（2026-11-01）。默认开，与存量课堂一致。
-  // 关掉后这个课堂只剩出题助手，适合纯刷题自习。
-  const [useTutor, setUseTutor] = useState(true);
+  // 1v1 指定学生（2026-11-02）：建房时必须点名一位学生，否则任何一个
+  // 学生先进来就占住了这个教室。
+  // 主讲助教不再是建房选项：2026-11-02 起默认配备，课堂里随时可开关。
+  const [students, setStudents] = useState<User[]>([]);
+  const [targetStudentId, setTargetStudentId] = useState("");
   const [joinId, setJoinId] = useState("");
   const [busy, setBusy] = useState(false);
   const [roomError, setRoomError] = useState("");
@@ -153,6 +157,28 @@ export default function TeacherPage() {
       alive = false;
     };
   }, [ready]);
+
+  /**
+   * 学生名单：1v1 建房时「指定学生」下拉的数据源。
+   *
+   * 切回「课堂」页签时重拉一次——学生可能刚在这台机器之外注册完，
+   * 缓存住名单会让老师找不到人。失败就留空数组，由界面提示「还没有
+   * 学生注册」，不要因为一个下拉把建房整条路堵死。
+   */
+  useEffect(() => {
+    if (!ready) return;
+    let alive = true;
+    void listUsers("student")
+      .then((data) => {
+        if (alive) setStudents(data.items ?? []);
+      })
+      .catch(() => {
+        if (alive) setStudents([]);
+      });
+    return () => {
+      alive = false;
+    };
+  }, [ready, tab]);
 
   const scenarioOptions =
     scenarios.length > 0
@@ -323,10 +349,23 @@ export default function TeacherPage() {
       setRoomError("课堂名不能为空。");
       return;
     }
+    // 1v1 必须点名学生：不指定就等于开门让人抢座，教师事后也改不了
+    // （课堂一旦有人进来，换指定学生会把已在里面的那位踢不出去）。
+    const target = targetStudentId ? Number(targetStudentId) : null;
+    if (scenario === "v1" && (!target || !Number.isInteger(target))) {
+      setRoomError("1v1 教室必须指定一位学生。先在下方下拉里选人。");
+      return;
+    }
     setBusy(true);
     setRoomError("");
     try {
-      const room = await createClassroom(name, "cs", undefined, scenario, useTutor);
+      const room = await createClassroom({
+        name,
+        scenario,
+        // 助教建课时一律配备，进课堂后可以随开随关。
+        useTutor: true,
+        targetStudentId: target,
+      });
       // 关键：创建课堂不会自动加成员，必须显式以 teacher 身份加入
       await addMember(room.id, identity.userId, "teacher");
       await persistIdentity(
@@ -519,34 +558,40 @@ export default function TeacherPage() {
                     ))}
                   </Select>
                 </Field>
-                <Field
-                  label="主讲助教"
-                  hint={
-                    useTutor
-                      ? "学生提问由主讲助教讲解；出题助手随时可用 @ 点名"
-                      : "这个课堂不配讲解老师，全部回答由出题助手给出（纯刷题）"
-                  }
-                >
-                  <div className="flex gap-1.5 rounded-lg border border-line bg-soft p-1">
-                    {[
-                      { value: true, label: "配备主讲助教" },
-                      { value: false, label: "只留出题助手" },
-                    ].map((opt) => (
-                      <button
-                        key={String(opt.value)}
-                        type="button"
-                        onClick={() => setUseTutor(opt.value)}
-                        className={`flex-1 rounded-md px-3 py-2 text-[13px] transition-colors ${
-                          useTutor === opt.value
-                            ? "bg-panel text-ink shadow-[0_1px_2px_rgba(15,23,42,0.08)]"
-                            : "text-sub hover:text-ink"
-                        }`}
-                      >
-                        {opt.label}
-                      </button>
-                    ))}
-                  </div>
-                </Field>
+                {scenario === "v1" ? (
+                  <Field
+                    label="指定学生"
+                    hint={
+                      students.length > 0
+                        ? "只有这位学生能进这个 1v1 教室"
+                        : "还没有学生注册 —— 先让学生在入口页注册，拿到 id 后这里就能选"
+                    }
+                  >
+                    <Select
+                      value={targetStudentId}
+                      onChange={(e) => setTargetStudentId(e.target.value)}
+                      disabled={students.length === 0}
+                    >
+                      <option value="">
+                        {students.length > 0 ? "请选择学生…" : "暂无学生"}
+                      </option>
+                      {students.map((stu) => (
+                        <option key={stu.id} value={String(stu.id)}>
+                          {stu.username}（id={stu.id}）
+                        </option>
+                      ))}
+                    </Select>
+                  </Field>
+                ) : (
+                  <p className="rounded-lg border border-line bg-soft px-3 py-2.5 text-[12px] text-sub">
+                    小组讨论课堂不指定学生，学生用课堂号自行加入。
+                  </p>
+                )}
+                {/* 助教/出题助手不再是建房选项：建课时默认都配备，
+                    进课堂后在聊天室右上角随时开关助教（2026-11-02）。 */}
+                <p className="text-[12px] text-hint">
+                  创建后默配备主讲助教与出题助手；进聊天室后可随时关掉助教。
+                </p>
                 <Btn
                   variant="primary"
                   className="w-full py-2.5"

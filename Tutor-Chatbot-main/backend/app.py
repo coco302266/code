@@ -111,6 +111,7 @@ from agent.resource_pptx import build_pptx
 from agent.state import ChatRequest, HistoryMessage, HINT_STRATEGIES, TutorState
 from sqlalchemy import select
 
+from auth import hash_password, password_problem, verify_password
 from db.diagnostics import diagnose, empty_result_hint
 from db.models import (
     AgentRun,
@@ -130,10 +131,12 @@ from db.repository import (
     find_classroom_document_by_hash,
     count_members_by_role,
     get_classroom_document,
+    get_user_by_username,
     is_member,
     list_classroom_documents,
     list_classrooms_for_user,
     list_messages,
+    list_users,
     get_classroom_scenario,
     get_classroom_use_tutor,
     get_messages_by_ids,
@@ -143,6 +146,8 @@ from db.repository import (
     mark_classroom_document_deleted,
     save_agent_run,
     save_message,
+    set_password_hash,
+    set_use_tutor,
 )
 from db.session import SessionLocal, db_available, get_db
 
@@ -855,6 +860,29 @@ def _compose_rag_context(
     return rag_context, source_items
 
 
+# 「本轮没有 AI 发言」的提示文案（2026-11-02）。
+# 只在一处定义：前端展示、SSE notice、日志都引它，避免三份措辞漂移。
+NO_TUTOR_NOTICE = (
+    "主讲助教已关闭，这一轮没有 AI 回复。想让出题助手出题，请 @出题助手。"
+)
+
+
+def _notice_stream(text: str) -> StreamingResponse:
+    """只发一条 notice 就结束的 SSE（本轮没有 AI 发言）。
+
+    保留 `sources` 首事件：契约里它是每条流的第一个事件，前端靠它区分
+    「这轮确实没用资料」和「这条流没覆盖」（见 API_CONTRACT §3.1）。
+    这里 items 为空正是事实——没有 Agent 发言，也就没有检索。
+    """
+
+    async def gen():
+        yield "data: " + json.dumps({"type": "sources", "items": []}) + "\n\n"
+        yield "data: " + json.dumps({"type": "notice", "content": text}) + "\n\n"
+        yield "data: [DONE]\n\n"
+
+    return StreamingResponse(gen(), media_type="text/event-stream")
+
+
 @app.post("/chat")
 @limiter.limit("10/minute")
 async def chat(request: Request, body: ChatRequest):
@@ -926,6 +954,18 @@ async def chat(request: Request, body: ChatRequest):
             raise
         except Exception as exc:
             print(f"[db] 读取历史/落库用户消息失败（改用前端历史）：{exc}", flush=True)
+
+    # 关掉主讲助教、这句话也没有 @出题助手：本轮注定没有 AI 发言，直接短路。
+    # 为什么不在编排层拦就够了：评估节点会把「花生在吗」判成「超出知识库范围」
+    # 并抢先播一条固定拒答，学生看到的仍然是「有东西在回我」——2026-11-02 用户
+    # 反馈的正是这个观感。放在这里还顺带省掉一次评估 LLM 调用（1~3 秒）。
+    # 学生消息在上面的 save_message 已经落库，聊天记录不会丢。
+    if (
+        classroom_id is not None
+        and not classroom_use_tutor
+        and not quiz_requested(body.message)
+    ):
+        return _notice_stream(NO_TUTOR_NOTICE)
 
     new_message = HumanMessage(content=body.message)
 
@@ -1260,7 +1300,9 @@ async def chat(request: Request, body: ChatRequest):
             plan_state = await agent_graph.ainvoke({
                 "scenario": effective_scenario,
                 "agent_role": body.agent_role,
-                # 学生 @ 出题助手 → 本轮只出题；课堂关掉主讲助教 → 只由出题助手应答。
+                # 学生 @ 出题助手 → 本轮只出题；课堂关掉主讲助教且没 @ →
+                # 空计划（本轮没有 AI 发言，不再由出题助手代答）。
+                # @ 的判定只看原话：出题助手是「点名才说话」的角色。
                 "quiz_only": quiz_requested(body.message),
                 "use_tutor": classroom_use_tutor,
                 "topic": assessment_state["topic"],
@@ -1281,6 +1323,31 @@ async def chat(request: Request, body: ChatRequest):
                 )
 
             run_started = time.perf_counter()
+
+            # 空计划（2026-11-02）：课堂关掉了主讲助教，学生这句话也没 @ 出题助手。
+            # 本轮刻意不派任何 Agent —— 助教不在了，问题就不该被出题助手代答。
+            # 必须显式发一条 notice：否则前端只知道「没收到 token」，
+            # 表现是消息发出去石沉大海，学生会当成系统坏了。
+            if not steps:
+                yield (
+                    "data: "
+                    f"{json.dumps({'type': 'notice', 'content': NO_TUTOR_NOTICE})}\n\n"
+                )
+                _record_agent_run(
+                    classroom_id,
+                    body.user_id,
+                    scenario=plan_state.get("scenario", "v1"),
+                    topic=assessment_state["topic"],
+                    roles=[],
+                    degraded=False,
+                    reason=plan_state.get("reason", ""),
+                    duration_ms=int((time.perf_counter() - run_started) * 1000),
+                    message_ids=[],
+                    rag_hits=len(source_items or []),
+                )
+                yield "data: [DONE]\n\n"
+                return
+
             saved_ids: list[int] = []
             personalized = False
             # 前面 Agent 说过的原话。这是「协作」与「并联各答各的」的分界线：
@@ -1520,8 +1587,28 @@ def admin_reload_kb(request: Request):
 
 
 class CreateUserRequest(BaseModel):
+    """注册：用户名 + 密码 + 身份。
+
+    id 由数据库自增分配，前端不能指定——让调用方传 id 等于把主键交给
+    客户端，重放/试探都很容易。注册成功后把分配的 id 回显给用户。
+    """
+
     username: str = Field(..., min_length=1, max_length=64)
+    # 只卡长度上限，复杂度规则统一由 auth.password_problem 判定，
+    # 避免「这里说 6 位、那里说 8 位」两套文案。
+    password: str = Field(..., max_length=128)
     role: Literal["student", "teacher"] = "student"
+
+
+class LoginRequest(BaseModel):
+    username: str = Field(..., min_length=1, max_length=64)
+    password: str = Field(..., max_length=128)
+
+
+class UpdateClassroomRequest(BaseModel):
+    """课堂设置的增量更新。当前只有「主讲助教」一个开关（随开随关）。"""
+
+    use_tutor: bool | None = None
 
 
 class CreateClassroomRequest(BaseModel):
@@ -1539,7 +1626,12 @@ class CreateClassroomRequest(BaseModel):
     scenario: str = "v1"
     # 是否配备主讲助教（2026-11-01）。关掉后整轮问答交给出题助手，
     # 课堂变成纯练习形态；默认开，与存量课堂行为一致。
+    # 2026-11-02 起建房界面不再让教师选，一律 true；保留字段是为了让
+    # 存量调用方（脚本/测试）仍能显式指定。
     use_tutor: bool = True
+    # 1v1 指定学生（2026-11-02）。给了就只有这位学生能进这个教室；
+    # 不给则退回「谁先进谁占位」的老行为。小组讨论课堂忽略该字段。
+    target_student_id: int | None = None
 
 
 class AddMemberRequest(BaseModel):
@@ -1566,12 +1658,110 @@ def _require_db():
         )
 
 
+def _user_payload(user: User) -> dict:
+    """用户对外字段白名单。
+
+    刻意不返回 password_hash：接口层唯一的口令防线就是「根本不吐出去」，
+    靠前端小心是防不住的（抓包就能看到）。
+    """
+    return {
+        "id": user.id,
+        "username": user.username,
+        "role": user.role,
+        "created_at": user.created_at.isoformat() if user.created_at else None,
+    }
+
+
 @app.post("/users", status_code=201)
 def api_create_user(body: CreateUserRequest):
+    """注册（2026-11-02 起必须设用户名 + 密码）。
+
+    与旧行为的一处关键差别：**重名不再幂等返回已有账号，而是 409**。
+    口令上线后，若还按昵称复用账号，任何人输入「张三」就能接管张三的
+    课堂、画像和历史对话——这已经不是便利性问题了。
+
+    id 由数据库自增分配，注册结果原样回显给前端展示。
+    """
+    _require_db()
+    username = body.username.strip()
+    if not username:
+        raise HTTPException(status_code=422, detail="用户名不能为空。")
+    problem = password_problem(body.password)
+    if problem:
+        raise HTTPException(status_code=422, detail=problem)
+
+    with get_db() as db:
+        if get_user_by_username(db, username) is not None:
+            raise HTTPException(
+                status_code=409,
+                detail="这个用户名已经被注册了。换一个用户名，或用密码直接登录。",
+            )
+        user = create_user(db, username, body.role, hash_password(body.password))
+        result = _user_payload(user)
+    return result
+
+
+@app.post("/auth/login")
+def api_login(body: LoginRequest):
+    """登录：用户名 + 密码，返回账号 id（前端据此恢复身份）。
+
+    两条不能省的语义：
+    1. 用户不存在与密码错误**返回同一句**「用户名或密码不正确」——分开说
+       等于给了一个用户名枚举接口。
+    2. 存量账号（password_hash 为 NULL）首次登录时把本次口令绑定上去。
+       这样口令功能上线不用逼所有人重新注册，代价是「第一个登录的人
+       认领这个账号」——对内网教学场景可接受，已在 HANDOFF 里注明。
+    """
+    _require_db()
+    username = body.username.strip()
+    if not username or not body.password:
+        raise HTTPException(status_code=422, detail="用户名和密码都要填。")
+
+    with get_db() as db:
+        user = get_user_by_username(db, username)
+        if user is None:
+            raise HTTPException(status_code=401, detail="用户名或密码不正确。")
+
+        bound = False
+        if user.password_hash is None:
+            # 老账号：口令功能上线前建的，没有密码可比。把这次输入绑定为
+            # 它的密码，下次就必须用同一个口令登录。
+            set_password_hash(db, user, hash_password(body.password))
+            bound = True
+        elif not verify_password(body.password, user.password_hash):
+            raise HTTPException(status_code=401, detail="用户名或密码不正确。")
+
+        result = _user_payload(user)
+        result["password_bound"] = bound
+    return result
+
+
+@app.get("/users")
+def api_list_users(
+    role: Literal["student", "teacher"] | None = None,
+    limit: int = 200,
+):
+    """用户列表（教师建房时挑「指定学生」的数据源）。
+
+    只回 id / username / role：前端需要的就这三样，多给的每一列都是
+    将来可能被误用的攻击面。
+    """
     _require_db()
     with get_db() as db:
-        user = create_user(db, body.username, body.role)
-        result = {"id": user.id, "username": user.username, "role": user.role}
+        rows = list_users(db, role, limit)
+        items = [_user_payload(u) for u in rows]
+    return {"count": len(items), "items": items}
+
+
+@app.get("/users/{user_id}")
+def api_get_user(user_id: int):
+    """按 id 查用户（固定 id 的落地：登录后可用它核对身份）。"""
+    _require_db()
+    with get_db() as db:
+        user = db.get(User, user_id)
+        if user is None:
+            raise HTTPException(status_code=404, detail=f"User {user_id} not found.")
+        result = _user_payload(user)
     return result
 
 
@@ -1584,6 +1774,20 @@ def api_create_classroom(body: CreateClassroomRequest):
                 raise HTTPException(
                     status_code=404, detail=f"User {uid} not found."
                 )
+        # 1v1 指定学生：必须真实存在，且确实是学生。允许把教师指定成
+        # 「学生」会把 1v1 的人数闸门绕成教师自问自答，直接挡掉。
+        if body.target_student_id is not None:
+            target = db.get(User, body.target_student_id)
+            if target is None:
+                raise HTTPException(
+                    status_code=404,
+                    detail=f"指定的学生（id={body.target_student_id}）不存在。",
+                )
+            if target.role != "student":
+                raise HTTPException(
+                    status_code=422,
+                    detail="指定的账号不是学生，不能作为 1v1 教室的学生。",
+                )
         room = create_classroom(
             db,
             body.name,
@@ -1594,6 +1798,7 @@ def api_create_classroom(body: CreateClassroomRequest):
             teacher_members=body.teacher_members,
             scenario=normalize_scenario(body.scenario),
             use_tutor=body.use_tutor,
+            target_student_id=body.target_student_id,
         )
         result = {
             "id": room.id,
@@ -1603,6 +1808,12 @@ def api_create_classroom(body: CreateClassroomRequest):
             "is_private": bool(room.is_private),
             "scenario": room.scenario,
             "use_tutor": bool(room.use_tutor),
+            "target_student_id": room.target_student_id,
+            "target_student_username": (
+                db.get(User, room.target_student_id).username
+                if room.target_student_id
+                else None
+            ),
         }
     return result
 
@@ -1818,7 +2029,8 @@ def api_add_member(classroom_id: int, body: AddMemberRequest):
     _require_db()
     with get_db() as db:
         # 先确认课堂和用户存在，否则外键约束会变成一句看不懂的 500
-        if db.get(Classroom, classroom_id) is None:
+        room = db.get(Classroom, classroom_id)
+        if room is None:
             raise HTTPException(
                 status_code=404, detail=f"Classroom {classroom_id} not found."
             )
@@ -1826,11 +2038,8 @@ def api_add_member(classroom_id: int, body: AddMemberRequest):
             raise HTTPException(
                 status_code=404, detail=f"User {body.user_id} not found."
             )
-
-        # 1v1 课堂的人数闸门（2026-11-01）：除 AI 的主讲/出题助手外，
-        # 只能有 1 位教师 + 1 位学生。AI 不落 classroom_members，所以直接数成员即可。
-        # 已在本课堂的人再次加入要放行（add_member 本身幂等），否则刷新页面就会 409。
-        room = db.get(Classroom, classroom_id)
+        # 已在课堂里的人重复加入必须放行（add_member 幂等）：刷新页面就会
+        # 重发一次加入请求，不该因为「名额已满」把老成员挡在外面。
         already = any(
             m.user_id == body.user_id
             for m in db.execute(
@@ -1839,6 +2048,35 @@ def api_add_member(classroom_id: int, body: AddMemberRequest):
                 )
             ).scalars()
         )
+
+        # 1v1 指定学生（2026-11-02）：教师建房时点名了学生，这个教室就只属于
+        # 那一位。别的学生进来一律 409 —— 不是「满了」，是「不归你」，文案要
+        # 说清这一点，否则学生会以为是人数限制，反复重试。
+        if (
+            room.scenario == "v1"
+            and room.target_student_id is not None
+            and body.role == "student"
+            and body.user_id != room.target_student_id
+            and not already
+        ):
+            target = db.get(User, room.target_student_id)
+            who = (
+                f"{target.username}（id={target.id}）"
+                if target is not None
+                else f"id={room.target_student_id}"
+            )
+            raise HTTPException(
+                status_code=409,
+                detail=(
+                    "这是指定学生的[1v1教室]，你不能进入。"
+                    f"本教室指定学生：{who}。"
+                    "如需上课，请联系老师把这个教室指定给你。"
+                ),
+            )
+
+        # 1v1 课堂的人数闸门（2026-11-01）：除 AI 的主讲/出题助手外，
+        # 只能有 1 位教师 + 1 位学生。AI 不落 classroom_members，所以直接数成员即可。
+        # 已在本课堂的人再次加入要放行（add_member 本身幂等），否则刷新页面就会 409。
         if room is not None and room.scenario == "v1" and not already:
             counts = count_members_by_role(db, classroom_id)
             if counts.get(body.role, 0) >= 1:
@@ -1977,6 +2215,58 @@ def api_get_classroom(classroom_id: int):
             # M4：房间跑哪种协作形态，前端据此决定要不要按角色分气泡渲染。
             "scenario": room.scenario,
             "use_tutor": bool(room.use_tutor),
+            # 1v1 指定学生：前端要能显示「本教室指定给谁」，学生端也靠它
+            # 提前判断自己该不该点进来。
+            "target_student_id": room.target_student_id,
+            "target_student_username": (
+                db.get(User, room.target_student_id).username
+                if room.target_student_id
+                else None
+            ),
+        }
+    return result
+
+
+@app.patch("/classrooms/{classroom_id}")
+def api_update_classroom(
+    classroom_id: int, body: UpdateClassroomRequest, teacher_id: int = Query(...)
+):
+    """课堂设置增量更新（当前只有主讲助教开关）。
+
+    为什么必须带 teacher_id：后端没有登录态，拦截伪造只能靠「让调用方
+    自证身份」——查一遍成员表，确认这个人确实是这个课堂的教师。少了这一步，
+    任何学生都能把全班的助教关掉。
+
+    为什么用 PATCH 而不是 PUT：课堂对象还有 name/scenario/target_student
+    等字段，PUT 语义要求全量提交，前端只想改一个开关就会误清空别的设置。
+    """
+    _require_db()
+    with get_db() as db:
+        room = db.get(Classroom, classroom_id)
+        if room is None:
+            raise HTTPException(
+                status_code=404, detail=f"Classroom {classroom_id} not found."
+            )
+        is_teacher = db.execute(
+            select(ClassroomMember).where(
+                ClassroomMember.classroom_id == classroom_id,
+                ClassroomMember.user_id == teacher_id,
+                ClassroomMember.role == "teacher",
+            )
+        ).scalar_one_or_none()
+        if is_teacher is None:
+            raise HTTPException(
+                status_code=403,
+                detail="只有本课堂的教师才能修改助教开关。",
+            )
+
+        if body.use_tutor is not None:
+            set_use_tutor(db, classroom_id, body.use_tutor)
+
+        result = {
+            "id": room.id,
+            "use_tutor": bool(room.use_tutor),
+            "scenario": room.scenario,
         }
     return result
 

@@ -4,8 +4,10 @@ name: ai-classroom
 # 前置：cp .env.docker.example .env  并填入 LLM_API_KEY / MySQL 密码
 # 启动：docker compose up -d --build
 #
-# 图形： web(nginx:80) ──/api──▶ backend(uvicorn:8000) ──▶ mysql:3306
+# 图形： web(nginx:80) ──/api──▶ backend(uvicorn:8000) ──▶ 宿主机(本机)MySQL:3306
 #        web 同时托管前端静态产物 out/
+#        后端连的是「本机 MySQL」（host.docker.internal:3306），不再用 compose 的 mysql 容器。
+#        如需退回容器内建库：docker compose --profile with-mysql up -d
 #
 # 局域网拓扑（一台做服务器，其余电脑只跑前端连同一后端）：
 #   服务器：docker compose 起全部服务，backend 留在内网、只由 web(nginx:8080) 对外。
@@ -16,6 +18,9 @@ name: ai-classroom
 
 services:
   mysql:
+    # 默认不再启动：后端已改为连「本机 MySQL」。
+    # 需要退回容器内建库时：docker compose --profile with-mysql up -d
+    profiles: ["with-mysql"]
     image: mysql:8.0
     restart: unless-stopped
     environment:
@@ -45,12 +50,13 @@ services:
     restart: unless-stopped
     env_file: .env
     environment:
-      # 覆盖 .env 里的本机地址，指向容器网络内的 mysql
-      MYSQL_HOST: mysql
-      MYSQL_PORT: "3306"
-      MYSQL_DATABASE: ${MYSQL_DATABASE:-ai_classroom}
-      MYSQL_USER: ${MYSQL_USER:-ai_classroom}
-      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      # 连接「宿主机（本机）MySQL」：容器经 host.docker.internal 访问宿主机 3306。
+      # 连接参数来自 deploy/.env 的 LOCAL_MYSQL_*（不进版本库）。
+      MYSQL_HOST: ${LOCAL_MYSQL_HOST:-host.docker.internal}
+      MYSQL_PORT: ${LOCAL_MYSQL_PORT:-3306}
+      MYSQL_DATABASE: ${LOCAL_MYSQL_DATABASE:-ai_classroom}
+      MYSQL_USER: ${LOCAL_MYSQL_USER:-root}
+      MYSQL_PASSWORD: ${LOCAL_MYSQL_PASSWORD}
       # 数据目录固定到容器内路径（对应下方卷挂载）
       KNOWLEDGE_PERSIST_DIR: /app/chroma_kb
       CLASSROOM_CHROMA_DIR: /app/chroma_classrooms
@@ -59,6 +65,9 @@ services:
       # CORS：显式放行本机前端与 nginx；局域网内其他电脑的前端来源由后端
       # 内置的私网正则自动放行（见 backend/app.py），无需逐个填客户端 IP。
       ALLOWED_ORIGINS: '["http://localhost:3000","http://localhost:8080","http://127.0.0.1:3000"]'
+    extra_hosts:
+      # Linux 下需显式把 host.docker.internal 指向宿主网关；Docker Desktop 自带也兼容。
+      - "host.docker.internal:host-gateway"
     volumes:
       # 模型缓存：5.8G，不进镜像（离线可用）。
       # 必须 rw：fastembed 要在缓存目录内建 .locks 做文件锁，只读会直接报错。
@@ -67,9 +76,6 @@ services:
       - ../backend/chroma_kb:/app/chroma_kb
       - ../backend/chroma_classrooms:/app/chroma_classrooms
       - ../backend/classroom_docs:/app/classroom_docs
-    depends_on:
-      mysql:
-        condition: service_healthy
     healthcheck:
       test: ["CMD", "curl", "-fsS", "http://127.0.0.1:8000/health"]
       interval: 30s
@@ -85,15 +91,14 @@ services:
       dockerfile: deploy/backend.Dockerfile
     env_file: .env
     environment:
-      MYSQL_HOST: mysql
-      MYSQL_PORT: "3306"
-      MYSQL_DATABASE: ${MYSQL_DATABASE:-ai_classroom}
-      MYSQL_USER: ${MYSQL_USER:-ai_classroom}
-      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_HOST: ${LOCAL_MYSQL_HOST:-host.docker.internal}
+      MYSQL_PORT: ${LOCAL_MYSQL_PORT:-3306}
+      MYSQL_DATABASE: ${LOCAL_MYSQL_DATABASE:-ai_classroom}
+      MYSQL_USER: ${LOCAL_MYSQL_USER:-root}
+      MYSQL_PASSWORD: ${LOCAL_MYSQL_PASSWORD}
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     command: ["python", "init_db.py"]
-    depends_on:
-      mysql:
-        condition: service_healthy
     restart: "no"
 
   web:
